@@ -17,8 +17,9 @@
 | # | Topic | Status |
 |---|-------|--------|
 | 1 | [Java Basics](./Java%20Basics/) | ✅ Complete |
+| 2 | [Core Java](./Core%20Java/) | ✅ Complete |
 
-> More topics coming soon — OOP, Collections, Exception Handling, Multithreading, etc.
+> More topics coming soon — Collections, Exception Handling, Multithreading, etc.
 
 ---
 
