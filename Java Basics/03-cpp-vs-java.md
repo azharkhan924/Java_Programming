@@ -27,12 +27,12 @@
 
 ### C++ (Platform Dependent)
 ```text
- source.cpp → Compiler → native .exe/.o → Only runs on SAME OS
+  source.cpp  →  Compiler  →  native .exe/.o  →  Only runs on SAME OS
 ```
 
 ### Java (Platform Independent)
 ```text
- Demo.java → javac → Demo.class (bytecode) → Runs on ANY JVM
+  Demo.java  →  javac  →  Demo.class (bytecode)  →  Runs on ANY JVM
 ```
 
 ---
@@ -60,4 +60,4 @@
 
 > ** Interview Tip:** "Java is platform independent but JVM is platform dependent" — ye line yaad rakhna, bahut common interview question hai!
 
-[ Back to Index](./README.md) | [Next: Java Features](./04-java-features.md)
+[Back to Index](./README.md) | [Next: Java Features](./04-java-features.md)

@@ -9,14 +9,14 @@
 Java me file reading aur writing **Streams** ke zariye hoti hai. Stream ek continuous sequence of data hota hai.
 
 ```text
- ┌─────────────────────── Java I/O ──────────────────────┐
- │ │
- Byte Streams (8-bit bytes) Character Streams (16-bit Unicode)
- (Images, Audio, PDF, Raw Binary) (Plain Text Files)
- ├── InputStream ├── Reader
- │ └── FileInputStream │ └── FileReader / BufferedReader
- └── OutputStream └── Writer
- └── FileOutputStream └── FileWriter / BufferedWriter
+               ┌─────────────────────── Java I/O ──────────────────────┐
+               │                                                       │
+        Byte Streams (8-bit bytes)                             Character Streams (16-bit Unicode)
+   (Images, Audio, PDF, Raw Binary)                                  (Plain Text Files)
+      ├── InputStream                                                   ├── Reader
+      │    └── FileInputStream                                          │    └── FileReader / BufferedReader
+      └── OutputStream                                                  └── Writer
+           └── FileOutputStream                                              └── FileWriter / BufferedWriter
 ```
 
 | Stream Type | Unit of Data | Base Classes | Best Used For |
@@ -81,7 +81,7 @@ Java ka `byte` signed hota hai (`-128` se `127`).
 ```java
 int ch;
 while ((ch = fis.read()) != -1) {
- System.out.print((char) ch); // Typecast int to char for display
+    System.out.print((char) ch); // Typecast int to char for display
 }
 ```
 
@@ -98,29 +98,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileIODemo {
- public static void main(String[] args) {
- String filename = "sample.txt";
+    public static void main(String[] args) {
+        String filename = "sample.txt";
 
- // 1. Writing with try-with-resources (Auto close!)
- try (FileOutputStream fos = new FileOutputStream(filename, true)) {
- String msg = "Learning Java File I/O\n";
- fos.write(msg.getBytes());
- System.out.println("Data written successfully!");
- } catch (IOException e) {
- e.printStackTrace();
- }
+        // 1. Writing with try-with-resources (Auto close!)
+        try (FileOutputStream fos = new FileOutputStream(filename, true)) {
+            String msg = "Learning Java File I/O\n";
+            fos.write(msg.getBytes());
+            System.out.println("Data written successfully!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
- // 2. Reading with try-with-resources
- try (FileInputStream fis = new FileInputStream(filename)) {
- int ch;
- System.out.println("File Content:");
- while ((ch = fis.read()) != -1) {
- System.out.print((char) ch);
- }
- } catch (IOException e) {
- e.printStackTrace();
- }
- }
+        // 2. Reading with try-with-resources
+        try (FileInputStream fis = new FileInputStream(filename)) {
+            int ch;
+            System.out.println("File Content:");
+            while ((ch = fis.read()) != -1) {
+                System.out.print((char) ch);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 ```
 

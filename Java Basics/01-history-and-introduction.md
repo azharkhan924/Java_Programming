@@ -10,11 +10,11 @@ Java ek **high-level, class-based, object-oriented** programming language hai jo
 
 | Domain | Examples |
 |--------|----------|
-| Software Development | Desktop apps, tools, utilities |
-| Web Applications | Spring Boot, JSP, Servlets |
-| Enterprise Applications | Banking systems, ERP, CRM |
+|  Software Development | Desktop apps, tools, utilities |
+|  Web Applications | Spring Boot, JSP, Servlets |
+|  Enterprise Applications | Banking systems, ERP, CRM |
 | ⚙ Backend Development | REST APIs, microservices |
-| Mobile Development | Android apps (historically) |
+|  Mobile Development | Android apps (historically) |
 | ☁ Cloud & Big Data | Hadoop, Spark, Kafka |
 
 ---
@@ -25,8 +25,8 @@ Java ek **high-level, class-based, object-oriented** programming language hai jo
 
 ```text
 December 1990 → Sun Microsystems me project start hua
- Goal → Aisi technology/language banana jo electronic devices ke liye useful ho
- Project Name → Green Project
+       Goal   → Aisi technology/language banana jo electronic devices ke liye useful ho
+  Project Name → Green Project
 ```
 
 ### 1991 — The Core Team
@@ -46,22 +46,22 @@ Sabse pehle C/C++ ko consider kiya gaya, lekin ek major problem thi:
 > **C/C++ platform/system dependent hain** — ek platform par compile ki gayi executable file doosre platform par directly run nahi hoti.
 
 ```text
- ┌─────────────┐
- │ first.c │ Source Code
- └──────┬──────┘
- ▼
- ┌─────────────┐
- │ Compiler │ Platform-Specific Compiler
- └──────┬──────┘
- ▼
- ┌─────────────┐
- │ first.obj │ Native Object File
- └──────┬──────┘
- │
- ┌────┴────┐
- ▼ ▼
- Windows Linux
- Same .obj file doosre OS par nahi chalegi
+  ┌─────────────┐
+  │   first.c   │    Source Code
+  └──────┬──────┘
+         ▼
+  ┌─────────────┐
+  │  Compiler   │    Platform-Specific Compiler
+  └──────┬──────┘
+         ▼
+  ┌─────────────┐
+  │  first.obj  │    Native Object File
+  └──────┬──────┘
+         │
+    ┌────┴────┐
+    ▼         ▼
+ Windows   Linux
+  Runs     Fails      Same .obj file doosre OS par nahi chalegi
 ```
 
 Is problem ki wajah se **platform-independent approach** ki zarurat hui.
@@ -102,4 +102,4 @@ Is problem ki wajah se **platform-independent approach** ki zarurat hui.
 
 > ** Yaad Rakho:** Java ka motto hai — **"Write Once, Run Anywhere" (WORA)**
 
-[ Back to Index](./README.md) | [Next: How Java Works](./02-how-java-works.md)
+[Back to Index](./README.md) | [Next: How Java Works](./02-how-java-works.md)

@@ -10,8 +10,8 @@ Cursors are used to **traverse (access one-by-one) the elements** of a collectio
 
 ```text
 Cursors in Java:
-1. Enumeration → Oldest (Java 1.0), only for Vector/legacy classes
-2. Iterator → Universal (Java 1.2), works with any Collection
+1. Enumeration  → Oldest (Java 1.0), only for Vector/legacy classes
+2. Iterator     → Universal (Java 1.2), works with any Collection
 3. ListIterator → Most Powerful (Java 1.2), only for List implementations
 ```
 
@@ -30,9 +30,9 @@ Enumeration<String> e = v.elements(); // Vector's special method
 
 ### Methods (Only 2):
 ```java
-while (e.hasMoreElements()) { // Is there a next element?
- String val = e.nextElement(); // Return next element
- System.out.println(val);
+while (e.hasMoreElements()) {       // Is there a next element?
+    String val = e.nextElement();   // Return next element
+    System.out.println(val);
 }
 ```
 
@@ -56,12 +56,12 @@ Iterator<String> it = list.iterator(); // Collection interface method
 
 ### Methods (3 Methods):
 ```java
-while (it.hasNext()) { // Is there a next element?
- String val = it.next(); // Return next element
+while (it.hasNext()) {          // Is there a next element?
+    String val = it.next();     // Return next element
 
- if (val.equals("Y")) {
- it.remove(); // Safe removal during iteration!
- }
+    if (val.equals("Y")) {
+        it.remove();            // valid Safe removal during iteration!
+    }
 }
 ```
 
@@ -82,8 +82,8 @@ while (it.hasNext()) { // Is there a next element?
 ### How to Get ListIterator:
 ```java
 ArrayList<String> list = new ArrayList<>(List.of("A", "B", "C", "D"));
-ListIterator<String> lit = list.listIterator(); // Start from index 0
-ListIterator<String> lit2 = list.listIterator(2); // Start from index 2
+ListIterator<String> lit = list.listIterator();       // Start from index 0
+ListIterator<String> lit2 = list.listIterator(2);     // Start from index 2
 ```
 
 ### Methods (9 Methods — Most Rich Cursor):
@@ -91,16 +91,16 @@ ListIterator<String> lit2 = list.listIterator(2); // Start from index 2
 #### Forward Traversal:
 ```java
 while (lit.hasNext()) {
- int index = lit.nextIndex(); // Index of next element
- String val = lit.next(); // Return next element + move forward
+    int index = lit.nextIndex();    // Index of next element
+    String val = lit.next();        // Return next element + move forward
 }
 ```
 
 #### Backward Traversal:
 ```java
 while (lit.hasPrevious()) {
- int index = lit.previousIndex(); // Index of previous element
- String val = lit.previous(); // Return previous element + move backward
+    int index = lit.previousIndex(); // Index of previous element
+    String val = lit.previous();     // Return previous element + move backward
 }
 ```
 
@@ -108,17 +108,17 @@ while (lit.hasPrevious()) {
 ```java
 ListIterator<String> lit = list.listIterator();
 while (lit.hasNext()) {
- String val = lit.next();
+    String val = lit.next();
 
- if (val.equals("B")) {
- lit.remove(); // Remove current element
- }
- if (val.equals("C")) {
- lit.set("C-MODIFIED"); // Replace current element!
- }
- if (val.equals("D")) {
- lit.add("NEW"); // Insert new element at current position!
- }
+    if (val.equals("B")) {
+        lit.remove();          // valid Remove current element
+    }
+    if (val.equals("C")) {
+        lit.set("C-MODIFIED"); // valid Replace current element!
+    }
+    if (val.equals("D")) {
+        lit.add("NEW");        // valid Insert new element at current position!
+    }
 }
 ```
 
@@ -130,11 +130,11 @@ while (lit.hasNext()) {
 |---------|-------------|----------|--------------|
 | **Introduced** | Java 1.0 | Java 1.2 | Java 1.2 |
 | **Works With** | Legacy only (Vector, Stack, Hashtable) | **Any Collection** (Universal) | **List only** (ArrayList, LinkedList, Vector) |
-| **Direction** | Forward only | Forward only | **Bidirectional** |
-| **Read** | `nextElement()` | `next()` | `next()` + `previous()` |
-| **Remove** | Not possible | `remove()` | `remove()` |
-| **Add** | No | No | `add()` |
-| **Replace** | No | No | `set()` |
+| **Direction** | Forward only | Forward only | **Bidirectional**|
+| **Read** |  `nextElement()` |  `next()` |  `next()` + `previous()` |
+| **Remove** | Not possible |  `remove()` |  `remove()` |
+| **Add** | No | No |  `add()` |
+| **Replace** | No | No |  `set()` |
 | **Method Count** | 2 | 3 | 9 |
 | **How to Get** | `vector.elements()` | `collection.iterator()` | `list.listIterator()` |
 
@@ -150,9 +150,9 @@ ArrayList<String> list = new ArrayList<>(List.of("A", "B", "C"));
 Iterator<String> it = list.iterator();
 
 while (it.hasNext()) {
- String s = it.next();
- list.remove(s); // Direct modification → ConcurrentModificationException!
- // it.remove(); // Use iterator's remove() — this is safe
+    String s = it.next();
+    list.remove(s);  // Direct modification → ConcurrentModificationException!
+    // it.remove();  // valid Use iterator's remove() — this is safe
 }
 ```
 
@@ -162,7 +162,7 @@ Iterators of `CopyOnWriteArrayList` and `ConcurrentHashMap` work on a **snapshot
 ```java
 CopyOnWriteArrayList<String> cowList = new CopyOnWriteArrayList<>(List.of("A", "B"));
 for (String s : cowList) {
- cowList.add("NEW"); // No exception! Iterator traverses a snapshot
+    cowList.add("NEW"); // valid No exception! Iterator traverses a snapshot
 }
 ```
 
@@ -175,7 +175,7 @@ for (String s : cowList) {
 | Is Enumeration universal? | No! It only works with legacy classes (Vector, Stack, Hashtable). |
 | Does Iterator have an `add()` method? | No! Only `hasNext()`, `next()`, `remove()`. Use ListIterator for `add()`. |
 | Will ListIterator work with HashSet? | No! ListIterator works only with `List` implementations. |
-| Is direct `list.remove()` safe during iteration? | Can throw `ConcurrentModificationException`. Use **`iterator.remove()`** instead. |
+| Is direct `list.remove()` safe during iteration? |  Can throw `ConcurrentModificationException`. Use **`iterator.remove()`** instead. |
 | Who throws `ConcurrentModificationException`? | **Fail-Fast** iterators (those of ArrayList, HashSet, HashMap, etc.). |
 
 ---

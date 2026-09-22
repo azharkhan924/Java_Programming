@@ -37,11 +37,11 @@ A **Cookie** small piece of data hota hai jo server response ke through browser 
 First Request
 Browser ─────────────→ Server
 Browser ←───────────── Server
- Set-Cookie
+          Set-Cookie
 
 Next Request
 Browser ─────────────→ Server
- Cookie included
+       Cookie included
 ```
 
 Server cookie ke value ke basis par client/browser ko identify ya state associate kar sakta hai.
@@ -124,11 +124,11 @@ Then cookie name/value check kar sakte hain:
 
 ```java
 if (cookies != null) {
- for (Cookie c : cookies) {
- if ("un".equals(c.getName())) {
- String username = c.getValue();
- }
- }
+    for (Cookie c : cookies) {
+        if ("un".equals(c.getName())) {
+            String username = c.getValue();
+        }
+    }
 }
 ```
 

@@ -14,23 +14,23 @@ statement 15:
 statement 1;
 statement 2;
 // ...
-statement 15; // Exception
+statement 15;   // Exception
 statement 16;
 statement 17;
 ```
 
 Without exception handling:
 
-- Execution stops at the point where the exception occurs.
-- The remaining statements of that method are not executed normally.
+-   Execution stops at the point where the exception occurs.
+-   The remaining statements of that method are not executed normally.
 
 With proper exception handling:
 
 ``` java
 try {
- // risky code
+    // risky code
 } catch (Exception e) {
- // handling code
+    // handling code
 }
 ```
 
@@ -51,36 +51,36 @@ The basic hierarchy is:
 
 ``` text
 java.lang.Object
- |
- Throwable
- / \
- Error Exception
- |
- ----------------
- | |
- Checked Unchecked
- Exceptions Exceptions
- |
- RuntimeException
+       |
+   Throwable
+    /     \
+ Error   Exception
+           |
+     ----------------
+     |              |
+ Checked        Unchecked
+ Exceptions    Exceptions
+                    |
+              RuntimeException
 ```
 
 ### Important Classes
 
 ``` text
 Object
- └── Throwable
- ├── Error
- │ ├── OutOfMemoryError
- │ └── StackOverflowError
- │
- └── Exception
- ├── IOException
- ├── SQLException
- └── RuntimeException
- ├── ArithmeticException
- ├── NullPointerException
- ├── ArrayIndexOutOfBoundsException
- └── ...
+  └── Throwable
+       ├── Error
+       │    ├── OutOfMemoryError
+       │    └── StackOverflowError
+       │
+       └── Exception
+            ├── IOException
+            ├── SQLException
+            └── RuntimeException
+                 ├── ArithmeticException
+                 ├── NullPointerException
+                 ├── ArrayIndexOutOfBoundsException
+                 └── ...
 ```
 
 ------------------------------------------------------------------------

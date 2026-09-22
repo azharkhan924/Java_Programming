@@ -12,82 +12,82 @@ Jab koi object **unreferenced / unreachable** ho jaata hai — koi active refere
 
 ## 2. Five Ways to Make an Object GC Eligible
 
-### 1⃣ Null Assignment
+### 1. Null Assignment
 
 ```java
 Demo d1 = new Demo();
-d1 = null; // object becomes GC eligible
+d1 = null;     // object becomes GC eligible
 ```
 
 ```text
-Before: d1 ─────► [Object]
-After: d1 ─────► null [Object] → GC eligible
+Before:  d1 ─────► [Object]
+After:   d1 ─────► null        [Object] → GC eligible
 ```
 
-### 2⃣ Reassigning Reference
+### 2. Reassigning Reference
 
 ```java
-Demo d1 = new Demo(); // Object 1
-Demo d2 = new Demo(); // Object 2
-d1 = d2; // Object 1 → GC eligible
+Demo d1 = new Demo();    // Object 1
+Demo d2 = new Demo();    // Object 2
+d1 = d2;                 // Object 1 → GC eligible
 ```
 
 ```text
 d1 ─────► [Object 2] ◄────── d2
- [Object 1] → GC eligible
+           [Object 1] → GC eligible
 ```
 
 > **Multiple references** ek object ko point kar sakti hain.
 
-### 3⃣ Local Object (Method Scope)
+### 3. Local Object (Method Scope)
 
 ```java
 void show() {
- Demo d = new Demo(); // local object
+    Demo d = new Demo();     // local object
 }
 // method khatam → d out of scope → object GC eligible
 ```
 
 > Jab tak reference method ke bahar escape nahi karta.
 
-### 4⃣ Anonymous Object
+### 4. Anonymous Object
 
 ```java
-new Demo().show(); // no stored reference
+new Demo().show();    // no stored reference
 ```
 
 Expression evaluate hone ke baad agar koi reference nahi bacha → **GC eligible**.
 
-### 5⃣ Island of Isolation
+### 5. Island of Isolation
 
 Objects jo **ek dusre ko reference** karte hain but **bahar se koi active reference nahi** → sab GC eligible.
 
 ```java
 class A {
- A i;
+    A i;
 
- public static void main(String[] args) {
- A a1 = new A();
- A a2 = new A();
- a1.i = a2;
- a2.i = a1;
- a1 = null;
- a2 = null; // Island of Isolation
- }
+    public static void main(String[] args) {
+        A a1 = new A();
+        A a2 = new A();
+        a1.i = a2;
+        a2.i = a1;
+        a1 = null;
+        a2 = null;    // Island of Isolation
+    }
 }
 ```
 
 ```text
 Before null:
-a1 ──► [Obj1] ──► [Obj2] ──► [Obj1] (circular)
+a1 ──► [Obj1] ──► [Obj2] ──► [Obj1]  (circular)
 a2 ──► [Obj2]
 
 After null:
-a1 → null a2 → null
+a1 → null    a2 → null
 
-[Obj1] ◄──► [Obj2] ← no active reference reaches them
- ↓
- Both GC eligible
+[Obj1] ◄──► [Obj2]   ← no active reference reaches them
+        ↓
+  Both GC eligible
 ```
 
 ---
@@ -95,8 +95,8 @@ a1 → null a2 → null
 ## 3. Requesting GC
 
 ```java
-System.gc(); // conventional way
-Runtime.getRuntime().gc(); // equivalent way
+System.gc();                       // conventional way
+Runtime.getRuntime().gc();         // equivalent way
 ```
 
 > Note: **Request / suggestion only!** JVM guarantee nahi deti ki GC immediately run hoga. Koi fixed percentage guarantee bhi nahi hai.
@@ -113,10 +113,10 @@ Historically, JVM object reclaim karne se pehle `finalize()` call kar sakti thi.
 
 ```java
 class Demo {
- @Override
- protected void finalize() throws Throwable {
- System.out.println("Finalize called");
- }
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println("Finalize called");
+    }
 }
 ```
 
@@ -149,11 +149,11 @@ class Demo {
 
 ```text
 Object becomes unreachable
- ↓
+        ↓
 GC Eligible
- ↓
+        ↓
 JVM may run GC (timing not guaranteed)
- ↓
+        ↓
 Memory reclaimed
 ```
 
@@ -172,7 +172,7 @@ int[][] arr = new int[100000][100000];
 
 ```java
 static void test() {
- test(); // infinite recursion
+    test();     // infinite recursion
 }
 // → java.lang.StackOverflowError
 ```
@@ -191,7 +191,7 @@ static void test() {
 | `finalize()` use karna chahiye? | No — deprecated |
 | `OutOfMemoryError` exception hai? | No — `Error` hai |
 | Anonymous object ka reference hota hai? | No stored reference |
-| `System.gc()` == `Runtime.getRuntime().gc()`? | Effectively equivalent |
+| `System.gc()` == `Runtime.getRuntime().gc()`? |  Effectively equivalent |
 
 ---
 

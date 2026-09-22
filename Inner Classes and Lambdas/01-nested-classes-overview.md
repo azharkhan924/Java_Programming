@@ -6,24 +6,24 @@ A **class declared inside another class** is called a **Nested Class**.
 
 ```java
 class Outer {
- class Inner {
- // inner class
- }
+    class Inner {
+        // inner class
+    }
 }
 ```
 
 ### Types
 
 ```text
- Nested Class
- / \
- Non-static Static
- |
- ┌────────┼────────┐
- │ │ │
- Instance Local Anonymous
- Inner Inner Inner
- Class Class Class
+                    Nested Class
+                   /            \
+             Non-static         Static
+                 |
+        ┌────────┼────────┐
+        │        │        │
+    Instance   Local   Anonymous
+     Inner     Inner     Inner
+     Class     Class     Class
 ```
 
 ### Non-static Nested Classes
@@ -68,14 +68,14 @@ Example:
 ```java
 class A {
 
- private class B {
- }
+    private class B {
+    }
 
- protected class C {
- }
+    protected class C {
+    }
 
- static class D {
- }
+    static class D {
+    }
 }
 ```
 
@@ -91,11 +91,11 @@ For example:
 ```java
 class A {
 
- void show() {
+    void show() {
 
- class B {
- }
- }
+        class B {
+        }
+    }
 }
 ```
 

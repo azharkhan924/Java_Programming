@@ -29,7 +29,7 @@ private int x;
 ### default (no modifier)
 
 ```java
-int x; // no keyword — default access
+int x;    // no keyword — default access
 ```
 
 - Accessible within the **same package**
@@ -70,10 +70,10 @@ public int x;
 Overriding ke time child method ka access level **equal ya wider** hona chahiye:
 
 ```text
-Parent: private → not overridden (not inherited)
-Parent: default → child: default / protected / public
+Parent: private   → not overridden (not inherited)
+Parent: default   → child: default / protected / public
 Parent: protected → child: protected / public
-Parent: public → child: public only
+Parent: public    → child: public only
 ```
 
 > **Cannot reduce access** — sirf maintain ya increase kar sakte hain.
@@ -81,16 +81,16 @@ Parent: public → child: public only
 ```java
 // Invalid — weaker access
 interface A {
- void show(); // public abstract
+    void show();    // public abstract
 }
 
 class B implements A {
- void show() { } // attempting to assign weaker access (default < public)
+    void show() { }  // attempting to assign weaker access (default < public)
 }
 
-// Valid
+// valid Valid
 class B implements A {
- public void show() { }
+    public void show() { }
 }
 ```
 
@@ -102,20 +102,20 @@ class B implements A {
 Access Level (narrow → wide):
 
 private → default → protected → public
- 
+                            
 ```
 
-> Overriding me: **Left → Right** allowed, **Right → Left** not allowed.
+> Overriding me: **Left → Right** allowed, **Right → Left**  not allowed.
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
-private → same class only
-default → same package
+private   → same class only
+default   → same package
 protected → same package + subclass inheritance
-public → everywhere
+public    → everywhere
 
 Overriding Rule:
 → child can maintain or INCREASE access

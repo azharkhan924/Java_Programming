@@ -9,10 +9,10 @@ block using the pipe (`|`) operator.
 
 ``` java
 try {
- // code
+    // code
 }
 catch (ArithmeticException | NullPointerException e) {
- System.out.println("Exception occurred");
+    System.out.println("Exception occurred");
 }
 ```
 
@@ -37,7 +37,7 @@ Why?
 
 ``` text
 Exception
- |
+   |
 ArithmeticException
 ```
 
@@ -65,10 +65,10 @@ Example:
 
 ``` java
 try {
- int x = 10 / 0;
+    int x = 10 / 0;
 }
 catch (Exception e) {
- System.out.println("Exception handled");
+    System.out.println("Exception handled");
 }
 ```
 
@@ -90,53 +90,53 @@ subclass of `Exception`.
 # 28. Important Exception Handling Flow
 
 ``` text
- Exception Occurs
- |
- v
- Current Method
- |
- Handler Present?
- / \
- Yes No
- | |
- Handle Method terminates
- |
- v
- Calling Method
- |
- Handler Present?
- / \
- Yes No
- | |
- Handle Continue propagation
- |
- v
- main()
- |
- Handler Present?
- / \
- Yes No
- | |
- Handle Default Handler
- |
- v
- Stack Trace + Termination
+              Exception Occurs
+                     |
+                     v
+              Current Method
+                     |
+             Handler Present?
+               /           \
+             Yes            No
+              |              |
+           Handle       Method terminates
+                             |
+                             v
+                       Calling Method
+                             |
+                     Handler Present?
+                       /         \
+                     Yes          No
+                      |            |
+                   Handle     Continue propagation
+                                   |
+                                   v
+                                 main()
+                                   |
+                         Handler Present?
+                           /         \
+                         Yes          No
+                          |            |
+                       Handle     Default Handler
+                                      |
+                                      v
+                              Stack Trace + Termination
 ```
 
 ------------------------------------------------------------------------
 
 # 29. Important Rules to Remember
 
-1. `try` contains risky code.
-2. `catch` handles exceptions.
-3. `finally` is mainly used for cleanup.
-4. `throw` explicitly throws an exception object.
-5. `throws` declares/propagates exception responsibility to the caller.
-6. Checked exceptions are checked by the compiler.
-7. Unchecked exceptions are subclasses of `RuntimeException`.
-8. Checked exceptions must be caught or declared.
-9. `try` must be followed by `catch`, `finally`, or used with
- try-with-resources.
+1.  `try` contains risky code.
+2.  `catch` handles exceptions.
+3.  `finally` is mainly used for cleanup.
+4.  `throw` explicitly throws an exception object.
+5.  `throws` declares/propagates exception responsibility to the caller.
+6.  Checked exceptions are checked by the compiler.
+7.  Unchecked exceptions are subclasses of `RuntimeException`.
+8.  Checked exceptions must be caught or declared.
+9.  `try` must be followed by `catch`, `finally`, or used with
+    try-with-resources.
 10. Multiple `catch` blocks are allowed.
 11. Specific `catch` blocks must come before general `catch` blocks.
 12. Multi-catch uses `|`.
@@ -146,11 +146,11 @@ subclass of `Exception`.
 16. `printStackTrace()` prints the stack trace.
 17. Unhandled exceptions propagate through the calling methods.
 18. If an exception reaches the top without a handler, the default
- uncaught exception handling mechanism reports it.
+    uncaught exception handling mechanism reports it.
 19. A custom exception can extend `Exception` or `RuntimeException`.
 20. `throw` can be used for both checked and unchecked exceptions;
- checked exceptions must additionally satisfy Java's catch-or-declare
- rule.
+    checked exceptions must additionally satisfy Java's catch-or-declare
+    rule.
 
 ------------------------------------------------------------------------
 

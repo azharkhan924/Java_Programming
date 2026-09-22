@@ -1,10 +1,10 @@
-# Collections Framework — Master Quick Revision & Cheat Sheet
+# ⚡ Collections Framework — Master Quick Revision & Cheat Sheet
 
 > **Summary:** Consolidated master cheat sheet featuring the complete Java Collection hierarchy, key comparison tables, essential formulas, and top 20 rapid-fire interview Q&As.
 
 ---
 
-## 1. Topic-Wise Summary Matrix
+## 1.  Topic-Wise Summary Matrix
 
 | # | Topic | Core Concept | Golden Rule |
 |---|-------|--------------|-------------|
@@ -24,15 +24,15 @@
 
 ```text
 Iterable (I)
- └── Collection (I)
- ├── List (I) ──── ArrayList, LinkedList, Vector → Stack
- ├── Set (I) ───── HashSet → LinkedHashSet
- │ SortedSet (I) → NavigableSet (I) → TreeSet
- └── Queue (I) ── Deque (I) → ArrayDeque, LinkedList
+  └── Collection (I)
+       ├── List (I) ──── ArrayList, LinkedList, Vector → Stack
+       ├── Set (I) ───── HashSet → LinkedHashSet
+       │                 SortedSet (I) → NavigableSet (I) → TreeSet
+       └── Queue (I) ── Deque (I) → ArrayDeque, LinkedList
 
 Map (I) ── HashMap → LinkedHashMap
- Hashtable → Properties
- SortedMap (I) → NavigableMap (I) → TreeMap
+            Hashtable → Properties
+            SortedMap (I) → NavigableMap (I) → TreeMap
 ```
 
 ---
@@ -44,7 +44,7 @@ Map (I) ── HashMap → LinkedHashMap
 | Feature | `ArrayList` | `LinkedList` | `Vector` |
 |---------|-------------|--------------|----------|
 | **Internal Data Structure** | Resizable Array | Doubly Linked List | Resizable Array |
-| **`RandomAccess` Support** | `O(1)` | `O(n)` | `O(1)` |
+| **`RandomAccess` Support** |  `O(1)` |  `O(n)` |  `O(1)` |
 | **Insert / Delete at Head** | `O(n)` shift required | `O(1)` pointer update | `O(n)` shift required |
 | **Thread Safety** | No (unsynchronized) | No (unsynchronized) | Yes (all methods synchronized) |
 | **Growth Policy** | `(old * 3 / 2) + 1` | N/A (node-based) | `old * 2` (doubles) |
@@ -56,9 +56,9 @@ Map (I) ── HashMap → LinkedHashMap
 
 | Feature | `HashSet` | `LinkedHashSet` | `TreeSet` |
 |---------|-----------|-----------------|-----------|
-| **Order Maintained** | None | Insertion order | Sorted order |
+| **Order Maintained** | None |  Insertion order |  Sorted order |
 | **Underlying Structure** | `HashMap` | `HashMap` + Doubly Linked List | Red-Black Tree (`TreeMap`) |
-| **Null Acceptance** | Up to 1 `null` | Up to 1 `null` | **NOT allowed** (throws NPE) |
+| **Null Acceptance** |  Up to 1 `null` |  Up to 1 `null` |  **NOT allowed** (throws NPE) |
 | **Time Complexity** | `O(1)` average | `O(1)` average | `O(log n)` guaranteed |
 | **Comparable Required?** | No | No | Yes (or pass `Comparator`) |
 | **Duplicate Detection** | `hashCode()` then `equals()` | `hashCode()` then `equals()` | `compareTo()` / `compare() == 0` |
@@ -82,7 +82,7 @@ Map (I) ── HashMap → LinkedHashMap
 
 | Feature | `Enumeration` | `Iterator` | `ListIterator` |
 |---------|---------------|------------|----------------|
-| **Direction** | Forward only | Forward only | Bidirectional |
+| **Direction** | Forward only | Forward only | Bidirectional|
 | **Scope** | Legacy classes (`Vector`, `Hashtable`) | Universal across all `Collection`s | `List` implementations only |
 | **Element Removal** | No | Yes (`remove()`) | Yes (`remove()`) |
 | **Element Modification** | No | No | Yes (`set()`, `add()`) |
@@ -90,67 +90,67 @@ Map (I) ── HashMap → LinkedHashMap
 
 ---
 
-## 4. Top 20 Rapid-Fire Interview Questions
+## 4.  Top 20 Rapid-Fire Interview Questions
 
-1. **What is the default initial capacity of an `ArrayList`?** 
- → **10** (allocated upon the first element insertion).
+1. **What is the default initial capacity of an `ArrayList`?**  
+   → **10** (allocated upon the first element insertion).
 
-2. **What is the default initial capacity and load factor of a `HashSet`?** 
- → Initial capacity is **16**, and load factor is **0.75**.
+2. **What is the default initial capacity and load factor of a `HashSet`?**  
+   → Initial capacity is **16**, and load factor is **0.75**.
 
-3. **What is the capacity growth formula of `ArrayList`?** 
- → `newCapacity = (currentCapacity * 3 / 2) + 1` (or `currentCapacity + (currentCapacity >> 1)` in modern JDKs).
+3. **What is the capacity growth formula of `ArrayList`?**  
+   → `newCapacity = (currentCapacity * 3 / 2) + 1` (or `currentCapacity + (currentCapacity >> 1)` in modern JDKs).
 
-4. **How does `Vector` grow when its capacity is exceeded?** 
- → It **doubles** its capacity (`currentCapacity * 2`).
+4. **How does `Vector` grow when its capacity is exceeded?**  
+   → It **doubles** its capacity (`currentCapacity * 2`).
 
-5. **Can we insert `null` into a `TreeSet`?** 
- → **No.** In Java 7+, inserting `null` into a `TreeSet` using natural ordering throws `NullPointerException`.
+5. **Can we insert `null` into a `TreeSet`?**  
+   →  **No.** In Java 7+, inserting `null` into a `TreeSet` using natural ordering throws `NullPointerException`.
 
-6. **What is the underlying data structure of `HashSet`?** 
- → Internally backed by a **`HashMap`**, where elements are keys and a dummy `PRESENT` constant is the value.
+6. **What is the underlying data structure of `HashSet`?**  
+   → Internally backed by a **`HashMap`**, where elements are keys and a dummy `PRESENT` constant is the value.
 
-7. **Does `LinkedList` implement `RandomAccess`?** 
- → **No.** Traversing by index requires sequential `O(n)` pointer dereferencing.
+7. **Does `LinkedList` implement `RandomAccess`?**  
+   →  **No.** Traversing by index requires sequential `O(n)` pointer dereferencing.
 
-8. **What is the difference between `Collection` and `Collections`?** 
- → `Collection` is a root interface; `Collections` is a utility class containing static helper algorithms (`sort`, `binarySearch`, `reverse`).
+8. **What is the difference between `Collection` and `Collections`?**  
+   → `Collection` is a root interface; `Collections` is a utility class containing static helper algorithms (`sort`, `binarySearch`, `reverse`).
 
-9. **Is `Map` a child interface of `Collection`?** 
- → **No.** `Map` defines key-value mappings and belongs to a completely separate hierarchy.
+9. **Is `Map` a child interface of `Collection`?**  
+   →  **No.** `Map` defines key-value mappings and belongs to a completely separate hierarchy.
 
-10. **Can `StringBuffer` be sorted directly in a default `TreeSet`?** 
- → **No.** Throws `ClassCastException` at runtime because `StringBuffer` does not implement `Comparable`.
+10. **Can `StringBuffer` be sorted directly in a default `TreeSet`?**  
+    →  **No.** Throws `ClassCastException` at runtime because `StringBuffer` does not implement `Comparable`.
 
-11. **What happens if a custom `Comparator` always returns `0` in a `TreeSet`?** 
- → Only the **first added element** is preserved; all subsequent elements are discarded as duplicates.
+11. **What happens if a custom `Comparator` always returns `0` in a `TreeSet`?**  
+    → Only the **first added element** is preserved; all subsequent elements are discarded as duplicates.
 
-12. **Does `Iterator` support an `add()` method?** 
- → **No.** Only `ListIterator` supports adding new elements during traversal.
+12. **Does `Iterator` support an `add()` method?**  
+    →  **No.** Only `ListIterator` supports adding new elements during traversal.
 
-13. **When does a fail-fast iterator throw `ConcurrentModificationException`?** 
- → When the collection is structurally modified during iteration through any mechanism other than the iterator's own `remove()` method.
+13. **When does a fail-fast iterator throw `ConcurrentModificationException`?**  
+    → When the collection is structurally modified during iteration through any mechanism other than the iterator's own `remove()` method.
 
-14. **When should `CopyOnWriteArrayList` be preferred over `Collections.synchronizedList()`?** 
- → In **read-heavy, write-rare** multi-threaded scenarios where locks on read operations would severely bottleneck performance.
+14. **When should `CopyOnWriteArrayList` be preferred over `Collections.synchronizedList()`?**  
+    → In **read-heavy, write-rare** multi-threaded scenarios where locks on read operations would severely bottleneck performance.
 
-15. **Is iterating over `Collections.synchronizedList()` intrinsically thread-safe?** 
- → **No.** You must explicitly enclose the iteration loop within a `synchronized (list)` block to prevent concurrent structural modifications.
+15. **Is iterating over `Collections.synchronizedList()` intrinsically thread-safe?**  
+    →  **No.** You must explicitly enclose the iteration loop within a `synchronized (list)` block to prevent concurrent structural modifications.
 
-16. **Which class does `Stack` extend in the JDK?** 
- → It extends **`Vector`** (a legacy inheritance choice; modern applications prefer `Deque` / `ArrayDeque`).
+16. **Which class does `Stack` extend in the JDK?**  
+    → It extends **`Vector`** (a legacy inheritance choice; modern applications prefer `Deque` / `ArrayDeque`).
 
-17. **If you override `equals()` without overriding `hashCode()`, will `HashSet` work properly?** 
- → **No.** Objects that are equal will produce different hash codes and land in separate buckets, breaking duplicate prevention.
+17. **If you override `equals()` without overriding `hashCode()`, will `HashSet` work properly?**  
+    →  **No.** Objects that are equal will produce different hash codes and land in separate buckets, breaking duplicate prevention.
 
-18. **Which interface must be implemented to establish default natural ordering?** 
- → **`java.lang.Comparable`** by overriding `compareTo()`.
+18. **Which interface must be implemented to establish default natural ordering?**  
+    → **`java.lang.Comparable`** by overriding `compareTo()`.
 
-19. **Does `headSet(30)` in `SortedSet` include the element `30`?** 
- → **No.** `headSet(toElement)` is strictly exclusive of the bound.
+19. **Does `headSet(30)` in `SortedSet` include the element `30`?**  
+    →  **No.** `headSet(toElement)` is strictly exclusive of the bound.
 
-20. **Does `tailSet(30)` in `SortedSet` include the element `30`?** 
- → **Yes.** `tailSet(fromElement)` is inclusive of the specified element.
+20. **Does `tailSet(30)` in `SortedSet` include the element `30`?**  
+    →  **Yes.** `tailSet(fromElement)` is inclusive of the specified element.
 
 ---
 

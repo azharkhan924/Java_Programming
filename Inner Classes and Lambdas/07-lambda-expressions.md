@@ -9,7 +9,7 @@ Example:
 
 ``` java
 interface Inter1 {
- void show();
+    void show();
 }
 ```
 
@@ -25,7 +25,7 @@ We can explicitly mark it using:
 ``` java
 @FunctionalInterface
 interface Inter1 {
- void show();
+    void show();
 }
 ```
 
@@ -40,10 +40,10 @@ Example using anonymous inner class:
 
 ``` java
 Inter1 in = new Inter1() {
- @Override
- public void show() {
- System.out.println("ABC");
- }
+    @Override
+    public void show() {
+        System.out.println("ABC");
+    }
 };
 ```
 
@@ -51,7 +51,7 @@ The same thing using lambda:
 
 ``` java
 Inter1 in = () -> {
- System.out.println("ABC");
+    System.out.println("ABC");
 };
 ```
 
@@ -76,7 +76,7 @@ Suppose:
 
 ``` java
 interface Inter1 {
- void show();
+    void show();
 }
 ```
 
@@ -84,10 +84,10 @@ interface Inter1 {
 
 ``` java
 Inter1 in = new Inter1() {
- @Override
- public void show() {
- System.out.println("SWT");
- }
+    @Override
+    public void show() {
+        System.out.println("SWT");
+    }
 };
 ```
 
@@ -98,7 +98,7 @@ we are implementing.
 
 ``` java
 Inter1 in = () -> {
- System.out.println("SWT");
+    System.out.println("SWT");
 };
 ```
 
@@ -118,7 +118,7 @@ Suppose the interface is:
 
 ``` java
 interface Inter1 {
- void show(int x);
+    void show(int x);
 }
 ```
 
@@ -126,10 +126,10 @@ Anonymous class:
 
 ``` java
 Inter1 in = new Inter1() {
- @Override
- public void show(int x) {
- System.out.println(x);
- }
+    @Override
+    public void show(int x) {
+        System.out.println(x);
+    }
 };
 ```
 
@@ -137,7 +137,7 @@ Lambda:
 
 ``` java
 Inter1 in = (int x) -> {
- System.out.println(x);
+    System.out.println(x);
 };
 ```
 
@@ -145,7 +145,7 @@ Because the parameter type can be inferred:
 
 ``` java
 Inter1 in = (x) -> {
- System.out.println(x);
+    System.out.println(x);
 };
 ```
 
@@ -153,7 +153,7 @@ Parentheses can be removed for a single parameter:
 
 ``` java
 Inter1 in = x -> {
- System.out.println(x);
+    System.out.println(x);
 };
 ```
 
@@ -171,7 +171,7 @@ Suppose:
 
 ``` java
 interface Inter1 {
- void show(int a, int b);
+    void show(int a, int b);
 }
 ```
 
@@ -179,7 +179,7 @@ Lambda:
 
 ``` java
 Inter1 in = (a, b) -> {
- System.out.println(a + b);
+    System.out.println(a + b);
 };
 ```
 
@@ -203,7 +203,7 @@ Suppose:
 
 ``` java
 interface Inter1 {
- int show(int a, int b);
+    int show(int a, int b);
 }
 ```
 
@@ -211,7 +211,7 @@ Lambda:
 
 ``` java
 Inter1 in = (a, b) -> {
- return a + b;
+    return a + b;
 };
 ```
 
@@ -240,7 +240,7 @@ Therefore, we can write:
 Button b = new Button("Click");
 
 b.addActionListener(e -> {
- setBackground(Color.RED);
+    setBackground(Color.RED);
 });
 ```
 
@@ -256,10 +256,10 @@ Compare:
 
 ``` java
 b.addActionListener(new ActionListener() {
- @Override
- public void actionPerformed(ActionEvent e) {
- setBackground(Color.RED);
- }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        setBackground(Color.RED);
+    }
 });
 ```
 

@@ -20,9 +20,9 @@ Example using an event listener:
 ```java
 button.addActionListener(new ActionListener() {
 
- public void actionPerformed(ActionEvent e) {
- System.out.println("Button clicked");
- }
+    public void actionPerformed(ActionEvent e) {
+        System.out.println("Button clicked");
+    }
 });
 ```
 
@@ -32,7 +32,7 @@ With modern Java, a functional interface can often be written using a lambda:
 
 ```java
 button.addActionListener(e -> {
- System.out.println("Button clicked");
+    System.out.println("Button clicked");
 });
 ```
 
@@ -43,17 +43,17 @@ Thus anonymous inner classes are closely related to **listeners, callbacks and l
 # 27. Quick Revision Map
 
 ```text
- NESTED CLASS
- │
- ┌───────────┴───────────┐
- │ │
- NON-STATIC STATIC
- │ NESTED CLASS
- ┌──────┼──────┐
- │ │ │
- Instance Local Anonymous
- Inner Inner Inner
- Class Class Class
+                    NESTED CLASS
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+        NON-STATIC                 STATIC
+             │                    NESTED CLASS
+      ┌──────┼──────┐
+      │      │      │
+   Instance Local  Anonymous
+    Inner  Inner     Inner
+    Class  Class     Class
 ```
 
 ### Instance Inner Class
@@ -68,8 +68,8 @@ Outer.Inner i = o.new Inner();
 ```java
 void show() {
 
- class B {
- }
+    class B {
+    }
 }
 ```
 
@@ -77,7 +77,7 @@ void show() {
 
 ```java
 A a = new A() {
- // body
+    // body
 };
 ```
 
@@ -116,24 +116,24 @@ private class B {
 
 # 26. Quick Comparison
 
- -------------------------------------------------------------------------
- Concept Object Creation
- ----------------------------------- -------------------------------------
- Normal class `A a = new A();`
+  -------------------------------------------------------------------------
+  Concept                             Object Creation
+  ----------------------------------- -------------------------------------
+  Normal class                        `A a = new A();`
 
- Upcasting `A a = new B();`
+  Upcasting                           `A a = new B();`
 
- Static nested class `A.B b = new A.B();`
+  Static nested class                 `A.B b = new A.B();`
 
- Instance inner class `A a = new A(); A.B b = a.new B();`
+  Instance inner class                `A a = new A(); A.B b = a.new B();`
 
- Anonymous class `A a = new A() { ... };`
+  Anonymous class                     `A a = new A() { ... };`
 
- Anonymous implementation of `Inter i = new Inter() { ... };`
- interface 
+  Anonymous implementation of         `Inter i = new Inter() { ... };`
+  interface                           
 
- Lambda `Inter i = () -> ...;`
- -------------------------------------------------------------------------
+  Lambda                              `Inter i = () -> ...;`
+  -------------------------------------------------------------------------
 
 ------------------------------------------------------------------------
 
@@ -148,19 +148,19 @@ A a = new B();
 Think:
 
 ``` text
-A → Reference Type
-a → Reference Variable
+A       → Reference Type
+a       → Reference Variable
 new B() → Object Creation
-B → Actual Object Type
+B       → Actual Object Type
 ```
 
 Similarly:
 
 ``` java
 Inter i = new Inter() {
- public void show() {
- System.out.println("Hello");
- }
+    public void show() {
+        System.out.println("Hello");
+    }
 };
 ```
 
@@ -168,15 +168,15 @@ Think:
 
 ``` text
 Inter
- ↓
+  ↓
 Reference Type
 
 i
- ↓
+  ↓
 Reference Variable
 
 new Inter() { ... }
- ↓
+  ↓
 Anonymous Class Object
 ```
 
@@ -189,35 +189,35 @@ variable mein rakha jata hai.
 
 # 28. Key Points to Remember
 
-1. Anonymous inner class has **no class name**.
-2. It is useful when a method needs a **special implementation for one
- particular object**.
-3. `A a = new B();` mein `a` reference variable hai aur `new B()` `B` ka
- object create karta hai.
-4. Interface ka direct object nahi banaya ja sakta.
-5. Anonymous class interface ko implement karke uska object create kar
- sakti hai.
-6. Adapter classes are useful when a listener interface has many
- methods but we need only a few.
-7. `WindowListener` ke liye adapter class unwanted methods ki empty
- implementations provide kar sakti hai.
-8. Anonymous adapter can be passed directly as a method argument.
-9. A functional interface has **exactly one abstract method**.
+1.  Anonymous inner class has **no class name**.
+2.  It is useful when a method needs a **special implementation for one
+    particular object**.
+3.  `A a = new B();` mein `a` reference variable hai aur `new B()` `B` ka
+    object create karta hai.
+4.  Interface ka direct object nahi banaya ja sakta.
+5.  Anonymous class interface ko implement karke uska object create kar
+    sakti hai.
+6.  Adapter classes are useful when a listener interface has many
+    methods but we need only a few.
+7.  `WindowListener` ke liye adapter class unwanted methods ki empty
+    implementations provide kar sakti hai.
+8.  Anonymous adapter can be passed directly as a method argument.
+9.  A functional interface has **exactly one abstract method**.
 10. Lambda expression functional interface ke single abstract method ki
- implementation provide karta hai.
+    implementation provide karta hai.
 11. Lambda mein method name aur boilerplate likhne ki zaroorat nahi hoti.
 12. One parameter mein parentheses optional hain: `x -> ...`
 13. Multiple parameters mein parentheses required hain: `(a, b) -> ...`
 14. Static nested class can be created without an object of the outer
- class.
+    class.
 15. Instance inner class requires an outer-class object.
 16. Static nested class can contain static and non-static members.
 17. Traditional instance inner-class rules do not allow ordinary static
- members; `static final` constants are the classic exception.
+    members; `static final` constants are the classic exception.
 18. A class can contain another class/interface.
 19. An interface can contain another interface/class.
 20. The actual object type and reference type can be different,
- especially in polymorphism and anonymous classes.
+    especially in polymorphism and anonymous classes.
 
 ---
 

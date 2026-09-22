@@ -1,4 +1,4 @@
-# Core Java — Quick Revision Cheat Sheet
+# ⚡ Core Java — Quick Revision Cheat Sheet
 
 ---
 
@@ -60,7 +60,7 @@ Parent IB → Parent Ctor → Child IB → Child Ctor
 
 ---
 
-## Static
+## ⚡ Static
 
 ```text
 static variable → class-level / shared
@@ -68,7 +68,7 @@ static method → no object needed, cannot access instance directly
 static block → class initialization time, multiple OK
 static import → use static members without class name
 static nested class → nested only, no outer object needed
-→ this | super in static context
+→ this  | super  in static context
 ```
 
 ---
@@ -128,10 +128,10 @@ HIDING
 ## Access Modifiers
 
 ```text
-private → same class
-default → same package
+private   → same class
+default   → same package
 protected → same package + subclass
-public → everywhere
+public    → everywhere
 
 Overriding: can maintain/increase access, CANNOT reduce
 ```
@@ -156,8 +156,8 @@ Syntax: dataType... name (Java 5+)
 ```text
 if → condition MUST be boolean (0 ≠ false in Java)
 switch → byte, short, char, int, String(7+), enum
- → NOT: long, float, double, boolean
- → No duplicate case/default
+       → NOT: long, float, double, boolean
+       → No duplicate case/default
 ```
 
 ---
@@ -192,10 +192,10 @@ Scanner: next()=token, nextInt()=int, nextLine()=line
 
 ```text
 public static void main(String[] args)
-public → JVM accessible
-static → no object needed
-void → no return
-args → String[] command-line arguments
+public  → JVM accessible
+static  → no object needed
+void    → no return
+args    → String[] command-line arguments
 ```
 
 ```text

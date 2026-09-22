@@ -6,22 +6,22 @@ Java allows us to create our own exception classes.
 
 A custom exception can extend:
 
-- `Exception` --- commonly used for a checked custom exception
-- `RuntimeException` --- commonly used for an unchecked custom
- exception
+-   `Exception` --- commonly used for a checked custom exception
+-   `RuntimeException` --- commonly used for an unchecked custom
+    exception
 
 ### Example: Custom Unchecked Exception
 
 ``` java
 class InvalidAgeException extends RuntimeException {
 
- public InvalidAgeException() {
- super();
- }
+    public InvalidAgeException() {
+        super();
+    }
 
- public InvalidAgeException(String message) {
- super(message);
- }
+    public InvalidAgeException(String message) {
+        super(message);
+    }
 }
 ```
 
@@ -29,16 +29,16 @@ Using the custom exception:
 
 ``` java
 class Demo {
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- int age = 15;
+        int age = 15;
 
- if (age < 18) {
- throw new InvalidAgeException("Age must be 18 or above");
- }
+        if (age < 18) {
+            throw new InvalidAgeException("Age must be 18 or above");
+        }
 
- System.out.println("Eligible");
- }
+        System.out.println("Eligible");
+    }
 }
 ```
 
@@ -46,7 +46,7 @@ class Demo {
 
 ``` java
 public InvalidAgeException() {
- super();
+    super();
 }
 ```
 
@@ -54,7 +54,7 @@ Creates the exception without a custom message.
 
 ``` java
 public InvalidAgeException(String message) {
- super(message);
+    super(message);
 }
 ```
 
@@ -69,9 +69,9 @@ If we extend `Exception`, our custom exception becomes checked.
 ``` java
 class InvalidAgeException extends Exception {
 
- public InvalidAgeException(String message) {
- super(message);
- }
+    public InvalidAgeException(String message) {
+        super(message);
+    }
 }
 ```
 
@@ -80,9 +80,9 @@ Now it must be handled or declared.
 ``` java
 static void checkAge(int age) throws InvalidAgeException {
 
- if (age < 18) {
- throw new InvalidAgeException("Invalid age");
- }
+    if (age < 18) {
+        throw new InvalidAgeException("Invalid age");
+    }
 }
 ```
 

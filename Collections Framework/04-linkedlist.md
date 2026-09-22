@@ -11,23 +11,23 @@
 ```text
 LinkedList Internal Structure:
 null ← [prev | A | next] ⟷ [prev | B | next] ⟷ [prev | C | next] → null
- ↑ head ↑ tail
+          ↑ head                                         ↑ tail
 ```
 
 ### Key Properties:
 ```text
- Maintains insertion order
- Allows duplicate elements
- Allows null values (multiple nulls too)
- Implements List + Deque interfaces simultaneously
- Does NOT implement RandomAccess (index access is O(n), not O(1)!)
- NOT synchronized (Not thread-safe)
+- Maintains insertion order
+- Allows duplicate elements
+- Allows null values (multiple nulls too)
+- Implements List + Deque interfaces simultaneously
+- Does NOT implement RandomAccess (index access is O(n), not O(1)!)
+- NOT synchronized (Not thread-safe)
 ```
 
 ### Class Declaration:
 ```java
 public class LinkedList<E> extends AbstractSequentialList<E>
- implements List<E>, Deque<E>, Cloneable, Serializable
+        implements List<E>, Deque<E>, Cloneable, Serializable
 ```
 
 ---
@@ -55,8 +55,8 @@ In ArrayList, elements are stored in contiguous memory → `get(5)` directly acc
 In LinkedList, there is no contiguous memory — elements are in scattered nodes. `get(5)` requires traversal from the head to the 5th node → **O(n)**.
 
 ```text
-ArrayList: [A][B][C][D][E] → get(3) = Direct jump to D O(1)
-LinkedList: A → B → C → D → E → get(3) = Start from A, 3 hops O(n)
+ArrayList:  [A][B][C][D][E] → get(3) = Direct jump to D → O(1)
+LinkedList: A → B → C → D → E → get(3) = Start from A, 3 hops → O(n)
 ```
 
 This is why LinkedList does **not** implement the `RandomAccess` marker interface.
@@ -85,22 +85,22 @@ LinkedList<String> list = new LinkedList<>();
 list.add("A"); list.add("B"); list.add("C");
 
 // ─── Adding at ends ───
-list.addFirst("Z"); // [Z, A, B, C] → Add at beginning
-list.addLast("D"); // [Z, A, B, C, D] → Add at end
-list.offerFirst("Y"); // Same as addFirst but returns boolean
-list.offerLast("E"); // Same as addLast but returns boolean
+list.addFirst("Z");    // [Z, A, B, C] → Add at beginning
+list.addLast("D");     // [Z, A, B, C, D] → Add at end
+list.offerFirst("Y");  // Same as addFirst but returns boolean
+list.offerLast("E");   // Same as addLast but returns boolean
 
 // ─── Accessing (without removing) ───
-list.getFirst(); // Throws NoSuchElementException if empty
-list.getLast(); // Throws NoSuchElementException if empty
-list.peekFirst(); // Returns null if empty (safer!)
-list.peekLast(); // Returns null if empty (safer!)
+list.getFirst();       // Throws NoSuchElementException if empty
+list.getLast();        // Throws NoSuchElementException if empty
+list.peekFirst();      // Returns null if empty (safer!)
+list.peekLast();       // Returns null if empty (safer!)
 
 // ─── Removing from ends ───
-list.removeFirst(); // Throws if empty
-list.removeLast(); // Throws if empty
-list.pollFirst(); // Returns null if empty (safer!)
-list.pollLast(); // Returns null if empty (safer!)
+list.removeFirst();    // Throws if empty
+list.removeLast();     // Throws if empty
+list.pollFirst();      // Returns null if empty (safer!)
+list.pollLast();       // Returns null if empty (safer!)
 ```
 
 ---
@@ -110,15 +110,15 @@ list.pollLast(); // Returns null if empty (safer!)
 ```java
 // ─── As Queue (FIFO: First In First Out) ───
 LinkedList<String> queue = new LinkedList<>();
-queue.offer("Task1"); // Add at rear
+queue.offer("Task1");    // Add at rear
 queue.offer("Task2");
-queue.poll(); // Remove from front → "Task1"
+queue.poll();            // Remove from front → "Task1"
 
 // ─── As Stack (LIFO: Last In First Out) ───
 LinkedList<String> stack = new LinkedList<>();
-stack.push("A"); // Internally addFirst()
+stack.push("A");         // Internally addFirst()
 stack.push("B");
-stack.pop(); // Internally removeFirst() → "B"
+stack.pop();             // Internally removeFirst() → "B"
 ```
 
 ---
@@ -128,11 +128,11 @@ stack.pop(); // Internally removeFirst() → "B"
 | Feature | ArrayList | LinkedList |
 |---------|-----------|------------|
 | **Internal Structure** | Resizable Array (`Object[]`) | Doubly Linked List (Nodes with prev/next) |
-| **`RandomAccess`** | Implements | Does not implement |
-| **`get(index)` Time** | **O(1)** Direct jump | **O(n)** Node traversal |
+| **`RandomAccess`** |  Implements |  Does not implement |
+| **`get(index)` Time** | **O(1)**  Direct jump | **O(n)** Node traversal |
 | **`add(end)` Time** | O(1) amortized | O(1) |
-| **`add(0, elem)` — Insert at beginning** | **O(n)** Shift all elements | **O(1)** Update head pointers |
-| **`remove(0)` — Remove from beginning** | **O(n)** Shift all elements | **O(1)** Update head pointers |
+| **`add(0, elem)` — Insert at beginning** | **O(n)**  Shift all elements | **O(1)**  Update head pointers |
+| **`remove(0)` — Remove from beginning** | **O(n)**  Shift all elements | **O(1)**  Update head pointers |
 | **Memory Overhead per Element** | Low (just the element reference) | High (element + prev pointer + next pointer) |
 | **Implements Deque?** | No | Yes (Stack + Queue operations) |
 | **Thread Safety** | Not synchronized | Not synchronized |
@@ -164,7 +164,7 @@ stack.pop(); // Internally removeFirst() → "B"
 | Trap | Answer |
 |------|--------|
 | Does LinkedList implement `RandomAccess`? | No! Index-based access is O(n). |
-| Is LinkedList a singly linked list? | It is a **Doubly Linked List** — both prev and next pointers exist. |
+| Is LinkedList a singly linked list? |  It is a **Doubly Linked List** — both prev and next pointers exist. |
 | ArrayList vs LinkedList for insertion — which is better? | **Frequent insertion at beginning/end** → LinkedList. **End-only add + frequent reads** → ArrayList. |
 | Does LinkedList have an initial capacity concept? | No! Nodes are created on-demand dynamically. |
 | What major interface does LinkedList implement besides `List`? | **`Deque`** (Double-Ended Queue). |

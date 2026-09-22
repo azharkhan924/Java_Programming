@@ -7,20 +7,20 @@
 ### Supported with Classes
 
 ```text
-1. Single Inheritance → A → B
-2. Multilevel Inheritance → A → B → C
+1. Single Inheritance       → A → B
+2. Multilevel Inheritance   → A → B → C
 3. Hierarchical Inheritance → A → B, A → C
 ```
 
 ### Not Supported with Classes
 
 ```text
-Multiple Inheritance → A, B → C ()
-Hybrid Inheritance → Combination ()
+Multiple Inheritance  → A, B → C  (Not Supported)
+Hybrid Inheritance    → Combination (Not Supported)
 ```
 
 ```java
-class C extends A, B { } // invalid — multiple class inheritance
+class C extends A, B { }   // invalid — multiple class inheritance
 ```
 
 ### Why Not?
@@ -33,7 +33,7 @@ Java avoids the **ambiguity** associated with inheriting same members from multi
 interface A { }
 interface B { }
 
-class C implements A, B { } // valid
+class C implements A, B { }   // valid
 ```
 
 ---
@@ -44,9 +44,9 @@ Inheritance allows a subclass to **reuse and extend** the behavior/properties of
 
 ```text
 Existing class (Parent/Super)
- ↓
- inherit
- ↓
+        ↓
+     inherit
+        ↓
 New class (Child/Sub) = reused + additional behavior
 ```
 
@@ -58,16 +58,16 @@ Subclass **apni implementation** provide karta hai inherited superclass method k
 
 ```java
 class A {
- void show() {
- System.out.println("A");
- }
+    void show() {
+        System.out.println("A");
+    }
 }
 
 class B extends A {
- @Override
- void show() {
- System.out.println("B");
- }
+    @Override
+    void show() {
+        System.out.println("B");
+    }
 }
 ```
 
@@ -85,10 +85,10 @@ class B extends A {
 Child method **weaker access** nahi de sakta:
 
 ```text
-private → not overridden (not inherited)
-default → default / protected / public
+private   → not overridden (not inherited)
+default   → default / protected / public
 protected → protected / public
-public → public only
+public    → public only
 ```
 
 > Child can maintain or **increase** accessibility, but **cannot reduce** it.
@@ -103,18 +103,18 @@ public → public only
 
 ```java
 final int x = 10;
-x = 20; // cannot assign a value to final variable
+x = 20;   // cannot assign a value to final variable
 ```
 
 ### Final Method — Cannot Override
 
 ```java
 class A {
- final void show() { }
+    final void show() { }
 }
 
 class B extends A {
- void show() { } // cannot override final method
+    void show() { }   // cannot override final method
 }
 ```
 
@@ -123,7 +123,7 @@ class B extends A {
 ```java
 final class A { }
 
-class B extends A { } // cannot extend final class
+class B extends A { }   // cannot extend final class
 ```
 
 > Example: `String` class is `final` — koi subclass nahi bana sakta.
@@ -135,7 +135,7 @@ class B extends A { } // cannot extend final class
 Ek important distinction:
 
 ```java
-final int x; // blank final — NOT automatically 0
+final int x;    // blank final — NOT automatically 0
 ```
 
 Blank final variable ko **exactly once** initialize karna mandatory hai.
@@ -144,11 +144,11 @@ Blank final variable ko **exactly once** initialize karna mandatory hai.
 
 ```java
 class A {
- final int x;
+    final int x;
 
- A() {
- x = 10; // assigned in constructor
- }
+    A() {
+        x = 10;    // valid assigned in constructor
+    }
 }
 ```
 
@@ -156,15 +156,15 @@ class A {
 
 ```java
 class A {
- final int x;
+    final int x;
 
- A() {
- x = 10; // 
- }
+    A() {
+        x = 10;       // valid
+    }
 
- A(int val) {
- x = val; // — har constructor path me assigned
- }
+    A(int val) {
+        x = val;       // valid — har constructor path me assigned
+    }
 }
 ```
 
@@ -172,11 +172,11 @@ class A {
 
 ```java
 class A {
- final int x;
+    final int x;
 
- {
- x = 100; // instance initializer block me bhi assign possible
- }
+    {
+        x = 100;    // valid instance initializer block me bhi assign possible
+    }
 }
 ```
 
@@ -184,20 +184,20 @@ class A {
 
 ```java
 class A {
- static final int X;
+    static final int X;
 
- static {
- X = 100; // static initializer block me assign
- }
+    static {
+        X = 100;    // valid static initializer block me assign
+    }
 }
 ```
 
 ---
 
-## 6. Cyclic Inheritance 
+## 6. Cyclic Inheritance
 
 ```java
-class A extends A { } // cyclic inheritance involving A
+class A extends A { }   // cyclic inheritance involving A
 ```
 
 ---
@@ -208,11 +208,11 @@ Private methods **inherited nahi hote** — so overriding nahi hoti.
 
 ```java
 class A {
- private void show() { }
+    private void show() { }
 }
 
 class B extends A {
- private void show() { } // separate method — NOT overriding
+    private void show() { }   // separate method — NOT overriding
 }
 ```
 
@@ -223,7 +223,7 @@ class B extends A {
 | Trap | Answer |
 |------|--------|
 | `final int x;` ko default value (0) milti hai? | No — blank final must be explicitly assigned |
-| Abstract class me blank final variable? | Possible — concrete subclass constructor me assign karna hoga |
+| Abstract class me blank final variable? |  Possible — concrete subclass constructor me assign karna hoga |
 | `final` class ko inherit kar sakte hain? | No |
 | `final` method ko override kar sakte hain? | No |
 | `private` method override hota hai? | No — inherited hi nahi hota |
@@ -233,7 +233,7 @@ class B extends A {
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
 INHERITANCE

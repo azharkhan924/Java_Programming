@@ -14,8 +14,8 @@ String s4 = "abc";
 Same pooled literal reuse hota hai:
 
 ```java
-System.out.println(s3 == s4); // true — same pooled object
-System.out.println(s3.equals(s4)); // true — same content
+System.out.println(s3 == s4);          // true  — same pooled object
+System.out.println(s3.equals(s4));     // true  — same content
 ```
 
 ### `new String()` — Separate Object
@@ -28,8 +28,8 @@ String s2 = new String("abc");
 `new` explicitly distinct objects create karta hai:
 
 ```java
-System.out.println(s1 == s2); // false — different objects
-System.out.println(s1.equals(s2)); // true — same content
+System.out.println(s1 == s2);          // false — different objects
+System.out.println(s1.equals(s2));     // true  — same content
 ```
 
 ### Memory Visualization
@@ -37,16 +37,16 @@ System.out.println(s1.equals(s2)); // true — same content
 ```text
 String Pool:
 ┌─────────┐
-│ "abc" │ ◄── s3, s4 point here
+│  "abc"   │ ◄── s3, s4 point here
 └─────────┘
 
 Heap:
-┌──────────┐ ┌──────────┐
-│ String │ │ String │
-│ "abc" │ │ "abc" │
-└──────────┘ └──────────┘
- ↑ ↑
- s1 s2
+┌──────────┐    ┌──────────┐
+│ String   │    │ String   │
+│ "abc"    │    │ "abc"    │
+└──────────┘    └──────────┘
+     ↑               ↑
+     s1              s2
 ```
 
 > String Pool modern JVMs me **heap memory** me hi hota hai. Sirf literals aur `intern()` ke through pooled strings main pool me aate hain.
@@ -60,14 +60,14 @@ Heap:
 ```java
 String s = "Hello";
 s.concat(" World");
-System.out.println(s); // "Hello" — original unchanged!
+System.out.println(s);     // "Hello" — original unchanged!
 ```
 
 `concat()` returns a **new String** — original modify nahi hota.
 
 ```java
-s = s.concat(" World"); // re-assign karna padega
-System.out.println(s); // "Hello World"
+s = s.concat(" World");    // re-assign karna padega
+System.out.println(s);     // "Hello World"
 ```
 
 ---
@@ -76,14 +76,14 @@ System.out.println(s); // "Hello World"
 
 | Class | Mutable? | Thread-safe? | Performance |
 |-------|----------|-------------|-------------|
-| `String` | Immutable | (immutable = inherently safe) | Slow for many modifications |
-| `StringBuilder` | Mutable | Not synchronized | ⚡ Fastest — single-threaded preferred |
-| `StringBuffer` | Mutable | Synchronized | Slower than StringBuilder |
+| `String` |  Immutable |  (immutable = inherently safe) | Slow for many modifications |
+| `StringBuilder` |  Mutable | Not synchronized | ⚡ Fastest — single-threaded preferred |
+| `StringBuffer` |  Mutable |  Synchronized | Slower than StringBuilder |
 
 ```java
 StringBuilder sb = new StringBuilder("Hello");
 sb.append(" World");
-System.out.println(sb); // "Hello World"
+System.out.println(sb);    // "Hello World"
 ```
 
 > **Rule of thumb:** Use `StringBuilder` for single-threaded string building. Use `StringBuffer` only when thread safety is needed.
@@ -96,14 +96,14 @@ System.out.println(sb); // "Hello World"
 
 ```java
 switch (x) {
- case 1:
- System.out.println("A");
- break;
- case 2:
- System.out.println("B");
- break;
- default:
- System.out.println("C");
+    case 1:
+        System.out.println("A");
+        break;
+    case 2:
+        System.out.println("B");
+        break;
+    default:
+        System.out.println("C");
 }
 ```
 
@@ -111,9 +111,9 @@ switch (x) {
 
 ```java
 switch (x) {
- case 1 -> System.out.println("A");
- case 2 -> System.out.println("B");
- default -> System.out.println("C");
+    case 1 -> System.out.println("A");
+    case 2 -> System.out.println("B");
+    default -> System.out.println("C");
 }
 ```
 
@@ -123,9 +123,9 @@ switch (x) {
 
 ```java
 switch (x) {
- case 1, 3, 5, 7, 9 -> System.out.println("Odd");
- case 2, 4, 6, 8, 10 -> System.out.println("Even");
- default -> System.out.println("Invalid");
+    case 1, 3, 5, 7, 9  -> System.out.println("Odd");
+    case 2, 4, 6, 8, 10 -> System.out.println("Even");
+    default              -> System.out.println("Invalid");
 }
 ```
 
@@ -133,8 +133,8 @@ switch (x) {
 
 ```java
 case 1 -> {
- System.out.println("A");
- System.out.println("B");
+    System.out.println("A");
+    System.out.println("B");
 }
 ```
 
@@ -142,7 +142,7 @@ case 1 -> {
 
 ```java
 case 1, 2 -> System.out.println("A");
-case 2, 3 -> System.out.println("B"); // duplicate case label: 2
+case 2, 3 -> System.out.println("B");   // duplicate case label: 2
 ```
 
 ---
@@ -180,7 +180,7 @@ int x = fi.read();
 
 | Question | Answer |
 |----------|--------|
-| `"abc" == "abc"` ka result? | `true` — same pooled literal |
+| `"abc" == "abc"` ka result? |  `true` — same pooled literal |
 | `new String("abc") == new String("abc")` ka result? | `false` — different objects |
 | `String` immutable kyu hai? | Security, caching, thread-safety, String Pool |
 | `StringBuilder` vs `StringBuffer` ka difference? | StringBuilder = not synchronized, StringBuffer = synchronized |

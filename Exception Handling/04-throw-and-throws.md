@@ -19,7 +19,7 @@ throw new ExceptionType("message");
 int age = 15;
 
 if (age < 18) {
- throw new ArithmeticException("Age is less than 18");
+    throw new ArithmeticException("Age is less than 18");
 }
 ```
 
@@ -27,8 +27,8 @@ Here, the programmer manually throws the exception.
 
 `throw` can be used with:
 
-- predefined exceptions
-- custom/user-defined exceptions
+-   predefined exceptions
+-   custom/user-defined exceptions
 
 ### Important
 
@@ -57,7 +57,7 @@ Example:
 
 ``` java
 static void show() throws IOException {
- // code
+    // code
 }
 ```
 
@@ -69,68 +69,68 @@ It delegates responsibility to the calling method.
 
 # 14. `throw` vs `throws`
 
- -----------------------------------------------------------------------
- `throw` `throws`
- ----------------------------------- -----------------------------------
- Used to explicitly throw an Used to declare/propagate
- exception exceptions
+  -----------------------------------------------------------------------
+  `throw`                             `throws`
+  ----------------------------------- -----------------------------------
+  Used to explicitly throw an         Used to declare/propagate
+  exception                           exceptions
 
- Used inside method/block Used with method/constructor
- signature
+  Used inside method/block            Used with method/constructor
+                                      signature
 
- Throws an exception object Specifies exception class(es)
+  Throws an exception object          Specifies exception class(es)
 
- Example: `throw new IOException();` Example:
- `void show() throws IOException`
+  Example: `throw new IOException();` Example:
+                                      `void show() throws IOException`
 
- Used to actually throw Used to declare/forward
- responsibility
+  Used to actually throw              Used to declare/forward
+                                      responsibility
 
- One exception object is thrown at a Multiple exception types can be
- time declared
- -----------------------------------------------------------------------
+  One exception object is thrown at a Multiple exception types can be
+  time                                declared
+  -----------------------------------------------------------------------
 
 ### Example
 
 ``` java
 static void show() throws IOException {
- throw new IOException("File error");
+    throw new IOException("File error");
 }
 ```
 
 Here:
 
-- `throw` actually throws the exception.
-- `throws` declares that the method may throw it.
+-   `throw` actually throws the exception.
+-   `throws` declares that the method may throw it.
 
 ------------------------------------------------------------------------
 
 # 15. `try-catch` vs `throws`
 
- -----------------------------------------------------------------------
- `try-catch` `throws`
- ----------------------------------- -----------------------------------
- Handles the exception Does not handle the exception
+  -----------------------------------------------------------------------
+  `try-catch`                         `throws`
+  ----------------------------------- -----------------------------------
+  Handles the exception               Does not handle the exception
 
- Exception handling happens in the Responsibility is passed to caller
- current method 
+  Exception handling happens in the   Responsibility is passed to caller
+  current method                      
 
- Works with checked and unchecked Mainly important for checked
- exceptions exceptions
+  Works with checked and unchecked    Mainly important for checked
+  exceptions                          exceptions
 
- Uses `catch` block Used in method signature
- -----------------------------------------------------------------------
+  Uses `catch` block                  Used in method signature
+  -----------------------------------------------------------------------
 
 Example:
 
 ``` java
 static void show() {
- try {
- // risky code
- }
- catch (Exception e) {
- // handled here
- }
+    try {
+        // risky code
+    }
+    catch (Exception e) {
+        // handled here
+    }
 }
 ```
 
@@ -138,7 +138,7 @@ Using `throws`:
 
 ``` java
 static void show() throws IOException {
- // caller must handle or further declare it
+    // caller must handle or further declare it
 }
 ```
 

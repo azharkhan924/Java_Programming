@@ -5,19 +5,19 @@
 ## 1. The Servlet Hierarchy
 
 ```text
- <<interface>>
- Servlet (jakarta.servlet / javax.servlet)
- ▲
- │ implements
- GenericServlet (Abstract Class)
- (Protocol-Independent, handles any protocol)
- ▲
- │ extends
- HttpServlet (Abstract Class)
- (Protocol-Specific: Optimized for HTTP protocol)
- ▲
- │ extends
- Your Custom Servlet (e.g. MyServlet)
+               <<interface>>
+                  Servlet (jakarta.servlet / javax.servlet)
+                     ▲
+                     │ implements
+             GenericServlet (Abstract Class)
+              (Protocol-Independent, handles any protocol)
+                     ▲
+                     │ extends
+               HttpServlet (Abstract Class)
+              (Protocol-Specific: Optimized for HTTP protocol)
+                     ▲
+                     │ extends
+             Your Custom Servlet (e.g. MyServlet)
 ```
 
 ### GenericServlet vs HttpServlet

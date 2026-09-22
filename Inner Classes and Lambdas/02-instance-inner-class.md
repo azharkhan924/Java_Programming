@@ -7,12 +7,12 @@ A class declared inside another class **without `static`** is called an **Instan
 ```java
 class Outer {
 
- class Inner {
+    class Inner {
 
- void show() {
- System.out.println("Inner Class");
- }
- }
+        void show() {
+            System.out.println("Inner Class");
+        }
+    }
 }
 ```
 
@@ -27,30 +27,30 @@ An instance inner class object is associated with an object of the outer class.
 ```java
 class Demo3 {
 
- int x = 100; // Instance variable
+    int x = 100;              // Instance variable
 
- void showC() { // Instance method
- System.out.println("A");
- }
+    void showC() {            // Instance method
+        System.out.println("A");
+    }
 
- class A { // Instance inner class
+    class A {                 // Instance inner class
 
- void show() {
- System.out.println("Class A");
- }
- }
+        void show() {
+            System.out.println("Class A");
+        }
+    }
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- Demo3 d = new Demo3();
+        Demo3 d = new Demo3();
 
- System.out.println(d.x);
- d.showC();
+        System.out.println(d.x);
+        d.showC();
 
- Demo3.A a = d.new A();
+        Demo3.A a = d.new A();
 
- a.show();
- }
+        a.show();
+    }
 }
 ```
 
@@ -79,11 +79,11 @@ Demo3.A a = d.new A();
 
 ```text
 Outer Class Object
- ↓
- d
- ↓
- d.new A()
- ↓
+        ↓
+       d
+        ↓
+   d.new A()
+        ↓
 Inner Class Object
 ```
 
@@ -117,14 +117,14 @@ An inner class can access members of its outer class, including **private member
 ```java
 class Outer {
 
- private int x = 100;
+    private int x = 100;
 
- class Inner {
+    class Inner {
 
- void show() {
- System.out.println(x);
- }
- }
+        void show() {
+            System.out.println(x);
+        }
+    }
 }
 ```
 
@@ -137,31 +137,31 @@ An inner class can be declared `private`.
 ```java
 class A {
 
- private class B {
+    private class B {
 
- void show() {
- System.out.println("B");
- }
- }
+        void show() {
+            System.out.println("B");
+        }
+    }
 
- void show2() {
+    void show2() {
 
- B b = new B();
- b.show();
- }
+        B b = new B();
+        b.show();
+    }
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new A();
- a.show2();
- }
+        A a = new A();
+        a.show2();
+    }
 }
 ```
 
 Since `B` is private, it cannot be directly accessed outside class `A`.
 
 ```java
-A.B b; // Error outside A
+A.B b;       // Error outside A
 ```
 
 But inside `A`:
@@ -182,12 +182,12 @@ Traditional Java syllabus notes often state that a non-static inner class cannot
 ```java
 class Demo {
 
- class A {
+    class A {
 
- static {
- System.out.println("A");
- }
- }
+        static {
+            System.out.println("A");
+        }
+    }
 }
 ```
 
@@ -202,24 +202,24 @@ class Demo {
 ```java
 abstract class A {
 
- class B {
+    class B {
 
- void show() {
- System.out.println("B");
- }
- }
+        void show() {
+            System.out.println("B");
+        }
+    }
 }
 
 class C extends A {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- C c = new C();
+        C c = new C();
 
- A.B b = c.new B();
+        A.B b = c.new B();
 
- b.show();
- }
+        b.show();
+    }
 }
 ```
 
@@ -238,8 +238,8 @@ This is an error:
 ```java
 class A {
 
- class A {
- }
+    class A {
+    }
 }
 ```
 
@@ -254,26 +254,26 @@ An inner class can itself be `abstract`.
 ```java
 class A {
 
- abstract class B {
+    abstract class B {
 
- abstract void show();
- }
+        abstract void show();
+    }
 
- class C extends B {
+    class C extends B {
 
- void show() {
- System.out.println("Class C");
- }
- }
+        void show() {
+            System.out.println("Class C");
+        }
+    }
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new A();
+        A a = new A();
 
- A.C c = a.new C();
+        A.C c = a.new C();
 
- c.show();
- }
+        c.show();
+    }
 }
 ```
 
@@ -286,7 +286,7 @@ Class C
 Abstract inner class cannot be instantiated directly:
 
 ```java
-A.B b = a.new B(); // Error
+A.B b = a.new B();       // Error
 ```
 
 But its concrete child can be instantiated:

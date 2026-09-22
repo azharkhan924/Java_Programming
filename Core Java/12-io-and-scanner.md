@@ -12,8 +12,8 @@
 ### `System.out.println()` — Deep Dive
 
 ```text
-System → class (java.lang.System)
-out → static field (type: PrintStream)
+System   → class (java.lang.System)
+out      → static field (type: PrintStream)
 println()→ PrintStream ki instance method
 ```
 
@@ -69,7 +69,7 @@ System.in → InputStreamReader → BufferedReader
 import java.io.*;
 
 BufferedReader br = new BufferedReader(
- new InputStreamReader(System.in)
+    new InputStreamReader(System.in)
 );
 ```
 
@@ -103,15 +103,15 @@ I/O operations `IOException` throw kar sakti hain:
 import java.io.*;
 
 class Demo {
- public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
- BufferedReader br = new BufferedReader(
- new InputStreamReader(System.in)
- );
+        BufferedReader br = new BufferedReader(
+            new InputStreamReader(System.in)
+        );
 
- String s = br.readLine();
- System.out.println(s);
- }
+        String s = br.readLine();
+        System.out.println(s);
+    }
 }
 ```
 
@@ -150,7 +150,7 @@ StringTokenizer st = new StringTokenizer(s, ", ");
 
 ```java
 while (st.hasMoreTokens()) {
- System.out.println(st.nextToken());
+    System.out.println(st.nextToken());
 }
 ```
 
@@ -212,7 +212,7 @@ Windows me Enter key produces: `\r\n`
 | Feature | Scanner | BufferedReader |
 |---------|---------|---------------|
 | Package | `java.util` | `java.io` |
-| Parsing | Built-in (`nextInt()`, `nextDouble()`) | Manual parsing needed |
+| Parsing |  Built-in (`nextInt()`, `nextDouble()`) |  Manual parsing needed |
 | Speed | Slower (parsing overhead) | Faster (buffered) |
 | Exception | `InputMismatchException` | `IOException` |
 | Token reading | `next()` — one token | `readLine()` — full line |
@@ -234,11 +234,11 @@ Windows me Enter key produces: `\r\n`
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
 I/O
-→ System.in = standard input (keyboard)
+→ System.in  = standard input (keyboard)
 → System.out = standard output (console)
 
 Input Hierarchy:

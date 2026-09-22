@@ -10,17 +10,17 @@
 
 ```text
 ArrayList Key Properties:
- Maintains insertion order
- Allows duplicate elements
- Allows null values (multiple nulls too)
- Implements RandomAccess → Fast index-based retrieval O(1)
- NOT synchronized (Not thread-safe by default)
+- Maintains insertion order
+- Allows duplicate elements
+- Allows null values (multiple nulls too)
+- Implements RandomAccess → Fast index-based retrieval O(1)
+- NOT synchronized (Not thread-safe by default)
 ```
 
 ### Class Declaration:
 ```java
 public class ArrayList<E> extends AbstractList<E>
- implements List<E>, RandomAccess, Cloneable, Serializable
+        implements List<E>, RandomAccess, Cloneable, Serializable
 ```
 
 ---
@@ -59,9 +59,9 @@ New Capacity = (Old Capacity * 3 / 2) + 1
 
 Example:
 Initial Capacity = 10
-After 1st growth = (10 * 3/2) + 1 = 16
-After 2nd growth = (16 * 3/2) + 1 = 25
-After 3rd growth = (25 * 3/2) + 1 = 38
+After 1st growth  = (10 * 3/2) + 1 = 16
+After 2nd growth  = (16 * 3/2) + 1 = 25
+After 3rd growth  = (25 * 3/2) + 1 = 38
 ```
 
 ### What Happens Internally?
@@ -90,11 +90,11 @@ ArrayList implements 3 important marker interfaces:
 ```java
 ArrayList<String> list = new ArrayList<>();
 
-System.out.println(list instanceof RandomAccess); // true
-System.out.println(list instanceof Serializable); // true
-System.out.println(list instanceof Cloneable); // true
-System.out.println(list instanceof List); // true
-System.out.println(list instanceof Collection); // true
+System.out.println(list instanceof RandomAccess);  // true
+System.out.println(list instanceof Serializable);  // true
+System.out.println(list instanceof Cloneable);      // true
+System.out.println(list instanceof List);           // true
+System.out.println(list instanceof Collection);     // true
 ```
 
 ---
@@ -107,7 +107,7 @@ ArrayList's `toString()` method is already overridden (in `AbstractCollection`):
 ArrayList<Integer> nums = new ArrayList<>();
 nums.add(10); nums.add(20); nums.add(30);
 
-System.out.println(nums); // [10, 20, 30] ← Clean readable output!
+System.out.println(nums);           // [10, 20, 30] ← Clean readable output!
 System.out.println(nums.toString()); // [10, 20, 30] ← Same result
 ```
 
@@ -130,14 +130,14 @@ System.out.println(nums.toString()); // [10, 20, 30] ← Same result
 ```text
 Operation Performance (ArrayList):
 ┌────────────────────────┬──────────┐
-│ Operation │ Time │
+│ Operation              │ Time     │
 ├────────────────────────┼──────────┤
-│ get(index) │ O(1) │
-│ add(element) at end │ O(1)* │ (* amortized, resize excluded)
-│ add(index, element) │ O(n) │ (shift elements right)
-│ remove(index) │ O(n) │ (shift elements left)
-│ contains(element) │ O(n) │ (linear search)
-│ size() │ O(1) │
+│ get(index)             │ O(1)     │
+│ add(element) at end    │ O(1)*    │  (* amortized, resize excluded)
+│ add(index, element)    │ O(n)     │  (shift elements right)
+│ remove(index)          │ O(n)     │  (shift elements left)
+│ contains(element)      │ O(n)     │  (linear search)
+│ size()                 │ O(1)     │
 └────────────────────────┴──────────┘
 ```
 

@@ -17,14 +17,14 @@
 
 ```java
 while (condition) {
- // body
+    // body
 }
 ```
 
 Condition must be **boolean** — same rule as `if`:
 
 ```java
-while (0) { } // incompatible types: int cannot be converted to boolean
+while (0) { }   // incompatible types: int cannot be converted to boolean
 ```
 
 ---
@@ -33,7 +33,7 @@ while (0) { } // incompatible types: int cannot be converted to boolean
 
 ```java
 for (initialization; condition; update) {
- // body
+    // body
 }
 ```
 
@@ -41,15 +41,15 @@ for (initialization; condition; update) {
 
 ```java
 for (int i = 0; i < 5; i++) {
- System.out.println(i);
+    System.out.println(i);
 }
 ```
 
 ### Important: Exactly Two Semicolons
 
 ```java
-for (;;) { } // infinite loop — valid
-for (int i = 0; i < 5; i++) { } // valid
+for (;;) { }                      // valid infinite loop — valid
+for (int i = 0; i < 5; i++) { }  // valid
 
 for (int i = 0; i < 5; i++;) { } // extra semicolon — compile error
 ```
@@ -62,7 +62,7 @@ Arrays aur `Iterable` collections traverse karne ke liye:
 
 ```java
 for (dataType variable : arrayOrCollection) {
- // body
+    // body
 }
 ```
 
@@ -72,7 +72,7 @@ for (dataType variable : arrayOrCollection) {
 int[] x = {10, 20, 30, 40};
 
 for (int i : x) {
- System.out.println(i);
+    System.out.println(i);
 }
 ```
 
@@ -100,8 +100,8 @@ Output:
 
 ```java
 for (int i = 1; i <= 5; i++) {
- if (i == 3) break;
- System.out.println(i);
+    if (i == 3) break;
+    System.out.println(i);
 }
 // Output: 1, 2
 ```
@@ -112,8 +112,8 @@ for (int i = 1; i <= 5; i++) {
 
 ```java
 for (int i = 1; i <= 5; i++) {
- if (i == 3) continue;
- System.out.println(i);
+    if (i == 3) continue;
+    System.out.println(i);
 }
 // Output: 1, 2, 4, 5
 ```
@@ -137,7 +137,7 @@ Java compiler **constant expressions** ke liye compile-time analysis karta hai.
 ```java
 while (true) {
 }
-System.out.println("Hello"); // unreachable statement
+System.out.println("Hello");   // unreachable statement
 ```
 
 Compiler jaanta hai ki `while(true)` kabhi terminate nahi hoga.
@@ -149,7 +149,7 @@ boolean x = true;
 
 while (x) {
 }
-System.out.println("Hello"); // no compile error
+System.out.println("Hello");   // valid no compile error
 ```
 
 `x` variable hai — compiler exactly prove nahi kar sakta ki loop infinite hai.
@@ -172,7 +172,7 @@ System.out.println("Hello"); // no compile error
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
 LOOPS
@@ -186,8 +186,8 @@ break → exits nearest loop/switch
 continue → skips current iteration, continues next
 
 UNREACHABLE CODE
-→ Constant true condition + code after loop → compile error
-→ Variable condition + code after loop → allowed
+→ Constant true condition + code after loop → [Error] compile error
+→ Variable condition + code after loop → [Valid] allowed
 ```
 
 ---

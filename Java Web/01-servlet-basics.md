@@ -12,9 +12,9 @@ A **Servlet** is a Java program that runs inside a **Servlet Container** on a we
 
 ```text
 Browser → Web Server / Servlet Container → Servlet → Database
- ↓
- Generate Response
- ↓
+                                              ↓
+                                         Generate Response
+                                              ↓
 Browser ←────────────── HTTP Response ────────┘
 ```
 
@@ -52,9 +52,9 @@ Request 2 ──► [OS Process 2 (Heavy)]
 Request 3 ──► [OS Process 3 (Heavy)]
 
 Servlet Model:
- ┌──► Thread 1 (Lightweight)
-Container Process ┼──► Thread 2 (Lightweight) ──► Shares Same Memory & Servlet Instance
- └──► Thread 3 (Lightweight)
+                  ┌──► Thread 1 (Lightweight)
+Container Process ┼──► Thread 2 (Lightweight)  ──► Shares Same Memory & Servlet Instance
+                  └──► Thread 3 (Lightweight)
 ```
 
 ### Advantages of Servlets

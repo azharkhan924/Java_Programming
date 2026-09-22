@@ -5,15 +5,15 @@
 ## Basics
 
 ```text
-++ Increment (value + 1)
--- Decrement (value - 1)
+++   Increment (value + 1)
+--   Decrement (value - 1)
 ```
 
 Ye variable ki value ko **1 se increase/decrease** karte hain.
 
 ---
 
-## 1⃣ Pre-Increment `++x`
+## 1. Pre-Increment `++x`
 
 > **Pehle increment karo → phir use karo**
 
@@ -36,7 +36,7 @@ y = 6
 
 ---
 
-## 2⃣ Post-Increment `x++`
+## 2. Post-Increment `x++`
 
 > **Pehle use karo → phir increment karo**
 
@@ -59,7 +59,7 @@ y = 5
 
 ---
 
-## 3⃣ Pre-Decrement `--x`
+## 3. Pre-Decrement `--x`
 
 ```java
 int x = 5;
@@ -74,7 +74,7 @@ y = 4
 
 ---
 
-## 4⃣ Post-Decrement `x--`
+## 4. Post-Decrement `x--`
 
 ```java
 int x = 5;
@@ -101,7 +101,7 @@ y = 5
 ### Easy Memory Trick
 
 ```text
-PRE → ++ pehle hai, toh increment PEHLE hoga
+PRE  → ++ pehle hai, toh increment PEHLE hoga
 POST → ++ baad me hai, toh increment BAAD ME hoga
 ```
 
@@ -133,7 +133,7 @@ x+++++x
 
 Java lexer ise parse karta hai as:
 ```text
-x++ ++ +x → Error! (x++ returns a value, not a variable — ++ can't apply to it)
+x++ ++ +x    →    Error! (x++ returns a value, not a variable — ++ can't apply to it)
 ```
 
 > ** Best Practice:** Hamesha spacing clearly use karo. `x++ + ++x` likhna better hai than `x++++x`.
@@ -154,12 +154,12 @@ x++ ++ +x → Error! (x++ returns a value, not a variable — ++ can't apply to 
 
 ```java
 boolean flag = true;
-flag++; // Compile error
+flag++;         // Compile error
 
 String s = "hi";
-s++; // Compile error
+s++;            // Compile error
 
-5++; // Not a variable
+5++;            // Not a variable
 ```
 
 ---
@@ -170,7 +170,7 @@ s++; // Compile error
 ```java
 int x = 10;
 x = x++;
-System.out.println(x); // Output: 10 (NOT 11!)
+System.out.println(x);   // Output: 10  (NOT 11!)
 ```
 **Why?** `x++` returns old value (10), which gets assigned back to `x`. Then increment happens, but assignment already overwrote it.
 
@@ -178,7 +178,7 @@ System.out.println(x); // Output: 10 (NOT 11!)
 ```java
 int x = 5;
 int y = x++ + ++x;
-System.out.println(y); // Output: 12
+System.out.println(y);   // Output: 12
 ```
 **Why?**
 ```text
@@ -190,16 +190,16 @@ y = 5 + 7 = 12
 ### Example 3
 ```java
 int x = 3;
-System.out.println(x++ + x++ + x++); // Output: 12
+System.out.println(x++ + x++ + x++);  // Output: 12
 ```
 **Why?**
 ```text
-First x++ → use 3, x becomes 4
+First  x++ → use 3, x becomes 4
 Second x++ → use 4, x becomes 5
-Third x++ → use 5, x becomes 6
+Third  x++ → use 5, x becomes 6
 Result = 3 + 4 + 5 = 12
 ```
 
 ---
 
-[ Back to Index](./README.md) | [Next: Bitwise & Shift Operators](./11-bitwise-and-shift.md)
+[Back to Index](./README.md) | [Next: Bitwise & Shift Operators](./11-bitwise-and-shift.md)

@@ -8,14 +8,14 @@ Abstract class `abstract` keyword se declare hoti hai.
 
 ```java
 abstract class Vehicle {
- abstract void start();
+    abstract void start();
 }
 ```
 
 ### Cannot Instantiate Directly
 
 ```java
-Vehicle v = new Vehicle(); // Vehicle is abstract; cannot be instantiated
+Vehicle v = new Vehicle();   // Vehicle is abstract; cannot be instantiated
 ```
 
 ---
@@ -26,9 +26,9 @@ Vehicle v = new Vehicle(); // Vehicle is abstract; cannot be instantiated
 
 ```java
 abstract class Vehicle {
- void start() {
- System.out.println("Start"); // concrete method
- }
+    void start() {
+        System.out.println("Start");   // concrete method
+    }
 }
 ```
 
@@ -54,14 +54,14 @@ abstract void show();
 
 ```java
 abstract class A {
- abstract void show();
+    abstract void show();
 }
 
 class B extends A {
- @Override
- void show() {
- System.out.println("Hello");
- }
+    @Override
+    void show() {
+        System.out.println("Hello");
+    }
 }
 ```
 
@@ -69,7 +69,7 @@ Agar implement nahi kiya, to `B` khud **abstract** hona chahiye:
 
 ```java
 abstract class B extends A {
- // show() not implemented — B stays abstract
+    // show() not implemented — B stays abstract
 }
 ```
 
@@ -81,23 +81,23 @@ Interface `interface` keyword se declare hota hai.
 
 ```java
 interface Printable {
- void print();
+    void print();
 }
 ```
 
 ### Cannot Instantiate Directly
 
 ```java
-Printable p = new Printable(); // 
+Printable p = new Printable();   // Error:
 ```
 
 ### Class Implements Interface
 
 ```java
 class Document implements Printable {
- public void print() {
- System.out.println("Printing...");
- }
+    public void print() {
+        System.out.println("Printing...");
+    }
 }
 ```
 
@@ -111,8 +111,8 @@ Interface ke normal methods implicitly **`public abstract`** hote hain:
 
 ```java
 interface A {
- void show();
- // same as: public abstract void show();
+    void show();
+    // same as: public abstract void show();
 }
 ```
 
@@ -125,15 +125,15 @@ Java 8 se interfaces me ye bhi allowed hain:
 
 ```java
 interface A {
- void show(); // public abstract
+    void show();                              // public abstract
 
- default void greet() { // default method
- System.out.println("Hello!");
- }
+    default void greet() {                    // default method
+        System.out.println("Hello!");
+    }
 
- static void info() { // static method
- System.out.println("Interface A");
- }
+    static void info() {                      // static method
+        System.out.println("Interface A");
+    }
 }
 ```
 
@@ -147,23 +147,23 @@ Interface method **`public`** hoti hai, to implementation me **access reduce nah
 
 ```java
 interface A {
- void show(); // implicitly public abstract
+    void show();    // implicitly public abstract
 }
 
 // Correct
 class B implements A {
- public void show() { }
+    public void show() { }
 }
 
 // Incorrect — weaker access
 class B implements A {
- void show() { } // attempting to assign weaker access privileges
+    void show() { }   // attempting to assign weaker access privileges
 }
 ```
 
 ```text
 Interface method → public
-Implementation → must be public (cannot be less accessible)
+Implementation  → must be public (cannot be less accessible)
 ```
 
 ---
@@ -175,10 +175,10 @@ Implementation → must be public (cannot be less accessible)
 | Keyword | `abstract class` | `interface` |
 | Methods | Abstract + concrete | Abstract + default + static (Java 8+) |
 | Variables | Instance + static + final + non-final | Implicitly `public static final` |
-| Constructor | Allowed | Not allowed |
-| Multiple inheritance | Single class only | Multiple interfaces |
+| Constructor |  Allowed | Not allowed |
+| Multiple inheritance |  Single class only |  Multiple interfaces |
 | Access modifiers | All allowed | Methods implicitly `public` |
-| Instantiation | Cannot | Cannot |
+| Instantiation |  Cannot |  Cannot |
 | `extends` vs `implements` | Class extends abstract class | Class implements interface |
 
 ### When to Use What?
@@ -204,7 +204,7 @@ Interface → jab unrelated classes me common capability define karni ho
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
 ABSTRACT CLASS

@@ -1,4 +1,4 @@
-# How Java Works — Compilation & Execution
+# ⚙ How Java Works — Compilation & Execution
 
 ---
 
@@ -7,25 +7,25 @@
 Java ka fundamental concept: **source code → bytecode → JVM execution**
 
 ```text
- ┌──────────────┐
- │ Demo.java │ Source Code (.java file)
- └──────┬───────┘
- ▼
- ┌──────────────┐
- │ javac │ Java Compiler
- └──────┬───────┘
- ▼
- ┌──────────────┐
- │ Demo.class │ Bytecode (.class file)
- └──────┬───────┘
- ▼
- ┌──────────────┐
- │ JVM │ Java Virtual Machine
- └──────┬───────┘
- ▼
- ┌──────────────┐
- │ main() │ Program Execution
- └──────────────┘
+  ┌──────────────┐
+  │  Demo.java   │   Source Code (.java file)
+  └──────┬───────┘
+         ▼
+  ┌──────────────┐
+  │    javac     │   Java Compiler
+  └──────┬───────┘
+         ▼
+  ┌──────────────┐
+  │  Demo.class  │   Bytecode (.class file)
+  └──────┬───────┘
+         ▼
+  ┌──────────────┐
+  │     JVM      │   Java Virtual Machine
+  └──────┬───────┘
+         ▼
+  ┌──────────────┐
+  │   main()     │   Program Execution
+  └──────────────┘
 ```
 
 ---
@@ -34,12 +34,12 @@ Java ka fundamental concept: **source code → bytecode → JVM execution**
 
 | Step | What Happens | Detail |
 |------|-------------|--------|
-| 1⃣ | **Write** | `.java` file me source code likho |
-| 2⃣ | **Compile** | `javac` compiler source code ko **bytecode** me convert karta hai |
-| 3⃣ | **Store** | Bytecode `.class` file me store hota hai |
-| 4⃣ | **Load** | JVM class ko **ClassLoader** ke through load karti hai |
-| 5⃣ | **Verify** | **Bytecode Verifier** bytecode ki validity check karta hai |
-| 6⃣ | **Execute** | JVM bytecode ko execute karti hai (interpret + JIT compile) |
+| 1 | **Write** | `.java` file me source code likho |
+| 2 | **Compile** | `javac` compiler source code ko **bytecode** me convert karta hai |
+| 3 | **Store** | Bytecode `.class` file me store hota hai |
+| 4 | **Load** | JVM class ko **ClassLoader** ke through load karti hai |
+| 5 | **Verify** | **Bytecode Verifier** bytecode ki validity check karta hai |
+| 6 | **Execute** | JVM bytecode ko execute karti hai (interpret + JIT compile) |
 
 ---
 
@@ -49,7 +49,7 @@ Java application ka entry point hamesha:
 
 ```java
 public static void main(String[] args) {
- // Program execution starts here
+    // Program execution starts here
 }
 ```
 
@@ -68,17 +68,17 @@ public static void main(String[] args) {
 ## Platform Independence — How?
 
 ```text
- Demo.class (Bytecode)
- │
- ┌──────────────┼──────────────┐
- ▼ ▼ ▼
- ┌──────────┐ ┌──────────┐ ┌──────────┐
- │ JVM for │ │ JVM for │ │ JVM for │
- │ Windows │ │ Linux │ │ macOS │
- └────┬─────┘ └────┬─────┘ └────┬─────┘
- ▼ ▼ ▼
- Windows Linux macOS
- 
+                    Demo.class (Bytecode)
+                         │
+          ┌──────────────┼──────────────┐
+          ▼              ▼              ▼
+    ┌──────────┐   ┌──────────┐   ┌──────────┐
+    │ JVM for  │   │ JVM for  │   │ JVM for  │
+    │ Windows  │   │  Linux   │   │  macOS   │
+    └────┬─────┘   └────┬─────┘   └────┬─────┘
+         ▼              ▼              ▼
+      Windows         Linux          macOS
+        (Runs)         (Runs)         (Runs)
 ```
 
 > **Same `.class` bytecode** ko different OS ke JVM par run kiya ja sakta hai — **yahi hai WORA (Write Once, Run Anywhere)!**
@@ -104,16 +104,16 @@ public static void main(String[] args) {
 
 ```text
 ┌─────────────────────────────────┐
-│ JDK │
-│ ┌───────────────────────────┐ │
-│ │ JRE │ │
-│ │ ┌─────────────────────┐ │ │
-│ │ │ JVM │ │ │
-│ │ └─────────────────────┘ │ │
-│ │ + Core Libraries │ │
-│ └───────────────────────────┘ │
-│ + javac compiler │
-│ + Dev Tools (jdb, javadoc) │
+│             JDK                 │
+│  ┌───────────────────────────┐  │
+│  │           JRE             │  │
+│  │  ┌─────────────────────┐  │  │
+│  │  │        JVM          │  │  │
+│  │  └─────────────────────┘  │  │
+│  │  + Core Libraries         │  │
+│  └───────────────────────────┘  │
+│  + javac compiler               │
+│  + Dev Tools (jdb, javadoc)     │
 └─────────────────────────────────┘
 ```
 
@@ -121,4 +121,4 @@ public static void main(String[] args) {
 
 > ** Yaad Rakho:** Java **"compile once"** approach use karta hai — source code → bytecode. JVM bytecode ko OS-specific instructions me translate karta hai at runtime.
 
-[ Back to Index](./README.md) | [Next: C++ vs Java](./03-cpp-vs-java.md)
+[Back to Index](./README.md) | [Next: C++ vs Java](./03-cpp-vs-java.md)

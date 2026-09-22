@@ -10,18 +10,18 @@
 
 ```text
 Collection (I)
- └── Set (I)
- └── SortedSet (I) [Java 1.2]
- └── NavigableSet (I) [Java 1.6]
- └── TreeSet (C) [Java 1.2]
+    └── Set (I)
+         └── SortedSet (I)           [Java 1.2]
+              └── NavigableSet (I)   [Java 1.6]
+                   └── TreeSet (C)   [Java 1.2]
 ```
 
 ### Key Properties:
 ```text
- Duplicates NOT allowed (enforced by Set contract)
- Elements stored in SORTED order (ascending/custom)
- null generally NOT allowed (TreeSet throws NullPointerException on comparison)
-Note: Elements must be mutually Comparable, or a custom Comparator must be provided
+- Duplicates NOT allowed (enforced by Set contract)
+- Elements stored in SORTED order (ascending/custom)
+- null generally NOT allowed (TreeSet throws NullPointerException on comparison)
+ Elements must be mutually Comparable, or a custom Comparator must be provided
 ```
 
 ---
@@ -55,9 +55,9 @@ ss.add(40);
 ```text
 Elements: [10, 20, 30, 40, 50]
 
-headSet(30): [10, 20] ← strictly less than 30 (30 excluded)
-tailSet(30): [30, 40, 50] ← 30 and higher (30 included)
-subSet(20, 40): [20, 30] ← 20 (included) to 40 (excluded)
+headSet(30):    [10, 20]           ← strictly less than 30 (30 excluded)
+tailSet(30):    [30, 40, 50]       ← 30 and higher (30 included)
+subSet(20, 40): [20, 30]           ← 20 (included) to 40 (excluded)
 ```
 
 ---
@@ -146,8 +146,8 @@ ts.add(10); // Throws ClassCastException! String cannot be compared to Integer!
 ### Rule 3: Custom Classes Require `Comparable` or `Comparator`
 ```java
 class Student {
- int rollNo;
- Student(int rollNo) { this.rollNo = rollNo; }
+    int rollNo;
+    Student(int rollNo) { this.rollNo = rollNo; }
 }
 
 TreeSet<Student> ts = new TreeSet<>();
@@ -156,17 +156,17 @@ ts.add(new Student(102)); // ClassCastException: Student cannot be cast to Compa
 ```
 **Solution:**
 1. Either implement `Comparable<Student>` in `Student`:
- ```java
- class Student implements Comparable<Student> {
- int rollNo;
- Student(int rollNo) { this.rollNo = rollNo; }
- @Override public int compareTo(Student o) { return Integer.compare(this.rollNo, o.rollNo); }
- }
- ```
+   ```java
+   class Student implements Comparable<Student> {
+       int rollNo;
+       Student(int rollNo) { this.rollNo = rollNo; }
+       @Override public int compareTo(Student o) { return Integer.compare(this.rollNo, o.rollNo); }
+   }
+   ```
 2. Or pass a `Comparator` into the `TreeSet` constructor:
- ```java
- TreeSet<Student> ts = new TreeSet<>(Comparator.comparingInt(s -> s.rollNo));
- ```
+   ```java
+   TreeSet<Student> ts = new TreeSet<>(Comparator.comparingInt(s -> s.rollNo));
+   ```
 
 ### Rule 4: `StringBuffer` & `StringBuilder` are Not Comparable
 Neither `StringBuffer` nor `StringBuilder` implements `Comparable`. Adding them to `new TreeSet<>()` without an explicit `Comparator` causes a `ClassCastException`.
@@ -179,29 +179,29 @@ Neither `StringBuffer` nor `StringBuilder` implements `Comparable`. Adding them 
 import java.util.*;
 
 public class TreeSetDemo {
- public static void main(String[] args) {
- SortedSet<Integer> set = new TreeSet<>();
- set.add(50);
- set.add(10);
- set.add(30);
- set.add(20);
- set.add(40);
- set.add(10); // Duplicate ignored
+    public static void main(String[] args) {
+        SortedSet<Integer> set = new TreeSet<>();
+        set.add(50);
+        set.add(10);
+        set.add(30);
+        set.add(20);
+        set.add(40);
+        set.add(10); // Duplicate ignored
 
- System.out.println("Set: " + set); // [10, 20, 30, 40, 50]
- System.out.println("First: " + set.first()); // 10
- System.out.println("Last: " + set.last()); // 50
- System.out.println("HeadSet(30): " + set.headSet(30)); // [10, 20]
- System.out.println("TailSet(30): " + set.tailSet(30)); // [30, 40, 50]
- System.out.println("SubSet(20, 40): " + set.subSet(20, 40)); // [20, 30]
+        System.out.println("Set: " + set);             // [10, 20, 30, 40, 50]
+        System.out.println("First: " + set.first());    // 10
+        System.out.println("Last: " + set.last());      // 50
+        System.out.println("HeadSet(30): " + set.headSet(30)); // [10, 20]
+        System.out.println("TailSet(30): " + set.tailSet(30)); // [30, 40, 50]
+        System.out.println("SubSet(20, 40): " + set.subSet(20, 40)); // [20, 30]
 
- // Custom comparator for descending order
- TreeSet<String> descNames = new TreeSet<>(Comparator.reverseOrder());
- descNames.add("Alice");
- descNames.add("Charlie");
- descNames.add("Bob");
- System.out.println("Descending: " + descNames); // [Charlie, Bob, Alice]
- }
+        // Custom comparator for descending order
+        TreeSet<String> descNames = new TreeSet<>(Comparator.reverseOrder());
+        descNames.add("Alice");
+        descNames.add("Charlie");
+        descNames.add("Bob");
+        System.out.println("Descending: " + descNames); // [Charlie, Bob, Alice]
+    }
 }
 ```
 
@@ -211,10 +211,10 @@ public class TreeSetDemo {
 
 | Feature | `HashSet` | `LinkedHashSet` | `TreeSet` |
 |---------|-----------|-----------------|-----------|
-| **Ordering** | None (random hash order) | Insertion order | Sorted order (Natural/Comparator) |
+| **Ordering** | None (random hash order) |  Insertion order |  Sorted order (Natural/Comparator) |
 | **Data Structure** | Hash Table (`HashMap`) | Hash Table + Doubly Linked List | Red-Black Tree (`TreeMap`) |
 | **Duplicates** | Not allowed | Not allowed | Not allowed |
-| **Null Acceptance** | Up to 1 `null` allowed | Up to 1 `null` allowed | **NOT allowed** (throws NPE) |
+| **Null Acceptance** |  Up to 1 `null` allowed |  Up to 1 `null` allowed |  **NOT allowed** (throws NPE) |
 | **Time Complexity** | `O(1)` average | `O(1)` average | `O(log n)` guaranteed |
 | **Comparable Required?** | No | No | Yes (or explicit `Comparator`) |
 | **Introduced In** | Java 1.2 | Java 1.4 | Java 1.2 |
@@ -225,11 +225,11 @@ public class TreeSetDemo {
 
 | Question / Trap | Correct Answer |
 |-----------------|----------------|
-| Can we insert `null` into a `TreeSet`? | **No.** In Java 7+, inserting `null` into a `TreeSet` with natural ordering throws `NullPointerException`. |
-| Does `headSet(30)` include `30`? | **No.** `headSet(toElement)` is strictly exclusive. In `NavigableSet`, use `headSet(30, true)` for inclusive. |
-| Does `tailSet(30)` include `30`? | **Yes.** `tailSet(fromElement)` is inclusive by default. |
+| Can we insert `null` into a `TreeSet`? |  **No.** In Java 7+, inserting `null` into a `TreeSet` with natural ordering throws `NullPointerException`. |
+| Does `headSet(30)` include `30`? |  **No.** `headSet(toElement)` is strictly exclusive. In `NavigableSet`, use `headSet(30, true)` for inclusive. |
+| Does `tailSet(30)` include `30`? |  **Yes.** `tailSet(fromElement)` is inclusive by default. |
 | What is the underlying data structure of `TreeSet`? | A **Red-Black Tree** (self-balancing binary search tree), backed by `TreeMap`. |
-| Can heterogeneous objects be added to a `TreeSet`? | **No.** Runtime `ClassCastException` occurs because elements must be mutually comparable. |
+| Can heterogeneous objects be added to a `TreeSet`? |  **No.** Runtime `ClassCastException` occurs because elements must be mutually comparable. |
 | How does `TreeSet` detect duplicate elements? | By comparing via `compareTo()` or `compare()`. If it returns `0`, the element is treated as a duplicate (does NOT use `equals()` or `hashCode()`). |
 
 ---

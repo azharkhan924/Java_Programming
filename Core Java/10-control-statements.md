@@ -21,20 +21,20 @@
 Java me `if` condition **boolean expression** chahti hai.
 
 ```java
-if (true) { } // 
-if (x > 5) { } // 
+if (true) { }              // valid
+if (x > 5) { }             // valid
 
 boolean flag = true;
-if (flag) { } // 
+if (flag) { }              // valid
 ```
 
 ### Note: C/C++ Wala Pattern Java Me Invalid Hai
 
 ```java
-if (0) { } // incompatible types: int cannot be converted to boolean
-if (1) { } // 
+if (0) { }                 // incompatible types: int cannot be converted to boolean
+if (1) { }                 // Error:
 
-boolean x = 1; // int is not boolean
+boolean x = 1;             // int is not boolean
 ```
 
 > Java me `0` = false aur `1` = true **nahi hota** — C/C++ ki tarah nahi.
@@ -45,16 +45,16 @@ boolean x = 1; // int is not boolean
 
 ```java
 switch (x) {
- case 1:
- System.out.println("One");
- break;
+    case 1:
+        System.out.println("One");
+        break;
 
- case 2:
- System.out.println("Two");
- break;
+    case 2:
+        System.out.println("Two");
+        break;
 
- default:
- System.out.println("Other");
+    default:
+        System.out.println("Other");
 }
 ```
 
@@ -74,37 +74,37 @@ switch (x) {
 
 ```java
 case 1:
- System.out.println("One");
- break; // switch se bahar
- break; // unreachable statement — compile error
+    System.out.println("One");
+    break;       // switch se bahar
+    break;       // unreachable statement — compile error
 ```
 
 ### No Duplicate Case Labels
 
 ```java
 case 1:
- System.out.println("A");
-case 1: // duplicate case label
- System.out.println("B");
+    System.out.println("A");
+case 1:                        // duplicate case label
+    System.out.println("B");
 ```
 
 ### No Duplicate Default
 
 ```java
 default:
- System.out.println("A");
-default: // duplicate default label
- System.out.println("B");
+    System.out.println("A");
+default:                       // duplicate default label
+    System.out.println("B");
 ```
 
 ### `case default:` is Invalid
 
 ```java
-case default: // illegal start of expression
- System.out.println("X");
+case default:                  // illegal start of expression
+    System.out.println("X");
 
-default: // correct syntax
- System.out.println("X");
+default:                       // valid correct syntax
+    System.out.println("X");
 ```
 
 ---
@@ -148,15 +148,15 @@ Agar switch expression `byte` hai, to case constants **byte range** (-128 to 127
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
 if → condition must be boolean
 switch → byte, short, char, int, String, enum
- → NOT: long, float, double, boolean
- → String support: Java 7+
- → No duplicate case/default
- → break terminates switch
+       → NOT: long, float, double, boolean
+       → String support: Java 7+
+       → No duplicate case/default
+       → break terminates switch
 ```
 
 ---

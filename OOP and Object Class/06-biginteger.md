@@ -14,13 +14,13 @@ Normal integer types ki **fixed limit** hoti hai:
 Jab number in se bhi bada ho:
 
 ```java
-long x = 999999999999999999999999L; // exceeds long range
+long x = 999999999999999999999999L;    // exceeds long range
 ```
 
 ### Solution — BigInteger
 
 ```java
-BigInteger x = new BigInteger("999999999999999999999999"); // 
+BigInteger x = new BigInteger("999999999999999999999999");    // valid
 ```
 
 - **Package:** `java.math`
@@ -86,19 +86,19 @@ x.mod(y);
 BigInteger x = BigInteger.valueOf(10);
 BigInteger y = BigInteger.valueOf(20);
 
-System.out.println(x.add(y)); // 30
-System.out.println(x.subtract(y)); // -10
-System.out.println(x.multiply(y)); // 200
-System.out.println(y.divide(x)); // 2
-System.out.println(x.mod(y)); // 10
+System.out.println(x.add(y));        // 30
+System.out.println(x.subtract(y));   // -10
+System.out.println(x.multiply(y));   // 200
+System.out.println(y.divide(x));     // 2
+System.out.println(x.mod(y));        // 10
 ```
 
 ### Note: Immutable — Result Store Karo
 
 ```java
-x.add(y); // x change NAHI hota!
+x.add(y);       // x change NAHI hota!
 
-x = x.add(y); // result re-assign karo
+x = x.add(y);   // valid result re-assign karo
 ```
 
 ---
@@ -127,10 +127,10 @@ x = x.add(y); // result re-assign karo
 ## 5. Predefined Constants
 
 ```java
-BigInteger.ZERO // 0
-BigInteger.ONE // 1
-BigInteger.TWO // 2 (Java 9+)
-BigInteger.TEN // 10
+BigInteger.ZERO    // 0
+BigInteger.ONE     // 1
+BigInteger.TWO     // 2 (Java 9+)
+BigInteger.TEN     // 10
 ```
 
 ---
@@ -146,7 +146,7 @@ if (x.equals(y))
 
 // Correct — compareTo()
 if (x.compareTo(y) < 0)
- System.out.println("x is smaller");
+    System.out.println("x is smaller");
 ```
 
 ### `compareTo()` Returns
@@ -174,11 +174,11 @@ if (x.compareTo(y) < 0)
 
 ## 8. Use Cases
 
-- Very large mathematical calculations
-- Competitive Programming
-- Cryptography (RSA, etc.)
-- Large factorials / Fibonacci
-- Exact integer calculations (no overflow)
+-  Very large mathematical calculations
+-  Competitive Programming
+-  Cryptography (RSA, etc.)
+-  Large factorials / Fibonacci
+-  Exact integer calculations (no overflow)
 
 ---
 
@@ -196,7 +196,7 @@ if (x.compareTo(y) < 0)
 
 ---
 
-## Quick Reference
+## ⚡ Quick Reference
 
 ```text
 BigInteger

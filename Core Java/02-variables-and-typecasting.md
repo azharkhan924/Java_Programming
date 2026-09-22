@@ -23,14 +23,14 @@ variable x might not have been initialized
 
 ```java
 int x = 10;
-System.out.println(x); // valid
+System.out.println(x);   // valid
 ```
 
-### Same Scope Me Re-declaration 
+### Same Scope Me Re-declaration
 
 ```java
 int x = 10;
-int x = 20; // variable x is already defined
+int x = 20;  // variable x is already defined
 ```
 
 ---
@@ -45,8 +45,8 @@ int x = 20; // variable x is already defined
 
 ```java
 void show() {
- int x;
- System.out.println(x); // ERROR
+    int x;
+    System.out.println(x);  // ERROR
 }
 ```
 
@@ -58,8 +58,8 @@ void show() {
 
 ```java
 class Student {
- int age; // default: 0
- String name; // default: null
+    int age;       // default: 0
+    String name;   // default: null
 }
 ```
 
@@ -71,7 +71,7 @@ class Student {
 
 ```java
 class Student {
- static String college = "AITR";
+    static String college = "AITR";
 }
 // Access: Student.college
 ```
@@ -79,7 +79,7 @@ class Student {
 > Note: Static variable ko **local variable** ke roop me declare nahi kar sakte:
 > ```java
 > void test() {
-> static int x; // invalid in Java
+>     static int x;  //  invalid in Java
 > }
 > ```
 
@@ -109,8 +109,8 @@ class Student {
 | `long` | 8 bytes | -2⁶³ to 2⁶³-1 |
 
 ```java
-System.out.println(Long.MAX_VALUE); // 9223372036854775807
-System.out.println(Byte.MIN_VALUE); // -128
+System.out.println(Long.MAX_VALUE);   // 9223372036854775807
+System.out.println(Byte.MIN_VALUE);   // -128
 ```
 
 > **Why multiple integer types?** Memory ko efficiently use karne ke liye. Small range ke data ke liye `long` use karna wasteful hai.
@@ -122,8 +122,8 @@ System.out.println(Byte.MIN_VALUE); // -128
 **Integer literal by default `int` hota hai.**
 
 ```java
-long x = 2147483648; // ERROR — literal exceeds int range
-long x = 2147483648L; // L suffix se long literal banta hai
+long x = 2147483648;    // ERROR — literal exceeds int range
+long x = 2147483648L;   // valid L suffix se long literal banta hai
 ```
 
 > **Tip:** Capital `L` prefer karo — lowercase `l` visually `1` jaisa lagta hai.
@@ -131,12 +131,12 @@ long x = 2147483648L; // L suffix se long literal banta hai
 **Floating-point literal by default `double` hoti hai.**
 
 ```java
-float x = 10.5; // ERROR — 10.5 is double literal
-float x = 10.5f; // f suffix se float literal banta hai
+float x = 10.5;      // ERROR — 10.5 is double literal
+float x = 10.5f;     // valid f suffix se float literal banta hai
 ```
 
 ```java
-float x = 10; // int → float widening allowed
+float x = 10;         // valid int → float widening allowed
 System.out.println(x); // 10.0
 ```
 
@@ -153,10 +153,10 @@ byte → short → int → long → float → double
 
 ```java
 int x = 10;
-long y = x; // int → long (implicit)
+long y = x;      // valid int → long (implicit)
 
 byte b = 10;
-int i = b; // byte → int (implicit)
+int i = b;       // valid byte → int (implicit)
 ```
 
 > Note: **`long → float` technically widening hai**, lekin floating-point representation ki wajah se **precision loss** possible hai.
@@ -169,7 +169,7 @@ Reverse direction me automatic conversion nahi hota — **explicit cast** chahiy
 
 ```java
 double x = 10.5;
-int y = (int) x; // y = 10 — decimal part lost
+int y = (int) x;     // y = 10 — decimal part lost
 ```
 
 ```text
@@ -193,11 +193,11 @@ byte, short, char → int me promote (arithmetic ke time)
 ```java
 float x = 10;
 int y = 3;
-System.out.println(x / y); // 3.3333333 (float result)
+System.out.println(x / y);   // 3.3333333 (float result)
 
 double x = 10;
 int y = 3;
-System.out.println(x / y); // 3.3333333333333335 (double result)
+System.out.println(x / y);   // 3.3333333333333335 (double result)
 ```
 
 ---
@@ -219,14 +219,14 @@ System.out.println(x / y); // 3.3333333333333335 (double result)
 
 ```java
 int x = 10;
-Integer obj = x; // autoboxing
+Integer obj = x;     // autoboxing
 ```
 
 ### Unboxing (Object → Primitive)
 
 ```java
 Integer obj = 10;
-int x = obj; // unboxing
+int x = obj;         // unboxing
 ```
 
 ---
@@ -235,15 +235,15 @@ int x = obj; // unboxing
 
 ```java
 String s1 = "10";
-int x = s1; // ERROR — incompatible types
+int x = s1;                    // ERROR — incompatible types
 
-int x = Integer.parseInt(s1); // correct way
+int x = Integer.parseInt(s1);  // valid correct way
 ```
 
 ### Invalid String → NumberFormatException
 
 ```java
-int x = Integer.parseInt("10abc"); // NumberFormatException
+int x = Integer.parseInt("10abc");  // NumberFormatException
 ```
 
 ---
@@ -260,13 +260,13 @@ int x = Integer.parseInt("10abc"); // NumberFormatException
 ### Example: -5 & -6
 
 ```text
--5: 00000101 → 11111010 → 11111011
--6: 00000110 → 11111001 → 11111010
+-5:  00000101 → 11111010 → 11111011
+-6:  00000110 → 11111001 → 11111010
 
- 11111011 (-5)
-& 11111010 (-6)
+  11111011  (-5)
+& 11111010  (-6)
 ----------
- 11111010 = -6
+  11111010  = -6
 
 Result: -5 & -6 = -6
 ```
@@ -287,34 +287,34 @@ Result: -5 & -6 = -6
 
 ---
 
-## Quick Revision Map
+## ⚡ Quick Revision Map
 
 ```text
 Java Variables
 │
 ├── Local Variable
-│ └── Must initialize before use
+│   └── Must initialize before use
 │
 ├── Instance Variable
-│ ├── Object-specific
-│ ├── Default value available
-│ └── Access through object
+│   ├── Object-specific
+│   ├── Default value available
+│   └── Access through object
 │
 └── Static Variable
- ├── Class-level
- ├── Shared
- └── Access using class name
+    ├── Class-level
+    ├── Shared
+    └── Access using class name
 ```
 
 ```text
 Type Conversion
 │
 ├── Implicit / Widening
-│ └── Automatic: byte → short → int → long → float → double
+│   └── Automatic: byte → short → int → long → float → double
 │
 └── Explicit / Narrowing
- ├── Cast required: (type) value
- └── Data loss possible
+    ├── Cast required: (type) value
+    └── Data loss possible
 ```
 
 ---

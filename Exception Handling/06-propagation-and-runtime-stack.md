@@ -9,11 +9,11 @@ This process continues up the method-call chain.
 
 ``` text
 Method C
- ↓
+   ↓
 Method B
- ↓
+   ↓
 Method A
- ↓
+   ↓
 main()
 ```
 
@@ -34,17 +34,17 @@ Example:
 ``` java
 class Demo {
 
- static void show2() throws ArithmeticException {
- int x = 10 / 0;
- }
+    static void show2() throws ArithmeticException {
+        int x = 10 / 0;
+    }
 
- static void show1() throws ArithmeticException {
- show2();
- }
+    static void show1() throws ArithmeticException {
+        show2();
+    }
 
- public static void main(String[] args) {
- show1();
- }
+    public static void main(String[] args) {
+        show1();
+    }
 }
 ```
 
@@ -52,9 +52,9 @@ Conceptually:
 
 ``` text
 show2()
- ↓
+   ↓
 show1()
- ↓
+   ↓
 main()
 ```
 
@@ -82,9 +82,9 @@ Suppose:
 
 ``` java
 main()
- ↓
+   ↓
 show1()
- ↓
+   ↓
 show2()
 ```
 
@@ -93,14 +93,14 @@ The stack conceptually becomes:
 ``` text
 | show2() |
 | show1() |
-| main() |
+| main()  |
 ```
 
 When `show2()` completes:
 
 ``` text
 | show1() |
-| main() |
+| main()  |
 ```
 
 When `show1()` completes:
@@ -126,9 +126,9 @@ Suppose:
 
 ``` java
 main()
- ↓
+   ↓
 show1()
- ↓
+   ↓
 show2()
 ```
 
@@ -138,17 +138,17 @@ The JVM looks for an appropriate exception handler.
 
 ### Step-by-step
 
-1. Exception occurs in `show2()`.
-2. JVM looks for a matching handler in `show2()`.
-3. If found, it handles the exception.
-4. If not found, `show2()` terminates abruptly.
-5. Its stack frame is removed.
-6. JVM checks the caller `show1()`.
-7. If `show1()` has a suitable handler, it handles the exception.
-8. Otherwise, `show1()` also terminates abruptly.
-9. JVM continues toward `main()`.
+1.  Exception occurs in `show2()`.
+2.  JVM looks for a matching handler in `show2()`.
+3.  If found, it handles the exception.
+4.  If not found, `show2()` terminates abruptly.
+5.  Its stack frame is removed.
+6.  JVM checks the caller `show1()`.
+7.  If `show1()` has a suitable handler, it handles the exception.
+8.  Otherwise, `show1()` also terminates abruptly.
+9.  JVM continues toward `main()`.
 10. If `main()` also does not handle it, the default exception handler
- handles the uncaught exception.
+    handles the uncaught exception.
 11. The program terminates.
 
 ------------------------------------------------------------------------
@@ -163,17 +163,17 @@ Typical output:
 
 ``` text
 Exception in thread "main" java.lang.ArithmeticException: / by zero
- at Demo.show2(Demo.java:5)
- at Demo.show1(Demo.java:9)
- at Demo.main(Demo.java:13)
+    at Demo.show2(Demo.java:5)
+    at Demo.show1(Demo.java:9)
+    at Demo.main(Demo.java:13)
 ```
 
 This contains:
 
-1. Exception type/name
-2. Exception message/description
-3. Stack trace showing where the exception propagated through the
- program
+1.  Exception type/name
+2.  Exception message/description
+3.  Stack trace showing where the exception propagated through the
+    program
 
 ------------------------------------------------------------------------
 
@@ -186,18 +186,18 @@ Example:
 
 ``` text
 java.lang.ArithmeticException: / by zero
- at Demo.show2(Demo.java:5)
- at Demo.show1(Demo.java:9)
- at Demo.main(Demo.java:13)
+    at Demo.show2(Demo.java:5)
+    at Demo.show1(Demo.java:9)
+    at Demo.main(Demo.java:13)
 ```
 
 Read it from the top:
 
 ``` text
 show2()
- ↓
+  ↓
 show1()
- ↓
+  ↓
 main()
 ```
 
@@ -252,16 +252,16 @@ Example:
 
 ``` text
 java.lang.ArithmeticException: / by zero
- at Demo.main(Demo.java:5)
+    at Demo.main(Demo.java:5)
 ```
 
 ### Quick Comparison
 
- Method Output
- --------------------- -----------------------------------
- `toString()` Exception name + message
- `getMessage()` Message only
- `printStackTrace()` Exception + message + stack trace
+  Method                Output
+  --------------------- -----------------------------------
+  `toString()`          Exception name + message
+  `getMessage()`        Message only
+  `printStackTrace()`   Exception + message + stack trace
 
 ------------------------------------------------------------------------
 

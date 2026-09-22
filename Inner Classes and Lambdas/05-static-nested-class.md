@@ -13,12 +13,12 @@ Example:
 ``` java
 class A {
 
- static class B {
+    static class B {
 
- void show() {
- System.out.println("Show");
- }
- }
+        void show() {
+            System.out.println("Show");
+        }
+    }
 }
 ```
 
@@ -27,7 +27,7 @@ Here:
 ``` text
 A
 └── static class B
- └── show()
+      └── show()
 ```
 
 ------------------------------------------------------------------------
@@ -39,12 +39,12 @@ A static nested class can be accessed using the outer class name.
 ``` java
 class A {
 
- static class B {
+    static class B {
 
- void show() {
- System.out.println("Show");
- }
- }
+        void show() {
+            System.out.println("Show");
+        }
+    }
 }
 ```
 
@@ -53,12 +53,12 @@ Another class:
 ``` java
 class D {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A.B b = new A.B();
+        A.B b = new A.B();
 
- b.show();
- }
+        b.show();
+    }
 }
 ```
 
@@ -70,9 +70,9 @@ A.B b = new A.B();
 
 Here:
 
-- `A.B` → type of reference variable
-- `b` → reference variable
-- `new A.B()` → creates object of static nested class `B`
+-   `A.B` → type of reference variable
+-   `b` → reference variable
+-   `new A.B()` → creates object of static nested class `B`
 
 No object of outer class `A` is required.
 
@@ -106,35 +106,35 @@ Reason:
 
 A static nested class can contain:
 
-- static variables
-- static methods
-- non-static variables
-- non-static methods
-- `main()` method
+-   static variables
+-   static methods
+-   non-static variables
+-   non-static methods
+-   `main()` method
 
 Example:
 
 ``` java
 class A {
 
- static class B {
+    static class B {
 
- static int x = 100;
+        static int x = 100;
 
- int y = 200;
+        int y = 200;
 
- static void staticShow() {
- System.out.println("Static method");
- }
+        static void staticShow() {
+            System.out.println("Static method");
+        }
 
- void instanceShow() {
- System.out.println("Instance method");
- }
+        void instanceShow() {
+            System.out.println("Instance method");
+        }
 
- public static void main(String[] args) {
- System.out.println("Main method inside static nested class");
- }
- }
+        public static void main(String[] args) {
+            System.out.println("Main method inside static nested class");
+        }
+    }
 }
 ```
 
@@ -150,12 +150,12 @@ Example:
 ``` java
 class A {
 
- class B {
+    class B {
 
- void show() {
- System.out.println("Show");
- }
- }
+        void show() {
+            System.out.println("Show");
+        }
+    }
 }
 ```
 
@@ -182,12 +182,12 @@ For example, this is not allowed in the traditional Java rule:
 ``` java
 class A {
 
- class B {
+    class B {
 
- static void show() {
- System.out.println("Show");
- }
- }
+        static void show() {
+            System.out.println("Show");
+        }
+    }
 }
 ```
 
@@ -200,10 +200,10 @@ A `static final` constant is allowed:
 ``` java
 class A {
 
- class B {
+    class B {
 
- static final int X = 100;
- }
+        static final int X = 100;
+    }
 }
 ```
 
@@ -225,12 +225,12 @@ Therefore, a static nested class can contain:
 ``` java
 class A {
 
- static class B {
+    static class B {
 
- public static void main(String[] args) {
- System.out.println("Hello");
- }
- }
+        public static void main(String[] args) {
+            System.out.println("Hello");
+        }
+    }
 }
 ```
 

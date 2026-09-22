@@ -7,24 +7,24 @@ A class declared inside a **method, constructor or local block** is called a **L
 ```java
 class A {
 
- void show() {
+    void show() {
 
- class B {
+        class B {
 
- void show2() {
- System.out.println("B");
- }
- }
+            void show2() {
+                System.out.println("B");
+            }
+        }
 
- B b = new B();
- b.show2();
- }
+        B b = new B();
+        b.show2();
+    }
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new A();
- a.show();
- }
+        A a = new A();
+        a.show();
+    }
 }
 ```
 
@@ -43,17 +43,17 @@ A local inner class has scope limited to the method/block in which it is declare
 ```java
 class A {
 
- void show() {
+    void show() {
 
- class B {
- void display() {
- System.out.println("B");
- }
- }
+        class B {
+            void display() {
+                System.out.println("B");
+            }
+        }
 
- B b = new B();
- b.display();
- }
+        B b = new B();
+        b.display();
+    }
 }
 ```
 
@@ -62,7 +62,7 @@ class A {
 ```java
 void test() {
 
- B b = new B(); // Error
+    B b = new B();       // Error
 }
 ```
 
@@ -86,18 +86,18 @@ Example inside a constructor:
 ```java
 class A {
 
- A() {
+    A() {
 
- class B {
+        class B {
 
- void show() {
- System.out.println("B");
- }
- }
+            void show() {
+                System.out.println("B");
+            }
+        }
 
- B b = new B();
- b.show();
- }
+        B b = new B();
+        b.show();
+    }
 }
 ```
 
@@ -110,26 +110,26 @@ A local inner class can access a local variable from its enclosing method only w
 ```java
 class A {
 
- void show() {
+    void show() {
 
- int y = 21;
+        int y = 21;
 
- class B {
+        class B {
 
- void show2() {
- System.out.println(y);
- }
- }
+            void show2() {
+                System.out.println(y);
+            }
+        }
 
- B b = new B();
- b.show2();
+        B b = new B();
+        b.show2();
 
- System.out.println("A");
- }
+        System.out.println("A");
+    }
 
- public static void main(String[] args) {
- new A().show();
- }
+    public static void main(String[] args) {
+        new A().show();
+    }
 }
 ```
 
@@ -176,7 +176,7 @@ then `y` is no longer effectively final.
 
 ```text
 Java 7 and earlier → explicitly final
-Java 8+ → final OR effectively final
+Java 8+            → final OR effectively final
 ```
 
 > **Effectively final = variable is not declared final, but its value is never changed after initialization.**

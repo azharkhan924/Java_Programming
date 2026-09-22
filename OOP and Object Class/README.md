@@ -1,7 +1,7 @@
 <p align="center">
- <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Badge"/>
- <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
- <img src="https://img.shields.io/badge/Notes-Short%20%26%20Quick-blueviolet?style=for-the-badge" alt="Notes Badge"/>
+  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Badge"/>
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
+  <img src="https://img.shields.io/badge/Notes-Short%20%26%20Quick-blueviolet?style=for-the-badge" alt="Notes Badge"/>
 </p>
 
 # OOP & Object Class — Short Notes for Quick Revision
@@ -14,17 +14,17 @@
 
 | # | Topic | File | Description |
 |---|-------|------|-------------|
-| 1 | Object Class & Methods | [01-object-class.md](./01-object-class.md) | Root class, 12 methods, getClass(), modifiers |
-| 2 | toString() & hashCode() | [02-tostring-and-hashcode.md](./02-tostring-and-hashcode.md) | Default behavior, overriding, hex vs decimal |
-| 3 | equals() & == | [03-equals-and-identity.md](./03-equals-and-identity.md) | Reference vs content comparison, contract, safe pattern |
-| 4 | Type Casting & instanceof | [04-typecasting-and-instanceof.md](./04-typecasting-and-instanceof.md) | Upcasting, downcasting, ClassCastException, null instanceof |
-| 5 | Strings & String Pool | [05-strings-and-pool.md](./05-strings-and-pool.md) | Immutability, String Pool, StringBuilder, switch arrows |
-| 6 | BigInteger | [06-biginteger.md](./06-biginteger.md) | Arbitrary precision, methods, constants, comparison |
-| 7 | Garbage Collection | [07-garbage-collection.md](./07-garbage-collection.md) | GC eligibility, 5 ways, System.gc(), finalization |
-| 8 | Cloning & Reflection | [08-cloning-and-reflection.md](./08-cloning-and-reflection.md) | Shallow/deep clone, Cloneable, Reflection API |
-| 9 | Singleton & Design Patterns | [09-singleton-pattern.md](./09-singleton-pattern.md) | Singleton, factory method, Runtime class |
-| 10 | File Handling | [10-file-handling.md](./10-file-handling.md) | FileOutputStream, read/write, append mode |
-| 11 | Master Quick Revision | [11-quick-revision.md](./11-quick-revision.md) | Master cheat sheet for all OOP topics |
+| 1 |  Object Class & Methods | [01-object-class.md](./01-object-class.md) | Root class, 12 methods, getClass(), modifiers |
+| 2 |  toString() & hashCode() | [02-tostring-and-hashcode.md](./02-tostring-and-hashcode.md) | Default behavior, overriding, hex vs decimal |
+| 3 | ⚖ equals() & == | [03-equals-and-identity.md](./03-equals-and-identity.md) | Reference vs content comparison, contract, safe pattern |
+| 4 |  Type Casting & instanceof | [04-typecasting-and-instanceof.md](./04-typecasting-and-instanceof.md) | Upcasting, downcasting, ClassCastException, null instanceof |
+| 5 |  Strings & String Pool | [05-strings-and-pool.md](./05-strings-and-pool.md) | Immutability, String Pool, StringBuilder, switch arrows |
+| 6 |  BigInteger | [06-biginteger.md](./06-biginteger.md) | Arbitrary precision, methods, constants, comparison |
+| 7 |  Garbage Collection | [07-garbage-collection.md](./07-garbage-collection.md) | GC eligibility, 5 ways, System.gc(), finalization |
+| 8 |  Cloning & Reflection | [08-cloning-and-reflection.md](./08-cloning-and-reflection.md) | Shallow/deep clone, Cloneable, Reflection API |
+| 9 |  Singleton & Design Patterns | [09-singleton-pattern.md](./09-singleton-pattern.md) | Singleton, factory method, Runtime class |
+| 10 |  File Handling | [10-file-handling.md](./10-file-handling.md) | FileOutputStream, read/write, append mode |
+| 11 | ⚡ Quick Revision | [11-quick-revision.md](./11-quick-revision.md) | Master cheat sheet for all OOP topics |
 
 ---
 
@@ -46,6 +46,5 @@ These notes are being continuously improved. Feel free to:
 ---
 
 <p align="center">
- <b>Made for quick Java revision</b>
+  <b>Made with  for quick Java revision</b>
 </p>
-

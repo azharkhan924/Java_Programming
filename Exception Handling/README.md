@@ -1,6 +1,6 @@
 <p align="center">
- <img src="https://img.shields.io/badge/Java-Exception%20Handling-red?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Exception Handling Badge"/>
- <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
+  <img src="https://img.shields.io/badge/Java-Exception%20Handling-red?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Exception Handling Badge"/>
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
 </p>
 
 # Java Exception Handling

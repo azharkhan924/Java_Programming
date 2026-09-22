@@ -21,13 +21,13 @@ If we implement `WindowListener` directly:
 ``` java
 class MyAdapter implements WindowListener {
 
- public void windowOpened(WindowEvent e) {}
- public void windowClosing(WindowEvent e) {}
- public void windowClosed(WindowEvent e) {}
- public void windowIconified(WindowEvent e) {}
- public void windowDeiconified(WindowEvent e) {}
- public void windowActivated(WindowEvent e) {}
- public void windowDeactivated(WindowEvent e) {}
+    public void windowOpened(WindowEvent e) {}
+    public void windowClosing(WindowEvent e) {}
+    public void windowClosed(WindowEvent e) {}
+    public void windowIconified(WindowEvent e) {}
+    public void windowDeiconified(WindowEvent e) {}
+    public void windowActivated(WindowEvent e) {}
+    public void windowDeactivated(WindowEvent e) {}
 }
 ```
 
@@ -42,19 +42,19 @@ That's why an **adapter class** is useful.
 ``` java
 class MyAdapter implements WindowListener {
 
- public void windowOpened(WindowEvent e) {}
+    public void windowOpened(WindowEvent e) {}
 
- public void windowClosing(WindowEvent e) {}
+    public void windowClosing(WindowEvent e) {}
 
- public void windowClosed(WindowEvent e) {}
+    public void windowClosed(WindowEvent e) {}
 
- public void windowIconified(WindowEvent e) {}
+    public void windowIconified(WindowEvent e) {}
 
- public void windowDeiconified(WindowEvent e) {}
+    public void windowDeiconified(WindowEvent e) {}
 
- public void windowActivated(WindowEvent e) {}
+    public void windowActivated(WindowEvent e) {}
 
- public void windowDeactivated(WindowEvent e) {}
+    public void windowDeactivated(WindowEvent e) {}
 }
 ```
 
@@ -65,17 +65,17 @@ Now another class can extend this adapter:
 ``` java
 class FDemo extends Frame {
 
- FDemo() {
+    FDemo() {
 
- MyAdapter m = new MyAdapter() {
- @Override
- public void windowClosing(WindowEvent e) {
- System.exit(0);
- }
- };
+        MyAdapter m = new MyAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        };
 
- addWindowListener(m);
- }
+        addWindowListener(m);
+    }
 }
 ```
 
@@ -87,10 +87,10 @@ Instead of creating a separate object:
 
 ``` java
 MyAdapter m = new MyAdapter() {
- @Override
- public void windowClosing(WindowEvent e) {
- System.exit(0);
- }
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
 };
 
 addWindowListener(m);
@@ -100,10 +100,10 @@ we can directly pass the anonymous object:
 
 ``` java
 addWindowListener(new MyAdapter() {
- @Override
- public void windowClosing(WindowEvent e) {
- System.exit(0);
- }
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
 });
 ```
 
@@ -111,12 +111,12 @@ addWindowListener(new MyAdapter() {
 
 ``` java
 addWindowListener(
- new MyAdapter() {
- @Override
- public void windowClosing(WindowEvent e) {
- System.exit(0);
- }
- }
+    new MyAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
+        }
+    }
 );
 ```
 
@@ -143,17 +143,17 @@ add(b1);
 add(b2);
 
 ActionListener al1 = new ActionListener() {
- @Override
- public void actionPerformed(ActionEvent e) {
- b1.setBackground(Color.PINK);
- }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        b1.setBackground(Color.PINK);
+    }
 };
 
 ActionListener al2 = new ActionListener() {
- @Override
- public void actionPerformed(ActionEvent e) {
- b2.setBackground(Color.GREEN);
- }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        b2.setBackground(Color.GREEN);
+    }
 };
 
 b1.addActionListener(al1);

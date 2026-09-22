@@ -13,7 +13,7 @@ int[] x = new int[5];
 Ye 5 integers ke liye space create karta hai.
 
 ```text
-Index: 0 1 2 3 4
+Index:  0   1   2   3   4
 Value: [0] [0] [0] [0] [0]
 ```
 
@@ -93,7 +93,7 @@ Output:
 Because:
 
 ```text
-50 → '2' 51 → '3' 52 → '4'
+50 → '2'    51 → '3'    52 → '4'
 ```
 
 > `System.out.println(char[])` ke liye special overloaded method hai jo characters print karta hai.
@@ -113,16 +113,16 @@ int[] x = {10, 20, 30};
 Array ke elements khud arrays hote hain:
 
 ```java
-int[][] x = new int[3][5]; // 3 rows × 5 columns
+int[][] x = new int[3][5];   // 3 rows × 5 columns
 ```
 
 ### Valid Declaration Styles
 
 ```java
-int[][] x; // most common
-int [][]x; // 
-int x[][]; // 
-int[] x[]; // 
+int[][] x;     // valid most common
+int [][]x;     // valid
+int x[][];     // valid
+int[] x[];     // valid
 ```
 
 ---
@@ -132,7 +132,7 @@ int[] x[]; //
 Rows ki length alag-alag ho sakti hai:
 
 ```java
-int[][] x = new int[3][]; // valid — rows undefined initially
+int[][] x = new int[3][];   // valid — rows undefined initially
 
 x[0] = new int[2];
 x[1] = new int[5];
@@ -171,8 +171,8 @@ print(new int[]{10, 20, 30});
 ### Note: Important Rule
 
 ```java
-new int[3]{10, 20, 30}; // invalid — size + values dono nahi de sakte
-new int[]{10, 20, 30}; // valid
+new int[3]{10, 20, 30};    // invalid — size + values dono nahi de sakte
+new int[]{10, 20, 30};     // valid
 ```
 
 ---

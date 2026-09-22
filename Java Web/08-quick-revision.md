@@ -8,51 +8,51 @@
 SERVLET
 │
 ├── Life Cycle
-│ ├── Loading & Instantiation
-│ ├── init() → once
-│ ├── service() → requests
-│ ├── destroy() → once
-│ └── GC → later, if eligible
+│   ├── Loading & Instantiation
+│   ├── init()       → once
+│   ├── service()    → requests
+│   ├── destroy()    → once
+│   └── GC           → later, if eligible
 │
 ├── HTTP Stateless
-│ └── Session Management
-│ ├── Cookies
-│ ├── HttpSession
-│ ├── Hidden Form Field
-│ └── URL Rewriting
+│   └── Session Management
+│       ├── Cookies
+│       ├── HttpSession
+│       ├── Hidden Form Field
+│       └── URL Rewriting
 │
 ├── COOKIE
-│ ├── Non-persistent
-│ ├── Persistent
-│ ├── new Cookie()
-│ ├── setMaxAge()
-│ └── response.addCookie()
+│   ├── Non-persistent
+│   ├── Persistent
+│   ├── new Cookie()
+│   ├── setMaxAge()
+│   └── response.addCookie()
 │
 ├── SESSION
-│ ├── getSession(true)
-│ ├── getSession(false)
-│ ├── setAttribute()
-│ ├── getAttribute()
-│ └── invalidate()
+│   ├── getSession(true)
+│   ├── getSession(false)
+│   ├── setAttribute()
+│   ├── getAttribute()
+│   └── invalidate()
 │
 └── JSP
- ├── Translation: .jsp → .java
- ├── Compilation: .java → .class
- ├── Directives
- │ ├── page
- │ ├── include
- │ └── taglib
- ├── Scripting
- │ ├── Scriptlet <% %>
- │ ├── Expression <%= %>
- │ └── Declaration <%! %>
- ├── Comments
- │ ├── HTML
- │ └── JSP
- └── MVC
- ├── Model
- ├── View
- └── Controller
+    ├── Translation: .jsp → .java
+    ├── Compilation: .java → .class
+    ├── Directives
+    │   ├── page
+    │   ├── include
+    │   └── taglib
+    ├── Scripting
+    │   ├── Scriptlet <% %>
+    │   ├── Expression <%= %>
+    │   └── Declaration <%! %>
+    ├── Comments
+    │   ├── HTML
+    │   └── JSP
+    └── MVC
+        ├── Model
+        ├── View
+        └── Controller
 ```
 
 ---
@@ -60,21 +60,21 @@ SERVLET
 ## 2. Complete Servlet Concept Map
 
 ```text
- JAVA SERVLET
- │
- ┌─────────────────┼─────────────────┐
- ↓ ↓ ↓
- Request/Response Lifecycle Configuration
- │ │ │
- ┌──────┴──────┐ init/service/ ┌──────┴──────┐
- ↓ ↓ destroy ↓ ↓
- HttpServletRequest ServletConfig ServletContext
- HttpServletResponse │ │
- │ │ │
- getParameter() One Servlet Whole App
- setContentType() │ │
- sendRedirect() ↓ ↓
- init-param context-param
+                         JAVA SERVLET
+                              │
+            ┌─────────────────┼─────────────────┐
+            ↓                 ↓                 ↓
+       Request/Response   Lifecycle        Configuration
+            │                 │                 │
+     ┌──────┴──────┐     init/service/      ┌──────┴──────┐
+     ↓             ↓       destroy           ↓             ↓
+ HttpServletRequest                 ServletConfig   ServletContext
+ HttpServletResponse                       │             │
+     │                                     │             │
+ getParameter()                         One Servlet   Whole App
+ setContentType()                         │             │
+ sendRedirect()                           ↓             ↓
+                                      init-param    context-param
 ```
 
 ---
@@ -134,56 +134,56 @@ SERVLET
 
 ## 4. Interview & Exam Important Points
 
-1. **Who manages servlet life cycle?** 
- Servlet Container.
+1. **Who manages servlet life cycle?**  
+   Servlet Container.
 
-2. **Which method is called only once for initialization?** 
- `init()`.
+2. **Which method is called only once for initialization?**  
+   `init()`.
 
-3. **Which method handles requests?** 
- `service()`.
+3. **Which method handles requests?**  
+   `service()`.
 
-4. **Which method is called before servlet destruction?** 
- `destroy()`.
+4. **Which method is called before servlet destruction?**  
+   `destroy()`.
 
-5. **Is HTTP stateful or stateless?** 
- Stateless.
+5. **Is HTTP stateful or stateless?**  
+   Stateless.
 
-6. **Where are cookies stored?** 
- Primarily in the client/browser.
+6. **Where are cookies stored?**  
+   Primarily in the client/browser.
 
-7. **Where is `HttpSession` state maintained?** 
- On the server.
+7. **Where is `HttpSession` state maintained?**  
+   On the server.
 
-8. **What does `getSession(false)` do?** 
- Existing session return karta hai; otherwise `null`, without creating a new session.
+8. **What does `getSession(false)` do?**  
+   Existing session return karta hai; otherwise `null`, without creating a new session.
 
-9. **JSP translation:** 
- `.jsp → .java`
+9. **JSP translation:**  
+   `.jsp → .java`
 
-10. **JSP compilation:** 
- `.java → .class`
+10. **JSP compilation:**  
+    `.java → .class`
 
-11. **Scriptlet:** 
- `<% %>`
+11. **Scriptlet:**  
+    `<% %>`
 
-12. **Expression:** 
- `<%= %>`
+12. **Expression:**  
+    `<%= %>`
 
-13. **Declaration:** 
- `<%! %>`
+13. **Declaration:**  
+    `<%! %>`
 
-14. **JSP comment:** 
- `<%-- --%>`
+14. **JSP comment:**  
+    `<%-- --%>`
 
-15. **Main JSP directives:** 
- `page`, `include`, `taglib`
+15. **Main JSP directives:**  
+    `page`, `include`, `taglib`
 
-16. **MVC mein Servlet ka common role:** 
- Controller.
+16. **MVC mein Servlet ka common role:**  
+    Controller.
 
-17. **MVC mein JSP ka common role:** 
- View.
+17. **MVC mein JSP ka common role:**  
+    View.
 
 ---
 
@@ -217,9 +217,9 @@ JSP:
 .java → compilation → .class
 
 JSP Scripting:
-<% %> Scriptlet
-<%= %> Expression
-<%! %> Declaration
+<% %>     Scriptlet
+<%= %>    Expression
+<%! %>    Declaration
 
 JSP Directives:
 page | include | taglib
@@ -231,13 +231,13 @@ Model | View | Controller
 ### Most Important Memory Lines
 
 ```text
-Config = ONE Servlet
+Config  = ONE Servlet
 Context = WHOLE Application
 
-Forward = Same Request + URL unchanged
+Forward  = Same Request + URL unchanged
 Redirect = New Request + URL changes
 
-Include = Include content + continue execution
+Include  = Include content + continue execution
 ```
 
 ---

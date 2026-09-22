@@ -20,14 +20,14 @@ The `try` block contains code where an exception may occur.
 
 ``` java
 try {
- // risky code
+    // risky code
 }
 ```
 
 A `try` block must be followed by at least one of:
 
-- `catch`
-- `finally`
+-   `catch`
+-   `finally`
 
 or it can be used as part of **try-with-resources**.
 
@@ -35,7 +35,7 @@ or it can be used as part of **try-with-resources**.
 
 ``` java
 try {
- int x = 10 / 0;
+    int x = 10 / 0;
 }
 
 System.out.println("Hello"); // Invalid placement
@@ -53,9 +53,9 @@ corresponding `try` block.
 
 ``` java
 try {
- int x = 10 / 0;
+    int x = 10 / 0;
 } catch (ArithmeticException e) {
- System.out.println("Cannot divide by zero");
+    System.out.println("Cannot divide by zero");
 }
 ```
 
@@ -70,16 +70,16 @@ A single `try` block can have multiple `catch` blocks.
 
 ``` java
 try {
- // risky code
+    // risky code
 }
 catch (ArithmeticException e) {
- // handle arithmetic exception
+    // handle arithmetic exception
 }
 catch (NullPointerException e) {
- // handle null pointer exception
+    // handle null pointer exception
 }
 catch (Exception e) {
- // handle other exceptions
+    // handle other exceptions
 }
 ```
 
@@ -93,13 +93,13 @@ Specific exceptions must come before their parent exception.
 
 ``` java
 try {
- // code
+    // code
 }
 catch (ArithmeticException e) {
- // specific
+    // specific
 }
 catch (Exception e) {
- // general
+    // general
 }
 ```
 
@@ -107,7 +107,7 @@ catch (Exception e) {
 
 ``` java
 try {
- // code
+    // code
 }
 catch (Exception e) {
 }
@@ -137,11 +137,11 @@ For example:
 
 ``` java
 try {
- statement1;
- statement2;
- statement3; // exception occurs here
- statement4;
- statement5;
+    statement1;
+    statement2;
+    statement3;  // exception occurs here
+    statement4;
+    statement5;
 }
 ```
 
@@ -157,13 +157,13 @@ exception occurs or not.
 
 ``` java
 try {
- // risky code
+    // risky code
 }
 catch (Exception e) {
- // handling
+    // handling
 }
 finally {
- // cleanup code
+    // cleanup code
 }
 ```
 
@@ -171,22 +171,22 @@ finally {
 
 ``` java
 try {
- // open connection
- // send data
+    // open connection
+    // send data
 }
 catch (Exception e) {
- // handle exception
+    // handle exception
 }
 finally {
- // close connection
+    // close connection
 }
 ```
 
 The `finally` block is commonly used for cleanup operations such as:
 
-- closing files
-- closing database connections
-- releasing resources
+-   closing files
+-   closing database connections
+-   releasing resources
 
 ### Possible Structures
 

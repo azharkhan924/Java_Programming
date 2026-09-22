@@ -17,24 +17,24 @@ Common forms:
 ```java
 class A {
 
- void show() {
- System.out.println("A");
- }
+    void show() {
+        System.out.println("A");
+    }
 }
 
 class Demo {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new A() {
+        A a = new A() {
 
- void show() {
- System.out.println("Anonymous Inner Class");
- }
- };
+            void show() {
+                System.out.println("Anonymous Inner Class");
+            }
+        };
 
- a.show();
- }
+        a.show();
+    }
 }
 ```
 
@@ -42,7 +42,7 @@ class Demo {
 
 ```java
 A a = new A() {
- ...
+    ...
 };
 ```
 
@@ -54,7 +54,7 @@ A a = new A() {
 
 ```text
 Superclass A reference
- ↓
+        ↓
 Anonymous subclass object
 ```
 
@@ -65,22 +65,22 @@ Anonymous subclass object
 ```java
 interface A {
 
- void show();
+    void show();
 }
 
 class Demo {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new A() {
+        A a = new A() {
 
- public void show() {
- System.out.println("Anonymous implementation");
- }
- };
+            public void show() {
+                System.out.println("Anonymous implementation");
+            }
+        };
 
- a.show();
- }
+        a.show();
+    }
 }
 ```
 
@@ -92,24 +92,24 @@ Here the anonymous class implements interface `A`.
 
 ```java
 interface A {
- void show();
+    void show();
 }
 
 class Demo {
 
- static void display(A a) {
- a.show();
- }
+    static void display(A a) {
+        a.show();
+    }
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- display(new A() {
+        display(new A() {
 
- public void show() {
- System.out.println("Anonymous Class");
- }
- });
- }
+            public void show() {
+                System.out.println("Anonymous Class");
+            }
+        });
+    }
 }
 ```
 
@@ -122,26 +122,26 @@ This is especially useful in **event listeners** and GUI programming.
 ```java
 class A {
 
- void show() {
- System.out.println("A");
- }
+    void show() {
+        System.out.println("A");
+    }
 }
 
 class B extends A {
 
- void show() {
- System.out.println("B");
- }
+    void show() {
+        System.out.println("B");
+    }
 }
 
 class Demo {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new B();
+        A a = new B();
 
- a.show();
- }
+        a.show();
+    }
 }
 ```
 
@@ -173,8 +173,8 @@ So:
 
 ```text
 Superclass A reference
- ↓
- Subclass B object
+          ↓
+      Subclass B object
 ```
 
 **Step 5:** `a.show()` is called.
@@ -201,7 +201,7 @@ abstract class A {
 This is invalid:
 
 ```java
-A a = new A(); // Error
+A a = new A();       // Error
 ```
 
 But a reference variable can be created:
@@ -215,9 +215,9 @@ And it can hold an object of a concrete subclass:
 ```java
 abstract class A {
 
- void show() {
- System.out.println("A");
- }
+    void show() {
+        System.out.println("A");
+    }
 }
 
 class B extends A {
@@ -225,12 +225,12 @@ class B extends A {
 
 class Demo {
 
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- A a = new B();
+        A a = new B();
 
- a.show();
- }
+        a.show();
+    }
 }
 ```
 
@@ -243,9 +243,9 @@ A
 ### Important
 
 ```text
-Abstract class object directly → 
-Abstract class reference → 
-Reference holding subclass → 
+Abstract class object directly → [Error]
+Abstract class reference       → [Valid]
+Reference holding subclass     → [Valid]
 ```
 
 ---
@@ -263,7 +263,7 @@ class B extends A {
 
 ```java
 A a = new A() {
- // body
+    // body
 };
 ```
 
@@ -327,14 +327,14 @@ Conceptually:
 
 ``` text
 Reference variable
- |
- v
- a1
- |
- v
- +---------+
- | B object |
- +---------+
+       |
+       v
+      a1
+       |
+       v
+   +---------+
+   | B object |
+   +---------+
 ```
 
 The object is a `B` object, not an `A` object.
@@ -351,34 +351,34 @@ A a1 = new B();
 
 executes:
 
-1. `new B()` requests memory for a new `B` object.
-2. The `B` constructor is executed.
-3. The resulting object exists in heap memory.
-4. `a1` stores a reference to that object.
-5. Because the reference type is `A`, only members accessible through
- `A` can be directly accessed using `a1`.
+1.  `new B()` requests memory for a new `B` object.
+2.  The `B` constructor is executed.
+3.  The resulting object exists in heap memory.
+4.  `a1` stores a reference to that object.
+5.  Because the reference type is `A`, only members accessible through
+    `A` can be directly accessed using `a1`.
 
 Example:
 
 ``` java
 class A {
- void showA() {
- System.out.println("A");
- }
+    void showA() {
+        System.out.println("A");
+    }
 }
 
 class B extends A {
- void showB() {
- System.out.println("B");
- }
+    void showB() {
+        System.out.println("B");
+    }
 }
 ```
 
 ``` java
 A a1 = new B();
 
-a1.showA(); // valid
-// a1.showB(); // compile-time error
+a1.showA();   // valid
+// a1.showB();   // compile-time error
 ```
 
 The object is still a `B` object.
@@ -392,28 +392,28 @@ This is commonly called **upcasting**.
 An interface cannot normally be instantiated directly:
 
 ``` java
-// Inter1 i = new Inter1(); // invalid
+// Inter1 i = new Inter1();   // invalid
 ```
 
 But an anonymous class can implement the interface:
 
 ``` java
 interface Inter1 {
- void show();
+    void show();
 }
 
 class Demo {
- public static void main(String[] args) {
+    public static void main(String[] args) {
 
- Inter1 in = new Inter1() {
- @Override
- public void show() {
- System.out.println("ABC");
- }
- };
+        Inter1 in = new Inter1() {
+            @Override
+            public void show() {
+                System.out.println("ABC");
+            }
+        };
 
- in.show();
- }
+        in.show();
+    }
 }
 ```
 
@@ -421,32 +421,32 @@ class Demo {
 
 ``` java
 Inter1 in = new Inter1() {
- public void show() {
- System.out.println("ABC");
- }
+    public void show() {
+        System.out.println("ABC");
+    }
 };
 ```
 
 The important point is:
 
-- `Inter1` → reference type
-- `in` → reference variable
-- `new Inter1() { ... }` → creates an **anonymous class object**
-- The anonymous class **implements `Inter1`**
-- The object is stored/referenced through the `Inter1` reference
+-   `Inter1` → reference type
+-   `in` → reference variable
+-   `new Inter1() { ... }` → creates an **anonymous class object**
+-   The anonymous class **implements `Inter1`**
+-   The object is stored/referenced through the `Inter1` reference
 
 Conceptually:
 
 ``` text
 Inter1 in
- |
- v
+   |
+   v
 +---------------------------+
-| Anonymous class object |
-| |
-| show() { |
-| System.out.println(...); |
-| } |
+| Anonymous class object    |
+|                           |
+| show() {                  |
+|   System.out.println(...); |
+| }                         |
 +---------------------------+
 ```
 
@@ -487,10 +487,10 @@ For example:
 
 ``` java
 addWindowListener(new MyAdapter() {
- @Override
- public void windowClosing(WindowEvent e) {
- System.exit(0);
- }
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.exit(0);
+    }
 });
 ```
 

@@ -1,4 +1,4 @@
-# equals() Method & == Operator
+# ⚖ equals() Method & == Operator
 
 ---
 
@@ -10,14 +10,14 @@ Objects ke case mein `==` **reference comparison** karta hai — kya dono refere
 String s1 = new String("Java");
 String s2 = new String("Java");
 
-System.out.println(s1 == s2); // false
+System.out.println(s1 == s2);    // false
 ```
 
 Because:
 
 ```text
-s1 ─────► [String "Java"] ← Object 1
-s2 ─────► [String "Java"] ← Object 2
+s1 ─────► [String "Java"]  ← Object 1
+s2 ─────► [String "Java"]  ← Object 2
 ```
 
 Different objects hain — content same hone se farak nahi padta.
@@ -28,7 +28,7 @@ Different objects hain — content same hone se farak nahi padta.
 
 ```java
 public boolean equals(Object obj) {
- return this == obj;
+    return this == obj;
 }
 ```
 
@@ -40,8 +40,8 @@ class A { }
 A a1 = new A();
 A a2 = new A();
 
-System.out.println(a1.equals(a2)); // false — different objects
-System.out.println(a1.equals(a1)); // true — same object
+System.out.println(a1.equals(a2));   // false — different objects
+System.out.println(a1.equals(a1));   // true  — same object
 ```
 
 ---
@@ -54,8 +54,8 @@ System.out.println(a1.equals(a1)); // true — same object
 String s1 = new String("Java");
 String s2 = new String("Java");
 
-System.out.println(s1 == s2); // false — references different
-System.out.println(s1.equals(s2)); // true — content same
+System.out.println(s1 == s2);          // false — references different
+System.out.println(s1.equals(s2));     // true  — content same
 ```
 
 ### Quick Reference
@@ -74,21 +74,21 @@ Agar same `id` wale Employees ko equal maanna ho:
 
 ```java
 class Employee {
- int id;
- String name;
+    int id;
+    String name;
 
- Employee(int id, String name) {
- this.id = id;
- this.name = name;
- }
+    Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
- @Override
- public boolean equals(Object o) {
- if (this == o) return true;
- if (!(o instanceof Employee)) return false;
- Employee e = (Employee) o;
- return this.id == e.id;
- }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee)) return false;
+        Employee e = (Employee) o;
+        return this.id == e.id;
+    }
 }
 ```
 
@@ -96,7 +96,7 @@ class Employee {
 Employee e1 = new Employee(101, "Azhar");
 Employee e2 = new Employee(101, "Rahul");
 
-System.out.println(e1.equals(e2)); // true — same id
+System.out.println(e1.equals(e2));   // true — same id
 ```
 
 ---
@@ -111,13 +111,13 @@ Parameter `Object` hai because `Object` Java ki root class hai — **kisi bhi ty
 
 ```text
 Employee object
- ↓
+      ↓
 Object reference parameter
- ↓
+      ↓
 instanceof check
- ↓
+      ↓
 Cast to Employee
- ↓
+      ↓
 Compare data
 ```
 
@@ -130,8 +130,8 @@ Compare data
 ```java
 @Override
 public boolean equals(Object o) {
- Employee e = (Employee) o;
- return this.id == e.id;
+    Employee e = (Employee) o;
+    return this.id == e.id;
 }
 ```
 
@@ -146,17 +146,17 @@ e1.equals(null);
 ```java
 @Override
 public boolean equals(Object o) {
- if (this == o) return true;
- if (!(o instanceof Employee)) return false;
- Employee e = (Employee) o;
- return this.id == e.id;
+    if (this == o) return true;
+    if (!(o instanceof Employee)) return false;
+    Employee e = (Employee) o;
+    return this.id == e.id;
 }
 ```
 
 ```java
 e1.equals(null);
 // null instanceof Employee → false
-// return false — no NullPointerException
+// return false  — no NullPointerException
 ```
 
 ---
@@ -167,17 +167,17 @@ e1.equals(null);
 @Override
 public boolean equals(Object o) {
 
- // Step 1: Same reference check
- if (this == o) return true;
+    // Step 1: Same reference check
+    if (this == o) return true;
 
- // Step 2: Type check (also handles null)
- if (!(o instanceof Employee)) return false;
+    // Step 2: Type check (also handles null)
+    if (!(o instanceof Employee)) return false;
 
- // Step 3: Cast
- Employee other = (Employee) o;
+    // Step 3: Cast
+    Employee other = (Employee) o;
 
- // Step 4: Compare relevant fields
- return this.id == other.id;
+    // Step 4: Compare relevant fields
+    return this.id == other.id;
 }
 ```
 
@@ -196,14 +196,14 @@ return Objects.equals(this.name, other.name);
 ### The Contract
 
 ```text
-If a.equals(b) == true
-Then a.hashCode() == b.hashCode() (MUST)
+If   a.equals(b) == true
+Then a.hashCode() == b.hashCode()   (MUST)
 ```
 
 ```java
 @Override
 public int hashCode() {
- return Integer.hashCode(id);
+    return Integer.hashCode(id);
 }
 ```
 
@@ -219,12 +219,12 @@ String s2 = new String("abc");
 String s3 = "abc";
 String s4 = "abc";
 
-System.out.println(s1 == s2); // false — different new objects
-System.out.println(s1.equals(s2)); // true — same content
-System.out.println(s1 == s3); // false — heap vs pool
-System.out.println(s1.equals(s3)); // true — same content
-System.out.println(s3 == s4); // true — same pooled literal
-System.out.println(s3.equals(s4)); // true — same content
+System.out.println(s1 == s2);          // false — different new objects
+System.out.println(s1.equals(s2));     // true  — same content
+System.out.println(s1 == s3);          // false — heap vs pool
+System.out.println(s1.equals(s3));     // true  — same content
+System.out.println(s3 == s4);          // true  — same pooled literal
+System.out.println(s3.equals(s4));     // true  — same content
 ```
 
 ---
@@ -235,7 +235,7 @@ System.out.println(s3.equals(s4)); // true — same content
 String s1 = new String("aaa");
 StringBuffer s2 = new StringBuffer("aaa");
 
-System.out.println(s1 == s2); // Compile-time error
+System.out.println(s1 == s2);   // Compile-time error
 ```
 
 `String` aur `StringBuffer` unrelated final classes hain — compiler jaanta hai ki dono kabhi same object nahi ho sakte.
@@ -252,7 +252,7 @@ System.out.println(s1 == s2); // Compile-time error
 | Default `Object.equals()` kya karta hai? | `this == obj` (reference check) |
 | `String.equals()` kya karta hai? | Content comparison |
 | `null instanceof AnyType` ka result? | `false` |
-| `equals()` override kiya to `hashCode()` bhi override karna chahiye? | Mandatory |
+| `equals()` override kiya to `hashCode()` bhi override karna chahiye? |  Mandatory |
 | `Objects.equals(a, b)` kyu prefer karte hain? | Null-safe comparison |
 | `new String("abc") == "abc"` ka result? | `false` |
 

@@ -1,6 +1,6 @@
 <p align="center">
- <img src="https://img.shields.io/badge/Java-Inner%20Classes%20%26%20Lambdas-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Inner Classes Badge"/>
- <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
+  <img src="https://img.shields.io/badge/Java-Inner%20Classes%20%26%20Lambdas-orange?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Inner Classes Badge"/>
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
 </p>
 
 # Java Inner Classes, Nested Classes & Lambda Expressions

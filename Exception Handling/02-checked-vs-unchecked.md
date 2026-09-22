@@ -4,8 +4,8 @@
 
 Java exceptions are broadly divided into:
 
-1. **Checked Exceptions**
-2. **Unchecked Exceptions**
+1.  **Checked Exceptions**
+2.  **Unchecked Exceptions**
 
 ## 3.1 Checked Exception
 
@@ -13,8 +13,8 @@ Checked exceptions are checked by the **compiler**.
 
 The programmer must either:
 
-- handle them using `try-catch`, or
-- declare/propagate them using `throws`.
+-   handle them using `try-catch`, or
+-   declare/propagate them using `throws`.
 
 ### Example
 
@@ -22,13 +22,13 @@ The programmer must either:
 import java.io.*;
 
 class Demo {
- public static void main(String[] args) {
- try {
- FileInputStream fis = new FileInputStream("abc.txt");
- } catch (IOException e) {
- System.out.println("File error");
- }
- }
+    public static void main(String[] args) {
+        try {
+            FileInputStream fis = new FileInputStream("abc.txt");
+        } catch (IOException e) {
+            System.out.println("File error");
+        }
+    }
 }
 ```
 
@@ -110,9 +110,9 @@ For example:
 
 ``` text
 Exception
-├── IOException → Checked
-├── SQLException → Checked
-└── RuntimeException → Unchecked
+├── IOException        → Checked
+├── SQLException       → Checked
+└── RuntimeException   → Unchecked
 ```
 
 Therefore, `Exception` is partially checked.

@@ -8,8 +8,8 @@ Variable ek **named storage location/container** hai jo value hold karta hai.
 
 ```java
 int age = 21;
-// ↑ ↑ ↑
-// type name value
+//  ↑     ↑     ↑
+// type  name  value
 ```
 
 | Part | Description |
@@ -45,18 +45,18 @@ int x = 10, y = 20, z = 30;
 | Type | Where Declared | Scope | Default Value |
 |------|---------------|-------|---------------|
 | **Local Variable** | Inside a method/block | Within that method/block only | No default — must initialize |
-| **Instance Variable** | Inside class, outside methods | Per-object — each object gets its own copy | Has defaults (0, null, false) |
-| **Static Variable** | Inside class with `static` keyword | Shared across all objects of the class | Has defaults (0, null, false) |
+| **Instance Variable** | Inside class, outside methods | Per-object — each object gets its own copy |  Has defaults (0, null, false) |
+| **Static Variable** | Inside class with `static` keyword | Shared across all objects of the class |  Has defaults (0, null, false) |
 
 ```java
 class Student {
- static String school = "ABC School"; // Static variable
- String name; // Instance variable
- 
- void display() {
- int marks = 95; // Local variable
- System.out.println(name + ": " + marks);
- }
+    static String school = "ABC School";  // Static variable
+    String name;                          // Instance variable
+    
+    void display() {
+        int marks = 95;                   // Local variable
+        System.out.println(name + ": " + marks);
+    }
 }
 ```
 
@@ -75,7 +75,7 @@ Java identifiers ke rules:
 | No spaces allowed | `student name` | No |
 | No special chars (except `_`, `$`) | `my@var` | No |
 | Cannot be a Java keyword | `class` | No |
-| Case-sensitive | `Age ≠ age ≠ AGE` | (all different) |
+| Case-sensitive | `Age ≠ age ≠ AGE` |  (all different) |
 
 ### Valid Examples
 ```java
@@ -88,10 +88,10 @@ myVariable123
 
 ### Invalid Examples
 ```java
-2name // starts with digit
-student name // contains space
-class // reserved keyword
-my-var // hyphen not allowed
+2name          // starts with digit
+student name   // contains space
+class          // reserved keyword
+my-var         // hyphen not allowed
 ```
 
 ---
@@ -116,9 +116,9 @@ String firstName = "Azhar";
 final double MAX_SPEED = 120.5;
 
 // Bad naming examples
-int x = 20; // Not descriptive
+int x = 20;          // Not descriptive
 int STUDENTAGE = 20; // Wrong convention for variable
-String s = "Azhar"; // Too short
+String s = "Azhar";  // Too short
 ```
 
 ---
@@ -126,16 +126,16 @@ String s = "Azhar"; // Too short
 ## Java Reserved Keywords (Cannot Use as Identifiers)
 
 ```text
-abstract assert boolean break byte
-case catch char class const*
-continue default do double else
-enum extends final finally float
-for goto* if implements import
-instanceof int interface long native
-new package private protected public
-return short static strictfp super
-switch synchronized this throw throws
-transient try void volatile while
+abstract   assert     boolean    break      byte
+case       catch      char       class      const*
+continue   default    do         double     else
+enum       extends    final      finally    float
+for        goto*      if         implements import
+instanceof int        interface  long       native
+new        package    private    protected  public
+return     short      static     strictfp   super
+switch     synchronized this     throw      throws
+transient  try        void       volatile   while
 
 * const and goto are reserved but not used in Java
 ```
@@ -144,4 +144,4 @@ transient try void volatile while
 
 ---
 
-[ Back to Index](./README.md) | [Next: Number Literals](./07-number-literals.md)
+[Back to Index](./README.md) | [Next: Number Literals](./07-number-literals.md)

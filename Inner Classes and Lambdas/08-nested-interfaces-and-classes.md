@@ -7,12 +7,12 @@ A class can be declared inside another class.
 ``` java
 class Outer {
 
- class Inner {
+    class Inner {
 
- void show() {
- System.out.println("Inside Inner");
- }
- }
+        void show() {
+            System.out.println("Inside Inner");
+        }
+    }
 }
 ```
 
@@ -23,8 +23,8 @@ It can be:
 ``` java
 class Outer {
 
- static class Inner {
- }
+    static class Inner {
+    }
 }
 ```
 
@@ -33,8 +33,8 @@ or:
 ``` java
 class Outer {
 
- class Inner {
- }
+    class Inner {
+    }
 }
 ```
 
@@ -50,9 +50,9 @@ An interface can be declared inside a class.
 ``` java
 class A {
 
- interface Inter1 {
- void show();
- }
+    interface Inter1 {
+        void show();
+    }
 }
 ```
 
@@ -61,9 +61,9 @@ It can be accessed using:
 ``` java
 class Demo implements A.Inter1 {
 
- public void show() {
- System.out.println("Show");
- }
+    public void show() {
+        System.out.println("Show");
+    }
 }
 ```
 
@@ -71,9 +71,9 @@ Or:
 
 ``` java
 A.Inter1 obj = new A.Inter1() {
- public void show() {
- System.out.println("Anonymous implementation");
- }
+    public void show() {
+        System.out.println("Anonymous implementation");
+    }
 };
 ```
 
@@ -86,9 +86,9 @@ An interface can contain another interface.
 ``` java
 interface OuterInter {
 
- interface InnerInter {
- void show();
- }
+    interface InnerInter {
+        void show();
+    }
 }
 ```
 
@@ -97,9 +97,9 @@ Implementation:
 ``` java
 class Demo implements OuterInter.InnerInter {
 
- public void show() {
- System.out.println("Show");
- }
+    public void show() {
+        System.out.println("Show");
+    }
 }
 ```
 
@@ -112,12 +112,12 @@ An interface can also contain a class.
 ``` java
 interface Inter1 {
 
- class A {
+    class A {
 
- void show() {
- System.out.println("Show");
- }
- }
+        void show() {
+            System.out.println("Show");
+        }
+    }
 }
 ```
 

@@ -8,13 +8,13 @@
 
 ```text
 Polymorphism
- │
- ├── Compile-Time (Static Binding / Early Binding)
- │ ├── Method Overloading
- │ └── Static Method Hiding
- │
- └── Run-Time (Dynamic Binding / Late Binding)
- └── Method Overriding
+     │
+     ├── Compile-Time (Static Binding / Early Binding)
+     │   ├── Method Overloading
+     │   └── Static Method Hiding
+     │
+     └── Run-Time (Dynamic Binding / Late Binding)
+         └── Method Overriding
 ```
 
 ---
@@ -25,12 +25,12 @@ Polymorphism
 
 ```java
 class Calculator {
- void sum(int a, int b) {
- System.out.println(a + b);
- }
- void sum(int a, int b, int c) {
- System.out.println(a + b + c);
- }
+    void sum(int a, int b) {
+        System.out.println(a + b);
+    }
+    void sum(int a, int b, int c) {
+        System.out.println(a + b + c);
+    }
 }
 ```
 
@@ -46,7 +46,7 @@ class Calculator {
 
 ```java
 int show(int x) { return x; }
-double show(int x) { return x; } // same parameter list — not valid overloading
+double show(int x) { return x; }    // same parameter list — not valid overloading
 ```
 
 ---
@@ -57,11 +57,11 @@ Compiler more specific/suitable method ko prefer karta hai:
 
 ```text
 1. Exact match
- ↓
+      ↓
 2. Widening primitive conversion
- ↓
+      ↓
 3. Boxing / unboxing
- ↓
+      ↓
 4. Varargs (lowest priority)
 ```
 
@@ -69,7 +69,7 @@ Compiler more specific/suitable method ko prefer karta hai:
 void show(int x) { }
 void show(double x) { }
 
-show(10); // → show(int) — exact match
+show(10);   // → show(int) — exact match
 ```
 
 ---
@@ -80,12 +80,12 @@ show(10); // → show(int) — exact match
 void show(int x, double y) { }
 void show(double x, int y) { }
 
-show(10, 20); // ambiguous — both equally applicable!
+show(10, 20);   // ambiguous — both equally applicable!
 ```
 
 ```text
-10 → int (exact), 20 → double (widening) → show(int, double)
-10 → double (widening), 20 → int (exact) → show(double, int)
+10 → int (exact),   20 → double (widening)    → show(int, double)
+10 → double (widening),  20 → int (exact)     → show(double, int)
 ```
 
 Dono equally applicable → **compile-time ambiguity error**.
@@ -106,16 +106,16 @@ Inheritance se related — **parent-child relationship** zaroori.
 
 ```java
 class A {
- void show() {
- System.out.println("Class A");
- }
+    void show() {
+        System.out.println("Class A");
+    }
 }
 
 class B extends A {
- @Override
- void show() {
- System.out.println("Class B");
- }
+    @Override
+    void show() {
+        System.out.println("Class B");
+    }
 }
 ```
 
@@ -123,12 +123,12 @@ class B extends A {
 
 ```java
 A obj = new B();
-obj.show(); // Output: "Class B"
+obj.show();      // Output: "Class B"
 ```
 
 ```text
-Reference type = A → compiler checks method availability
-Actual object = B → runtime decides which implementation
+Reference type = A    → compiler checks method availability
+Actual object  = B    → runtime decides which implementation
 ```
 
 > Overridden instance method ke liye **actual object** decide karta hai kaunsi implementation execute hogi.
@@ -141,21 +141,21 @@ Static methods **override nahi hoti** — agar parent-child me same signature ki
 
 ```java
 class A {
- static void show() {
- System.out.println("Class A");
- }
+    static void show() {
+        System.out.println("Class A");
+    }
 }
 
 class B extends A {
- static void show() {
- System.out.println("Class B");
- }
+    static void show() {
+        System.out.println("Class B");
+    }
 }
 ```
 
 ```java
 A obj = new B();
-obj.show(); // Output: "Class A" — reference type decides!
+obj.show();      // Output: "Class A" — reference type decides!
 ```
 
 > Static method dispatch **reference type** ke basis par hota hai, actual object se nahi.
@@ -172,13 +172,13 @@ obj.show(); // Output: "Class A" — reference type decides!
 | Parameter list | Same | Same |
 | Binding | **Runtime** | **Compile-time** |
 | Depends on | **Actual object** | **Reference type** |
-| `@Override` | Valid | Static methods don't override |
+| `@Override` |  Valid |  Static methods don't override |
 
 ### Easy Memory Trick
 
 ```text
 Instance → Object → Runtime → Overriding
-Static → Reference → Compile-time → Hiding
+Static   → Reference → Compile-time → Hiding
 ```
 
 ---
@@ -200,7 +200,7 @@ Java me normal instance methods **dynamically dispatched** hoti hain.
 
 ```java
 A obj = new B();
-obj.show(); // B ka show() execute hoga (if overridden)
+obj.show();   // B ka show() execute hoga (if overridden)
 ```
 
 > C++ me `virtual` keyword chahiye. Java me instance methods ke liye **separate `virtual` keyword nahi** — JVM automatically dynamic dispatch karta hai.
@@ -235,7 +235,7 @@ obj.show(); // B ka show() execute hoga (if overridden)
 
 ---
 
-## Super Short Memory Trick
+## ⚡ Super Short Memory Trick
 
 ```text
 OVERLOADING

@@ -9,19 +9,19 @@ Constructor ek **special member** hai jo object creation ke time **initializatio
 ```java
 class Student {
 
- Student() {
- System.out.println("Constructor called");
- }
+    Student() {
+        System.out.println("Constructor called");
+    }
 }
 
-Student s1 = new Student(); // "Constructor called"
+Student s1 = new Student();  // "Constructor called"
 ```
 
 ### Constructor ki Properties
 
 | Property | Detail |
 |----------|--------|
-| Return type | Nahi hota — not even `void` |
+| Return type |  Nahi hota — not even `void` |
 | Name | Class name ke **same** |
 | Invocation | Object create karte waqt **automatically** |
 | Purpose | Object ko **initialize** karna |
@@ -37,7 +37,7 @@ Agar class me **koi constructor declare nahi kiya**, compiler ek no-arg construc
 
 ```java
 class Student {
- // no constructor written
+    // no constructor written
 }
 ```
 
@@ -45,7 +45,7 @@ Compiler internally generate karta hai:
 
 ```java
 Student() {
- super();
+    super();
 }
 ```
 
@@ -55,9 +55,9 @@ Programmer khud bhi no-arg constructor define kar sakta hai:
 
 ```java
 class Student {
- Student() {
- System.out.println("No-arg constructor");
- }
+    Student() {
+        System.out.println("No-arg constructor");
+    }
 }
 ```
 
@@ -69,11 +69,11 @@ Parameters ke saath constructor:
 
 ```java
 class Student {
- int age;
+    int age;
 
- Student(int age) {
- this.age = age;
- }
+    Student(int age) {
+        this.age = age;
+    }
 }
 
 Student s1 = new Student(20);
@@ -85,11 +85,11 @@ Agar **koi bhi constructor explicitly likha**, compiler default constructor **na
 
 ```java
 class A {
- A(int x) { }
+    A(int x) { }
 }
 
-new A(); // no default constructor available
-new A(10); // 
+new A();     // no default constructor available
+new A(10);   // valid
 ```
 
 ---
@@ -98,7 +98,7 @@ new A(10); //
 
 | Point | Constructor | Method |
 |-------|------------|--------|
-| Return type | Nahi hota | Hota hai (`void` bhi) |
+| Return type |  Nahi hota |  Hota hai (`void` bhi) |
 | Name | Class name ke same | Freely choose kar sakte hain |
 | Invocation | Object creation ke time auto | Manually invoke |
 | Purpose | Initialization | Behaviour define karna |
@@ -112,12 +112,12 @@ new A(10); //
 
 ```java
 class Student {
- int age;
+    int age;
 
- void setAge(int age) {
- this.age = age; // this.age = instance variable
- // age = method parameter
- }
+    void setAge(int age) {
+        this.age = age;      // this.age = instance variable
+                              // age = method parameter
+    }
 }
 ```
 
@@ -140,16 +140,16 @@ Constructor chaining means **ek constructor dusre constructor ko call karta hai*
 
 ```java
 class A {
- A() {
- System.out.println("A");
- }
+    A() {
+        System.out.println("A");
+    }
 }
 
 class B extends A {
- B() {
- // super(); ← compiler implicitly insert karta hai
- System.out.println("B");
- }
+    B() {
+        // super(); ← compiler implicitly insert karta hai
+        System.out.println("B");
+    }
 }
 ```
 
@@ -174,14 +174,14 @@ B
 
 ```java
 class A {
- A(int x) { } // no default constructor
+    A(int x) { }     // no default constructor
 }
 
 class B extends A {
- B() {
- // compiler tries: super()
- // but A has no no-arg constructor → ERROR
- }
+    B() {
+        // compiler tries: super()
+        // but A has no no-arg constructor → ERROR
+    }
 }
 ```
 
@@ -189,9 +189,9 @@ Fix:
 
 ```java
 class B extends A {
- B() {
- super(10); // explicitly call parameterized constructor
- }
+    B() {
+        super(10);    // valid explicitly call parameterized constructor
+    }
 }
 ```
 
@@ -204,13 +204,13 @@ Instance block `{ }` class ke andar likha jata hai (method ke bahar).
 ```java
 class Student {
 
- {
- System.out.println("Instance Block");
- }
+    {
+        System.out.println("Instance Block");
+    }
 
- Student() {
- System.out.println("Constructor");
- }
+    Student() {
+        System.out.println("Constructor");
+    }
 }
 ```
 
@@ -225,9 +225,9 @@ Constructor
 
 ```text
 Object Creation
- ↓
+      ↓
 Instance Initializer Block
- ↓
+      ↓
 Constructor Body
 ```
 
@@ -249,7 +249,7 @@ Constructor Body
 |-------|---------------|-------------|
 | Type | Initializer block | Special member |
 | Execution | Constructor se **pehle** | Instance block ke **baad** |
-| Parameters | Directly receive nahi karta | Parameters accept karta hai |
+| Parameters |  Directly receive nahi karta |  Parameters accept karta hai |
 | Multiple | Multiple blocks possible | Multiple constructors (overloading) |
 | Purpose | Common initialization | Object-specific initialization |
 
@@ -259,11 +259,11 @@ Constructor Body
 
 ```text
 Parent Instance Block
- ↓
+        ↓
 Parent Constructor
- ↓
+        ↓
 Child Instance Block
- ↓
+        ↓
 Child Constructor
 ```
 
@@ -271,13 +271,13 @@ Child Constructor
 
 ```java
 class Parent {
- { System.out.println("Parent IB"); }
- Parent() { System.out.println("Parent Constructor"); }
+    { System.out.println("Parent IB"); }
+    Parent() { System.out.println("Parent Constructor"); }
 }
 
 class Child extends Parent {
- { System.out.println("Child IB"); }
- Child() { System.out.println("Child Constructor"); }
+    { System.out.println("Child IB"); }
+    Child() { System.out.println("Child Constructor"); }
 }
 
 Child c = new Child();
@@ -309,7 +309,7 @@ Child Constructor
 
 ---
 
-## Quick Revision
+## ⚡ Quick Revision
 
 ```text
 Constructor

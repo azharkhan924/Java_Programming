@@ -19,8 +19,8 @@ Conceptually:
 
 ```text
 Object
- ↑
- A
+  ↑
+  A
 ```
 
 > Agar hum explicitly `extends` nahi likhte, tab bhi class indirectly `Object` ko inherit karti hai.
@@ -41,7 +41,7 @@ Object
 | 8 | `wait(long timeout)` | `public final` | No |
 | 9 | `wait(long timeout, int nanos)` | `public final` | No |
 | 10 | `wait()` | `public final` | No |
-| 11 | `finalize()` | `protected` | (deprecated) |
+| 11 | `finalize()` | `protected` |  (deprecated) |
 | 12 | `registerNatives()` | `private static native` | No |
 
 ### Modifier Summary
@@ -57,7 +57,7 @@ Object
 ### The 5 Overridable Methods
 
 ```text
-hashCode() equals() clone() toString() finalize()
+hashCode()    equals()    clone()    toString()    finalize()
 ```
 
 > Note: `finalize()` is **deprecated for removal** since Java 9. Do not use in new code.
@@ -76,7 +76,7 @@ Runtime par object ki **actual class** ka `Class` object return karta hai.
 class A { }
 
 A a1 = new A();
-System.out.println(a1.getClass()); // class A
+System.out.println(a1.getClass());          // class A
 System.out.println(a1.getClass().getName()); // A
 ```
 
@@ -101,17 +101,17 @@ Every class directly/indirectly extends Object.
 ### Rule 2 — Object Reference Holds Any Object
 
 ```java
-Object o = new Employee(); // valid
-Object o = new String("Hi"); // valid
-Object o = new int[]{1,2}; // valid
+Object o = new Employee();    // valid
+Object o = new String("Hi");  // valid
+Object o = new int[]{1,2};    // valid
 ```
 
 ### Rule 3 — Reference Type Controls Compile-Time
 
 ```java
 Object o = new Employee();
-// o.id; // Object class me id nahi hai
-// o.getName(); // Object class me getName() nahi hai
+// o.id;          // Object class me id nahi hai
+// o.getName();   // Object class me getName() nahi hai
 ```
 
 > Compiler reference type (`Object`) dekhta hai, actual object type nahi.

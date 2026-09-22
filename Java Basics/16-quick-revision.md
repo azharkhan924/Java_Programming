@@ -1,4 +1,4 @@
-# Quick Revision — Complete Java Basics Cheat Sheet
+# ⚡ Quick Revision — Complete Java Basics Cheat Sheet
 
 ---
 
@@ -6,71 +6,71 @@
 
 ```text
 Java Basics
-├── History
-│ ├── Green Project (1990, Sun Microsystems)
-│ ├── Team: James Gosling, Mike Sheridan, Patrick Naughton
-│ ├── Oak → Java (name change)
-│ └── JDK 1.0 (23 Jan 1996)
+├──  History
+│   ├── Green Project (1990, Sun Microsystems)
+│   ├── Team: James Gosling, Mike Sheridan, Patrick Naughton
+│   ├── Oak → Java (name change)
+│   └── JDK 1.0 (23 Jan 1996)
 │
 ├── ⚙ How It Works
-│ ├── .java → javac → .class (bytecode) → JVM → execution
-│ ├── WORA: Write Once, Run Anywhere
-│ ├── JDK ⊃ JRE ⊃ JVM
-│ └── Entry point: public static void main(String[] args)
+│   ├── .java → javac → .class (bytecode) → JVM → execution
+│   ├── WORA: Write Once, Run Anywhere
+│   ├── JDK ⊃ JRE ⊃ JVM
+│   └── Entry point: public static void main(String[] args)
 │
-├── Data Types (8 Primitives)
-│ ├── Integer
-│ │ ├── byte → 1 byte → -128 to 127
-│ │ ├── short → 2 bytes → -32,768 to 32,767
-│ │ ├── int → 4 bytes → ~±2.1 billion
-│ │ └── long → 8 bytes → ~±9.2 quintillion
-│ ├── Floating
-│ │ ├── float → 4 bytes → ~6-7 digits precision
-│ │ └── double → 8 bytes → ~15-16 digits precision
-│ ├── Character
-│ │ └── char → 2 bytes → 0 to 65,535 (UTF-16)
-│ └── Boolean
-│ └── boolean → true / false
+├──  Data Types (8 Primitives)
+│   ├── Integer
+│   │   ├── byte   → 1 byte  → -128 to 127
+│   │   ├── short  → 2 bytes → -32,768 to 32,767
+│   │   ├── int    → 4 bytes → ~±2.1 billion
+│   │   └── long   → 8 bytes → ~±9.2 quintillion
+│   ├── Floating
+│   │   ├── float  → 4 bytes → ~6-7 digits precision
+│   │   └── double → 8 bytes → ~15-16 digits precision
+│   ├── Character
+│   │   └── char   → 2 bytes → 0 to 65,535 (UTF-16)
+│   └── Boolean
+│       └── boolean → true / false
 │
-├── Number Literals
-│ ├── Decimal → 100
-│ ├── Octal → 0114 (prefix 0)
-│ ├── Hex → 0xAC (prefix 0x)
-│ ├── Binary → 0b1011 (prefix 0b)
-│ └── Underscore → 1_000_000
+├──  Number Literals
+│   ├── Decimal  → 100
+│   ├── Octal    → 0114 (prefix 0)
+│   ├── Hex      → 0xAC (prefix 0x)
+│   ├── Binary   → 0b1011 (prefix 0b)
+│   └── Underscore → 1_000_000
 │
-├── Type Casting
-│ ├── Widening (Implicit): byte → short → int → long → float → double
-│ ├── Narrowing (Explicit): (type) value
-│ └── Promotion: byte/short/char → int in arithmetic
+├──  Type Casting
+│   ├── Widening (Implicit):  byte → short → int → long → float → double
+│   ├── Narrowing (Explicit): (type) value
+│   └── Promotion: byte/short/char → int in arithmetic
 │
-├── Operators
-│ ├── Arithmetic → + - * / %
-│ ├── Relational → < > <= >=
-│ ├── Equality → == !=
-│ ├── Logical → && || !
-│ ├── Bitwise → & | ^ ~
-│ ├── Shift → << >> >>>
-│ ├── Assignment → = += -= *= /= %=
-│ ├── Ternary → ? :
-│ └── Unary → + - ++ -- ! ~
+├──  Operators
+│   ├── Arithmetic     → + - * / %
+│   ├── Relational     → < > <= >=
+│   ├── Equality       → == !=
+│   ├── Logical        → && || !
+│   ├── Bitwise        → & | ^ ~
+│   ├── Shift          → << >> >>>
+│   ├── Assignment     → = += -= *= /= %=
+│   ├── Ternary        → ? :
+│   └── Unary          → + - ++ -- ! ~
 │
-├── Characters
-│ ├── 'A' = 65, 'a' = 97, '0' = 48
-│ ├── char + char → int (numeric promotion)
-│ └── Useful: Character.isDigit(), toUpperCase()
+├──  Characters
+│   ├── 'A' = 65, 'a' = 97, '0' = 48
+│   ├── char + char → int (numeric promotion)
+│   └── Useful: Character.isDigit(), toUpperCase()
 │
-├── Strings
-│ ├── Reference type (class), immutable
-│ ├── "+" → concatenation
-│ ├── Use .equals() for comparison, NOT ==
-│ └── String Pool concept
+├──  Strings
+│   ├── Reference type (class), immutable
+│   ├── "+" → concatenation
+│   ├── Use .equals() for comparison, NOT ==
+│   └── String Pool concept
 │
-└── printf()
- ├── %d (int), %f (float), %c (char), %s (String)
- ├── %.Nf (decimal precision)
- ├── %0Nd (zero padding)
- └── Escape: \n \t \\ \" \'
+└──  printf()
+    ├── %d (int), %f (float), %c (char), %s (String)
+    ├── %.Nf (decimal precision)
+    ├── %0Nd (zero padding)
+    └── Escape: \n \t \\ \" \'
 ```
 
 ---
@@ -106,15 +106,15 @@ Java Basics
 
 | Category | Operators |
 |----------|-----------|
-| Arithmetic | `+ - * / %` |
-| Unary | `+ - ++ -- ! ~` |
-| Relational | `< > <= >=` |
-| Equality | `== !=` |
-| Logical | `&& \|\| !` |
-| Bitwise | `& \| ^ ~` |
-| Shift | `<< >> >>>` |
+| Arithmetic | `+  -  *  /  %` |
+| Unary | `+  -  ++  --  !  ~` |
+| Relational | `<  >  <=  >=` |
+| Equality | `==  !=` |
+| Logical | `&&  \|\|  !` |
+| Bitwise | `&  \|  ^  ~` |
+| Shift | `<<  >>  >>>` |
 | Assignment | `=` |
-| Compound | `+= -= *= /= %= &= \|= ^= <<= >>= >>>=` |
+| Compound | `+=  -=  *=  /=  %=  &=  \|=  ^=  <<=  >>=  >>>=` |
 | Ternary | `? :` |
 
 ---
@@ -124,19 +124,19 @@ Java Basics
 ```text
 WIDENING (Automatic):
 byte → short → int → long → float → double
- ↑
- char
+                ↑
+              char
 
 NARROWING (Manual):
 double → float → long → int → short → byte
- Syntax: (targetType) value
+  Syntax: (targetType) value
 
 ARITHMETIC PROMOTION:
-byte + byte → int
-short + short → int
-char + char → int
-int + long → long
-int + float → float
+byte + byte   →  int
+short + short →  int
+char + char   →  int
+int + long    →  long
+int + float   →  float
 float + double → double
 ```
 
@@ -150,9 +150,9 @@ Bigger → Smaller = Narrowing (Explicit, Manual cast)
 ```
 
 ```text
-'A' = 65 (character → numeric code)
-'a' = 97 ('a' - 'A' = 32, difference between cases)
-'0' = 48 ('0' is a CHARACTER, not zero!)
+'A' = 65    (character → numeric code)
+'a' = 97    ('a' - 'A' = 32, difference between cases)
+'0' = 48    ('0' is a CHARACTER, not zero!)
 ```
 
 ```text
@@ -167,18 +167,18 @@ x++ → use THEN increment
 ```
 
 ```text
-x << n = x × 2ⁿ (left shift = multiply by power of 2)
-x >> n = x / 2ⁿ (right shift = divide by power of 2)
-~n = -(n + 1) (bitwise complement)
+x << n = x × 2ⁿ    (left shift = multiply by power of 2)
+x >> n = x / 2ⁿ    (right shift = divide by power of 2)
+~n = -(n + 1)       (bitwise complement)
 ```
 
 ---
 
 <p align="center">
- <b> Congratulations! You've covered all Java Basics!</b><br>
- <i>Keep revising, keep coding ☕</i>
+  <b> Congratulations! You've covered all Java Basics!</b><br>
+  <i>Keep revising, keep coding ☕</i>
 </p>
 
 ---
 
-[ Back to Index](./README.md)
+[Back to Index](./README.md)
