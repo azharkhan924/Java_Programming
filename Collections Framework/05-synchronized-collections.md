@@ -1,19 +1,18 @@
 # 🔄 Synchronized Collections — Thread-Safe Wrappers
 
-> **Summary:** ArrayList/LinkedList ki thread-safety problem, `Collections.synchronizedList/Set/Map()` wrapper methods, `CopyOnWriteArrayList`, aur synchronized vs concurrent collections ka farq.
+> **Summary:** Why ArrayList/LinkedList are not thread-safe, `Collections.synchronizedList/Set/Map()` wrapper methods, `CopyOnWriteArrayList`, and synchronized vs concurrent collections comparison.
 
 ---
 
 ## 1. The Problem — ArrayList is NOT Thread-Safe
 
-ArrayList, LinkedList, HashSet, HashMap — ye sab **default me synchronized nahi** hain.
+ArrayList, LinkedList, HashSet, HashMap — none of these are **synchronized by default**.
 
-Agar multiple threads ek hi ArrayList par simultaneously read/write karein:
+If multiple threads simultaneously read/write to the same ArrayList:
 
 ```java
 // ❌ DANGER: Multiple threads modifying same ArrayList!
 ArrayList<String> list = new ArrayList<>();
-
 // Thread 1: list.add("A");
 // Thread 2: list.add("B");
 // Thread 3: list.remove(0);
@@ -24,23 +23,19 @@ ArrayList<String> list = new ArrayList<>();
 
 ## 2. Solution 1: `Collections.synchronizedList()` Wrapper
 
-`Collections` utility class har non-synchronized collection ka **synchronized (thread-safe) wrapper** provide karti hai:
+The `Collections` utility class provides a **synchronized (thread-safe) wrapper** for every non-synchronized collection:
 
 ```java
-import java.util.Collections;
-
 // ✅ Thread-safe wrapper around ArrayList
 List<String> syncList = Collections.synchronizedList(new ArrayList<>());
-
 syncList.add("A");  // Each method call is locked by synchronized block
-syncList.add("B");
 syncList.get(0);    // Thread-safe read
 ```
 
-### ⚠️ Important: Iteration still NOT safe automatically!
+### ⚠️ Important: Iteration is still NOT safe automatically!
 
 ```java
-// ❌ WRONG — Iteration ke dauran koi dusra thread modify kare toh ConcurrentModificationException!
+// ❌ WRONG — Another thread modifying during iteration causes ConcurrentModificationException!
 for (String s : syncList) {
     System.out.println(s);
 }
@@ -70,11 +65,9 @@ synchronized (syncList) {
 
 ## 4. Solution 2: `CopyOnWriteArrayList` (Modern Approach)
 
-`CopyOnWriteArrayList` (package: `java.util.concurrent`) ek better modern alternative hai:
+`CopyOnWriteArrayList` (package: `java.util.concurrent`) is a better modern alternative:
 
 ```java
-import java.util.concurrent.CopyOnWriteArrayList;
-
 CopyOnWriteArrayList<String> cowList = new CopyOnWriteArrayList<>();
 cowList.add("A");
 cowList.add("B");
@@ -83,16 +76,16 @@ cowList.add("B");
 ### How It Works:
 ```text
 Read Operations:  Direct access on current internal array → NO LOCKING needed! ✅ Fast!
-Write Operations: Puura array ka fresh copy create hota hai, usme modification hoti hai,
-                  phir internal reference naye array ko point karne lagta hai.
+Write Operations: A fresh copy of the entire array is created, modification is made on the copy,
+                  then the internal reference is updated to point to the new array.
 ```
 
 ### When to Use CopyOnWriteArrayList?
-- **Read operations bahut zyada** hongi aur **write operations rare** hongi (e.g., config lists, listener registries)
-- Iteration ke dauran safe rehna hai bina `ConcurrentModificationException` ke
+- **Read operations are very frequent** and **write operations are rare** (e.g., config lists, listener registries)
+- Safe iteration without `ConcurrentModificationException`
 
 ### When NOT to Use?
-- Frequent writes → Har write par array copy karna expensive hai!
+- Frequent writes → Copying the entire array on every write is expensive!
 
 ---
 
@@ -100,8 +93,8 @@ Write Operations: Puura array ka fresh copy create hota hai, usme modification h
 
 | Feature | `Collections.synchronizedList()` | `CopyOnWriteArrayList` |
 |---------|----------------------------------|------------------------|
-| **Read Locking** | ✅ Every read locked | ❌ No lock on reads (fast!) |
-| **Write Behavior** | In-place modification with lock | Creates new array copy |
+| **Read Locking** | ✅ Every read is locked | ❌ No lock on reads (fast!) |
+| **Write Behavior** | In-place modification with lock | Creates a new array copy |
 | **Iteration Safety** | Manual sync required around iterator | ✅ Automatically safe (snapshot iterator) |
 | **Write Performance** | Better for frequent writes | Worse for frequent writes (array copy each time) |
 | **Read Performance** | Slower (lock on every read) | ✅ Faster (no locking) |
@@ -111,7 +104,7 @@ Write Operations: Puura array ka fresh copy create hota hai, usme modification h
 
 ## 6. Other Concurrent Collections (Java 5+)
 
-Java `java.util.concurrent` package me aur bhi powerful thread-safe collections hain:
+The `java.util.concurrent` package provides more powerful thread-safe collections:
 
 | Class | Replaces | Key Feature |
 |-------|----------|-------------|
@@ -127,11 +120,11 @@ Java `java.util.concurrent` package me aur bhi powerful thread-safe collections 
 
 | Trap | Answer |
 |------|--------|
-| `ArrayList` ko thread-safe kaise banayein? | `Collections.synchronizedList(new ArrayList<>())` ya `CopyOnWriteArrayList` use karo. |
-| `Collections.synchronizedList()` me iteration safe hai? | ❌ Nahi! Manually `synchronized(list) { ... }` block me iterate karna padta hai. |
-| `CopyOnWriteArrayList` har operation me lock lagata hai? | ❌ Reads par koi lock nahi! Sirf writes par internal array copy hota hai. |
-| `Hashtable` aur `ConcurrentHashMap` me farq? | `Hashtable` full object lock karta hai (slow). `ConcurrentHashMap` segment-level locking karta hai (fast). |
-| Kya `Vector` ab bhi use karna chahiye? | ❌ Modern code me generally nahi. `CopyOnWriteArrayList` ya `Collections.synchronizedList()` prefer karo. |
+| How to make ArrayList thread-safe? | `Collections.synchronizedList(new ArrayList<>())` or use `CopyOnWriteArrayList`. |
+| Is iteration safe with `Collections.synchronizedList()`? | ❌ No! Must manually wrap iteration in a `synchronized(list) { ... }` block. |
+| Does `CopyOnWriteArrayList` lock on every operation? | ❌ No locking on reads! Only writes create a new internal array copy. |
+| Difference between `Hashtable` and `ConcurrentHashMap`? | `Hashtable` locks the full object (slow). `ConcurrentHashMap` uses segment-level locking (fast). |
+| Should `Vector` still be used in modern code? | ❌ Generally not. Prefer `CopyOnWriteArrayList` or `Collections.synchronizedList()`. |
 
 ---
 

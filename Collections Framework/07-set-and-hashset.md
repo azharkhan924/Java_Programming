@@ -1,19 +1,19 @@
 # 🎯 Set Interface — HashSet & LinkedHashSet
 
-> **Summary:** Set interface properties, HashSet internal working (HashMap-backed), `equals()` + `hashCode()` contract for duplicate detection, HashSet constructors aur Load Factor, LinkedHashSet (insertion order preserved), aur 6 critical examples.
+> **Summary:** Set interface properties, HashSet internal working (HashMap-backed), `equals()` + `hashCode()` contract for duplicate detection, HashSet constructors and Load Factor, LinkedHashSet (insertion order preserved), and critical examples.
 
 ---
 
-## 1. Set Interface Kya Hai?
+## 1. What is the Set Interface?
 
-> **Set** = A collection that contains **NO duplicate elements** aur generally **no guaranteed insertion order** (implementation-dependent).
+> **Set** = A collection that contains **no duplicate elements** and generally **no guaranteed insertion order** (implementation-dependent).
 
 ```text
 Set Properties:
-❌ Duplicates NOT allowed (add karne ki koshish karo toh silently ignore — no error)
-❌ Insertion order NOT guaranteed (HashSet me)
-✅ At most ONE null element allowed (HashSet me)
-✅ Based on mathematical "Set" concept
+❌ Duplicates NOT allowed (if you try to add a duplicate, it is silently ignored — no error)
+❌ Insertion order NOT guaranteed (in HashSet)
+✅ At most ONE null element allowed (in HashSet)
+✅ Based on the mathematical "Set" concept
 ```
 
 ### Set Hierarchy:
@@ -31,10 +31,10 @@ Set (I)
 
 ## 2. HashSet — How It Works Internally (MOST IMPORTANT!)
 
-> **Secret:** HashSet internally ek **`HashMap`** use karta hai!
+> **Secret:** HashSet internally uses a **`HashMap`**!
 
 ```java
-// HashSet ka source code (simplified):
+// HashSet source code (simplified):
 public class HashSet<E> {
     private HashMap<E, Object> map;
     private static final Object PRESENT = new Object(); // Dummy value
@@ -45,17 +45,12 @@ public class HashSet<E> {
 }
 ```
 
-Jab aap `hashSet.add("Azhar")` karte ho:
-```text
-Internally: hashMap.put("Azhar", DUMMY_OBJECT)
-```
-
 ### Duplicate Detection — 2-Step Process:
 
 ```text
-Step 1: hashCode() call hota hai → Bucket number decide hota hai
-Step 2: Agar uss bucket me koi element pehle se hai →
-        equals() call hota hai → Agar true → DUPLICATE! Element add nahi hoga.
+Step 1: hashCode() is called → Bucket number is determined
+Step 2: If an element already exists in that bucket →
+        equals() is called → If true → DUPLICATE! Element is NOT added.
 ```
 
 ```text
@@ -63,31 +58,31 @@ hashSet.add("Hello")
     ↓
 hashCode("Hello") → Bucket #5
     ↓
-Bucket #5 empty hai? → YES → Element stored! ✅
-    
+Is Bucket #5 empty? → YES → Element stored! ✅
+
 hashSet.add("Hello")  // Duplicate attempt
     ↓
 hashCode("Hello") → Bucket #5
     ↓
-Bucket #5 me already "Hello" hai → equals("Hello", "Hello") → true → REJECTED! ❌
+Bucket #5 already has "Hello" → equals("Hello", "Hello") → true → REJECTED! ❌
 ```
 
 ---
 
-## 3. `equals()` aur `hashCode()` Contract (THE Golden Rule!)
+## 3. `equals()` and `hashCode()` Contract (THE Golden Rule!)
 
 ### The Contract:
-1. **Agar `o1.equals(o2)` true hai → toh `o1.hashCode() == o2.hashCode()` MUST be true!**
-2. Agar `hashCode()` same hai → `equals()` true bhi ho sakta hai, false bhi (Hash Collision).
-3. Agar `equals()` false hai → `hashCode()` same ya different kuch bhi ho sakta hai.
+1. **If `o1.equals(o2)` is true → then `o1.hashCode() == o2.hashCode()` MUST be true!**
+2. If `hashCode()` is the same → `equals()` can be true or false (Hash Collision).
+3. If `equals()` is false → `hashCode()` can be same or different.
 
 ### What Happens If You Break This Contract?
 
 | Scenario | `equals()` | `hashCode()` | HashSet Behavior |
 |----------|------------|---------------|------------------|
-| ✅ Both overridden correctly | Content match → true | Same value for equal objects | Duplicates correctly detected! ✅ |
+| ✅ Both overridden correctly | Content match → true | Same for equal objects | Duplicates correctly detected! ✅ |
 | ❌ Only `equals()` overridden | Content match → true | Different (default Object hashCode) | **Duplicate stored!** Different bucket → `equals()` never called! ❌ |
-| ❌ Only `hashCode()` overridden | Reference check (default) | Same value | Same bucket par jaayega, `equals()` false return karega → **Duplicate stored!** ❌ |
+| ❌ Only `hashCode()` overridden | Reference check (default) | Same value | Same bucket, but `equals()` returns false → **Duplicate stored!** ❌ |
 | ❌ Neither overridden | Reference check | Random memory address | Logical duplicates both stored! ❌ |
 
 ---
@@ -104,7 +99,7 @@ set.add("Java");    // Duplicate — silently ignored!
 System.out.println(set.size()); // 2
 System.out.println(set);        // [Java, Python] (order not guaranteed)
 ```
-> **Why it works:** `String` class already `equals()` aur `hashCode()` both override karti hai content-based comparison ke liye.
+> **Why it works:** `String` class already overrides both `equals()` and `hashCode()` for content-based comparison.
 
 ### Example 2: Custom Object WITHOUT Override (Bug!)
 ```java
@@ -158,35 +153,33 @@ System.out.println(set.size()); // 1 ← ✅ CORRECT!
 | `HashSet(int initialCapacity, float loadFactor)` | Custom | Custom |
 | `HashSet(Collection c)` | Based on collection size | 0.75 |
 
-### Load Factor / Fill Ratio Kya Hai?
+### Load Factor / Fill Ratio
 
 ```text
-Load Factor = Threshold ratio jab rehashing (resize + rehash) trigger hoti hai
+Load Factor = Threshold ratio at which rehashing (resize + rehash) is triggered
 
 Default Load Factor = 0.75 (75%)
-Meaning: Jab HashSet 75% filled ho jaaye → internally HashMap apni capacity DOUBLE kar deta hai
-         aur saare existing elements ko naye buckets me rehash karta hai.
+Meaning: When the HashSet is 75% full → the internal HashMap doubles its capacity
+         and rehashes all existing elements into the new buckets.
 
 Example:
 Default Capacity = 16 buckets
 Threshold = 16 × 0.75 = 12 elements
-Jab 13th element add hoga → Capacity doubled to 32 + rehashing!
+When the 13th element is added → Capacity doubles to 32 + rehashing occurs!
 ```
 
-> ⚠️ **High Load Factor** (e.g., 0.9) → Memory save, lekin hash collisions zyada → Slow search  
-> ⚠️ **Low Load Factor** (e.g., 0.5) → Fast operations, lekin memory waste zyada
+> ⚠️ **High Load Factor** (e.g., 0.9) → Saves memory, but more hash collisions → Slower search  
+> ⚠️ **Low Load Factor** (e.g., 0.5) → Faster operations, but more memory waste
 
 ---
 
 ## 6. LinkedHashSet — Insertion Order Preserved!
 
-**LinkedHashSet** = HashSet + **Doubly Linked List** jo insertion order maintain karti hai.
+**LinkedHashSet** = HashSet + **Doubly Linked List** that maintains insertion order.
 
 ```java
 LinkedHashSet<String> lhs = new LinkedHashSet<>();
-lhs.add("C");
-lhs.add("A");
-lhs.add("B");
+lhs.add("C"); lhs.add("A"); lhs.add("B");
 lhs.add("A"); // Duplicate — ignored!
 
 System.out.println(lhs); // [C, A, B] ← Insertion order preserved! ✅
@@ -198,7 +191,7 @@ System.out.println(lhs); // [C, A, B] ← Insertion order preserved! ✅
 |---------|---------|---------------|
 | **Order** | ❌ No guaranteed order | ✅ Insertion order preserved |
 | **Internal Structure** | HashMap | HashMap + Doubly Linked List |
-| **Performance** | Slightly faster (no linked list overhead) | Slightly slower (extra pointers maintain karne padte hain) |
+| **Performance** | Slightly faster (no linked list overhead) | Slightly slower (extra pointers to maintain) |
 | **Memory** | Less | More (extra prev/next pointers per entry) |
 | **Null Allowed?** | ✅ One null | ✅ One null |
 
@@ -208,12 +201,12 @@ System.out.println(lhs); // [C, A, B] ← Insertion order preserved! ✅
 
 | Trap | Answer |
 |------|--------|
-| HashSet internally kaunsa data structure use karta hai? | **HashMap** (elements as keys, dummy object as value). |
-| HashSet me duplicate detection ka order kya hai? | **Pehle `hashCode()`** (bucket find karo), **phir `equals()`** (content match karo). |
-| Sirf `equals()` override karein bina `hashCode()` ke — kya duplicates detect honge? | ❌ **Nahi!** Different hashCode → different bucket → `equals()` kabhi call hi nahi hoga! |
-| HashSet me kitne null elements allowed hain? | Maximum **1 null** element. |
-| LinkedHashSet me insertion order maintain hoti hai? | ✅ **Haan!** |
-| HashSet ka default initial capacity kitni hai? | **16** (not 10 like ArrayList!) |
+| What data structure does HashSet use internally? | **HashMap** (elements as keys, dummy object as value). |
+| What is the order of duplicate detection in HashSet? | **First `hashCode()`** (find the bucket), **then `equals()`** (match the content). |
+| If you override only `equals()` without `hashCode()` — will duplicates be detected? | ❌ **No!** Different hashCode → different bucket → `equals()` is never called! |
+| How many null elements are allowed in HashSet? | Maximum **1 null** element. |
+| Does LinkedHashSet preserve insertion order? | ✅ **Yes!** |
+| What is HashSet's default initial capacity? | **16** (not 10 like ArrayList!) |
 
 ---
 

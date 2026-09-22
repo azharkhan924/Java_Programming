@@ -1,14 +1,14 @@
 # 🛡️ Vector & Stack
 
-> **Summary:** Vector constructors, capacity vs size, Vector-specific methods, ArrayList vs Vector comparison, Stack class (LIFO), push/pop/peek methods, aur Stack usage example.
+> **Summary:** Vector constructors, capacity vs size, Vector-specific methods, ArrayList vs Vector comparison, Stack class (LIFO), push/pop/peek methods, and Stack usage example.
 
 ---
 
-## 1. Vector Kya Hai?
+## 1. What is Vector?
 
-**Vector** ArrayList jaise hi ek **resizable array** hai, lekin ek major difference ke sath:
+**Vector** is a resizable array similar to ArrayList, but with one major difference:
 
-> 🔒 **Vector ke saare methods `synchronized` hain — yani Thread-Safe hai by default!**
+> 🔒 **All of Vector's methods are `synchronized` — it is Thread-Safe by default!**
 
 ```text
 Vector Key Properties:
@@ -16,8 +16,8 @@ Vector Key Properties:
 ✅ Allows duplicate elements
 ✅ Allows null values
 ✅ Implements RandomAccess → Fast index-based access O(1)
-✅ Synchronized (Thread-safe) — Every method locked!
-⚠️ Legacy class (Java 1.0 se hai, ab rarely direct use hota hai)
+✅ Synchronized (Thread-safe) — Every method is locked
+⚠️ Legacy class (exists since Java 1.0, rarely used directly now)
 ```
 
 ---
@@ -29,7 +29,7 @@ Vector Key Properties:
 Vector<String> v = new Vector<>();
 ```
 - **Initial Capacity:** 10
-- **Capacity Increment:** Previous capacity double hoti hai (x2)
+- **Capacity Increment:** Previous capacity is doubled (x2)
 
 ### Constructor 2: Custom Capacity — `Vector(int initialCapacity)`
 ```java
@@ -41,7 +41,7 @@ Vector<String> v = new Vector<>(50);
 ```java
 Vector<String> v = new Vector<>(50, 10);
 ```
-- Starting capacity 50, har resize par sirf 10 extra space badhega (instead of doubling)
+- Starting capacity 50, each resize adds only 10 extra slots (instead of doubling)
 
 ### Constructor 4: From Collection — `Vector(Collection c)`
 ```java
@@ -54,7 +54,7 @@ Vector<String> v = new Vector<>(existingList);
 
 | Feature | ArrayList | Vector |
 |---------|-----------|--------|
-| **Growth Formula** | `(old * 3/2) + 1` | `old * 2` (default), ya custom increment |
+| **Growth Formula** | `(old * 3/2) + 1` | `old * 2` (default), or custom increment |
 | **Default Initial Capacity** | 10 | 10 |
 | **Custom Increment?** | ❌ No | ✅ Yes (3rd constructor) |
 
@@ -64,12 +64,10 @@ Vector<String> v = new Vector<>(existingList);
 
 ```java
 Vector<Integer> v = new Vector<>(); // capacity = 10
-v.add(1);
-v.add(2);
-v.add(3);
+v.add(1); v.add(2); v.add(3);
 
 System.out.println(v.capacity()); // 10 → Total allocated space
-System.out.println(v.size());     //  3 → Actual elements added
+System.out.println(v.size());     //  3 → Actual elements stored
 ```
 
 ```text
@@ -79,7 +77,7 @@ Size = 3 elements stored
 Capacity = 10 total slots available
 ```
 
-> ⚠️ **Note:** ArrayList me `capacity()` method **nahi** hota. Ye sirf Vector ka feature hai.
+> ⚠️ **Note:** ArrayList does **not** have a `capacity()` method. This is a Vector-only feature.
 
 ---
 
@@ -87,19 +85,19 @@ Capacity = 10 total slots available
 
 | Feature | ArrayList | Vector |
 |---------|-----------|--------|
-| **Thread Safety** | ❌ NOT synchronized | ✅ Synchronized (every method par lock) |
+| **Thread Safety** | ❌ NOT synchronized | ✅ Synchronized (lock on every method) |
 | **Performance** | Faster (no locking overhead) | Slower (synchronization cost) |
 | **Capacity Growth** | `(old * 3/2) + 1` | `old * 2` (or custom increment) |
 | **`capacity()` Method** | ❌ Not available | ✅ Available |
 | **Legacy?** | No (Java 1.2+) | Yes (Java 1.0, re-engineered in 1.2) |
-| **Iteration** | `Iterator` aur `ListIterator` | `Enumeration` bhi support karta hai (plus Iterator/ListIterator) |
-| **When to use?** | Single-threaded apps, high-performance reads | Multi-threaded apps (lekin modern code me `CopyOnWriteArrayList` prefer hota hai) |
+| **Iteration** | `Iterator` and `ListIterator` | `Enumeration` also supported (plus Iterator/ListIterator) |
+| **When to use?** | Single-threaded apps, high-performance reads | Multi-threaded apps (but modern code prefers `CopyOnWriteArrayList`) |
 
 ---
 
 ## 6. Vector-Specific Methods
 
-Vector ke paas kuch extra methods hain jo ArrayList me nahi milte:
+Vector has some extra methods not found in ArrayList:
 
 ```java
 Vector<String> v = new Vector<>();
@@ -120,15 +118,15 @@ v.lastElement();         // Last element (throws exception if empty)
 
 // ─── Capacity ───
 v.capacity();            // Current internal array capacity
-v.trimToSize();          // Capacity ko current size tak shrink karo
-v.ensureCapacity(100);   // Minimum 100 capacity ensure karo
+v.trimToSize();          // Shrink capacity to current size
+v.ensureCapacity(100);   // Ensure minimum capacity of 100
 ```
 
 ---
 
 ## 7. Stack — LIFO Data Structure
 
-**Stack** class **Vector ko extend** karta hai aur **LIFO (Last-In-First-Out)** behavior provide karta hai.
+**Stack** class **extends Vector** and provides **LIFO (Last-In-First-Out)** behavior.
 
 ```text
 Stack extends Vector
@@ -154,31 +152,29 @@ Stack<String> stack = new Stack<>(); // Only one constructor — no-arg
 ```java
 Stack<Integer> stack = new Stack<>();
 
-// 1. push() — Element ko top par add karna
+// 1. push() — Add element to top
 stack.push(10);  // [10]
 stack.push(20);  // [10, 20]
 stack.push(30);  // [10, 20, 30]
 
-// 2. pop() — Top element remove + return karna
+// 2. pop() — Remove + return top element
 int top = stack.pop(); // Returns 30, Stack: [10, 20]
 
-// 3. peek() — Top element dekhna WITHOUT removing
+// 3. peek() — View top element WITHOUT removing
 int current = stack.peek(); // Returns 20, Stack: [10, 20] (unchanged!)
 
-// 4. empty() — Stack khali hai ya nahi?
+// 4. empty() — Check if stack is empty
 boolean isEmpty = stack.empty(); // false
 
-// 5. search(element) — 1-based position from top return karta hai
+// 5. search(element) — Returns 1-based position from top
 int pos = stack.search(10); // Returns 2 (10 is 2nd from top)
-// Agar element nahi mila toh -1 return karta hai
+// Returns -1 if element is not found
 ```
 
 ### Stack LIFO Example:
 ```java
 Stack<String> stack = new Stack<>();
-stack.push("A");
-stack.push("B");
-stack.push("C");
+stack.push("A"); stack.push("B"); stack.push("C");
 
 while (!stack.empty()) {
     System.out.println(stack.pop());
@@ -190,7 +186,7 @@ while (!stack.empty()) {
 
 ## 9. ⚠️ Modern Alternative to Stack
 
-> Stack class **legacy** hai (Java 1.0). Modern code me **`Deque`** interface use karna recommended hai:
+> Stack class is **legacy** (Java 1.0). Modern code should use the **`Deque`** interface:
 
 ```java
 // ✅ Modern approach
@@ -201,8 +197,8 @@ stack.pop(); // 20
 ```
 
 **Why ArrayDeque over Stack?**
-- `Stack` inherits `Vector` ka synchronization overhead (even jab zaroorat nahi ho)
-- `ArrayDeque` faster hai aur no unnecessary synchronization
+- `Stack` inherits `Vector`'s synchronization overhead (even when not needed)
+- `ArrayDeque` is faster and has no unnecessary synchronization
 
 ---
 
@@ -210,12 +206,12 @@ stack.pop(); // 20
 
 | Trap | Answer |
 |------|--------|
-| Vector thread-safe hai lekin ArrayList nahi, toh hamesha Vector use karna chahiye? | ❌ Nahi! Synchronization se performance slow hoti hai. Single-threaded apps me hamesha ArrayList use karo. |
-| Stack konsi class extend karta hai? | `java.util.Vector` |
-| `peek()` aur `pop()` me farq? | `peek()` sirf dekhta hai (stack unchanged). `pop()` remove + return karta hai. |
-| Empty stack par `pop()` call karein toh kya hoga? | `EmptyStackException` throw hogi! |
-| Vector ka default capacity growth kya hai? | Double (2x) hota hai. |
-| `stack.search()` 0-based return karta hai? | ❌ **1-based** position return karta hai from top! |
+| Vector is thread-safe but ArrayList is not, so always use Vector? | ❌ No! Synchronization slows performance. Always use ArrayList for single-threaded apps. |
+| What class does Stack extend? | `java.util.Vector` |
+| Difference between `peek()` and `pop()`? | `peek()` only views (stack unchanged). `pop()` removes + returns. |
+| What happens when `pop()` is called on an empty stack? | `EmptyStackException` is thrown! |
+| What is Vector's default capacity growth? | It **doubles** (2x). |
+| Does `stack.search()` return a 0-based index? | ❌ It returns a **1-based** position from the top! |
 
 ---
 

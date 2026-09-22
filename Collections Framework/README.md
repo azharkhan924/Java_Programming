@@ -7,7 +7,7 @@
 
 # 📦 Java Collections Framework — Short Notes for Quick Revision
 
-> **Style:** Ye notes quick revision ke liye hain. Language intentionally **Hinglish + English** rakhi gayi hai, taaki concepts short aur easy-to-revise rahen.
+> **Style:** These notes are for quick revision. Language is kept in **English** with clear explanations and interview-oriented content.
 
 ---
 

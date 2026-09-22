@@ -1,18 +1,18 @@
 # 📋 ArrayList — Deep Dive
 
-> **Summary:** ArrayList constructors, initial capacity & growth formula, `RandomAccess` / `Serializable` / `Cloneable` marker interfaces, `toString()` behavior, aur best/worst use case scenarios.
+> **Summary:** ArrayList constructors, initial capacity & growth formula, `RandomAccess` / `Serializable` / `Cloneable` marker interfaces, `toString()` behavior, and best/worst use case scenarios.
 
 ---
 
-## 1. ArrayList Kya Hai?
+## 1. What is ArrayList?
 
-**ArrayList** ek **resizable array** (dynamic array) hai jo internally ordinary array use karta hai lekin size automatically grow hota hai jab elements add karte ho.
+**ArrayList** is a **resizable array** (dynamic array) that internally uses an ordinary array, but the size automatically grows when elements are added.
 
 ```text
 ArrayList Key Properties:
 ✅ Maintains insertion order
 ✅ Allows duplicate elements
-✅ Allows null values (multiple nulls bhi)
+✅ Allows null values (multiple nulls too)
 ✅ Implements RandomAccess → Fast index-based retrieval O(1)
 ❌ NOT synchronized (Not thread-safe by default)
 ```
@@ -31,28 +31,28 @@ public class ArrayList<E> extends AbstractList<E>
 ```java
 ArrayList<String> list = new ArrayList<>();
 ```
-- **Initial Capacity:** 10 (internally size 10 ka array create hota hai)
-- Jab 10 elements fill ho jaayein, toh automatically naya bada array banta hai
+- **Initial Capacity:** 10 (internally a size 10 array is created)
+- When 10 elements are filled, a new larger array is automatically created
 
 ### Constructor 2: Custom Capacity — `ArrayList(int initialCapacity)`
 ```java
 ArrayList<String> list = new ArrayList<>(100);
 ```
-- Agar tumhe advance me pata hai ki roughly kitne elements aayenge, toh ye use karo
-- **Performance Benefit:** Baar-baar resize/copy operations avoid hote hain
+- Use when you roughly know how many elements will be added
+- **Performance Benefit:** Avoids repeated resize/copy operations
 
 ### Constructor 3: From Existing Collection — `ArrayList(Collection c)`
 ```java
 List<String> original = List.of("A", "B", "C");
 ArrayList<String> copy = new ArrayList<>(original);
 ```
-- Kisi bhi existing Collection ka data ek ArrayList me copy kar deta hai
+- Copies data from any existing Collection into a new ArrayList
 
 ---
 
 ## 3. Capacity Growth Formula
 
-Jab ArrayList ka internal array full ho jaata hai aur ek aur element add karna hota hai:
+When the internal array is full and another element needs to be added:
 
 ```text
 New Capacity = (Old Capacity * 3 / 2) + 1
@@ -64,27 +64,27 @@ After 2nd growth  = (16 * 3/2) + 1 = 25
 After 3rd growth  = (25 * 3/2) + 1 = 38
 ```
 
-### Internally Kya Hota Hai?
+### What Happens Internally?
 ```text
-1. Naya bada array create hota hai (new capacity ke sath)
-2. Purane array ke saare elements naye array me copy hote hain (System.arraycopy)
-3. Purana array GC eligible ho jaata hai
-4. ArrayList ka internal reference naye array ko point karne lagta hai
+1. A new larger array is created (with the new capacity)
+2. All elements from the old array are copied to the new array (System.arraycopy)
+3. The old array becomes GC eligible
+4. ArrayList's internal reference points to the new array
 ```
 
-> ⚠️ **Performance Warning:** Agar starting capacity bahut chhoti rakhi aur bahut saare elements add kiye, toh baar-baar resizing + copying hogi jisse performance degrade hogi. Isliye agar approximate size pata ho toh initial capacity specify karo!
+> ⚠️ **Performance Warning:** If the starting capacity is too small and many elements are added, repeated resizing + copying degrades performance. Specify initial capacity if the approximate size is known!
 
 ---
 
 ## 4. Marker Interfaces Implemented by ArrayList
 
-ArrayList 3 important marker interfaces implement karta hai:
+ArrayList implements 3 important marker interfaces:
 
 | Marker Interface | Purpose |
 |------------------|---------|
-| **`RandomAccess`** | JVM ko signal karta hai ki ye data structure **O(1) time me index-based access** support karta hai (`get(i)` operation fast hai) |
-| **`Serializable`** | Object ko **byte stream me convert** (serialize) karke network ya file me bheja ja sakta hai |
-| **`Cloneable`** | `clone()` method se **shallow copy** banayi ja sakti hai bina `CloneNotSupportedException` ke |
+| **`RandomAccess`** | Signals to algorithms that this data structure supports **O(1) index-based access** (`get(i)` is fast) |
+| **`Serializable`** | Object can be **converted to a byte stream** and sent over network or saved to file |
+| **`Cloneable`** | **Shallow copy** can be created via `clone()` without `CloneNotSupportedException` |
 
 ### `instanceof` Check Example:
 ```java
@@ -101,33 +101,31 @@ System.out.println(list instanceof Collection);     // true
 
 ## 5. `toString()` Behavior in Collections
 
-ArrayList ka `toString()` method automatically override kiya hua hota hai (`AbstractCollection` class me):
+ArrayList's `toString()` method is already overridden (in `AbstractCollection`):
 
 ```java
 ArrayList<Integer> nums = new ArrayList<>();
-nums.add(10);
-nums.add(20);
-nums.add(30);
+nums.add(10); nums.add(20); nums.add(30);
 
 System.out.println(nums);           // [10, 20, 30] ← Clean readable output!
 System.out.println(nums.toString()); // [10, 20, 30] ← Same result
 ```
 
-> **Comparison:** Plain array me `System.out.println(arr)` ugly output deta hai jaise `[I@1a2b3c`. Collections me `toString()` already overridden hai taaki human-readable `[elem1, elem2, ...]` format aaye.
+> **Comparison:** A plain array prints ugly output like `[I@1a2b3c`. Collections have `toString()` already overridden for a human-readable `[elem1, elem2, ...]` format.
 
 ---
 
 ## 6. ArrayList — Best & Worst Use Cases
 
 ### ✅ Best Choice (Use ArrayList When):
-- **Frequent retrieval / read operations** chahiye (index-based access O(1) time me)
-- Data mostly **sequential read** hota hai (e.g., display list of products, render table rows)
-- Elements insert/remove mostly **end se** hote hain (`add()` amortized O(1) hai)
+- **Frequent retrieval / read operations** (index-based access is O(1))
+- Data is mostly **sequential reads** (e.g., display a list of products, render table rows)
+- Elements are inserted/removed mostly **at the end** (`add()` is amortized O(1))
 
 ### ❌ Worst Choice (Avoid ArrayList When):
-- **Frequent insertion/deletion middle me** karni ho → Har baar elements shift hone padte hain → O(n) time!
-- **Thread-safety** required ho → ArrayList synchronized nahi hai, race conditions aa sakte hain
-- Elements **beginning se baar-baar add/remove** karne hon → LinkedList better rahegi
+- **Frequent insertion/deletion in the middle** — elements must be shifted → O(n)!
+- **Thread-safety** is required — ArrayList is not synchronized, race conditions can occur
+- Elements are **frequently added/removed at the beginning** — LinkedList is better for this
 
 ```text
 Operation Performance (ArrayList):
@@ -149,12 +147,12 @@ Operation Performance (ArrayList):
 
 | Trap | Answer |
 |------|--------|
-| ArrayList ka default initial capacity kitni hoti hai? | **10** |
-| Capacity growth formula kya hai? | `(OldCapacity * 3/2) + 1` |
-| `RandomAccess` interface me kitne methods hain? | **0** (Marker Interface hai!) |
-| Kya ArrayList me `null` dal sakte hain? | ✅ Haan, multiple nulls bhi allowed hain. |
-| ArrayList thread-safe hai? | ❌ Nahi. Thread-safety ke liye `Collections.synchronizedList()` ya `CopyOnWriteArrayList` use karo. |
-| ArrayList internally konsa data structure use karta hai? | Ordinary **resizable array** (Object[]) |
+| What is ArrayList's default initial capacity? | **10** |
+| What is the capacity growth formula? | `(OldCapacity * 3/2) + 1` |
+| How many methods does `RandomAccess` interface have? | **0** (It is a Marker Interface!) |
+| Can `null` be stored in ArrayList? | ✅ Yes, multiple nulls are allowed. |
+| Is ArrayList thread-safe? | ❌ No. Use `Collections.synchronizedList()` or `CopyOnWriteArrayList` for thread-safety. |
+| What data structure does ArrayList use internally? | An ordinary **resizable array** (`Object[]`) |
 
 ---
 
