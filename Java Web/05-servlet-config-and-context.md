@@ -1,178 +1,260 @@
-# ⚙️ ServletConfig, ServletContext & Annotations
-
-> **Summary:** `ServletConfig` (per-servlet config) vs `ServletContext` (app-wide shared state), `<init-param>` vs `<context-param>`, Attributes vs Parameters, aur modern `@WebServlet` annotations.
+# ServletConfig & ServletContext
 
 ---
 
-## 1. Why External Configuration?
+## 1. Servlet Configuration
 
-Agar database credentials, API keys, ya file paths ko Java class ke andar hardcode kar diya jaye:
-- Har chhota change karne ke liye poora project recompile aur redeploy karna padega.
-- Same database URL 10 alag Servlets me duplicate hoga.
+Hardcoding configuration values inside every Servlet creates maintenance problems.
 
-Java Servlet do configuration objects provide karta hai:
-1. **`ServletConfig`** — Sirf ek specific Servlet ke liye private settings.
-2. **`ServletContext`** — Poori web application ke saare Servlets ke liye shared global settings.
+### Problems with hardcoding
+
+- Difficult to change configuration
+- Same values may need to be repeated
+- Poor maintainability
+- Configuration gets mixed with application logic
+
+Servlets provide configuration mechanisms:
+
+1. `ServletConfig` → Servlet-specific configuration
+2. `ServletContext` → Application-wide configuration/data
 
 ---
 
-## 2. `ServletConfig` (Servlet-Specific)
+## 2. ServletConfig
 
-Har Servlet ke paas apna khud ka dedicated `ServletConfig` object hota hai jo Servlet Container instantiate karte waqt banata hai.
+`ServletConfig` is an object created and maintained by the Servlet Container for **each Servlet**.
 
-### XML Configuration (`web.xml`):
+### Key point
+
+> One Servlet has its own `ServletConfig` object.
+
+It is mainly used to provide **Servlet-specific initialization parameters**.
+
+### Flow
+
+```text
+Web Application Starts
+        ↓
+Container Reads web.xml
+        ↓
+Servlet Configuration Found
+        ↓
+ServletConfig Created
+        ↓
+Init Parameters Stored
+        ↓
+init() Called
+        ↓
+Servlet Uses Configuration
+```
+
+### ServletConfig in `web.xml`
+
+Example:
+
 ```xml
 <servlet>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.example.LoginServlet</servlet-class>
-    
-    <!-- Init Parameter for this Servlet only -->
+    <servlet-name>S1</servlet-name>
+    <servlet-class>MyServlet</servlet-class>
+
     <init-param>
-        <param-name>maxLoginAttempts</param-name>
-        <param-value>5</param-value>
+        <param-name>user</param-name>
+        <param-value>admin</param-value>
     </init-param>
 </servlet>
 ```
 
-### Accessing in Java:
+### Reading ServletConfig
+
 ```java
-public class LoginServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        ServletConfig config = getServletConfig();
-        String maxAttempts = config.getInitParameter("maxLoginAttempts"); // "5"
-        String servletName = config.getServletName(); // "LoginServlet"
-    }
-}
+ServletConfig config = getServletConfig();
+String value = config.getInitParameter("user");
 ```
+
+### ServletConfig Methods
+
+| Method | Purpose |
+|---|---|
+| `getInitParameter(String name)` | Gets the value of a specific initialization parameter |
+| `getInitParameterNames()` | Gets names of all initialization parameters |
+| `getServletContext()` | Gets the application-wide `ServletContext` |
+| `getServletName()` | Gets the Servlet's configured name |
 
 ---
 
-## 3. `ServletContext` (Application-Wide Shared)
+## 3. ServletContext
 
-Jab web application server par deploy hokar start hoti hai, container **ek single `ServletContext` object** banata hai. Ye object application band hone tak zinda rehta hai aur **application ke sabhi Servlets aur JSPs ke beech share hota hai**.
+`ServletContext` is an **application-wide object** created by the Servlet Container.
+
+> It is shared among all Servlets belonging to the same web application.
+
+### Main purpose
+
+- Store application-wide information
+- Share data between Servlets
+- Access application-level configuration
+- Provide access to the application environment
+
+### Flow
 
 ```text
-                 Web Application (myapp.war) Starts
-                                  │
-                                  ▼
-                    ┌───────────────────────────┐
-                    │  Single ServletContext    │◄─── Shared by ALL Servlets!
-                    │ (Global Config & State)   │
-                    └─────────────┬─────────────┘
-                                  │
-         ┌────────────────────────┼────────────────────────┐
-         ▼                        ▼                        ▼
-    Servlet 1                Servlet 2                Servlet 3
-(LoginServlet)            (PaymentServlet)          (AdminServlet)
+Web Application Starts
+        ↓
+Container creates ServletContext
+        ↓
+Shared by all Servlets
+        ↓
+Servlet 1 ─┐
+Servlet 2 ─┼──→ Same ServletContext
+Servlet 3 ─┘
+        ↓
+Application Stops
+        ↓
+ServletContext destroyed
 ```
 
-### XML Configuration (`web.xml`):
+### Context Parameters in `web.xml`
+
+Application-wide initialization parameters can be defined using `context-param`.
+
 ```xml
-<!-- Available to ALL Servlets in the application -->
 <context-param>
-    <param-name>companyEmail</param-name>
-    <param-value>support@example.com</param-value>
+    <param-name>appName</param-name>
+    <param-value>LearningPath</param-value>
 </context-param>
 ```
 
-### Accessing in Java:
-```java
-ServletContext context = getServletContext();
-// Or via config: getServletConfig().getServletContext();
+### Reading Context Parameter
 
-String email = context.getInitParameter("companyEmail");
+```java
+ServletContext ctx = getServletContext();
+String appName = ctx.getInitParameter("appName");
+```
+
+### ServletContext Attributes
+
+`ServletContext` also supports attributes for sharing application-level objects/data.
+
+```java
+ServletContext ctx = getServletContext();
+
+// Set attribute
+ctx.setAttribute("count", 100);
+
+// Get attribute
+Object value = ctx.getAttribute("count");
+
+// Remove attribute
+ctx.removeAttribute("count");
 ```
 
 ---
 
-## 4. `ServletContext` Attributes (Sharing Objects at Runtime)
+## 4. ServletConfig vs ServletContext
 
-`ServletContext` sirf string parameters read karne ke liye nahi, balki runtime par **Java objects share karne** ke liye bhi use hota hai:
+| Feature | ServletConfig | ServletContext |
+|---|---|---|
+| Scope | Servlet-specific | Application-wide |
+| Number | One per Servlet | One per web application |
+| Shared among Servlets? | No | Yes |
+| Main use | Servlet-specific configuration | Global/application-wide configuration and data |
+| Init parameters | `init-param` | `context-param` |
+| Created by | Servlet Container | Servlet Container |
+| Access | `getServletConfig()` | `getServletContext()` |
+| Can access Context? | Yes | Application object itself |
 
-```java
-// Servlet 1: Hit counter update ya DB Pool save karna
-ServletContext context = getServletContext();
-context.setAttribute("appVisitorCount", 1050);
+### Easy memory trick
 
-// Servlet 2: Kisi dusre Servlet me access karna
-ServletContext context = getServletContext();
-Integer visitors = (Integer) context.getAttribute("appVisitorCount");
-
-// Attribute remove karna
-context.removeAttribute("appVisitorCount");
-```
-
----
-
-## 5. ⚖️ Comparison Matrix: ServletConfig vs ServletContext
-
-| Feature | `ServletConfig` | `ServletContext` |
-|---------|-----------------|------------------|
-| **Scope** | Single Servlet ke liye private | Poori web application ke liye shared |
-| **Quantity** | One per Servlet | **Only ONE per Web Application** |
-| **Configuration Tag** | `<init-param>` inside `<servlet>` | `<context-param>` under `<web-app>` |
-| **Getter Method** | `getServletConfig()` | `getServletContext()` |
-| **Runtime Attributes?** | ❌ Attributes support nahi karta | ✅ Supports `setAttribute()` / `getAttribute()` |
-| **Lifecycle** | Servlet ke sath banta aur destroy hota hai | App start par banta hai, app stop par destroy hota hai |
-
-### 🧠 Memory Trick:
 ```text
-ServletConfig  = CONFIG for ONE Servlet
-ServletContext = CONTEXT for WHOLE Application
+ServletConfig  → CONFIG for ONE Servlet
+ServletContext → CONTEXT for WHOLE application
 ```
 
 ---
 
-## 6. ⚖️ Init Parameter vs Attribute
+## 5. Init Parameter vs Attribute
 
 | Feature | Init Parameter | Attribute |
-|---------|----------------|-----------|
-| **Kahan define hota hai?** | `web.xml` ya `@WebServlet` annotations me | Java code me runtime par (`setAttribute`) |
-| **Data Type** | Sirf **`String`** hota hai | **`Object`** (String, List, Model, Connection, etc.) |
-| **Modifiable?** | Read-Only (Runtime par change nahi ho sakta) | Read-Write (Modify / Delete kiya ja sakta hai) |
-| **Methods** | `getInitParameter("name")` | `setAttribute()`, `getAttribute()`, `removeAttribute()` |
+|---|---|---|
+| Purpose | Configuration | Runtime data/object sharing |
+| Usually defined in | `web.xml` | Java code |
+| Value | Configuration value (String) | Any object/value (`Object`) |
+| Methods | `getInitParameter()` | `setAttribute()`, `getAttribute()` |
+| Scope | ServletConfig: one Servlet; Context: whole application | Depends on scope object used |
+
+### Example
+
+```java
+// Configuration
+String user = config.getInitParameter("user");
+
+// Runtime shared data
+ctx.setAttribute("count", 100);
+```
 
 ---
 
-## 7. Modern Annotation-Based Configuration (`@WebServlet`)
+## 6. When to Use What?
 
-Java EE 6+ (Servlet 3.0+) se `web.xml` me heavy XML configuration likhne ki zaroorat nahi hai. Hum seedha Java class ke upar **`@WebServlet`** annotation use karte hain:
+### When to Use ServletConfig?
+
+Use `ServletConfig` when configuration is **specific to one Servlet**.
+
+Examples:
+- Servlet-specific username/configuration
+- Servlet-specific file path
+- Servlet-specific initialization value
+- Any setting that should not be shared with every Servlet
+
+### When to Use ServletContext?
+
+Use `ServletContext` when information is required by **multiple Servlets** or belongs to the entire application.
+
+Examples:
+- Application name
+- Global configuration
+- Shared application-level objects
+- Common resources/data
+- Values that need to be accessed by multiple Servlets
+
+---
+
+## 7. Annotation-Based Servlet Configuration
+
+Instead of configuring every Servlet in `web.xml`, annotations can be used.
+
+The commonly used annotation is:
 
 ```java
-import jakarta.servlet.annotation.WebInitParam;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
+@WebServlet("/hello")
+public class HelloServlet extends HttpServlet {
 
-@WebServlet(
-    name = "ReportServlet",
-    urlPatterns = {"/reports", "/generate-report"},
-    loadOnStartup = 1,
-    initParams = {
-        @WebInitParam(name = "exportFormat", value = "PDF"),
-        @WebInitParam(name = "pageSize", value = "A4")
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+        // Servlet logic
     }
-)
-public class ReportServlet extends HttpServlet {
-    // Clean & self-contained configuration!
 }
 ```
 
-### Advantages of `@WebServlet`:
-- No XML clutter in `web.xml`
-- Configuration aur code ek hi jagah rehte hain
-- Fast maintenance & refactoring
+### What does `@WebServlet` do?
+
+It tells the Servlet Container that the class is a Servlet and provides its URL mapping.
+
+Example:
+
+```java
+@WebServlet("/login")
+```
+
+Then `http://localhost:8080/app/login` can map to `LoginServlet`.
+
+### Why use annotations?
+
+- Less XML configuration
+- Easier mapping
+- Configuration stays close to the Servlet class
+- Cleaner project structure
 
 ---
 
-## 🧠 Interview Quick Traps
-
-| Trap | Answer |
-|------|--------|
-| Ek Servlet doosre Servlet ke `ServletConfig` ko read kar sakta hai? | ❌ Nahi! `ServletConfig` strictly private hota hai. |
-| Application-wide hit counter maintain karne ke liye kya use karenge? | `ServletContext.setAttribute()`. |
-| `web.xml` me `context-param` kis tag ke andar aata hai? | Root `<web-app>` tag ke directly andar (kisi `<servlet>` ke andar nahi). |
-| `ServletContext` thread-safe hota hai? | ❌ Nahi! Kyunki multiple servlets/threads ek sath read/write kar sakte hain, isliye synchronization zaroori hai. |
-
----
-
-[⬅️ Previous: Servlet Communication](./04-servlet-communication.md) · [📖 Back to Java Web Index](./README.md) · [Next → Session & Cookies ➡️](./06-session-management-and-cookies.md)
+[Previous: Servlet Communication](./04-servlet-communication.md) · [Back to Java Web Index](./README.md) · [Next: Session Management & Cookies](./06-session-management-and-cookies.md)
