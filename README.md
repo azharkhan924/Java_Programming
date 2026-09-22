@@ -20,8 +20,9 @@
 | 2 | [Core Java](./Core%20Java/) | Methods, OOP Fundamentals, Constructors, Static, Inheritance, Polymorphism | ✅ Complete (14 Notes) |
 | 3 | [OOP & Object Class](./OOP%20and%20Object%20Class/) | Object class methods, equals/hashCode, Casting, Strings, GC, Cloning, Singleton | ✅ Complete (11 Notes) |
 | 4 | [Java Web](./Java%20Web/) | Servlets, Lifecycle, Request/Response, RequestDispatcher, Cookies, Session, JSP & MVC | ✅ Complete (8 Notes) |
+| 5 | [Collections Framework](./Collections%20Framework/) | ArrayList, LinkedList, Vector, Stack, Set, HashSet, TreeSet, Comparable, Comparator, Cursors | ✅ Complete (10 Notes) |
 
-> More topics coming soon — Collections Framework, Exception Handling, Multithreading, etc.
+> More topics coming soon — Exception Handling, Multithreading, JDBC, etc.
 
 ---
 
