@@ -1,4 +1,4 @@
-# 🚀 The `main()` Method & `System.out.println()`
+# The `main()` Method & `System.out.println()`
 
 ---
 
@@ -27,7 +27,7 @@ public static void main(String[] args)
 Agar `main()` instance method hota:
 
 ```java
-public void main(String[] args)   // non-static
+public void main(String[] args) // non-static
 ```
 
 to JVM ko pehle object create karna padta — **chicken-and-egg problem**.
@@ -40,10 +40,10 @@ to JVM ko pehle object create karna padta — **chicken-and-egg problem**.
 
 ```java
 class Demo {
-    public static void main(String[] args) {
-        System.out.println(args[0]);
-        System.out.println(args[1]);
-    }
+ public static void main(String[] args) {
+ System.out.println(args[0]);
+ System.out.println(args[1]);
+ }
 }
 ```
 
@@ -75,11 +75,11 @@ args[1] = "Developer"
 ## 4. `System.out.println()` — Internal Breakdown
 
 ```text
-System      → java.lang.System (class)
-     ↓
-out         → static field (type: PrintStream)
-     ↓            conceptually: public static final PrintStream out
-println()   → PrintStream ki instance method
+System → java.lang.System (class)
+ ↓
+out → static field (type: PrintStream)
+ ↓ conceptually: public static final PrintStream out
+println() → PrintStream ki instance method
 ```
 
 ### Step by Step
@@ -106,9 +106,9 @@ System.out.println("Hello");
 import static java.lang.System.out;
 
 class Demo {
-    public static void main(String[] args) {
-        out.println("Hello");       // ✅ no System prefix
-    }
+ public static void main(String[] args) {
+ out.println("Hello"); // no System prefix
+ }
 }
 ```
 
@@ -117,12 +117,12 @@ Wildcard:
 ```java
 import static java.lang.System.*;
 
-out.println("Hello");              // ✅
+out.println("Hello"); // 
 ```
 
 ---
 
-## 🧠 Interview Quick Questions
+## Interview Quick Questions
 
 | Question | Answer |
 |----------|--------|
@@ -136,7 +136,7 @@ out.println("Hello");              // ✅
 
 ---
 
-## ⚡ Quick Revision
+## Quick Revision
 
 ```text
 main() Method:
@@ -159,4 +159,4 @@ Command-Line Args:
 
 ---
 
-[⬅️ Previous: I/O & Scanner](./12-io-and-scanner.md) · [📖 Back to Core Java Index](./README.md) · [Next → Quick Revision ➡️](./14-quick-revision.md)
+[Previous: I/O & Scanner](./12-io-and-scanner.md) · [Back to Core Java Index](./README.md) · [Next: Quick Revision](./14-quick-revision.md)

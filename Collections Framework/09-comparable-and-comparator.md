@@ -1,4 +1,4 @@
-# ⚖️ Comparable & Comparator — Sorting in Java
+# Comparable & Comparator — Sorting in Java
 
 > **Summary:** Complete comparison between `Comparable` and `Comparator`, `compareTo()` vs `compare()`, natural vs customized sorting, sorting predefined and custom classes, Java 8 lambda/method reference enhancements, and interview edge cases.
 
@@ -23,16 +23,16 @@ Java provides two interfaces to sort objects:
 ## 2. Architectural Relationship
 
 ```text
-                 Your Entity Class (e.g., Employee)
-                                |
-           --------------------------------------------
-           |                                          |
-      Class Author                               Class Consumer
-           |                                          |
-    implements Comparable                     passes Comparator
-           |                                          |
-     Natural Sorting                           Custom Sorting
- (e.g., sort by ID ascending)               (e.g., sort by Name / Salary)
+ Your Entity Class (e.g., Employee)
+ |
+ --------------------------------------------
+ | |
+ Class Author Class Consumer
+ | |
+ implements Comparable passes Comparator
+ | |
+ Natural Sorting Custom Sorting
+ (e.g., sort by ID ascending) (e.g., sort by Name / Salary)
 ```
 
 ---
@@ -54,7 +54,7 @@ If this natural ordering is not what you need (e.g., reverse alphabetical or by 
 Classes like `StringBuffer` and `StringBuilder` do **not** implement `Comparable`:
 ```java
 TreeSet<StringBuffer> ts = new TreeSet<>();
-ts.add(new StringBuffer("A")); // ❌ Throws ClassCastException!
+ts.add(new StringBuffer("A")); // Throws ClassCastException!
 ```
 To sort `StringBuffer` objects, you **must** supply a custom `Comparator`:
 ```java
@@ -85,27 +85,27 @@ public int compareTo(T o);
 ### Custom Class Example:
 ```java
 public class Employee implements Comparable<Employee> {
-    private int id;
-    private String name;
+ private int id;
+ private String name;
 
-    public Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+ public Employee(int id, String name) {
+ this.id = id;
+ this.name = name;
+ }
 
-    public int getId() { return id; }
-    public String getName() { return name; }
+ public int getId() { return id; }
+ public String getName() { return name; }
 
-    @Override
-    public int compareTo(Employee other) {
-        // Natural ordering: ascending by ID
-        return Integer.compare(this.id, other.id);
-    }
+ @Override
+ public int compareTo(Employee other) {
+ // Natural ordering: ascending by ID
+ return Integer.compare(this.id, other.id);
+ }
 
-    @Override
-    public String toString() {
-        return id + ":" + name;
-    }
+ @Override
+ public String toString() {
+ return id + ":" + name;
+ }
 }
 ```
 
@@ -143,10 +143,10 @@ boolean equals(Object obj); // Inherited from Object, overriding is optional
 import java.util.Comparator;
 
 public class EmployeeNameComparator implements Comparator<Employee> {
-    @Override
-    public int compare(Employee e1, Employee e2) {
-        return e1.getName().compareTo(e2.getName());
-    }
+ @Override
+ public int compare(Employee e1, Employee e2) {
+ return e1.getName().compareTo(e2.getName());
+ }
 }
 ```
 
@@ -160,7 +160,7 @@ Comparator<Employee> byIdDesc = Comparator.comparingInt(Employee::getId).reverse
 
 // Sort by Name, then by ID if names match
 Comparator<Employee> byNameThenId = Comparator.comparing(Employee::getName)
-                                              .thenComparingInt(Employee::getId);
+ .thenComparingInt(Employee::getId);
 ```
 
 Using in `TreeSet`:
@@ -186,29 +186,29 @@ Requirement:
 import java.util.*;
 
 public class StringLengthComparator implements Comparator<String> {
-    @Override
-    public int compare(String s1, String s2) {
-        int lenDiff = Integer.compare(s1.length(), s2.length());
-        if (lenDiff != 0) {
-            return lenDiff;
-        }
-        return s1.compareTo(s2);
-    }
+ @Override
+ public int compare(String s1, String s2) {
+ int lenDiff = Integer.compare(s1.length(), s2.length());
+ if (lenDiff != 0) {
+ return lenDiff;
+ }
+ return s1.compareTo(s2);
+ }
 
-    public static void main(String[] args) {
-        TreeSet<String> set = new TreeSet<>(new StringLengthComparator());
-        set.add("Apple");
-        set.add("Dog");
-        set.add("Cat");
-        set.add("Banana");
-        set.add("Ant");
+ public static void main(String[] args) {
+ TreeSet<String> set = new TreeSet<>(new StringLengthComparator());
+ set.add("Apple");
+ set.add("Dog");
+ set.add("Cat");
+ set.add("Banana");
+ set.add("Ant");
 
-        System.out.println(set); 
-        // Output: [Ant, Cat, Dog, Apple, Banana]
-        // Ant, Cat, Dog (length 3, sorted alphabetically)
-        // Apple (length 5)
-        // Banana (length 6)
-    }
+ System.out.println(set); 
+ // Output: [Ant, Cat, Dog, Apple, Banana]
+ // Ant, Cat, Dog (length 3, sorted alphabetically)
+ // Apple (length 5)
+ // Banana (length 6)
+ }
 }
 ```
 
@@ -231,10 +231,10 @@ In a `TreeSet` or `TreeMap`, uniqueness is determined **strictly by the comparat
 
 ```java
 class AlwaysZeroComparator implements Comparator<Integer> {
-    @Override
-    public int compare(Integer o1, Integer o2) {
-        return 0; // Every element is considered duplicate
-    }
+ @Override
+ public int compare(Integer o1, Integer o2) {
+ return 0; // Every element is considered duplicate
+ }
 }
 
 TreeSet<Integer> ts = new TreeSet<>(new AlwaysZeroComparator());
@@ -244,7 +244,7 @@ ts.add(30);
 
 System.out.println(ts); // Output: [10]
 ```
-> ⚠️ Only `10` is stored! When `20` and `30` are added, `compare()` returns `0`, causing `TreeSet` to consider them identical duplicates of `10`.
+> Note: Only `10` is stored! When `20` and `30` are added, `compare()` returns `0`, causing `TreeSet` to consider them identical duplicates of `10`.
 
 ---
 
@@ -265,17 +265,17 @@ int result = usCollator.compare("resume", "résumé");
 
 ---
 
-## 9. 🧠 Interview Quick Traps
+## 9. Interview Quick Traps
 
 | Question / Trap | Correct Answer |
 |-----------------|----------------|
-| Can a class implement both `Comparable` and be used with `Comparator`? | ✅ **Yes.** `Comparable` provides the default natural ordering, while `Comparator` can override it whenever custom sorting is needed. |
-| Is `equals()` mandatory to override in `Comparator`? | ❌ **No.** `Comparator` declares `boolean equals(Object obj)`, but every class already inherits `equals()` from `java.lang.Object`. |
-| Does returning `+1` preserve insertion order in a `TreeSet`? | ❌ **No.** A `Comparator` sign contract defines precedence, not insertion ordering. Returning constant `+1` causes an unbalanced or malformed tree traversal. |
+| Can a class implement both `Comparable` and be used with `Comparator`? | **Yes.** `Comparable` provides the default natural ordering, while `Comparator` can override it whenever custom sorting is needed. |
+| Is `equals()` mandatory to override in `Comparator`? | **No.** `Comparator` declares `boolean equals(Object obj)`, but every class already inherits `equals()` from `java.lang.Object`. |
+| Does returning `+1` preserve insertion order in a `TreeSet`? | **No.** A `Comparator` sign contract defines precedence, not insertion ordering. Returning constant `+1` causes an unbalanced or malformed tree traversal. |
 | Why does `TreeSet` drop distinct elements if `compare()` returns `0`? | Because `TreeSet` uses `compare() == 0` to check for equality. If `compare()` returns `0`, the element is treated as duplicate and rejected. |
-| Can `StringBuffer` be stored in a default `new TreeSet<>()`? | ❌ **No.** It throws `ClassCastException` because `StringBuffer` does not implement `Comparable`. Pass an explicit `Comparator` to allow it. |
+| Can `StringBuffer` be stored in a default `new TreeSet<>()`? | **No.** It throws `ClassCastException` because `StringBuffer` does not implement `Comparable`. Pass an explicit `Comparator` to allow it. |
 | What happens if `compareTo()` is inconsistent with `equals()`? | The collection behaves correctly under sorting, but violates the general contract of `Set` (which specifies behavior based on `equals()`). |
 
 ---
 
-[⬅️ Previous: SortedSet & TreeSet](./08-sortedset-and-treeset.md) · [📖 Back to Collections Index](./README.md) · [Next → Master Quick Revision ➡️](./10-quick-revision.md)
+[Previous: SortedSet & TreeSet](./08-sortedset-and-treeset.md) · [Back to Collections Index](./README.md) · [Next: Master Quick Revision](./10-quick-revision.md)

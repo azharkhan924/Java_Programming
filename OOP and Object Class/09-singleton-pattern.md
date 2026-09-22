@@ -1,4 +1,4 @@
-# 🔒 Singleton Design Pattern — Complete Guide
+# Singleton Design Pattern — Complete Guide
 
 > **Summary:** Singleton Design Pattern ka concept, implementation steps (Lazy vs Eager), Thread-safety (DCL, Bill Pugh), `Runtime` class example, Singleton break hone ke tarike (Reflection, Serialization, Cloning) aur unke solutions, tatha Enum Singleton.
 
@@ -8,7 +8,7 @@
 
 **Singleton Pattern** ek **Creational Design Pattern** hai jiska maksad ye ensure karna hota hai ki **puri application me ek class ka sirf aur sirf EK hi instance (object)** bane, aur us instance ko access karne ka ek global point ho.
 
-### 🎯 Real-World Use Cases
+### Real-World Use Cases
 - **Database Connection Pool** — Har query ke liye naya pool banane ki bajaye single pool share hota hai.
 - **Logging Service** — Sabhi modules ek hi Logger instance me logs append karte hain.
 - **Configuration Manager** — `application.properties` ya app settings ek hi instance me load hoti hain.
@@ -28,33 +28,33 @@ Ek class ko Singleton banane ke liye ye 3 cheezein mandatory hain:
 
 ```java
 public class MySingleton {
-    // Step 2: Private static instance
-    private static MySingleton instance;
+ // Step 2: Private static instance
+ private static MySingleton instance;
 
-    // Step 1: Private constructor
-    private MySingleton() {
-        System.out.println("Singleton Instance Created!");
-    }
+ // Step 1: Private constructor
+ private MySingleton() {
+ System.out.println("Singleton Instance Created!");
+ }
 
-    // Step 3: Public static factory method
-    public static MySingleton getInstance() {
-        if (instance == null) {
-            instance = new MySingleton(); // First time call par create hoga
-        }
-        return instance; // Har subsequent call par wahi object return hoga
-    }
+ // Step 3: Public static factory method
+ public static MySingleton getInstance() {
+ if (instance == null) {
+ instance = new MySingleton(); // First time call par create hoga
+ }
+ return instance; // Har subsequent call par wahi object return hoga
+ }
 }
 ```
 
-### 🧪 Verification:
+### Verification:
 ```java
 public class Test {
-    public static void main(String[] args) {
-        MySingleton s1 = MySingleton.getInstance();
-        MySingleton s2 = MySingleton.getInstance();
+ public static void main(String[] args) {
+ MySingleton s1 = MySingleton.getInstance();
+ MySingleton s2 = MySingleton.getInstance();
 
-        System.out.println(s1 == s2); // ✅ true (Same memory address!)
-    }
+ System.out.println(s1 == s2); // true (Same memory address!)
+ }
 }
 ```
 
@@ -74,17 +74,17 @@ public class Test {
 ## 4. Multithreading & Thread Safety
 
 Lazy initialization me multi-threaded environment me **Race Condition** ho sakti hai:
-- Agar Thread-A aur Thread-B ek hi waqt par `if (instance == null)` check karein, toh dono ko `null` milega aur **do alag objects** ban jayenge! 😱
+- Agar Thread-A aur Thread-B ek hi waqt par `if (instance == null)` check karein, toh dono ko `null` milega aur **do alag objects** ban jayenge! 
 
-### 🛡️ Approaches for Thread Safety:
+### Approaches for Thread Safety:
 
 #### Approach 1: Synchronized Method (Simple but Slow)
 ```java
 public static synchronized MySingleton getInstance() {
-    if (instance == null) {
-        instance = new MySingleton();
-    }
-    return instance;
+ if (instance == null) {
+ instance = new MySingleton();
+ }
+ return instance;
 }
 ```
 *Disadvantage:* Har call par lock acquire hota hai, performance degrade hoti hai.
@@ -92,37 +92,37 @@ public static synchronized MySingleton getInstance() {
 #### Approach 2: Double-Checked Locking (DCL) — Industry Standard ⭐
 ```java
 public class DCLSingleton {
-    // 'volatile' ensures visibility across threads & prevents instruction reordering
-    private static volatile DCLSingleton instance;
+ // 'volatile' ensures visibility across threads & prevents instruction reordering
+ private static volatile DCLSingleton instance;
 
-    private DCLSingleton() {}
+ private DCLSingleton() {}
 
-    public static DCLSingleton getInstance() {
-        if (instance == null) { // First check (no locking)
-            synchronized (DCLSingleton.class) {
-                if (instance == null) { // Second check (with locking)
-                    instance = new DCLSingleton();
-                }
-            }
-        }
-        return instance;
-    }
+ public static DCLSingleton getInstance() {
+ if (instance == null) { // First check (no locking)
+ synchronized (DCLSingleton.class) {
+ if (instance == null) { // Second check (with locking)
+ instance = new DCLSingleton();
+ }
+ }
+ }
+ return instance;
+ }
 }
 ```
 
 #### Approach 3: Bill Pugh Solution (Static Inner Helper Class) — Elegant & Best ⭐
 ```java
 public class BillPughSingleton {
-    private BillPughSingleton() {}
+ private BillPughSingleton() {}
 
-    // Inner static class is NOT loaded until getInstance() is called
-    private static class Helper {
-        private static final BillPughSingleton INSTANCE = new BillPughSingleton();
-    }
+ // Inner static class is NOT loaded until getInstance() is called
+ private static class Helper {
+ private static final BillPughSingleton INSTANCE = new BillPughSingleton();
+ }
 
-    public static BillPughSingleton getInstance() {
-        return Helper.INSTANCE; // ClassLoader guarantees thread-safety automatically!
-    }
+ public static BillPughSingleton getInstance() {
+ return Helper.INSTANCE; // ClassLoader guarantees thread-safety automatically!
+ }
 }
 ```
 
@@ -150,54 +150,54 @@ System.out.println("Free Memory: " + r1.freeMemory());
 
 Interviewers aksar puchte hain: *"Singleton ko tod kar dikhao!"*
 
-### 1️⃣ Attack via Reflection
+### 1⃣ Attack via Reflection
 ```java
 // Reflection can access private constructor!
 Constructor<MySingleton> cons = MySingleton.class.getDeclaredConstructor();
 cons.setAccessible(true);
-MySingleton s3 = cons.newInstance(); // ⚠️ New instance created!
+MySingleton s3 = cons.newInstance(); // Note: New instance created!
 ```
-**🛡️ Defense:** Constructor me check lagao:
+** Defense:** Constructor me check lagao:
 ```java
 private MySingleton() {
-    if (instance != null) {
-        throw new RuntimeException("Instance already exists! Use getInstance().");
-    }
+ if (instance != null) {
+ throw new RuntimeException("Instance already exists! Use getInstance().");
+ }
 }
 ```
 
-### 2️⃣ Attack via Serialization / Deserialization
+### 2⃣ Attack via Serialization / Deserialization
 Object serialize karke file me save karo aur deserialize karo — Java naya object instantiate kar deta hai!
-**🛡️ Defense:** `readResolve()` method implement karo:
+** Defense:** `readResolve()` method implement karo:
 ```java
 protected Object readResolve() {
-    return getInstance(); // Returns the existing instance!
+ return getInstance(); // Returns the existing instance!
 }
 ```
 
-### 3️⃣ Attack via Cloning
+### 3⃣ Attack via Cloning
 Agar Singleton class `Cloneable` implement karti hai, toh `clone()` se duplicate ban sakta hai.
-**🛡️ Defense:** `clone()` ko override karke exception throw karo:
+** Defense:** `clone()` ko override karke exception throw karo:
 ```java
 @Override
 protected Object clone() throws CloneNotSupportedException {
-    throw new CloneNotSupportedException("Singleton cannot be cloned!");
+ throw new CloneNotSupportedException("Singleton cannot be cloned!");
 }
 ```
 
 ---
 
-## 7. 👑 The Ultimate Singleton: Enum Singleton
+## 7. The Ultimate Singleton: Enum Singleton
 
 Effective Java ke author **Joshua Bloch** ke mutabiq, Singleton banane ka sabse safe aur best tarika **Enum** hai:
 
 ```java
 public enum EnumSingleton {
-    INSTANCE;
+ INSTANCE;
 
-    public void doSomething() {
-        System.out.println("Working with Enum Singleton!");
-    }
+ public void doSomething() {
+ System.out.println("Working with Enum Singleton!");
+ }
 }
 ```
 
@@ -209,11 +209,11 @@ public enum EnumSingleton {
 
 ---
 
-## 🧠 Interview Quick Traps
+## Interview Quick Traps
 
 | Trap | Answer |
 |------|--------|
-| Singleton class ka constructor public ho sakta hai? | ❌ Nahi, `private` hona zaroori hai. |
+| Singleton class ka constructor public ho sakta hai? | Nahi, `private` hona zaroori hai. |
 | Double-Checked Locking me `volatile` keyword kyu zaroori hai? | Instruction reordering prevent karne aur visibility ensure karne ke liye. |
 | Java standard library me Singleton ka example? | `java.lang.Runtime` (`Runtime.getRuntime()`). |
 | Singleton todne ke 3 raste kaunse hain? | Reflection, Serialization, aur Cloning. |
@@ -221,4 +221,4 @@ public enum EnumSingleton {
 
 ---
 
-[⬅️ Previous: Cloning & Reflection](./08-cloning-and-reflection.md) · [📖 Back to OOP Index](./README.md) · [Next → File Handling ➡️](./10-file-handling.md)
+[Previous: Cloning & Reflection](./08-cloning-and-reflection.md) · [Back to OOP Index](./README.md) · [Next: File Handling](./10-file-handling.md)

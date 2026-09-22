@@ -1,4 +1,4 @@
-# 🏗️ Collection Framework — Introduction & Hierarchy
+# Collection Framework — Introduction & Hierarchy
 
 > **Summary:** Why collections are needed, Array limitations, Array vs Collection comparison, `Collection` interface vs `Collections` utility class, and the complete Collection Framework hierarchy.
 
@@ -25,7 +25,7 @@ An array allows us to represent a **large number of values using a single variab
 
 ## 2. Array Limitations
 
-### ❌ Limitation 1: Fixed Size
+### Limitation 1: Fixed Size
 
 ```java
 int[] a = new int[5]; // Size = 5, once created it cannot be changed
@@ -33,7 +33,7 @@ int[] a = new int[5]; // Size = 5, once created it cannot be changed
 
 The size cannot be directly increased or decreased after creation.
 
-### ❌ Limitation 2: Homogeneous Data
+### Limitation 2: Homogeneous Data
 
 Arrays normally store elements of the **same declared type**.
 
@@ -46,7 +46,7 @@ int[] a = {10, 20, 30}; // All elements are of type int
 > Object[] arr = { new Student(), new Customer(), "Azhar", 100 };
 > ```
 
-### ❌ Limitation 3: No Underlying Standard Data Structure
+### Limitation 3: No Underlying Standard Data Structure
 
 Arrays do not provide a rich set of predefined collection methods. For many requirements, we have to write the logic explicitly.
 
@@ -97,7 +97,7 @@ It provides ready-made data structures and methods for:
 
 ---
 
-## 6. ⚠️ Collection vs Collections (Important Distinction!)
+## 6. Note: Collection vs Collections (Important Distinction!)
 
 | Feature | `Collection` (Interface) | `Collections` (Utility Class) |
 |---------|--------------------------|-------------------------------|
@@ -107,7 +107,7 @@ It provides ready-made data structures and methods for:
 | **Example** | `Collection<String> c = new ArrayList<>();` | `Collections.sort(list);` `Collections.reverse(list);` |
 
 ```text
-Collection  → Interface
+Collection → Interface
 Collections → Utility class
 ```
 
@@ -116,29 +116,29 @@ Collections → Utility class
 ## 7. Complete Collection Framework Hierarchy
 
 ```text
-                            Iterable (I)
-                               │
-                          Collection (I)
-                         /     |        \
-                       /       |          \
-                   List (I)   Set (I)    Queue (I)
-                   /  |  \      |   \         |
-                  /   |   \     |    \      Deque (I)
-                 /    |    \    |     \       |
-          ArrayList  LL  Vector HashSet  SortedSet (I)
-                      |      |       |         |
-                      |    Stack  LHS    NavigableSet (I)
-                      |                        |
-                      |                     TreeSet
-                      └──── implements Deque too
+ Iterable (I)
+ │
+ Collection (I)
+ / | \
+ / | \
+ List (I) Set (I) Queue (I)
+ / | \ | \ |
+ / | \ | \ Deque (I)
+ / | \ | \ |
+ ArrayList LL Vector HashSet SortedSet (I)
+ | | | |
+ | Stack LHS NavigableSet (I)
+ | |
+ | TreeSet
+ └──── implements Deque too
 
-  ┌─────────────── MAP (I) ── (NOT a child of Collection!) ────┐
-  │   Map (I)                                                   │
-  │    ├── HashMap → LinkedHashMap                              │
-  │    ├── Hashtable → Properties                               │
-  │    ├── SortedMap (I) → NavigableMap (I) → TreeMap           │
-  │    └── ConcurrentHashMap                                    │
-  └─────────────────────────────────────────────────────────────┘
+ ┌─────────────── MAP (I) ── (NOT a child of Collection!) ────┐
+ │ Map (I) │
+ │ ├── HashMap → LinkedHashMap │
+ │ ├── Hashtable → Properties │
+ │ ├── SortedMap (I) → NavigableMap (I) → TreeMap │
+ │ └── ConcurrentHashMap │
+ └─────────────────────────────────────────────────────────────┘
 ```
 
 > **(I)** = Interface | **LL** = LinkedList | **LHS** = LinkedHashSet
@@ -150,12 +150,12 @@ Collections → Utility class
 
 | Interface | Duplicates? | Ordered? | Sorted? | Key Feature |
 |-----------|-------------|----------|---------|-------------|
-| **List** | ✅ Yes | ✅ Insertion order preserved | ❌ No | Index-based access |
-| **Set** | ❌ No | ❌ Not guaranteed (HashSet) | ❌ No | Uniqueness enforced |
-| **SortedSet** | ❌ No | ✅ Sorted order | ✅ Yes | Natural/custom sorting |
-| **Queue** | ✅ Yes | ✅ FIFO order | ❌ No | First-In-First-Out |
-| **Deque** | ✅ Yes | ✅ Both ends | ❌ No | Double-ended operations |
-| **Map** | Keys: ❌ / Values: ✅ | Depends on impl | ❌ No | Key-Value pairs |
+| **List** | Yes | Insertion order preserved | No | Index-based access |
+| **Set** | No | Not guaranteed (HashSet) | No | Uniqueness enforced |
+| **SortedSet** | No | Sorted order | Yes | Natural/custom sorting |
+| **Queue** | Yes | FIFO order | No | First-In-First-Out |
+| **Deque** | Yes | Both ends | No | Double-ended operations |
+| **Map** | Keys: / Values: | Depends on impl | No | Key-Value pairs |
 
 ---
 
@@ -167,31 +167,31 @@ Collections → Utility class
 List<String> list = new ArrayList<>();
 list.add("A");
 list.add("B");
-list.add("A"); // ✅ Duplicate allowed!
+list.add("A"); // Duplicate allowed!
 System.out.println(list); // [A, B, A] → Insertion order maintained!
 ```
 
 ### Common List Implementations:
 ```text
 List (I)
- ├── ArrayList      → Resizable array, fast random access, not synchronized
- ├── LinkedList     → Doubly-linked list, fast insert/delete, implements Deque too
- └── Vector         → Synchronized (thread-safe) resizable array (legacy)
-      └── Stack     → LIFO structure, extends Vector
+ ├── ArrayList → Resizable array, fast random access, not synchronized
+ ├── LinkedList → Doubly-linked list, fast insert/delete, implements Deque too
+ └── Vector → Synchronized (thread-safe) resizable array (legacy)
+ └── Stack → LIFO structure, extends Vector
 ```
 
 ---
 
-## 🧠 Interview Quick Traps
+## Interview Quick Traps
 
 | Trap | Answer |
 |------|--------|
-| Is `Map` a child of `Collection`? | ❌ No. Map is a separate interface, not part of the Collection hierarchy. |
+| Is `Map` a child of `Collection`? | No. Map is a separate interface, not part of the Collection hierarchy. |
 | Difference between `Collection` and `Collections`? | `Collection` = Interface, `Collections` = Utility class with static methods. |
 | Can arrays store primitives directly? Can collections? | Arrays: Yes. Collections: No — autoboxing converts to wrapper objects (`Integer`, `Double`). |
 | What is the root interface of the Collection hierarchy? | `Iterable` is the root; `Collection` extends `Iterable`. |
-| Are duplicates allowed in `List`? | ✅ Yes. In `Set`, no. |
+| Are duplicates allowed in `List`? | Yes. In `Set`, no. |
 
 ---
 
-[📖 Back to Collections Index](./README.md) · [Next → ArrayList ➡️](./02-arraylist.md)
+[Back to Collections Index](./README.md) · [Next: ArrayList](./02-arraylist.md)

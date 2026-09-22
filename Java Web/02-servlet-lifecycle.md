@@ -16,27 +16,27 @@ Overall flow:
 
 ```text
 Loading & Instantiation
-        ↓
-     init()
-        ↓
+ ↓
+ init()
+ ↓
 Request Handling → service()
-        ↓
-   destroy()
-        ↓
+ ↓
+ destroy()
+ ↓
 Garbage Collection
 ```
 
 ```text
 Servlet Loading
-      ↓
-   init()
-      ↓
-  service()
-      ↓
-  service()
-      ↓
-  service()
-      ↓
+ ↓
+ init()
+ ↓
+ service()
+ ↓
+ service()
+ ↓
+ service()
+ ↓
  destroy()
 ```
 
@@ -68,7 +68,7 @@ Typical work:
 
 ```java
 public void init() throws ServletException {
-    // initialization code
+ // initialization code
 }
 ```
 
@@ -76,7 +76,7 @@ Servlet API ka alternate form:
 
 ```java
 public void init(ServletConfig config) throws ServletException {
-    super.init(config);
+ super.init(config);
 }
 ```
 
@@ -90,14 +90,14 @@ For `HttpServlet`, `service()` HTTP request method ke according appropriate meth
 
 ```text
 HTTP Request
-     ↓
+ ↓
 service()
-     ↓
+ ↓
  ┌───────────────┐
  │ GET → doGet() │
  │ POST → doPost()│
- │ PUT → ...     │
- │ DELETE → ...  │
+ │ PUT → ... │
+ │ DELETE → ... │
  └───────────────┘
 ```
 
@@ -105,8 +105,8 @@ service()
 
 ```java
 public void service(ServletRequest req, ServletResponse res)
-        throws ServletException, IOException {
-    // request handling
+ throws ServletException, IOException {
+ // request handling
 }
 ```
 
@@ -114,15 +114,15 @@ Usually application code mein `HttpServlet` ke saath hum directly:
 
 ```java
 protected void doGet(HttpServletRequest req,
-                     HttpServletResponse resp)
-        throws ServletException, IOException {
-    // GET request
+ HttpServletResponse resp)
+ throws ServletException, IOException {
+ // GET request
 }
 
 protected void doPost(HttpServletRequest req,
-                      HttpServletResponse resp)
-        throws ServletException, IOException {
-    // POST request
+ HttpServletResponse resp)
+ throws ServletException, IOException {
+ // POST request
 }
 ```
 
@@ -141,7 +141,7 @@ Typical cleanup:
 
 ```java
 public void destroy() {
-    // cleanup code
+ // cleanup code
 }
 ```
 
@@ -168,20 +168,20 @@ Load Class → Create Object → init() [once]
 
 ## 4. Key Interview Points
 
-1. **Who manages the servlet life cycle?**  
-   Servlet Container (e.g. Apache Tomcat).
+1. **Who manages the servlet life cycle?** 
+ Servlet Container (e.g. Apache Tomcat).
 
-2. **Which method is called only once for initialization?**  
-   `init()`.
+2. **Which method is called only once for initialization?** 
+ `init()`.
 
-3. **Which method handles requests?**  
-   `service()`.
+3. **Which method handles requests?** 
+ `service()`.
 
-4. **Which method is called before servlet destruction?**  
-   `destroy()`.
+4. **Which method is called before servlet destruction?** 
+ `destroy()`.
 
-5. **Does `destroy()` perform garbage collection?**  
-   No. It performs cleanup; JVM Garbage Collector reclaims the object later when it is unreferenced.
+5. **Does `destroy()` perform garbage collection?** 
+ No. It performs cleanup; JVM Garbage Collector reclaims the object later when it is unreferenced.
 
 ---
 

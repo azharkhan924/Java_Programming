@@ -1,4 +1,4 @@
-# 🔁 Loops in Java
+# Loops in Java
 
 ---
 
@@ -17,14 +17,14 @@
 
 ```java
 while (condition) {
-    // body
+ // body
 }
 ```
 
 Condition must be **boolean** — same rule as `if`:
 
 ```java
-while (0) { }   // ❌ incompatible types: int cannot be converted to boolean
+while (0) { } // incompatible types: int cannot be converted to boolean
 ```
 
 ---
@@ -33,7 +33,7 @@ while (0) { }   // ❌ incompatible types: int cannot be converted to boolean
 
 ```java
 for (initialization; condition; update) {
-    // body
+ // body
 }
 ```
 
@@ -41,17 +41,17 @@ for (initialization; condition; update) {
 
 ```java
 for (int i = 0; i < 5; i++) {
-    System.out.println(i);
+ System.out.println(i);
 }
 ```
 
 ### Important: Exactly Two Semicolons
 
 ```java
-for (;;) { }                      // ✅ infinite loop — valid
-for (int i = 0; i < 5; i++) { }  // ✅ valid
+for (;;) { } // infinite loop — valid
+for (int i = 0; i < 5; i++) { } // valid
 
-for (int i = 0; i < 5; i++;) { } // ❌ extra semicolon — compile error
+for (int i = 0; i < 5; i++;) { } // extra semicolon — compile error
 ```
 
 ---
@@ -62,7 +62,7 @@ Arrays aur `Iterable` collections traverse karne ke liye:
 
 ```java
 for (dataType variable : arrayOrCollection) {
-    // body
+ // body
 }
 ```
 
@@ -72,7 +72,7 @@ for (dataType variable : arrayOrCollection) {
 int[] x = {10, 20, 30, 40};
 
 for (int i : x) {
-    System.out.println(i);
+ System.out.println(i);
 }
 ```
 
@@ -100,8 +100,8 @@ Output:
 
 ```java
 for (int i = 1; i <= 5; i++) {
-    if (i == 3) break;
-    System.out.println(i);
+ if (i == 3) break;
+ System.out.println(i);
 }
 // Output: 1, 2
 ```
@@ -112,8 +112,8 @@ for (int i = 1; i <= 5; i++) {
 
 ```java
 for (int i = 1; i <= 5; i++) {
-    if (i == 3) continue;
-    System.out.println(i);
+ if (i == 3) continue;
+ System.out.println(i);
 }
 // Output: 1, 2, 4, 5
 ```
@@ -137,7 +137,7 @@ Java compiler **constant expressions** ke liye compile-time analysis karta hai.
 ```java
 while (true) {
 }
-System.out.println("Hello");   // ❌ unreachable statement
+System.out.println("Hello"); // unreachable statement
 ```
 
 Compiler jaanta hai ki `while(true)` kabhi terminate nahi hoga.
@@ -149,7 +149,7 @@ boolean x = true;
 
 while (x) {
 }
-System.out.println("Hello");   // ✅ no compile error
+System.out.println("Hello"); // no compile error
 ```
 
 `x` variable hai — compiler exactly prove nahi kar sakta ki loop infinite hai.
@@ -158,21 +158,21 @@ System.out.println("Hello");   // ✅ no compile error
 
 ---
 
-## 🧠 Interview Traps
+## Interview Traps
 
 | Trap | Answer |
 |------|--------|
-| `while (0)` valid hai? | ❌ No — must be boolean |
+| `while (0)` valid hai? | No — must be boolean |
 | `for` loop me kitne semicolons? | Exactly **2** |
-| `for (;;)` valid hai? | ✅ Yes — infinite loop |
-| `while(true) { } sop("hi")` compile hoga? | ❌ No — unreachable statement |
-| `boolean x = true; while(x) { } sop("hi")` compile hoga? | ✅ Yes — variable condition |
-| `continue` switch me allowed hai? | ❌ No — loop me hi allowed |
-| `break` switch me allowed hai? | ✅ Yes |
+| `for (;;)` valid hai? | Yes — infinite loop |
+| `while(true) { } sop("hi")` compile hoga? | No — unreachable statement |
+| `boolean x = true; while(x) { } sop("hi")` compile hoga? | Yes — variable condition |
+| `continue` switch me allowed hai? | No — loop me hi allowed |
+| `break` switch me allowed hai? | Yes |
 
 ---
 
-## ⚡ Quick Revision
+## Quick Revision
 
 ```text
 LOOPS
@@ -186,10 +186,10 @@ break → exits nearest loop/switch
 continue → skips current iteration, continues next
 
 UNREACHABLE CODE
-→ Constant true condition + code after loop → ❌ compile error
-→ Variable condition + code after loop → ✅ allowed
+→ Constant true condition + code after loop → compile error
+→ Variable condition + code after loop → allowed
 ```
 
 ---
 
-[⬅️ Previous: Control Statements](./10-control-statements.md) · [📖 Back to Core Java Index](./README.md) · [Next → I/O & Scanner ➡️](./12-io-and-scanner.md)
+[Previous: Control Statements](./10-control-statements.md) · [Back to Core Java Index](./README.md) · [Next: I/O & Scanner](./12-io-and-scanner.md)

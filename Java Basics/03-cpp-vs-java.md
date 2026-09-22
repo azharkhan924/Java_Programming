@@ -1,8 +1,8 @@
-# 🆚 C++ vs Java — Key Differences
+# C++ vs Java — Key Differences
 
 ---
 
-## 📊 Comparison Table
+## Comparison Table
 
 | Feature | C++ | Java |
 |---------|-----|------|
@@ -23,21 +23,21 @@
 
 ---
 
-## 🔍 Platform Dependence vs Independence
+## Platform Dependence vs Independence
 
 ### C++ (Platform Dependent)
 ```text
-  source.cpp  →  Compiler  →  native .exe/.o  →  Only runs on SAME OS
+ source.cpp → Compiler → native .exe/.o → Only runs on SAME OS
 ```
 
 ### Java (Platform Independent)
 ```text
-  Demo.java  →  javac  →  Demo.class (bytecode)  →  Runs on ANY JVM
+ Demo.java → javac → Demo.class (bytecode) → Runs on ANY JVM
 ```
 
 ---
 
-## 🧠 Why Java Chose These Differences
+## Why Java Chose These Differences
 
 | C++ Feature Removed | Reason |
 |---------------------|--------|
@@ -49,7 +49,7 @@
 
 ---
 
-## 💡 Important Points to Remember
+## Important Points to Remember
 
 - Java ko often **"C++ minus the complexities"** kaha jata hai
 - Java ne C/C++ ka syntax adopt kiya but unsafe features hata diye
@@ -58,6 +58,6 @@
 
 ---
 
-> **💡 Interview Tip:** "Java is platform independent but JVM is platform dependent" — ye line yaad rakhna, bahut common interview question hai!
+> ** Interview Tip:** "Java is platform independent but JVM is platform dependent" — ye line yaad rakhna, bahut common interview question hai!
 
-[⬅️ Back to Index](./README.md) | [Next: Java Features ➡️](./04-java-features.md)
+[ Back to Index](./README.md) | [Next: Java Features](./04-java-features.md)

@@ -1,8 +1,8 @@
-# ⚡ Core Java — Quick Revision Cheat Sheet
+# Core Java — Quick Revision Cheat Sheet
 
 ---
 
-## 📦 Arrays
+## Arrays
 
 ```text
 → Indexed collection of same type
@@ -16,7 +16,7 @@
 
 ---
 
-## 🔢 Variables
+## Variables
 
 ```text
 Local Variable → must initialize before use
@@ -37,7 +37,7 @@ Floating literal default = double (use f for float)
 
 ---
 
-## 🏗️ Constructors
+## Constructors
 
 ```text
 → No return type (not even void)
@@ -60,7 +60,7 @@ Parent IB → Parent Ctor → Child IB → Child Ctor
 
 ---
 
-## ⚡ Static
+## Static
 
 ```text
 static variable → class-level / shared
@@ -68,12 +68,12 @@ static method → no object needed, cannot access instance directly
 static block → class initialization time, multiple OK
 static import → use static members without class name
 static nested class → nested only, no outer object needed
-→ this ❌ | super ❌ in static context
+→ this | super in static context
 ```
 
 ---
 
-## 🧬 Inheritance & Final
+## Inheritance & Final
 
 ```text
 Supported: Single, Multilevel, Hierarchical
@@ -87,7 +87,7 @@ blank final → must be explicitly assigned (not auto 0)
 
 ---
 
-## 🧩 Abstract & Interface
+## Abstract & Interface
 
 ```text
 Abstract Class:
@@ -105,7 +105,7 @@ Interface:
 
 ---
 
-## 🎭 Polymorphism
+## Polymorphism
 
 ```text
 OVERLOADING (Compile-time)
@@ -125,20 +125,20 @@ HIDING
 
 ---
 
-## 🔐 Access Modifiers
+## Access Modifiers
 
 ```text
-private   → same class
-default   → same package
+private → same class
+default → same package
 protected → same package + subclass
-public    → everywhere
+public → everywhere
 
 Overriding: can maintain/increase access, CANNOT reduce
 ```
 
 ---
 
-## 📢 Varargs
+## Varargs
 
 ```text
 Syntax: dataType... name (Java 5+)
@@ -151,18 +151,18 @@ Syntax: dataType... name (Java 5+)
 
 ---
 
-## 🔀 Control Statements
+## Control Statements
 
 ```text
 if → condition MUST be boolean (0 ≠ false in Java)
 switch → byte, short, char, int, String(7+), enum
-       → NOT: long, float, double, boolean
-       → No duplicate case/default
+ → NOT: long, float, double, boolean
+ → No duplicate case/default
 ```
 
 ---
 
-## 🔁 Loops
+## Loops
 
 ```text
 while, do-while, for, for-each
@@ -170,13 +170,13 @@ for → exactly 2 semicolons | for(;;) = infinite
 for-each → for(type x : array/collection)
 break → exits loop/switch
 continue → skips iteration (loop only)
-Constant true + code after = unreachable ❌
-Variable true + code after = allowed ✅
+Constant true + code after = unreachable 
+Variable true + code after = allowed 
 ```
 
 ---
 
-## 📥 I/O
+## I/O
 
 ```text
 System.in → InputStreamReader → BufferedReader
@@ -188,14 +188,14 @@ Scanner: next()=token, nextInt()=int, nextLine()=line
 
 ---
 
-## 🚀 main() Method
+## main() Method
 
 ```text
 public static void main(String[] args)
-public  → JVM accessible
-static  → no object needed
-void    → no return
-args    → String[] command-line arguments
+public → JVM accessible
+static → no object needed
+void → no return
+args → String[] command-line arguments
 ```
 
 ```text
@@ -205,7 +205,7 @@ System(class) → out(static PrintStream) → println()(method)
 
 ---
 
-## 🧠 40 Must-Remember Facts
+## 40 Must-Remember Facts
 
 1. Local variable → no default value, must initialize
 2. Instance variable → default value automatically
@@ -220,7 +220,7 @@ System(class) → out(static PrintStream) → println()(method)
 11. Instance block executes before constructor
 12. Static block at class initialization
 13. `this` / `super` not available in static context
-14. Multiple class inheritance ❌, multiple interfaces ✅
+14. Multiple class inheritance , multiple interfaces 
 15. `final` variable cannot reassign
 16. `final` method cannot override
 17. `final` class cannot extend
@@ -250,4 +250,4 @@ System(class) → out(static PrintStream) → println()(method)
 
 ---
 
-[📖 Back to Core Java Index](./README.md)
+[Back to Core Java Index](./README.md)

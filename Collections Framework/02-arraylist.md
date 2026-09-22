@@ -1,4 +1,4 @@
-# 📋 ArrayList — Deep Dive
+# ArrayList — Deep Dive
 
 > **Summary:** ArrayList constructors, initial capacity & growth formula, `RandomAccess` / `Serializable` / `Cloneable` marker interfaces, `toString()` behavior, and best/worst use case scenarios.
 
@@ -10,17 +10,17 @@
 
 ```text
 ArrayList Key Properties:
-✅ Maintains insertion order
-✅ Allows duplicate elements
-✅ Allows null values (multiple nulls too)
-✅ Implements RandomAccess → Fast index-based retrieval O(1)
-❌ NOT synchronized (Not thread-safe by default)
+ Maintains insertion order
+ Allows duplicate elements
+ Allows null values (multiple nulls too)
+ Implements RandomAccess → Fast index-based retrieval O(1)
+ NOT synchronized (Not thread-safe by default)
 ```
 
 ### Class Declaration:
 ```java
 public class ArrayList<E> extends AbstractList<E>
-        implements List<E>, RandomAccess, Cloneable, Serializable
+ implements List<E>, RandomAccess, Cloneable, Serializable
 ```
 
 ---
@@ -59,9 +59,9 @@ New Capacity = (Old Capacity * 3 / 2) + 1
 
 Example:
 Initial Capacity = 10
-After 1st growth  = (10 * 3/2) + 1 = 16
-After 2nd growth  = (16 * 3/2) + 1 = 25
-After 3rd growth  = (25 * 3/2) + 1 = 38
+After 1st growth = (10 * 3/2) + 1 = 16
+After 2nd growth = (16 * 3/2) + 1 = 25
+After 3rd growth = (25 * 3/2) + 1 = 38
 ```
 
 ### What Happens Internally?
@@ -72,7 +72,7 @@ After 3rd growth  = (25 * 3/2) + 1 = 38
 4. ArrayList's internal reference points to the new array
 ```
 
-> ⚠️ **Performance Warning:** If the starting capacity is too small and many elements are added, repeated resizing + copying degrades performance. Specify initial capacity if the approximate size is known!
+> Note: **Performance Warning:** If the starting capacity is too small and many elements are added, repeated resizing + copying degrades performance. Specify initial capacity if the approximate size is known!
 
 ---
 
@@ -90,11 +90,11 @@ ArrayList implements 3 important marker interfaces:
 ```java
 ArrayList<String> list = new ArrayList<>();
 
-System.out.println(list instanceof RandomAccess);  // true
-System.out.println(list instanceof Serializable);  // true
-System.out.println(list instanceof Cloneable);      // true
-System.out.println(list instanceof List);           // true
-System.out.println(list instanceof Collection);     // true
+System.out.println(list instanceof RandomAccess); // true
+System.out.println(list instanceof Serializable); // true
+System.out.println(list instanceof Cloneable); // true
+System.out.println(list instanceof List); // true
+System.out.println(list instanceof Collection); // true
 ```
 
 ---
@@ -107,7 +107,7 @@ ArrayList's `toString()` method is already overridden (in `AbstractCollection`):
 ArrayList<Integer> nums = new ArrayList<>();
 nums.add(10); nums.add(20); nums.add(30);
 
-System.out.println(nums);           // [10, 20, 30] ← Clean readable output!
+System.out.println(nums); // [10, 20, 30] ← Clean readable output!
 System.out.println(nums.toString()); // [10, 20, 30] ← Same result
 ```
 
@@ -117,12 +117,12 @@ System.out.println(nums.toString()); // [10, 20, 30] ← Same result
 
 ## 6. ArrayList — Best & Worst Use Cases
 
-### ✅ Best Choice (Use ArrayList When):
+### Best Choice (Use ArrayList When):
 - **Frequent retrieval / read operations** (index-based access is O(1))
 - Data is mostly **sequential reads** (e.g., display a list of products, render table rows)
 - Elements are inserted/removed mostly **at the end** (`add()` is amortized O(1))
 
-### ❌ Worst Choice (Avoid ArrayList When):
+### Worst Choice (Avoid ArrayList When):
 - **Frequent insertion/deletion in the middle** — elements must be shifted → O(n)!
 - **Thread-safety** is required — ArrayList is not synchronized, race conditions can occur
 - Elements are **frequently added/removed at the beginning** — LinkedList is better for this
@@ -130,30 +130,30 @@ System.out.println(nums.toString()); // [10, 20, 30] ← Same result
 ```text
 Operation Performance (ArrayList):
 ┌────────────────────────┬──────────┐
-│ Operation              │ Time     │
+│ Operation │ Time │
 ├────────────────────────┼──────────┤
-│ get(index)             │ O(1) ✅  │
-│ add(element) at end    │ O(1)* ✅ │  (* amortized, resize excluded)
-│ add(index, element)    │ O(n) ❌  │  (shift elements right)
-│ remove(index)          │ O(n) ❌  │  (shift elements left)
-│ contains(element)      │ O(n)     │  (linear search)
-│ size()                 │ O(1)     │
+│ get(index) │ O(1) │
+│ add(element) at end │ O(1)* │ (* amortized, resize excluded)
+│ add(index, element) │ O(n) │ (shift elements right)
+│ remove(index) │ O(n) │ (shift elements left)
+│ contains(element) │ O(n) │ (linear search)
+│ size() │ O(1) │
 └────────────────────────┴──────────┘
 ```
 
 ---
 
-## 🧠 Interview Quick Traps
+## Interview Quick Traps
 
 | Trap | Answer |
 |------|--------|
 | What is ArrayList's default initial capacity? | **10** |
 | What is the capacity growth formula? | `(OldCapacity * 3/2) + 1` |
 | How many methods does `RandomAccess` interface have? | **0** (It is a Marker Interface!) |
-| Can `null` be stored in ArrayList? | ✅ Yes, multiple nulls are allowed. |
-| Is ArrayList thread-safe? | ❌ No. Use `Collections.synchronizedList()` or `CopyOnWriteArrayList` for thread-safety. |
+| Can `null` be stored in ArrayList? | Yes, multiple nulls are allowed. |
+| Is ArrayList thread-safe? | No. Use `Collections.synchronizedList()` or `CopyOnWriteArrayList` for thread-safety. |
 | What data structure does ArrayList use internally? | An ordinary **resizable array** (`Object[]`) |
 
 ---
 
-[⬅️ Previous: Framework Intro](./01-collection-framework-intro.md) · [📖 Back to Collections Index](./README.md) · [Next → Vector & Stack ➡️](./03-vector-and-stack.md)
+[Previous: Framework Intro](./01-collection-framework-intro.md) · [Back to Collections Index](./README.md) · [Next: Vector & Stack](./03-vector-and-stack.md)

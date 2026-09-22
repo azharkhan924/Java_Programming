@@ -1,4 +1,4 @@
-# 📢 Variable Arguments (Varargs)
+# Variable Arguments (Varargs)
 
 ---
 
@@ -21,7 +21,7 @@ void sum(int a, int b, int c, int d) { }
 
 ```java
 void sum(int... x) {
-    // x is internally an array
+ // x is internally an array
 }
 ```
 
@@ -38,9 +38,9 @@ returnType methodName(dataType... variableName)
 Valid styles (spaces around `...`):
 
 ```java
-void sum(int... a)     // ✅
-void sum(int ...a)     // ✅
-void sum(int...a)      // ✅
+void sum(int... a) // 
+void sum(int ...a) // 
+void sum(int...a) // 
 ```
 
 > Must have exactly **three dots (`...`)**.
@@ -52,22 +52,22 @@ void sum(int...a)      // ✅
 ### Rule 1 — Last Parameter Hona Chahiye
 
 ```java
-void display(int x, int... y)    // ✅ valid
-void display(int... x, int y)    // ❌ invalid
+void display(int x, int... y) // valid
+void display(int... x, int y) // invalid
 ```
 
 ### Rule 2 — Only ONE Varargs Parameter
 
 ```java
-void display(int x, int... y)      // ✅ valid
-void display(int... x, int... y)   // ❌ invalid
+void display(int x, int... y) // valid
+void display(int... x, int... y) // invalid
 ```
 
 ### Rule 3 — Varargs & Array Cannot Coexist as Overloads
 
 ```java
-void sum(int... a)    // same effective signature
-void sum(int[] a)     // ❌ cannot coexist
+void sum(int... a) // same effective signature
+void sum(int[] a) // cannot coexist
 ```
 
 ---
@@ -76,9 +76,9 @@ void sum(int[] a)     // ❌ cannot coexist
 
 | Feature | Varargs `int... a` | Array `int[] a` |
 |---------|-------------------|-----------------|
-| Zero args | ✅ `sum()` | ❌ Not possible |
-| Direct values | ✅ `sum(10, 20)` | ❌ Not possible |
-| Array reference | ✅ `sum(arr)` | ✅ `sum(arr)` |
+| Zero args | `sum()` | Not possible |
+| Direct values | `sum(10, 20)` | Not possible |
+| Array reference | `sum(arr)` | `sum(arr)` |
 | Overloading priority | **Lowest** | — |
 
 ---
@@ -87,25 +87,25 @@ void sum(int[] a)     // ❌ cannot coexist
 
 ```java
 class A {
-    void sum(int... a) {
-        int s = 0;
-        for (int i : a) {
-            s = s + i;
-        }
-        System.out.println(s);
-    }
+ void sum(int... a) {
+ int s = 0;
+ for (int i : a) {
+ s = s + i;
+ }
+ System.out.println(s);
+ }
 
-    public static void main(String[] args) {
-        A obj = new A();
+ public static void main(String[] args) {
+ A obj = new A();
 
-        obj.sum();                     // 0
-        obj.sum(10);                   // 10
-        obj.sum(10, 20);               // 30
-        obj.sum(100, 200, 300);        // 600
+ obj.sum(); // 0
+ obj.sum(10); // 10
+ obj.sum(10, 20); // 30
+ obj.sum(100, 200, 300); // 600
 
-        int[] x = {10, 20, 30, 40};
-        obj.sum(x);                    // 100
-    }
+ int[] x = {10, 20, 30, 40};
+ obj.sum(x); // 100
+ }
 }
 ```
 
@@ -137,20 +137,20 @@ Variable number of arguments accept karne ki capability varargs se aati hai.
 
 ---
 
-## 🧠 Interview Traps
+## Interview Traps
 
 | Trap | Answer |
 |------|--------|
-| `void sum(int... a)` ko zero args ke saath call kar sakte hain? | ✅ Yes |
-| `void sum(int[] a)` ko zero args ke saath call kar sakte hain? | ❌ No |
-| `int... a` aur `int[] a` dono overloaded methods ho sakte hain? | ❌ No — same signature |
+| `void sum(int... a)` ko zero args ke saath call kar sakte hain? | Yes |
+| `void sum(int[] a)` ko zero args ke saath call kar sakte hain? | No |
+| `int... a` aur `int[] a` dono overloaded methods ho sakte hain? | No — same signature |
 | Varargs method me argument ki position? | **Last parameter** hona chahiye |
 | Ek method me kitne varargs parameters? | **Sirf ek** |
 | Varargs ki overloading priority? | **Lowest / least** |
 
 ---
 
-## ⚡ Quick Revision
+## Quick Revision
 
 ```text
 Varargs
@@ -166,4 +166,4 @@ Varargs
 
 ---
 
-[⬅️ Previous: Access Modifiers](./08-access-modifiers.md) · [📖 Back to Core Java Index](./README.md) · [Next → Control Statements ➡️](./10-control-statements.md)
+[Previous: Access Modifiers](./08-access-modifiers.md) · [Back to Core Java Index](./README.md) · [Next: Control Statements](./10-control-statements.md)

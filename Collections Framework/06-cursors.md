@@ -1,4 +1,4 @@
-# 🔍 Cursors — Enumeration, Iterator & ListIterator
+# Cursors — Enumeration, Iterator & ListIterator
 
 > **Summary:** 3 cursor types for traversing Java collections, their methods, forward vs bidirectional traversal, fail-fast behavior, and when to use which cursor.
 
@@ -10,8 +10,8 @@ Cursors are used to **traverse (access one-by-one) the elements** of a collectio
 
 ```text
 Cursors in Java:
-1. Enumeration  → Oldest (Java 1.0), only for Vector/legacy classes
-2. Iterator     → Universal (Java 1.2), works with any Collection
+1. Enumeration → Oldest (Java 1.0), only for Vector/legacy classes
+2. Iterator → Universal (Java 1.2), works with any Collection
 3. ListIterator → Most Powerful (Java 1.2), only for List implementations
 ```
 
@@ -30,16 +30,16 @@ Enumeration<String> e = v.elements(); // Vector's special method
 
 ### Methods (Only 2):
 ```java
-while (e.hasMoreElements()) {       // Is there a next element?
-    String val = e.nextElement();   // Return next element
-    System.out.println(val);
+while (e.hasMoreElements()) { // Is there a next element?
+ String val = e.nextElement(); // Return next element
+ System.out.println(val);
 }
 ```
 
 ### Limitations:
-- ❌ **Forward direction** only
-- ❌ Cannot **remove elements** during traversal
-- ❌ Works only with **legacy classes** (not with ArrayList, HashSet, etc.)
+- **Forward direction** only
+- Cannot **remove elements** during traversal
+- Works only with **legacy classes** (not with ArrayList, HashSet, etc.)
 
 ---
 
@@ -56,22 +56,22 @@ Iterator<String> it = list.iterator(); // Collection interface method
 
 ### Methods (3 Methods):
 ```java
-while (it.hasNext()) {          // Is there a next element?
-    String val = it.next();     // Return next element
+while (it.hasNext()) { // Is there a next element?
+ String val = it.next(); // Return next element
 
-    if (val.equals("Y")) {
-        it.remove();            // ✅ Safe removal during iteration!
-    }
+ if (val.equals("Y")) {
+ it.remove(); // Safe removal during iteration!
+ }
 }
 ```
 
 ### Key Advantages over Enumeration:
-- ✅ **Universal** — works with any Collection
-- ✅ **Safe `remove()`** — can safely delete elements during iteration
+- **Universal** — works with any Collection
+- **Safe `remove()`** — can safely delete elements during iteration
 
 ### Limitations:
-- ❌ **Forward direction** only
-- ❌ Cannot **add or replace** elements during traversal (only remove)
+- **Forward direction** only
+- Cannot **add or replace** elements during traversal (only remove)
 
 ---
 
@@ -82,8 +82,8 @@ while (it.hasNext()) {          // Is there a next element?
 ### How to Get ListIterator:
 ```java
 ArrayList<String> list = new ArrayList<>(List.of("A", "B", "C", "D"));
-ListIterator<String> lit = list.listIterator();       // Start from index 0
-ListIterator<String> lit2 = list.listIterator(2);     // Start from index 2
+ListIterator<String> lit = list.listIterator(); // Start from index 0
+ListIterator<String> lit2 = list.listIterator(2); // Start from index 2
 ```
 
 ### Methods (9 Methods — Most Rich Cursor):
@@ -91,16 +91,16 @@ ListIterator<String> lit2 = list.listIterator(2);     // Start from index 2
 #### Forward Traversal:
 ```java
 while (lit.hasNext()) {
-    int index = lit.nextIndex();    // Index of next element
-    String val = lit.next();        // Return next element + move forward
+ int index = lit.nextIndex(); // Index of next element
+ String val = lit.next(); // Return next element + move forward
 }
 ```
 
 #### Backward Traversal:
 ```java
 while (lit.hasPrevious()) {
-    int index = lit.previousIndex(); // Index of previous element
-    String val = lit.previous();     // Return previous element + move backward
+ int index = lit.previousIndex(); // Index of previous element
+ String val = lit.previous(); // Return previous element + move backward
 }
 ```
 
@@ -108,33 +108,33 @@ while (lit.hasPrevious()) {
 ```java
 ListIterator<String> lit = list.listIterator();
 while (lit.hasNext()) {
-    String val = lit.next();
+ String val = lit.next();
 
-    if (val.equals("B")) {
-        lit.remove();          // ✅ Remove current element
-    }
-    if (val.equals("C")) {
-        lit.set("C-MODIFIED"); // ✅ Replace current element!
-    }
-    if (val.equals("D")) {
-        lit.add("NEW");        // ✅ Insert new element at current position!
-    }
+ if (val.equals("B")) {
+ lit.remove(); // Remove current element
+ }
+ if (val.equals("C")) {
+ lit.set("C-MODIFIED"); // Replace current element!
+ }
+ if (val.equals("D")) {
+ lit.add("NEW"); // Insert new element at current position!
+ }
 }
 ```
 
 ---
 
-## 5. ⚖️ The Ultimate Comparison: Enumeration vs Iterator vs ListIterator
+## 5. ⚖ The Ultimate Comparison: Enumeration vs Iterator vs ListIterator
 
 | Feature | Enumeration | Iterator | ListIterator |
 |---------|-------------|----------|--------------|
 | **Introduced** | Java 1.0 | Java 1.2 | Java 1.2 |
 | **Works With** | Legacy only (Vector, Stack, Hashtable) | **Any Collection** (Universal) | **List only** (ArrayList, LinkedList, Vector) |
-| **Direction** | Forward only ➡️ | Forward only ➡️ | **Bidirectional** ⬅️➡️ |
-| **Read** | ✅ `nextElement()` | ✅ `next()` | ✅ `next()` + `previous()` |
-| **Remove** | ❌ Not possible | ✅ `remove()` | ✅ `remove()` |
-| **Add** | ❌ | ❌ | ✅ `add()` |
-| **Replace** | ❌ | ❌ | ✅ `set()` |
+| **Direction** | Forward only | Forward only | **Bidirectional** |
+| **Read** | `nextElement()` | `next()` | `next()` + `previous()` |
+| **Remove** | Not possible | `remove()` | `remove()` |
+| **Add** | No | No | `add()` |
+| **Replace** | No | No | `set()` |
 | **Method Count** | 2 | 3 | 9 |
 | **How to Get** | `vector.elements()` | `collection.iterator()` | `list.listIterator()` |
 
@@ -150,9 +150,9 @@ ArrayList<String> list = new ArrayList<>(List.of("A", "B", "C"));
 Iterator<String> it = list.iterator();
 
 while (it.hasNext()) {
-    String s = it.next();
-    list.remove(s);  // ❌ Direct modification → ConcurrentModificationException!
-    // it.remove();  // ✅ Use iterator's remove() — this is safe
+ String s = it.next();
+ list.remove(s); // Direct modification → ConcurrentModificationException!
+ // it.remove(); // Use iterator's remove() — this is safe
 }
 ```
 
@@ -162,22 +162,22 @@ Iterators of `CopyOnWriteArrayList` and `ConcurrentHashMap` work on a **snapshot
 ```java
 CopyOnWriteArrayList<String> cowList = new CopyOnWriteArrayList<>(List.of("A", "B"));
 for (String s : cowList) {
-    cowList.add("NEW"); // ✅ No exception! Iterator traverses a snapshot
+ cowList.add("NEW"); // No exception! Iterator traverses a snapshot
 }
 ```
 
 ---
 
-## 🧠 Interview Quick Traps
+## Interview Quick Traps
 
 | Trap | Answer |
 |------|--------|
-| Is Enumeration universal? | ❌ No! It only works with legacy classes (Vector, Stack, Hashtable). |
-| Does Iterator have an `add()` method? | ❌ No! Only `hasNext()`, `next()`, `remove()`. Use ListIterator for `add()`. |
-| Will ListIterator work with HashSet? | ❌ No! ListIterator works only with `List` implementations. |
-| Is direct `list.remove()` safe during iteration? | ❌ Can throw `ConcurrentModificationException`. Use **`iterator.remove()`** instead. |
+| Is Enumeration universal? | No! It only works with legacy classes (Vector, Stack, Hashtable). |
+| Does Iterator have an `add()` method? | No! Only `hasNext()`, `next()`, `remove()`. Use ListIterator for `add()`. |
+| Will ListIterator work with HashSet? | No! ListIterator works only with `List` implementations. |
+| Is direct `list.remove()` safe during iteration? | Can throw `ConcurrentModificationException`. Use **`iterator.remove()`** instead. |
 | Who throws `ConcurrentModificationException`? | **Fail-Fast** iterators (those of ArrayList, HashSet, HashMap, etc.). |
 
 ---
 
-[⬅️ Previous: Synchronized Collections](./05-synchronized-collections.md) · [📖 Back to Collections Index](./README.md) · [Next → Set & HashSet ➡️](./07-set-and-hashset.md)
+[Previous: Synchronized Collections](./05-synchronized-collections.md) · [Back to Collections Index](./README.md) · [Next: Set & HashSet](./07-set-and-hashset.md)

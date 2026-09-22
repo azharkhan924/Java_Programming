@@ -1,4 +1,4 @@
-# 🔢 BigInteger
+# BigInteger
 
 ---
 
@@ -14,13 +14,13 @@ Normal integer types ki **fixed limit** hoti hai:
 Jab number in se bhi bada ho:
 
 ```java
-long x = 999999999999999999999999L;    // ❌ exceeds long range
+long x = 999999999999999999999999L; // exceeds long range
 ```
 
 ### Solution — BigInteger
 
 ```java
-BigInteger x = new BigInteger("999999999999999999999999");    // ✅
+BigInteger x = new BigInteger("999999999999999999999999"); // 
 ```
 
 - **Package:** `java.math`
@@ -48,13 +48,13 @@ BigInteger y = BigInteger.valueOf(20);
 BigInteger x = new BigInteger("123456789123456789123456789");
 ```
 
-### ⚠️ Common Trap
+### Note: Common Trap
 
 ```java
-// ❌ Wrong — literal exceeds long range
+// Wrong — literal exceeds long range
 BigInteger x = BigInteger.valueOf(999999999999999999999L);
 
-// ✅ Correct — use String
+// Correct — use String
 BigInteger x = new BigInteger("999999999999999999999");
 ```
 
@@ -65,14 +65,14 @@ BigInteger x = new BigInteger("999999999999999999999");
 BigInteger me **normal operators directly use nahi** kar sakte:
 
 ```java
-// ❌ Wrong
+// Wrong
 x + y
 x - y
 x * y
 ```
 
 ```java
-// ✅ Correct
+// Correct
 x.add(y);
 x.subtract(y);
 x.multiply(y);
@@ -86,19 +86,19 @@ x.mod(y);
 BigInteger x = BigInteger.valueOf(10);
 BigInteger y = BigInteger.valueOf(20);
 
-System.out.println(x.add(y));        // 30
-System.out.println(x.subtract(y));   // -10
-System.out.println(x.multiply(y));   // 200
-System.out.println(y.divide(x));     // 2
-System.out.println(x.mod(y));        // 10
+System.out.println(x.add(y)); // 30
+System.out.println(x.subtract(y)); // -10
+System.out.println(x.multiply(y)); // 200
+System.out.println(y.divide(x)); // 2
+System.out.println(x.mod(y)); // 10
 ```
 
-### ⚠️ Immutable — Result Store Karo
+### Note: Immutable — Result Store Karo
 
 ```java
-x.add(y);       // ❌ x change NAHI hota!
+x.add(y); // x change NAHI hota!
 
-x = x.add(y);   // ✅ result re-assign karo
+x = x.add(y); // result re-assign karo
 ```
 
 ---
@@ -127,10 +127,10 @@ x = x.add(y);   // ✅ result re-assign karo
 ## 5. Predefined Constants
 
 ```java
-BigInteger.ZERO    // 0
-BigInteger.ONE     // 1
-BigInteger.TWO     // 2 (Java 9+)
-BigInteger.TEN     // 10
+BigInteger.ZERO // 0
+BigInteger.ONE // 1
+BigInteger.TWO // 2 (Java 9+)
+BigInteger.TEN // 10
 ```
 
 ---
@@ -138,15 +138,15 @@ BigInteger.TEN     // 10
 ## 6. Comparison — Don't Use `==`
 
 ```java
-// ❌ Wrong — reference comparison
+// Wrong — reference comparison
 if (x == y)
 
-// ✅ Correct — equals()
+// Correct — equals()
 if (x.equals(y))
 
-// ✅ Correct — compareTo()
+// Correct — compareTo()
 if (x.compareTo(y) < 0)
-    System.out.println("x is smaller");
+ System.out.println("x is smaller");
 ```
 
 ### `compareTo()` Returns
@@ -166,37 +166,37 @@ if (x.compareTo(y) < 0)
 | Size | Fixed (32-bit) | Fixed (64-bit) | Arbitrary precision |
 | Type | Primitive | Primitive | Class/Object |
 | Operators | `+ - * /` | `+ - * /` | Methods only |
-| Very large numbers | ❌ | Limited | ✅ |
+| Very large numbers | No | Limited | Yes |
 | Package | `java.lang` | `java.lang` | `java.math` |
-| Immutable | — | — | ✅ |
+| Immutable | — | — | Yes |
 
 ---
 
 ## 8. Use Cases
 
-- 🔢 Very large mathematical calculations
-- 🏆 Competitive Programming
-- 🔐 Cryptography (RSA, etc.)
-- 📊 Large factorials / Fibonacci
-- 🎯 Exact integer calculations (no overflow)
+- Very large mathematical calculations
+- Competitive Programming
+- Cryptography (RSA, etc.)
+- Large factorials / Fibonacci
+- Exact integer calculations (no overflow)
 
 ---
 
-## 🧠 Interview Quick Questions
+## Interview Quick Questions
 
 | Question | Answer |
 |----------|--------|
 | `BigInteger` kaunse package me hai? | `java.math` |
-| `BigInteger` immutable hai? | ✅ Yes |
-| Operators directly use kar sakte hain? | ❌ No — methods use karo |
-| `x.add(y)` se `x` change hota hai? | ❌ No — new object return hota hai |
+| `BigInteger` immutable hai? | Yes |
+| Operators directly use kar sakte hain? | No — methods use karo |
+| `x.add(y)` se `x` change hota hai? | No — new object return hota hai |
 | `BigInteger.TWO` kab se available? | Java 9+ |
 | Comparison kaise karein? | `equals()` ya `compareTo()` |
 | Decimal values ke liye kya use karein? | `BigDecimal` |
 
 ---
 
-## ⚡ Quick Reference
+## Quick Reference
 
 ```text
 BigInteger
@@ -212,4 +212,4 @@ BigInteger
 
 ---
 
-[⬅️ Previous: Strings & String Pool](./05-strings-and-pool.md) · [📖 Back to OOP Index](./README.md) · [Next → Garbage Collection ➡️](./07-garbage-collection.md)
+[Previous: Strings & String Pool](./05-strings-and-pool.md) · [Back to OOP Index](./README.md) · [Next: Garbage Collection](./07-garbage-collection.md)

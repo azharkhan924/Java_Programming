@@ -1,4 +1,4 @@
-# 🔐 Access Modifiers
+# Access Modifiers
 
 ---
 
@@ -17,7 +17,7 @@ Java me **4 main access modifiers** hain:
 
 ## 2. Access Levels — Detailed
 
-### 🔒 `private`
+### `private`
 
 ```java
 private int x;
@@ -26,16 +26,16 @@ private int x;
 - Accessible **only inside the same class**
 - Other classes (even same package) access nahi kar sakti
 
-### 📦 default (no modifier)
+### default (no modifier)
 
 ```java
-int x;    // no keyword — default access
+int x; // no keyword — default access
 ```
 
 - Accessible within the **same package**
 - Dusre package se access nahi kar sakte
 
-### 🛡️ `protected`
+### `protected`
 
 ```java
 protected int x;
@@ -44,7 +44,7 @@ protected int x;
 - Same package ke andar → fully accessible
 - **Different package** me sirf **subclass** ke through accessible (via inheritance)
 
-### 🌐 `public`
+### `public`
 
 ```java
 public int x;
@@ -58,10 +58,10 @@ public int x;
 
 | Modifier | Same Class | Same Package | Subclass (Other Package) | Other Package |
 |----------|-----------|-------------|------------------------|--------------|
-| `private` | ✅ | ❌ | ❌ | ❌ |
-| default | ✅ | ✅ | ❌ | ❌ |
-| `protected` | ✅ | ✅ | ✅ | ❌ |
-| `public` | ✅ | ✅ | ✅ | ✅ |
+| `private` | Yes | No | No | No |
+| default | Yes | Yes | No | No |
+| `protected` | Yes | Yes | Yes | No |
+| `public` | Yes | Yes | Yes | Yes |
 
 ---
 
@@ -70,52 +70,52 @@ public int x;
 Overriding ke time child method ka access level **equal ya wider** hona chahiye:
 
 ```text
-Parent: private   → not overridden (not inherited)
-Parent: default   → child: default / protected / public
+Parent: private → not overridden (not inherited)
+Parent: default → child: default / protected / public
 Parent: protected → child: protected / public
-Parent: public    → child: public only
+Parent: public → child: public only
 ```
 
 > **Cannot reduce access** — sirf maintain ya increase kar sakte hain.
 
 ```java
-// ❌ Invalid — weaker access
+// Invalid — weaker access
 interface A {
-    void show();    // public abstract
+ void show(); // public abstract
 }
 
 class B implements A {
-    void show() { }  // ❌ attempting to assign weaker access (default < public)
+ void show() { } // attempting to assign weaker access (default < public)
 }
 
-// ✅ Valid
+// Valid
 class B implements A {
-    public void show() { }
+ public void show() { }
 }
 ```
 
 ---
 
-## 🧠 Memory Trick
+## Memory Trick
 
 ```text
 Access Level (narrow → wide):
 
 private → default → protected → public
-  🔒        📦         🛡️         🌐
+ 
 ```
 
-> Overriding me: **Left → Right** allowed, **Right → Left** ❌ not allowed.
+> Overriding me: **Left → Right** allowed, **Right → Left** not allowed.
 
 ---
 
-## ⚡ Quick Revision
+## Quick Revision
 
 ```text
-private   → same class only
-default   → same package
+private → same class only
+default → same package
 protected → same package + subclass inheritance
-public    → everywhere
+public → everywhere
 
 Overriding Rule:
 → child can maintain or INCREASE access
@@ -124,4 +124,4 @@ Overriding Rule:
 
 ---
 
-[⬅️ Previous: Polymorphism](./07-polymorphism.md) · [📖 Back to Core Java Index](./README.md) · [Next → Varargs ➡️](./09-varargs.md)
+[Previous: Polymorphism](./07-polymorphism.md) · [Back to Core Java Index](./README.md) · [Next: Varargs](./09-varargs.md)

@@ -34,17 +34,17 @@ It is mainly used to provide **Servlet-specific initialization parameters**.
 
 ```text
 Web Application Starts
-        ↓
+ ↓
 Container Reads web.xml
-        ↓
+ ↓
 Servlet Configuration Found
-        ↓
+ ↓
 ServletConfig Created
-        ↓
+ ↓
 Init Parameters Stored
-        ↓
+ ↓
 init() Called
-        ↓
+ ↓
 Servlet Uses Configuration
 ```
 
@@ -54,13 +54,13 @@ Example:
 
 ```xml
 <servlet>
-    <servlet-name>S1</servlet-name>
-    <servlet-class>MyServlet</servlet-class>
+ <servlet-name>S1</servlet-name>
+ <servlet-class>MyServlet</servlet-class>
 
-    <init-param>
-        <param-name>user</param-name>
-        <param-value>admin</param-value>
-    </init-param>
+ <init-param>
+ <param-name>user</param-name>
+ <param-value>admin</param-value>
+ </init-param>
 </servlet>
 ```
 
@@ -99,17 +99,17 @@ String value = config.getInitParameter("user");
 
 ```text
 Web Application Starts
-        ↓
+ ↓
 Container creates ServletContext
-        ↓
+ ↓
 Shared by all Servlets
-        ↓
+ ↓
 Servlet 1 ─┐
 Servlet 2 ─┼──→ Same ServletContext
 Servlet 3 ─┘
-        ↓
+ ↓
 Application Stops
-        ↓
+ ↓
 ServletContext destroyed
 ```
 
@@ -119,8 +119,8 @@ Application-wide initialization parameters can be defined using `context-param`.
 
 ```xml
 <context-param>
-    <param-name>appName</param-name>
-    <param-value>LearningPath</param-value>
+ <param-name>appName</param-name>
+ <param-value>LearningPath</param-value>
 </context-param>
 ```
 
@@ -166,7 +166,7 @@ ctx.removeAttribute("count");
 ### Easy memory trick
 
 ```text
-ServletConfig  → CONFIG for ONE Servlet
+ServletConfig → CONFIG for ONE Servlet
 ServletContext → CONTEXT for WHOLE application
 ```
 
@@ -229,10 +229,10 @@ The commonly used annotation is:
 @WebServlet("/hello")
 public class HelloServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
-        // Servlet logic
-    }
+ @Override
+ protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+ // Servlet logic
+ }
 }
 ```
 

@@ -1,27 +1,27 @@
-# ✨ Java Features — Buzzwords
+# Java Features — Buzzwords
 
 ---
 
-## 1. 🌍 Platform Independent (WORA)
+## 1. Platform Independent (WORA)
 
 Java source code directly OS-specific machine code me compile nahi hota — instead **bytecode** generate hota hai.
 
 ```text
-.java  →  javac  →  .class (Bytecode)  →  JVM  →  Machine/OS
+.java → javac → .class (Bytecode) → JVM → Machine/OS
 ```
 
 > **Write Once, Run Anywhere (WORA)** — same bytecode har OS ke JVM par chalta hai!
 
 ---
 
-## 2. 🧱 Object-Oriented
+## 2. Object-Oriented
 
 Java **strongly** object-oriented language hai.
 
 - Sab kuch classes aur objects ke around revolve karta hai
 - Supports: **Encapsulation, Inheritance, Polymorphism, Abstraction**
 
-> ⚠️ **Technically purely OOP nahi hai** kyunki primitive types (`int`, `char`, `boolean`, etc.) objects nahi hain. Isliye **"mostly object-oriented"** kehna zyada accurate hai.
+> Note: **Technically purely OOP nahi hai** kyunki primitive types (`int`, `char`, `boolean`, etc.) objects nahi hain. Isliye **"mostly object-oriented"** kehna zyada accurate hai.
 
 ### OOP ke 4 Pillars at a Glance
 
@@ -34,19 +34,19 @@ Java **strongly** object-oriented language hai.
 
 ---
 
-## 3. 🎯 Simple
+## 3. Simple
 
 - Java ka syntax C/C++ se familiar hai
 - Complex features remove/simplify kiye gaye:
-  - No pointers
-  - No operator overloading
-  - No multiple class inheritance
-  - No preprocessor
-  - Automatic memory management
+ - No pointers
+ - No operator overloading
+ - No multiple class inheritance
+ - No preprocessor
+ - Automatic memory management
 
 ---
 
-## 4. 🔒 No Direct Pointers
+## 4. No Direct Pointers
 
 Java me C/C++ jaise explicit pointers aur pointer arithmetic nahi hoti.
 
@@ -59,7 +59,7 @@ Java me C/C++ jaise explicit pointers aur pointer arithmetic nahi hoti.
 
 ---
 
-## 5. 💪 Robust
+## 5. Robust
 
 Java ko robust banane wale factors:
 
@@ -74,7 +74,7 @@ Java ko robust banane wale factors:
 
 ---
 
-## 6. 🛡️ Secure
+## 6. Secure
 
 | Security Feature | Description |
 |------------------|-------------|
@@ -84,11 +84,11 @@ Java ko robust banane wale factors:
 | ClassLoader | Classes ko isolated namespaces me load karta hai |
 | Sandbox Execution | Applets/untrusted code restricted environment me run hota tha |
 
-> ⚠️ Security sirf pointers ki absence ki wajah se nahi hai — Java ka **broader runtime/security architecture** important hai.
+> Note: Security sirf pointers ki absence ki wajah se nahi hai — Java ka **broader runtime/security architecture** important hai.
 
 ---
 
-## 7. 🧵 Multithreaded
+## 7. Multithreaded
 
 - Java me **built-in threading support** hai
 - `Thread` class aur `Runnable` interface directly available hain
@@ -96,7 +96,7 @@ Java ko robust banane wale factors:
 
 ---
 
-## 8. 🏗️ Architecture Neutral
+## 8. Architecture Neutral
 
 - Bytecode **architecture-neutral** hai
 - JVM specification clearly defined hai
@@ -104,7 +104,7 @@ Java ko robust banane wale factors:
 
 ---
 
-## 9. 🚀 High Performance
+## 9. High Performance
 
 - JVM me **JIT (Just-In-Time) Compiler** hai
 - Hot code paths ko native machine code me compile karta hai at runtime
@@ -112,7 +112,7 @@ Java ko robust banane wale factors:
 
 ---
 
-## 10. 📡 Distributed
+## 10. Distributed
 
 - Java me networking built-in hai (`java.net` package)
 - RMI (Remote Method Invocation) support
@@ -120,7 +120,7 @@ Java ko robust banane wale factors:
 
 ---
 
-## 📊 Java Features Summary
+## Java Features Summary
 
 ```text
 Java Features
@@ -137,4 +137,4 @@ Java Features
 
 ---
 
-[⬅️ Back to Index](./README.md) | [Next: Data Types ➡️](./05-data-types.md)
+[ Back to Index](./README.md) | [Next: Data Types](./05-data-types.md)

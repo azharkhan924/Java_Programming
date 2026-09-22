@@ -1,8 +1,8 @@
-# 🔄 Type Casting in Java
+# Type Casting in Java
 
 ---
 
-## 📌 What is Type Casting?
+## What is Type Casting?
 
 **Type Casting** = ek data type ki value ko doosre data type me convert karna.
 
@@ -10,12 +10,12 @@ Java me **2 types** ki type conversion hoti hai:
 
 | Type | Direction | Cast Required? | Data Loss? |
 |------|-----------|---------------|------------|
-| **Widening** (Implicit) | Smaller → Larger | ❌ No | Usually No |
-| **Narrowing** (Explicit) | Larger → Smaller | ✅ Yes | ⚠️ Possible |
+| **Widening** (Implicit) | Smaller → Larger | No | Usually No |
+| **Narrowing** (Explicit) | Larger → Smaller | Yes | Note: Possible |
 
 ---
 
-## 1️⃣ Widening / Implicit Type Casting
+## 1⃣ Widening / Implicit Type Casting
 
 Smaller type → Larger type. Compiler **automatically** kar deta hai.
 
@@ -23,45 +23,45 @@ Smaller type → Larger type. Compiler **automatically** kar deta hai.
 
 ```text
 byte → short → int → long → float → double
-                ↑
-              char
+ ↑
+ char
 ```
 
 ### Examples
 
 ```java
 int x = 10;
-double y = x;           // ✅ Implicit widening: int → double
-System.out.println(y);  // Output: 10.0
+double y = x; // Implicit widening: int → double
+System.out.println(y); // Output: 10.0
 
 byte b = 50;
-int i = b;              // ✅ Implicit widening: byte → int
+int i = b; // Implicit widening: byte → int
 
 char c = 'A';
-int n = c;              // ✅ Implicit widening: char → int (65)
+int n = c; // Implicit widening: char → int (65)
 ```
 
 ### Key Points
 
-- ✅ JVM/compiler automatically conversion karta hai
-- ✅ Source aur destination types compatible hone chahiye
-- ✅ Destination type source type se broader hona chahiye
-- ⚠️ **Usually** data loss nahi hota
+- JVM/compiler automatically conversion karta hai
+- Source aur destination types compatible hone chahiye
+- Destination type source type se broader hona chahiye
+- Note: **Usually** data loss nahi hota
 
-### ⚠️ Important Exception — `long → float` Precision Loss
+### Note: Important Exception — `long → float` Precision Loss
 
 ```java
 long bigNum = 123456789012345L;
-float f = bigNum;   // Widening allowed, BUT...
-System.out.println(f);          // 1.23456788E14 — digits lost!
-System.out.println((long) f);   // 123456789012344 — not exact!
+float f = bigNum; // Widening allowed, BUT...
+System.out.println(f); // 1.23456788E14 — digits lost!
+System.out.println((long) f); // 123456789012344 — not exact!
 ```
 
 > Widening ka matlab sirf **bytes ki ranking** nahi hai. `float` (4 bytes) `long` (8 bytes) se chhota hai, phir bhi `long → float` widening hai kyunki Java spec allows it. But large integer values ke **exact digits lose** ho sakte hain.
 
 ---
 
-## 2️⃣ Narrowing / Explicit Type Casting
+## 2⃣ Narrowing / Explicit Type Casting
 
 Larger type → Smaller type. **Manually cast** likhna padta hai.
 
@@ -75,25 +75,25 @@ Larger type → Smaller type. **Manually cast** likhna padta hai.
 
 ```text
 double → float → long → int → short → byte
-                                  ↓
-                                char
+ ↓
+ char
 ```
 
 ### Examples
 
 ```java
 double d = 10.75;
-int x = (int) d;              // ✅ Explicit narrowing
-System.out.println(x);         // Output: 10 (decimal part discarded!)
+int x = (int) d; // Explicit narrowing
+System.out.println(x); // Output: 10 (decimal part discarded!)
 
-float f = (float) 10.5;       // ✅ double → float
+float f = (float) 10.5; // double → float
 
 int i = 300;
-byte b = (byte) i;            // ✅ But value wraps around!
-System.out.println(b);         // Output: 44 (300 % 256 = 44)
+byte b = (byte) i; // But value wraps around!
+System.out.println(b); // Output: 44 (300 % 256 = 44)
 ```
 
-### ⚠️ Data Loss Scenarios
+### Note: Data Loss Scenarios
 
 | Conversion | What Gets Lost |
 |-----------|---------------|
@@ -104,14 +104,14 @@ System.out.println(b);         // Output: 44 (300 % 256 = 44)
 
 ---
 
-## 3️⃣ Numeric Promotion in Expressions
+## 3⃣ Numeric Promotion in Expressions
 
 Jab arithmetic operation hota hai, Java **automatically operands ko promote** karta hai:
 
 ### Rule
 
 ```text
-byte / short / char → int   (ALWAYS promoted in arithmetic)
+byte / short / char → int (ALWAYS promoted in arithmetic)
 ```
 
 Agar operands me wider type hai to result us wider type ka hoga:
@@ -125,63 +125,63 @@ result type ≈ max(int, type of x, type of y)
 ```java
 byte a = 10;
 byte b = 20;
-// byte c = a + b;    // ❌ Error! Result is int, not byte
-int c = a + b;        // ✅ Correct
+// byte c = a + b; // Error! Result is int, not byte
+int c = a + b; // Correct
 
 char x = 'A';
 char y = 'B';
-int sum = x + y;      // ✅ 65 + 66 = 131 (result is int)
+int sum = x + y; // 65 + 66 = 131 (result is int)
 ```
 
-### ⚠️ Common Gotcha — Compound Assignment vs Normal
+### Note: Common Gotcha — Compound Assignment vs Normal
 
 ```java
 byte x = 10;
-x += 20;           // ✅ Valid! (compound assignment has implicit cast)
+x += 20; // Valid! (compound assignment has implicit cast)
 // Equivalent to: x = (byte)(x + 20);
 
 byte x = 10;
-x = x + 20;        // ❌ Error! (x + 20 gives int, can't assign to byte)
-x = (byte)(x + 20); // ✅ Explicit cast required
+x = x + 20; // Error! (x + 20 gives int, can't assign to byte)
+x = (byte)(x + 20); // Explicit cast required
 ```
 
-> **💡 Key Insight:** `x += y` is NOT always the same as `x = x + y`. Compound assignment includes an **implicit narrowing cast**!
+> ** Key Insight:** `x += y` is NOT always the same as `x = x + y`. Compound assignment includes an **implicit narrowing cast**!
 
 ---
 
-## 4️⃣ Assignment Compatibility
+## 4⃣ Assignment Compatibility
 
 ```java
 // Widening — OK
 int x = 10;
-double y = x;          // ✅
+double y = x; // 
 
 // Narrowing — Error without cast
 double x = 10.5;
-int y = x;             // ❌ Error
-int y = (int) x;       // ✅
+int y = x; // Error
+int y = (int) x; // 
 
 // Constant assignment to smaller type — OK if in range
-byte b = 100;          // ✅ 100 is compile-time constant, fits in byte
-byte b = 200;          // ❌ 200 exceeds byte range (-128 to 127)
+byte b = 100; // 100 is compile-time constant, fits in byte
+byte b = 200; // 200 exceeds byte range (-128 to 127)
 
 // Variable assignment to smaller type — Always needs cast
 int x = 65;
-char c = x;            // ❌ Error (even though 65 fits in char)
-char c = (char) x;     // ✅ Explicit cast needed
+char c = x; // Error (even though 65 fits in char)
+char c = (char) x; // Explicit cast needed
 ```
 
 ---
 
-## 📊 Type Casting Cheat Sheet
+## Type Casting Cheat Sheet
 
 ```text
 Smaller → Bigger (WIDENING)
 ═══════════════════════════
 Automatic, No cast needed
 byte → short → int → long → float → double
-                ↑
-              char
+ ↑
+ char
 
 Bigger → Smaller (NARROWING)
 ═══════════════════════════
@@ -190,14 +190,14 @@ double → float → long → int → short → byte
 
 ARITHMETIC PROMOTION
 ═══════════════════
-byte + byte   →  int
-short + short →  int
-char + char   →  int
-int + long    →  long
-int + float   →  float
+byte + byte → int
+short + short → int
+char + char → int
+int + long → long
+int + float → float
 float + double → double
 ```
 
 ---
 
-[⬅️ Back to Index](./README.md) | [Next: Operators ➡️](./09-operators.md)
+[ Back to Index](./README.md) | [Next: Operators](./09-operators.md)

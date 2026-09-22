@@ -1,8 +1,8 @@
-# 🔀 Bitwise & Shift Operators
+# Bitwise & Shift Operators
 
 ---
 
-## 📌 Overview
+## Overview
 
 Bitwise operators **individual bits** par operation perform karte hain.
 
@@ -18,7 +18,7 @@ Bitwise operators **individual bits** par operation perform karte hain.
 
 ---
 
-## 1️⃣ Bitwise AND `&`
+## 1⃣ Bitwise AND `&`
 
 > Dono bits `1` hone chahiye result `1` ho.
 
@@ -32,28 +32,28 @@ Bitwise operators **individual bits** par operation perform karte hain.
 ### Example: `18 & 21`
 
 ```text
-  18 = 1 0 0 1 0
-  21 = 1 0 1 0 1
-       ---------
-  &  = 1 0 0 0 0  =  16
+ 18 = 1 0 0 1 0
+ 21 = 1 0 1 0 1
+ ---------
+ & = 1 0 0 0 0 = 16
 ```
 
 ```java
-System.out.println(18 & 21);   // Output: 16
+System.out.println(18 & 21); // Output: 16
 ```
 
-### 🎯 Common Uses
+### Common Uses
 - **Check if number is even/odd:** `n & 1` → `0` means even, `1` means odd
 - **Masking:** Specific bits extract karna
 
 ```java
-System.out.println(10 & 1);    // 0 → even
-System.out.println(11 & 1);    // 1 → odd
+System.out.println(10 & 1); // 0 → even
+System.out.println(11 & 1); // 1 → odd
 ```
 
 ---
 
-## 2️⃣ Bitwise OR `|`
+## 2⃣ Bitwise OR `|`
 
 > Koi bhi ek bit `1` ho to result `1` hai.
 
@@ -67,19 +67,19 @@ System.out.println(11 & 1);    // 1 → odd
 ### Example: `18 | 21`
 
 ```text
-  18 = 1 0 0 1 0
-  21 = 1 0 1 0 1
-       ---------
-  |  = 1 0 1 1 1  =  23
+ 18 = 1 0 0 1 0
+ 21 = 1 0 1 0 1
+ ---------
+ | = 1 0 1 1 1 = 23
 ```
 
 ```java
-System.out.println(18 | 21);   // Output: 23
+System.out.println(18 | 21); // Output: 23
 ```
 
 ---
 
-## 3️⃣ Bitwise XOR `^`
+## 3⃣ Bitwise XOR `^`
 
 > Dono bits **different** hone chahiye result `1` ho.
 
@@ -93,30 +93,30 @@ System.out.println(18 | 21);   // Output: 23
 ### Example: `18 ^ 21`
 
 ```text
-  18 = 1 0 0 1 0
-  21 = 1 0 1 0 1
-       ---------
-  ^  = 0 0 1 1 1  =  7
+ 18 = 1 0 0 1 0
+ 21 = 1 0 1 0 1
+ ---------
+ ^ = 0 0 1 1 1 = 7
 ```
 
 ```java
-System.out.println(18 ^ 21);   // Output: 7
+System.out.println(18 ^ 21); // Output: 7
 ```
 
-### 🎯 XOR Properties (Important!)
+### XOR Properties (Important!)
 
 ```text
-a ^ a = 0        → XOR with itself = 0
-a ^ 0 = a        → XOR with 0 = same value
-a ^ b = b ^ a    → Commutative
-(a ^ b) ^ c = a ^ (b ^ c)  → Associative
+a ^ a = 0 → XOR with itself = 0
+a ^ 0 = a → XOR with 0 = same value
+a ^ b = b ^ a → Commutative
+(a ^ b) ^ c = a ^ (b ^ c) → Associative
 ```
 
-> **💡 Interview Use:** Array me ek number jo ek hi baar aaya hai, baaki sab twice → XOR of all elements = answer!
+> ** Interview Use:** Array me ek number jo ek hi baar aaya hai, baaki sab twice → XOR of all elements = answer!
 
 ---
 
-## 4️⃣ Bitwise Complement `~`
+## 4⃣ Bitwise Complement `~`
 
 > Har bit ko **invert** karta hai: `0 → 1`, `1 → 0`
 
@@ -129,56 +129,56 @@ a ^ b = b ^ a    → Commutative
 ### Examples
 
 ```java
-System.out.println(~15);     // -16
-System.out.println(~0);      // -1
-System.out.println(~(-1));   // 0
-System.out.println(~10);     // -11
+System.out.println(~15); // -16
+System.out.println(~0); // -1
+System.out.println(~(-1)); // 0
+System.out.println(~10); // -11
 ```
 
 **Why `~15 = -16`?**
 ```text
-15 in binary (32-bit):  00000000 00000000 00000000 00001111
-~15:                    11111111 11111111 11111111 11110000
+15 in binary (32-bit): 00000000 00000000 00000000 00001111
+~15: 11111111 11111111 11111111 11110000
 This is -16 in two's complement representation
 ```
 
 ---
 
-## 5️⃣ Left Shift `<<`
+## 5⃣ Left Shift `<<`
 
 > Bits ko **left** me shift karta hai. Right side par **0** fill hota hai.
 
 ### Formula
 
 ```text
-x << n = x × 2ⁿ  (for normal positive values, subject to overflow)
+x << n = x × 2ⁿ (for normal positive values, subject to overflow)
 ```
 
 ### Example: `20 << 3`
 
 ```text
-  20 =    1 0 1 0 0
-  20 << 3 = 1 0 1 0 0 0 0 0  =  160
+ 20 = 1 0 1 0 0
+ 20 << 3 = 1 0 1 0 0 0 0 0 = 160
 
-  Verification: 20 × 2³ = 20 × 8 = 160 ✅
+ Verification: 20 × 2³ = 20 × 8 = 160 
 ```
 
 ```java
-System.out.println(20 << 3);    // 160
-System.out.println(1 << 10);    // 1024  (2¹⁰)
-System.out.println(5 << 1);     // 10    (5 × 2)
+System.out.println(20 << 3); // 160
+System.out.println(1 << 10); // 1024 (2¹⁰)
+System.out.println(5 << 1); // 10 (5 × 2)
 ```
 
 ---
 
-## 6️⃣ Signed Right Shift `>>`
+## 6⃣ Signed Right Shift `>>`
 
 > Bits ko **right** me shift karta hai. Left side par **sign bit** fill hota hai (sign preserve).
 
 ### Formula
 
 ```text
-x >> n ≈ x / 2ⁿ  (integer division, rounds towards negative infinity)
+x >> n ≈ x / 2ⁿ (integer division, rounds towards negative infinity)
 ```
 
 ### Example: `20 >> 3`
@@ -187,26 +187,26 @@ x >> n ≈ x / 2ⁿ  (integer division, rounds towards negative infinity)
 20 >> 3 ≈ 20 / 8 = 2
 
 Verification:
-  20 = 1 0 1 0 0
-  20 >> 3 =     1 0  =  2 ✅
+ 20 = 1 0 1 0 0
+ 20 >> 3 = 1 0 = 2 
 ```
 
 ### Negative Number Example
 
 ```java
-System.out.println(-20 >> 3);   // -3
+System.out.println(-20 >> 3); // -3
 // Because sign bit (1) is preserved during shift
 ```
 
 ---
 
-## 7️⃣ Unsigned Right Shift `>>>`
+## 7⃣ Unsigned Right Shift `>>>`
 
 > Right shift karta hai, lekin left side par **hamesha 0** fill karta hai (sign ignore).
 
 ```java
-System.out.println(20 >>> 3);    // 2  (same as >> for positive numbers)
-System.out.println(-20 >>> 3);   // 536870909  (very large positive number!)
+System.out.println(20 >>> 3); // 2 (same as >> for positive numbers)
+System.out.println(-20 >>> 3); // 536870909 (very large positive number!)
 ```
 
 ### `>>` vs `>>>` Difference
@@ -219,53 +219,53 @@ System.out.println(-20 >>> 3);   // 536870909  (very large positive number!)
 
 ---
 
-## 🔀 Bitwise Operators with Boolean
+## Bitwise Operators with Boolean
 
 `&`, `|`, `^` **boolean** operands par bhi kaam karte hain:
 
 ```java
-System.out.println(true & false);    // false
-System.out.println(true | false);    // true
-System.out.println(true ^ false);    // true
-System.out.println(true ^ true);     // false
+System.out.println(true & false); // false
+System.out.println(true | false); // true
+System.out.println(true ^ false); // true
+System.out.println(true ^ true); // false
 ```
 
-### ⚠️ `&` vs `&&` with Booleans
+### Note: `&` vs `&&` with Booleans
 
 | | `&` (Bitwise) | `&&` (Logical) |
 |---|---|---|
-| Short-circuits? | ❌ No — always evaluates both sides | ✅ Yes |
+| Short-circuits? | No — always evaluates both sides | Yes |
 | Use case | Rare with booleans | Standard for conditions |
 
 ```java
 // With &&: second condition NOT evaluated if first is false
-false && someMethod()     // someMethod() skipped
+false && someMethod() // someMethod() skipped
 
 // With &: BOTH sides ALWAYS evaluated
-false & someMethod()      // someMethod() still called!
+false & someMethod() // someMethod() still called!
 ```
 
-### ❌ These Do NOT Work on Boolean
+### These Do NOT Work on Boolean
 
 ```text
-<<   >>   >>>   ~
+<< >> >>> ~
 ```
 
 ---
 
-## 📊 Quick Reference
+## Quick Reference
 
 ```text
-AND (&):   1 & 1 = 1, rest = 0   → "Both must be 1"
-OR  (|):   0 | 0 = 0, rest = 1   → "Either can be 1"
-XOR (^):   Same = 0, Diff = 1    → "Must be different"
-NOT (~):   ~n = -(n+1)           → "Flip all bits"
+AND (&): 1 & 1 = 1, rest = 0 → "Both must be 1"
+OR (|): 0 | 0 = 0, rest = 1 → "Either can be 1"
+XOR (^): Same = 0, Diff = 1 → "Must be different"
+NOT (~): ~n = -(n+1) → "Flip all bits"
 
-<<  : x × 2ⁿ                    → "Multiply by power of 2"
->>  : x / 2ⁿ (sign preserved)   → "Divide by power of 2"
->>> : x / 2ⁿ (unsigned)         → "Divide, ignore sign"
+<< : x × 2ⁿ → "Multiply by power of 2"
+>> : x / 2ⁿ (sign preserved) → "Divide by power of 2"
+>>> : x / 2ⁿ (unsigned) → "Divide, ignore sign"
 ```
 
 ---
 
-[⬅️ Back to Index](./README.md) | [Next: Characters & Unicode ➡️](./12-characters-and-unicode.md)
+[ Back to Index](./README.md) | [Next: Characters & Unicode](./12-characters-and-unicode.md)

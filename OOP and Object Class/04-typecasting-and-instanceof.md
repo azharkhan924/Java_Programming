@@ -1,4 +1,4 @@
-# 🔄 Type Casting & instanceof
+# Type Casting & instanceof
 
 ---
 
@@ -10,7 +10,7 @@ Parent reference → Child object:
 class A { }
 class B extends A { }
 
-A a1 = new B();    // ✅ Upcasting — implicit
+A a1 = new B(); // Upcasting — implicit
 ```
 
 ```text
@@ -28,7 +28,7 @@ B (child)
 ```java
 Object o = new Employee();
 
-System.out.println(o.id);     // ❌ compile-time error: cannot find symbol
+System.out.println(o.id); // compile-time error: cannot find symbol
 ```
 
 ### Why?
@@ -37,7 +37,7 @@ Compiler **reference variable ka type** dekhta hai:
 
 ```text
 Compile time → Reference type (Object) → accessible members
-Runtime      → Actual object (Employee) → overridden methods
+Runtime → Actual object (Employee) → overridden methods
 ```
 
 `Object` me `id` nahi hai — isliye compile error.
@@ -49,9 +49,9 @@ Runtime      → Actual object (Employee) → overridden methods
 ```java
 Object o = new Employee();
 
-Employee e = (Employee) o;     // ✅ explicit downcast
+Employee e = (Employee) o; // explicit downcast
 
-System.out.println(e.id);      // ✅ now accessible
+System.out.println(e.id); // now accessible
 ```
 
 > Casting **reference ka declared type** change karti hai — object ko physically convert nahi karti.
@@ -67,21 +67,21 @@ class C extends A { }
 ```
 
 ```text
-      A
-     / \
-    B   C
+ A
+ / \
+ B C
 ```
 
 ### All Type Casting Cases
 
 | # | Code | Compile | Runtime | Reason |
 |---|------|---------|---------|--------|
-| 1 | `B b = new A();` | ❌ | — | Parent object → child reference (implicit) not allowed |
-| 2 | `C c = new B();` | ❌ | — | Sibling classes — no relationship |
-| 3 | `A a = new B();` | ✅ | ✅ | Upcasting — valid |
-| 4 | `A a = new A(); B b = (B) a;` | ✅ | ❌ `ClassCastException` | Actual object is A, not B |
-| 5 | `A a = new B(); B b = (B) a;` | ✅ | ✅ | Actual object genuinely B |
-| 6 | `A a = new C(); B b = (B) a;` | ✅ | ❌ `ClassCastException` | Actual object is C, not B |
+| 1 | `B b = new A();` | No | — | Parent object → child reference (implicit) not allowed |
+| 2 | `C c = new B();` | No | — | Sibling classes — no relationship |
+| 3 | `A a = new B();` | Yes | Yes | Upcasting — valid |
+| 4 | `A a = new A(); B b = (B) a;` | Yes | `ClassCastException` | Actual object is A, not B |
+| 5 | `A a = new B(); B b = (B) a;` | Yes | Yes | Actual object genuinely B |
+| 6 | `A a = new C(); B b = (B) a;` | Yes | `ClassCastException` | Actual object is C, not B |
 
 ---
 
@@ -91,7 +91,7 @@ class C extends A { }
 
 ```java
 A a1 = new A();
-B b1 = (B) a1;    // ✅ compiles → ❌ ClassCastException at runtime
+B b1 = (B) a1; // compiles → ClassCastException at runtime
 ```
 
 > Runtime object requested target type ke compatible nahi hota → `ClassCastException`.
@@ -109,10 +109,10 @@ But successful downcasting ke liye:
 
 ```java
 A a = new B();
-B b = (B) a;       // ✅ actual object is B
+B b = (B) a; // actual object is B
 
 A a = new C();
-B b = (B) a;       // ❌ ClassCastException — actual object is C, not B
+B b = (B) a; // ClassCastException — actual object is C, not B
 ```
 
 ---
@@ -121,18 +121,18 @@ B b = (B) a;       // ❌ ClassCastException — actual object is C, not B
 
 ```java
 class A {
-    void show() { System.out.println("A"); }
+ void show() { System.out.println("A"); }
 }
 
 class B extends A {
-    @Override
-    void show() { System.out.println("B"); }
+ @Override
+ void show() { System.out.println("B"); }
 }
 ```
 
 ```java
 A a1 = new B();
-a1.show();         // Output: "B" — actual object decides
+a1.show(); // Output: "B" — actual object decides
 ```
 
 This is **Runtime Polymorphism / Dynamic Method Dispatch**.
@@ -142,11 +142,11 @@ This is **Runtime Polymorphism / Dynamic Method Dispatch**.
 ```java
 class A { }
 class B extends A {
-    void show() { System.out.println("B"); }
+ void show() { System.out.println("B"); }
 }
 
 A a1 = new B();
-a1.show();         // ❌ compile-time error — A has no show()
+a1.show(); // compile-time error — A has no show()
 ```
 
 > Compiler reference type check karta hai — A me `show()` nahi hai.
@@ -155,12 +155,12 @@ a1.show();         // ❌ compile-time error — A has no show()
 
 ```java
 class A {
-    void show() { System.out.println("A"); }
+ void show() { System.out.println("A"); }
 }
 class B extends A { }
 
 A a1 = new B();
-a1.show();         // Output: "A" — inherited method
+a1.show(); // Output: "A" — inherited method
 ```
 
 ---
@@ -170,7 +170,7 @@ a1.show();         // Output: "A" — inherited method
 Runtime par check karta hai — kya object kisi type ka instance hai?
 
 ```java
-object instanceof ClassName    // → true / false
+object instanceof ClassName // → true / false
 ```
 
 ### Basic Example
@@ -178,8 +178,8 @@ object instanceof ClassName    // → true / false
 ```java
 A a1 = new B();
 
-System.out.println(a1 instanceof A);   // true  — B is-a A
-System.out.println(a1 instanceof B);   // true  — actual object is B
+System.out.println(a1 instanceof A); // true — B is-a A
+System.out.println(a1 instanceof B); // true — actual object is B
 ```
 
 ### Hierarchy Check (A → B, A → C)
@@ -192,15 +192,15 @@ C c1 = new C();
 
 | Check | Result | Reason |
 |-------|--------|--------|
-| `a1 instanceof A` | ✅ `true` | A object is A |
+| `a1 instanceof A` | `true` | A object is A |
 | `a1 instanceof B` | `false` | A object is not B |
 | `a1 instanceof C` | `false` | A object is not C |
-| `b1 instanceof A` | ✅ `true` | B is-a A |
-| `b1 instanceof B` | ✅ `true` | B is B |
-| `b1 instanceof C` | ❌ compile error | Sibling classes |
-| `c1 instanceof A` | ✅ `true` | C is-a A |
-| `c1 instanceof B` | ❌ compile error | Sibling classes |
-| `c1 instanceof C` | ✅ `true` | C is C |
+| `b1 instanceof A` | `true` | B is-a A |
+| `b1 instanceof B` | `true` | B is B |
+| `b1 instanceof C` | compile error | Sibling classes |
+| `c1 instanceof A` | `true` | C is-a A |
+| `c1 instanceof B` | compile error | Sibling classes |
+| `c1 instanceof C` | `true` | C is C |
 
 ---
 
@@ -209,7 +209,7 @@ C c1 = new C();
 ```java
 Object o = null;
 
-System.out.println(o instanceof Object);   // false
+System.out.println(o instanceof Object); // false
 System.out.println(null instanceof String); // false
 ```
 
@@ -225,7 +225,7 @@ null instanceof AnyReferenceType → always false
 
 ```java
 if (!(o instanceof Employee))
-    return false;
+ return false;
 ```
 
 Ye automatically `null` ko bhi handle kar leta hai — kyunki `null instanceof Employee` → `false`.
@@ -236,37 +236,37 @@ Ye automatically `null` ko bhi handle kar leta hai — kyunki `null instanceof E
 
 ```text
 Actual object ka runtime type
-          ↓
+ ↓
 Kya requested type ka instance hai?
-          ↓
-       true / false
+ ↓
+ true / false
 ```
 
 ```java
 A a1 = new B();
 
-a1 instanceof B    // reference type A, but actual object B → true
-a1 instanceof A    // B is-a A → true
+a1 instanceof B // reference type A, but actual object B → true
+a1 instanceof A // B is-a A → true
 ```
 
 ---
 
-## 🧠 Interview Quick Traps
+## Interview Quick Traps
 
 | Trap | Answer |
 |------|--------|
-| Upcasting implicit hoti hai? | ✅ Yes |
-| Downcasting implicit hoti hai? | ❌ No — explicit cast required |
+| Upcasting implicit hoti hai? | Yes |
+| Downcasting implicit hoti hai? | No — explicit cast required |
 | `ClassCastException` checked ya unchecked? | Unchecked (`RuntimeException`) |
-| Sibling classes me casting possible hai? | ❌ No — compile error |
+| Sibling classes me casting possible hai? | No — compile error |
 | `null instanceof Object` ka result? | `false` |
-| `A a = new A(); B b = (B) a;` compile hota hai? | ✅ Yes — but runtime ClassCastException |
+| `A a = new A(); B b = (B) a;` compile hota hai? | Yes — but runtime ClassCastException |
 | Compile time par kaun decide karta hai? | Reference type |
 | Runtime par kaun decide karta hai? | Actual object |
 
 ---
 
-## ⚡ Quick Rules
+## Quick Rules
 
 ```text
 UPCASTING (Child → Parent reference)
@@ -287,4 +287,4 @@ instanceof
 
 ---
 
-[⬅️ Previous: equals() & ==](./03-equals-and-identity.md) · [📖 Back to OOP Index](./README.md) · [Next → Strings & String Pool ➡️](./05-strings-and-pool.md)
+[Previous: equals() & ==](./03-equals-and-identity.md) · [Back to OOP Index](./README.md) · [Next: Strings & String Pool](./05-strings-and-pool.md)

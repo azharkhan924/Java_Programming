@@ -1,10 +1,10 @@
-# ⚡ OOP & Object Class — Master Quick Revision & Cheat Sheet
+# OOP & Object Class — Master Quick Revision & Cheat Sheet
 
 > **Summary:** Ek single page par pure module (Files 01 to 10) ka revision, critical comparison tables, interview traps, aur golden rules.
 
 ---
 
-## 1. 📊 Topic-Wise Summary Matrix
+## 1. Topic-Wise Summary Matrix
 
 | # | Topic | Core Concept | Golden Rule |
 |---|-------|--------------|-------------|
@@ -21,7 +21,7 @@
 
 ---
 
-## 2. ⚖️ Crucial Comparison Tables
+## 2. ⚖ Crucial Comparison Tables
 
 ### A. `==` Operator vs `equals()` Method
 
@@ -51,8 +51,8 @@
 |---------|-----------------|----------------------|------------------------|
 | **Instance Creation** | At class loading | On first call to `getInstance()` | On enum loading |
 | **Thread Safety** | Guaranteed by ClassLoader | Needs `volatile` + `synchronized` | JVM Guaranteed |
-| **Reflection Safe?** | ❌ Broken by Reflection | ❌ Broken by Reflection | ✅ Immune |
-| **Serialization Safe?** | Needs `readResolve()` | Needs `readResolve()` | ✅ Built-in safe |
+| **Reflection Safe?** | Broken by Reflection | Broken by Reflection | Immune |
+| **Serialization Safe?** | Needs `readResolve()` | Needs `readResolve()` | Built-in safe |
 
 ---
 
@@ -67,7 +67,7 @@
 
 ---
 
-## 3. 🎯 Top 15 Interview Golden Rules
+## 3. Top 15 Interview Golden Rules
 
 1. **HashCode-Equals Contract:** Agar `o1.equals(o2)` is `true`, toh unka `hashCode()` MUST BE identical. Reverse zaroori nahi hai (Hash Collision).
 2. **String Immutability:** String ka koi bhi method original string ko modify nahi karta; hamesha new String return karta hai.
@@ -87,4 +87,4 @@
 
 ---
 
-[⬅️ Previous: File Handling](./10-file-handling.md) · [📖 Back to OOP Index](./README.md) · [🏠 Home / Root README](../README.md)
+[Previous: File Handling](./10-file-handling.md) · [Back to OOP Index](./README.md) · [Root README](../README.md)

@@ -45,15 +45,15 @@ RequestDispatcher rd = request.getRequestDispatcher("/servlet2");
 
 ```text
 Browser
-   ↓
+ ↓
 Servlet 1
-   ↓
+ ↓
 forward()
-   ↓
+ ↓
 Servlet 2
-   ↓
+ ↓
 Response
-   ↓
+ ↓
 Browser
 ```
 
@@ -92,14 +92,14 @@ rd.forward(request, response);
 
 ```text
 Browser → Request Object → Servlet 1
-                         ↓
-                       forward
-                         ↓
-                       Servlet 2
-                         ↓
-                      Response
-                         ↓
-                      Browser
+ ↓
+ forward
+ ↓
+ Servlet 2
+ ↓
+ Response
+ ↓
+ Browser
 ```
 
 > No new client request is created during forwarding, so the browser URL normally remains the same.
@@ -123,19 +123,19 @@ The current Servlet can continue processing after `include()`.
 
 ```text
 Browser
-   ↓
+ ↓
 Servlet 1
-   ↓
+ ↓
 include()
-   ↓
+ ↓
 Servlet 2 generates content
-   ↓
+ ↓
 Content is included in Servlet 1 response
-   ↓
+ ↓
 Servlet 1 continues
-   ↓
+ ↓
 Final Response
-   ↓
+ ↓
 Browser
 ```
 
@@ -145,9 +145,9 @@ A common use is including reusable UI components:
 
 ```text
 Servlet/JSP
-   ├── Header
-   ├── Main Content
-   └── Footer
+ ├── Header
+ ├── Main Content
+ └── Footer
 ```
 
 ---
@@ -183,15 +183,15 @@ The Servlet tells the browser to make a new request to another URL.
 
 ```text
 Browser
-   ↓ Request
+ ↓ Request
 Servlet 1
-   ↓ Redirect Response
+ ↓ Redirect Response
 Browser
-   ↓ New Request
+ ↓ New Request
 Servlet 2
-   ↓
+ ↓
 Response
-   ↓
+ ↓
 Browser
 ```
 
@@ -219,8 +219,8 @@ response.sendRedirect("servlet2");
 ### Easy memory trick
 
 ```text
-FORWARD  → Same request → URL unchanged → Server-side
-REDIRECT → New request  → URL changes   → Client-side
+FORWARD → Same request → URL unchanged → Server-side
+REDIRECT → New request → URL changes → Client-side
 ```
 
 ---
@@ -249,13 +249,13 @@ But they are not available in the new request created by `sendRedirect()`.
 ```text
 forward():
 Request 1 → Servlet 1 → Servlet 2
-             SAME REQUEST
+ SAME REQUEST
 
 redirect():
 Request 1 → Servlet 1
-               ↓
-          Redirect response
-               ↓
+ ↓
+ Redirect response
+ ↓
 Browser creates Request 2 → Servlet 2
 ```
 

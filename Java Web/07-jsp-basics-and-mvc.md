@@ -44,7 +44,7 @@ Example conceptually:
 
 ```text
 home.jsp
-   ↓
+ ↓
 home_jsp.java
 ```
 
@@ -60,7 +60,7 @@ Example conceptually:
 
 ```text
 home_jsp.java
-   ↓
+ ↓
 home_jsp.class
 ```
 
@@ -105,7 +105,7 @@ Scripting elements ke 3 main types:
 
 ```jsp
 <%
-    // Java code
+ // Java code
 %>
 ```
 
@@ -113,9 +113,9 @@ Scripting elements ke 3 main types:
 
 ```jsp
 <%
-    int a = 10;
-    int b = 20;
-    int sum = a + b;
+ int a = 10;
+ int b = 20;
+ int sum = a + b;
 %>
 ```
 
@@ -155,7 +155,7 @@ jaisa behavior produce karta hai.
 
 ```jsp
 <%!
-    // declaration
+ // declaration
 %>
 ```
 
@@ -163,11 +163,11 @@ jaisa behavior produce karta hai.
 
 ```jsp
 <%!
-    int count = 0;
+ int count = 0;
 
-    public int square(int n) {
-        return n * n;
-    }
+ public int square(int n) {
+ return n * n;
+ }
 %>
 ```
 
@@ -176,9 +176,9 @@ Declaration ka code generated servlet ke `_jspService()` method ke **bahar**, cl
 ### Easy Memory Trick
 
 ```text
-<%  %>     → Scriptlet    → _jspService() ke andar
-<%= %>     → Expression   → output / out.print(...)
-<%! %>     → Declaration  → class level / _jspService() ke bahar
+<% %> → Scriptlet → _jspService() ke andar
+<%= %> → Expression → output / out.print(...)
+<%! %> → Declaration → class level / _jspService() ke bahar
 ```
 
 ---
@@ -250,7 +250,7 @@ Custom/JSTL tag libraries use karne ke liye:
 
 ```jsp
 <%@ taglib prefix="c"
-           uri="http://java.sun.com/jsp/jstl/core" %>
+ uri="http://java.sun.com/jsp/jstl/core" %>
 ```
 
 > Modern Jakarta/JSTL setups mein URI/library configuration project ke version ke according different ho sakti hai.
@@ -309,15 +309,15 @@ JSP aur Servlet primarily **server-side** technologies hain.
 
 ```text
 Client / Browser
-      ↓
-   Request
-      ↓
+ ↓
+ Request
+ ↓
 Server / Servlet Container
-      ↓
+ ↓
 Servlet / JSP
-      ↓
-   Response
-      ↓
+ ↓
+ Response
+ ↓
 Client / Browser
 ```
 
@@ -330,26 +330,26 @@ Client / Browser
 MVC application ko 3 major parts mein separate karta hai.
 
 ```text
-             User / Browser
-                    |
-                    | Request
-                    ↓
-              Controller
-             (Servlet)
-                    |
-          ┌─────────┴─────────┐
-          ↓                   ↓
-       Model                 View
-  (Java/Service/DAO)          (JSP)
-          |                   |
-          ↓                   |
-       Database               |
-          |                   |
-          └─────────┬─────────┘
-                    ↓
-                Response
-                    ↓
-               User/Browser
+ User / Browser
+ |
+ | Request
+ ↓
+ Controller
+ (Servlet)
+ |
+ ┌─────────┴─────────┐
+ ↓ ↓
+ Model View
+ (Java/Service/DAO) (JSP)
+ | |
+ ↓ |
+ Database |
+ | |
+ └─────────┬─────────┘
+ ↓
+ Response
+ ↓
+ User/Browser
 ```
 
 ### Model
@@ -386,10 +386,10 @@ Servlet commonly controller ka role play karta hai.
 
 ```text
 Browser → Servlet → Service/DAO → Database
-                    ↓
-                  JSP
-                    ↓
-                 Browser
+ ↓
+ JSP
+ ↓
+ Browser
 ```
 
 ### MVC ka Main Benefit

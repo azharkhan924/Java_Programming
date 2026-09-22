@@ -1,4 +1,4 @@
-# 📁 File Handling — Streams, FileOutputStream & FileInputStream
+# File Handling — Streams, FileOutputStream & FileInputStream
 
 > **Summary:** Java File I/O basics, Byte Streams vs Character Streams, `FileOutputStream` (Write & Append mode), `FileInputStream` (`read()`, why `int` return type, EOF `-1`), aur modern `try-with-resources`.
 
@@ -9,14 +9,14 @@
 Java me file reading aur writing **Streams** ke zariye hoti hai. Stream ek continuous sequence of data hota hai.
 
 ```text
-               ┌─────────────────────── Java I/O ──────────────────────┐
-               │                                                       │
-        Byte Streams (8-bit bytes)                             Character Streams (16-bit Unicode)
-   (Images, Audio, PDF, Raw Binary)                                  (Plain Text Files)
-      ├── InputStream                                                   ├── Reader
-      │    └── FileInputStream                                          │    └── FileReader / BufferedReader
-      └── OutputStream                                                  └── Writer
-           └── FileOutputStream                                              └── FileWriter / BufferedWriter
+ ┌─────────────────────── Java I/O ──────────────────────┐
+ │ │
+ Byte Streams (8-bit bytes) Character Streams (16-bit Unicode)
+ (Images, Audio, PDF, Raw Binary) (Plain Text Files)
+ ├── InputStream ├── Reader
+ │ └── FileInputStream │ └── FileReader / BufferedReader
+ └── OutputStream └── Writer
+ └── FileOutputStream └── FileWriter / BufferedWriter
 ```
 
 | Stream Type | Unit of Data | Base Classes | Best Used For |
@@ -39,7 +39,7 @@ fos.write('A'); // Writes ASCII value of 'A' (65)
 fos.close();
 ```
 
-### ➕ Append Mode (`append = true`)
+### Append Mode (`append = true`)
 Agar aap chahte hain ki purana data delete na ho aur naya data file ke end me jud jaye:
 
 ```java
@@ -68,7 +68,7 @@ int data = fis.read(); // Reads single byte
 fis.close();
 ```
 
-### ❓ Interview Trap: `read()` ka Return Type `int` kyu hota hai, `byte` kyu nahi?
+### Interview Trap: `read()` ka Return Type `int` kyu hota hai, `byte` kyu nahi?
 
 Java ka `byte` signed hota hai (`-128` se `127`).
 - `read()` valid bytes ko `0` se `255` (unsigned range) ke beech represent karta hai.
@@ -76,12 +76,12 @@ Java ka `byte` signed hota hai (`-128` se `127`).
 - Agar return type `byte` hota, toh genuine byte `(byte) 0xFF` (`-1`) aur EOF `-1` me farq nahi pata chalta!
 - Isliye `read()` hamesha **`int`** return karta hai!
 
-### 🔄 Reading an Entire File with a Loop:
+### Reading an Entire File with a Loop:
 
 ```java
 int ch;
 while ((ch = fis.read()) != -1) {
-    System.out.print((char) ch); // Typecast int to char for display
+ System.out.print((char) ch); // Typecast int to char for display
 }
 ```
 
@@ -98,29 +98,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class FileIODemo {
-    public static void main(String[] args) {
-        String filename = "sample.txt";
+ public static void main(String[] args) {
+ String filename = "sample.txt";
 
-        // 1. Writing with try-with-resources (Auto close!)
-        try (FileOutputStream fos = new FileOutputStream(filename, true)) {
-            String msg = "Learning Java File I/O\n";
-            fos.write(msg.getBytes());
-            System.out.println("Data written successfully!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+ // 1. Writing with try-with-resources (Auto close!)
+ try (FileOutputStream fos = new FileOutputStream(filename, true)) {
+ String msg = "Learning Java File I/O\n";
+ fos.write(msg.getBytes());
+ System.out.println("Data written successfully!");
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
 
-        // 2. Reading with try-with-resources
-        try (FileInputStream fis = new FileInputStream(filename)) {
-            int ch;
-            System.out.println("File Content:");
-            while ((ch = fis.read()) != -1) {
-                System.out.print((char) ch);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+ // 2. Reading with try-with-resources
+ try (FileInputStream fis = new FileInputStream(filename)) {
+ int ch;
+ System.out.println("File Content:");
+ while ((ch = fis.read()) != -1) {
+ System.out.print((char) ch);
+ }
+ } catch (IOException e) {
+ e.printStackTrace();
+ }
+ }
 }
 ```
 
@@ -140,7 +140,7 @@ String line = br.readLine(); // Reads line-by-line cleanly
 
 ---
 
-## 🧠 Interview Quick Traps
+## Interview Quick Traps
 
 | Trap | Answer |
 |------|--------|
@@ -152,4 +152,4 @@ String line = br.readLine(); // Reads line-by-line cleanly
 
 ---
 
-[⬅️ Previous: Singleton Pattern](./09-singleton-pattern.md) · [📖 Back to OOP Index](./README.md) · [Next → Quick Revision ➡️](./11-quick-revision.md)
+[Previous: Singleton Pattern](./09-singleton-pattern.md) · [Back to OOP Index](./README.md) · [Next: Quick Revision](./11-quick-revision.md)

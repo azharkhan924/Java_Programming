@@ -1,29 +1,29 @@
-# 🧮 Operators in Java
+# Operators in Java
 
 ---
 
-## 📋 Operator Categories Overview
+## Operator Categories Overview
 
 | Category | Operators | Result Type |
 |----------|-----------|-------------|
-| **Arithmetic** | `+  -  *  /  %` | Numeric |
-| **Relational** | `<  >  <=  >=` | boolean |
-| **Equality** | `==  !=` | boolean |
-| **Logical** | `&&  \|\|  !` | boolean |
-| **Assignment** | `=  +=  -=  *=  /=  %=` | Value |
+| **Arithmetic** | `+ - * / %` | Numeric |
+| **Relational** | `< > <= >=` | boolean |
+| **Equality** | `== !=` | boolean |
+| **Logical** | `&& \|\| !` | boolean |
+| **Assignment** | `= += -= *= /= %=` | Value |
 | **Ternary** | `? :` | Value |
-| **Unary** | `+  -  ++  --  !  ~` | Varies |
+| **Unary** | `+ - ++ -- ! ~` | Varies |
 
 ---
 
-## ➕ Arithmetic Operators
+## Arithmetic Operators
 
 ```text
-+   Addition
--   Subtraction
-*   Multiplication
-/   Division
-%   Modulus (remainder)
++ Addition
+- Subtraction
+* Multiplication
+/ Division
+% Modulus (remainder)
 ```
 
 ### Examples
@@ -31,130 +31,130 @@
 ```java
 int x = 10, y = 3;
 
-System.out.println(x + y);   // 13
-System.out.println(x - y);   // 7
-System.out.println(x * y);   // 30
-System.out.println(x / y);   // 3  (integer division — truncates!)
-System.out.println(x % y);   // 1  (remainder)
+System.out.println(x + y); // 13
+System.out.println(x - y); // 7
+System.out.println(x * y); // 30
+System.out.println(x / y); // 3 (integer division — truncates!)
+System.out.println(x % y); // 1 (remainder)
 ```
 
-### ⚠️ Important — Integer Division
+### Note: Important — Integer Division
 
 ```java
-10 / 3    // → 3   (NOT 3.33!)
-10 / 3.0  // → 3.333...  (one operand is double, result is double)
+10 / 3 // → 3 (NOT 3.33!)
+10 / 3.0 // → 3.333... (one operand is double, result is double)
 ```
 
-> **💡 Tip:** Agar decimal result chahiye to at least ek operand ko `double`/`float` banao.
+> ** Tip:** Agar decimal result chahiye to at least ek operand ko `double`/`float` banao.
 
-### 🎯 Modulus `%` and Sign Rule
+### Modulus `%` and Sign Rule
 
 Java me `%` ka result **left operand (dividend) ka sign follow** karta hai:
 
 ```java
--10 % 3    // -1    (left operand is negative)
--10 % -3   // -1    (left operand is negative)
- 10 % -3   //  1    (left operand is positive)
- 10 % 3    //  1    (left operand is positive)
+-10 % 3 // -1 (left operand is negative)
+-10 % -3 // -1 (left operand is negative)
+ 10 % -3 // 1 (left operand is positive)
+ 10 % 3 // 1 (left operand is positive)
 ```
 
-### ⚠️ Division by Zero
+### Note: Division by Zero
 
 | Type | Expression | Result |
 |------|-----------|--------|
-| Integer | `10 / 0` | `ArithmeticException` ❌ (runtime error) |
+| Integer | `10 / 0` | `ArithmeticException` (runtime error) |
 | Float | `10.0 / 0.0` | `Infinity` |
 | Float | `-10.0 / 0.0` | `-Infinity` |
 | Float | `0.0 / 0.0` | `NaN` (Not a Number) |
 
 ```java
-System.out.println(10.0 / 0.0);    // Infinity
-System.out.println(-10.0 / 0.0);   // -Infinity
-System.out.println(0.0 / 0.0);     // NaN
+System.out.println(10.0 / 0.0); // Infinity
+System.out.println(-10.0 / 0.0); // -Infinity
+System.out.println(0.0 / 0.0); // NaN
 ```
 
-> ⚠️ Arithmetic operators `boolean` par work **nahi** karte!
+> Note: Arithmetic operators `boolean` par work **nahi** karte!
 
 ---
 
-## 🔍 Relational Operators
+## Relational Operators
 
 Comparison ke liye — result hamesha **boolean** hota hai.
 
 ```text
-<    Less than
->    Greater than
-<=   Less than or equal to
->=   Greater than or equal to
+< Less than
+> Greater than
+<= Less than or equal to
+>= Greater than or equal to
 ```
 
 ```java
 int a = 10, b = 20;
 
-System.out.println(a < b);     // true
-System.out.println(a > b);     // false
-System.out.println(a <= 10);   // true
-System.out.println(a >= 20);   // false
+System.out.println(a < b); // true
+System.out.println(a > b); // false
+System.out.println(a <= 10); // true
+System.out.println(a >= 20); // false
 ```
 
-### ❌ Cannot Use On
+### Cannot Use On
 
 - `boolean` — `true < false` invalid hai
 - `String` — `"abc" > "xyz"` invalid hai (use `compareTo()` instead)
 
-### ⚠️ Cannot Chain Comparisons
+### Note: Cannot Chain Comparisons
 
 ```java
-10 < 20 < 30    // ❌ Error!
+10 < 20 < 30 // Error!
 ```
 
 Kyunki `10 < 20` → `true`, phir `true < 30` — Java boolean ko integer se compare nahi kar sakta.
 
 **Correct way:**
 ```java
-10 < 20 && 20 < 30    // ✅ Use logical AND
+10 < 20 && 20 < 30 // Use logical AND
 ```
 
 ---
 
-## ⚖️ Equality Operators
+## Equality Operators
 
 ```text
-==   Equal to
-!=   Not equal to
+== Equal to
+!= Not equal to
 ```
 
 ### Primitives ke liye — Value Compare
 
 ```java
-System.out.println(10 == 10);     // true
-System.out.println(10 != 20);     // true
-System.out.println('A' == 65);    // true  (char compared as int)
-System.out.println('A' == 65.0);  // true  (widening to double)
+System.out.println(10 == 10); // true
+System.out.println(10 != 20); // true
+System.out.println('A' == 65); // true (char compared as int)
+System.out.println('A' == 65.0); // true (widening to double)
 ```
 
-### ⚠️ Reference Types ke liye — Reference Compare (NOT content!)
+### Note: Reference Types ke liye — Reference Compare (NOT content!)
 
 ```java
 String a = new String("Java");
 String b = new String("Java");
 
-System.out.println(a == b);          // false  (different objects)
-System.out.println(a.equals(b));     // true   (same content)
+System.out.println(a == b); // false (different objects)
+System.out.println(a.equals(b)); // true (same content)
 ```
 
-> **💡 Rule:** String content compare karne ke liye hamesha `.equals()` use karo, `==` nahi!
+> ** Rule:** String content compare karne ke liye hamesha `.equals()` use karo, `==` nahi!
 
 ---
 
-## 🔗 Logical Operators
+## Logical Operators
 
 Multiple boolean conditions combine karne ke liye:
 
 ```text
-&&   Logical AND   → dono true hone chahiye
-||   Logical OR    → at least ek true hona chahiye
-!    Logical NOT   → boolean reverse karta hai
+&& Logical AND → dono true hone chahiye
+|| Logical OR → at least ek true hona chahiye
+! Logical NOT → boolean reverse karta hai
 ```
 
 ### Truth Tables
@@ -170,24 +170,24 @@ Multiple boolean conditions combine karne ke liye:
 
 ```java
 int age = 20;
-System.out.println(age >= 18 && age <= 60);   // true
-System.out.println(age < 18 || age > 60);     // false
-System.out.println(!(age >= 18));              // false
+System.out.println(age >= 18 && age <= 60); // true
+System.out.println(age < 18 || age > 60); // false
+System.out.println(!(age >= 18)); // false
 ```
 
-### ⚡ Short-Circuit Evaluation
+### Short-Circuit Evaluation
 
 `&&` aur `||` **short-circuit** operators hain — agar result pehle condition se hi decide ho jaye to second condition evaluate nahi hoti.
 
 ```java
 // AND: Agar first condition false hai → second check nahi hogi
-false && someExpensiveMethod()   // someExpensiveMethod() NEVER called
+false && someExpensiveMethod() // someExpensiveMethod() NEVER called
 
 // OR: Agar first condition true hai → second check nahi hogi
-true || someExpensiveMethod()    // someExpensiveMethod() NEVER called
+true || someExpensiveMethod() // someExpensiveMethod() NEVER called
 ```
 
-> **💡 Use Case:** Null check karte waqt short-circuiting useful hai:
+> ** Use Case:** Null check karte waqt short-circuiting useful hai:
 > ```java
 > if (str != null && str.length() > 0) { ... }
 > ```
@@ -195,7 +195,7 @@ true || someExpensiveMethod()    // someExpensiveMethod() NEVER called
 
 ---
 
-## 📎 Assignment Operators
+## Assignment Operators
 
 ### Simple Assignment
 
@@ -207,10 +207,10 @@ int x = 10;
 
 ```java
 int a, b, c, d;
-a = b = c = d = 10;   // Right-to-left evaluation
+a = b = c = d = 10; // Right-to-left evaluation
 ```
 
-> ⚠️ `int a = b = c = d = 10;` → ❌ Error if `b`, `c`, `d` not already declared!
+> Note: `int a = b = c = d = 10;` → Error if `b`, `c`, `d` not already declared!
 
 ### Compound Assignment Operators
 
@@ -230,7 +230,7 @@ a = b = c = d = 10;   // Right-to-left evaluation
 
 ---
 
-## ❓ Ternary Operator
+## Ternary Operator
 
 ```java
 condition ? valueIfTrue : valueIfFalse
@@ -238,16 +238,16 @@ condition ? valueIfTrue : valueIfFalse
 
 ```java
 int a = 10, b = 20;
-int max = (a > b) ? a : b;    // max = 20
+int max = (a > b) ? a : b; // max = 20
 
 String result = (a > b) ? "A is bigger" : "B is bigger";
 ```
 
-> **💡 Tip:** Ternary operator nested bhi kar sakte ho, lekin readability ke liye `if-else` better hai nested cases me.
+> ** Tip:** Ternary operator nested bhi kar sakte ho, lekin readability ke liye `if-else` better hai nested cases me.
 
 ---
 
-## 📊 Operator Precedence (High → Low)
+## Operator Precedence (High → Low)
 
 | Priority | Operators |
 |----------|-----------|
@@ -266,8 +266,8 @@ String result = (a > b) ? "A is bigger" : "B is bigger";
 | 13 | `? :` |
 | 14 (lowest) | `=` `+=` `-=` etc. |
 
-> **💡 Tip:** Jab doubt ho — **parentheses `()` use karo!** Code readable bhi hoga aur galti bhi nahi hogi.
+> ** Tip:** Jab doubt ho — **parentheses `()` use karo!** Code readable bhi hoga aur galti bhi nahi hogi.
 
 ---
 
-[⬅️ Back to Index](./README.md) | [Next: Increment & Decrement ➡️](./10-increment-decrement.md)
+[ Back to Index](./README.md) | [Next: Increment & Decrement](./10-increment-decrement.md)

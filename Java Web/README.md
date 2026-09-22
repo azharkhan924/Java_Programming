@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Java%20Web-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Web Badge"/>
-  <img src="https://img.shields.io/badge/Servlet-Jakarta%2FJavaEE-blue?style=for-the-badge" alt="Servlet Badge"/>
-  <img src="https://img.shields.io/badge/JSP-Dynamic%20Web-green?style=for-the-badge" alt="JSP Badge"/>
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
+ <img src="https://img.shields.io/badge/Java%20Web-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java Web Badge"/>
+ <img src="https://img.shields.io/badge/Servlet-Jakarta%2FJavaEE-blue?style=for-the-badge" alt="Servlet Badge"/>
+ <img src="https://img.shields.io/badge/JSP-Dynamic%20Web-green?style=for-the-badge" alt="JSP Badge"/>
+ <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status Badge"/>
 </p>
 
 # Java Web — Servlets, JSP, Sessions & MVC

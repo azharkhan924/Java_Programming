@@ -1,4 +1,4 @@
-# 📝 toString() & hashCode()
+# toString() & hashCode()
 
 ---
 
@@ -25,8 +25,8 @@ Object class ki default `toString()` implementation:
 
 ```java
 public String toString() {
-    return getClass().getName() + "@" +
-           Integer.toHexString(hashCode());
+ return getClass().getName() + "@" +
+ Integer.toHexString(hashCode());
 }
 ```
 
@@ -37,9 +37,9 @@ ClassName@hexadecimalHashCode
 ```
 
 ```text
-A          → class name
-@          → separator
-5e2de80c   → hashCode ka hexadecimal representation
+A → class name
+@ → separator
+5e2de80c → hashCode ka hexadecimal representation
 ```
 
 ---
@@ -50,18 +50,18 @@ Default output meaningful nahi hota — override karke useful representation de 
 
 ```java
 class Employee {
-    int id;
-    String name;
+ int id;
+ String name;
 
-    Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+ Employee(int id, String name) {
+ this.id = id;
+ this.name = name;
+ }
 
-    @Override
-    public String toString() {
-        return "Employee{id=" + id + ", name='" + name + "'}";
-    }
+ @Override
+ public String toString() {
+ return "Employee{id=" + id + ", name='" + name + "'}";
+ }
 }
 ```
 
@@ -98,10 +98,10 @@ public native int hashCode()
 
 ```java
 A a1 = new A();
-System.out.println(a1.hashCode());    // e.g. 1577213552
+System.out.println(a1.hashCode()); // e.g. 1577213552
 ```
 
-### ⚠️ Common Misconception
+### Note: Common Misconception
 
 > "JVM har object ko ek unique number assign karti hai aur wahi hashCode hai."
 
@@ -121,8 +121,8 @@ System.out.println(a1.hashCode());    // e.g. 1577213552
 ```java
 A a1 = new A();
 
-System.out.println(a1);             // A@5e2de80c
-System.out.println(a1.hashCode());  // 1580066828
+System.out.println(a1); // A@5e2de80c
+System.out.println(a1.hashCode()); // 1580066828
 ```
 
 ```text
@@ -139,9 +139,9 @@ So same value hai — bas representation alag hai (decimal vs hex).
 
 ```text
 Object
- ├── toString()  → object ki string representation
- ├── hashCode()  → hash value (int)
- └── equals()    → logical equality check
+ ├── toString() → object ki string representation
+ ├── hashCode() → hash value (int)
+ └── equals() → logical equality check
 ```
 
 ### The Contract
@@ -159,31 +159,31 @@ then their hashCode() values MUST be equal.
 
 ```java
 class Employee {
-    int id;
-    String name;
+ int id;
+ String name;
 
-    Employee(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+ Employee(int id, String name) {
+ this.id = id;
+ this.name = name;
+ }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Employee)) return false;
-        Employee other = (Employee) o;
-        return this.id == other.id;
-    }
+ @Override
+ public boolean equals(Object o) {
+ if (this == o) return true;
+ if (!(o instanceof Employee)) return false;
+ Employee other = (Employee) o;
+ return this.id == other.id;
+ }
 
-    @Override
-    public int hashCode() {
-        return Integer.hashCode(id);
-    }
+ @Override
+ public int hashCode() {
+ return Integer.hashCode(id);
+ }
 
-    @Override
-    public String toString() {
-        return "Employee{id=" + id + ", name='" + name + "'}";
-    }
+ @Override
+ public String toString() {
+ return "Employee{id=" + id + ", name='" + name + "'}";
+ }
 }
 ```
 
@@ -191,18 +191,18 @@ class Employee {
 
 ---
 
-## 🧠 Interview Quick Questions
+## Interview Quick Questions
 
 | Question | Answer |
 |----------|--------|
 | Default `toString()` kya return karta hai? | `ClassName@hexHashCode` |
-| `hashCode()` unique guarantee deta hai? | ❌ No — collisions possible |
-| `equals()` override kiya to `hashCode()` bhi override karna chahiye? | ✅ Yes — contract |
+| `hashCode()` unique guarantee deta hai? | No — collisions possible |
+| `equals()` override kiya to `hashCode()` bhi override karna chahiye? | Yes — contract |
 | `toString()` kyu override karte hain? | Meaningful representation ke liye |
 | `hashCode()` ka return type? | `int` |
-| `hashCode()` `native` method hai? | ✅ Yes |
+| `hashCode()` `native` method hai? | Yes |
 | `toString()` mein hex value kahan se aati hai? | `Integer.toHexString(hashCode())` |
 
 ---
 
-[⬅️ Previous: Object Class](./01-object-class.md) · [📖 Back to OOP Index](./README.md) · [Next → equals() & == ➡️](./03-equals-and-identity.md)
+[Previous: Object Class](./01-object-class.md) · [Back to OOP Index](./README.md) · [Next: equals() & ==](./03-equals-and-identity.md)

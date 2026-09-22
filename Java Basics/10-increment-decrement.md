@@ -1,19 +1,19 @@
-# ⬆️ Increment & Decrement Operators
+# ⬆ Increment & Decrement Operators
 
 ---
 
-## 📌 Basics
+## Basics
 
 ```text
-++   Increment (value + 1)
---   Decrement (value - 1)
+++ Increment (value + 1)
+-- Decrement (value - 1)
 ```
 
 Ye variable ki value ko **1 se increase/decrease** karte hain.
 
 ---
 
-## 1️⃣ Pre-Increment `++x`
+## 1⃣ Pre-Increment `++x`
 
 > **Pehle increment karo → phir use karo**
 
@@ -36,7 +36,7 @@ y = 6
 
 ---
 
-## 2️⃣ Post-Increment `x++`
+## 2⃣ Post-Increment `x++`
 
 > **Pehle use karo → phir increment karo**
 
@@ -59,7 +59,7 @@ y = 5
 
 ---
 
-## 3️⃣ Pre-Decrement `--x`
+## 3⃣ Pre-Decrement `--x`
 
 ```java
 int x = 5;
@@ -74,7 +74,7 @@ y = 4
 
 ---
 
-## 4️⃣ Post-Decrement `x--`
+## 4⃣ Post-Decrement `x--`
 
 ```java
 int x = 5;
@@ -89,7 +89,7 @@ y = 5
 
 ---
 
-## 📊 Summary Table
+## Summary Table
 
 | Expression | x (before = 5) | y | x (after) |
 |-----------|----------------|---|-----------|
@@ -98,16 +98,16 @@ y = 5
 | `y = --x` | — | **4** | **4** |
 | `y = x--` | — | **5** | **4** |
 
-### 🧠 Easy Memory Trick
+### Easy Memory Trick
 
 ```text
-PRE  → ++ pehle hai, toh increment PEHLE hoga
+PRE → ++ pehle hai, toh increment PEHLE hoga
 POST → ++ baad me hai, toh increment BAAD ME hoga
 ```
 
 ---
 
-## ⚠️ Tokenization Gotchas — `+++` Expressions
+## Note: Tokenization Gotchas — `+++` Expressions
 
 Java me `+` characters ko **lexer** left-to-right greedy matching se tokens me break karta hai.
 
@@ -125,7 +125,7 @@ x++ → use 5, then x becomes 6
 result = 5 + 6 = 11
 ```
 
-### ⚠️ Confusing Expression: `x+++++x`
+### Note: Confusing Expression: `x+++++x`
 
 ```java
 x+++++x
@@ -133,44 +133,44 @@ x+++++x
 
 Java lexer ise parse karta hai as:
 ```text
-x++ ++ +x    →   ❌ Error! (x++ returns a value, not a variable — ++ can't apply to it)
+x++ ++ +x → Error! (x++ returns a value, not a variable — ++ can't apply to it)
 ```
 
-> **💡 Best Practice:** Hamesha spacing clearly use karo. `x++ + ++x` likhna better hai than `x++++x`.
+> ** Best Practice:** Hamesha spacing clearly use karo. `x++ + ++x` likhna better hai than `x++++x`.
 
 ---
 
-## ❌ Where `++`/`--` Work Nahi Karte
+## Where `++`/`--` Work Nahi Karte
 
 | Type | Works? |
 |------|--------|
-| `int`, `long`, `byte`, `short` | ✅ |
-| `float`, `double` | ✅ |
-| `char` | ✅ |
-| `boolean` | ❌ |
-| `String` | ❌ |
-| Literal values (`5++`) | ❌ |
-| Expressions (`(a+b)++`) | ❌ |
+| `int`, `long`, `byte`, `short` | Yes |
+| `float`, `double` | Yes |
+| `char` | Yes |
+| `boolean` | No |
+| `String` | No |
+| Literal values (`5++`) | No |
+| Expressions (`(a+b)++`) | No |
 
 ```java
 boolean flag = true;
-flag++;         // ❌ Compile error
+flag++; // Compile error
 
 String s = "hi";
-s++;            // ❌ Compile error
+s++; // Compile error
 
-5++;            // ❌ Not a variable
+5++; // Not a variable
 ```
 
 ---
 
-## 🔥 Tricky Interview Examples
+## Tricky Interview Examples
 
 ### Example 1
 ```java
 int x = 10;
 x = x++;
-System.out.println(x);   // Output: 10  (NOT 11!)
+System.out.println(x); // Output: 10 (NOT 11!)
 ```
 **Why?** `x++` returns old value (10), which gets assigned back to `x`. Then increment happens, but assignment already overwrote it.
 
@@ -178,7 +178,7 @@ System.out.println(x);   // Output: 10  (NOT 11!)
 ```java
 int x = 5;
 int y = x++ + ++x;
-System.out.println(y);   // Output: 12
+System.out.println(y); // Output: 12
 ```
 **Why?**
 ```text
@@ -190,16 +190,16 @@ y = 5 + 7 = 12
 ### Example 3
 ```java
 int x = 3;
-System.out.println(x++ + x++ + x++);  // Output: 12
+System.out.println(x++ + x++ + x++); // Output: 12
 ```
 **Why?**
 ```text
-First  x++ → use 3, x becomes 4
+First x++ → use 3, x becomes 4
 Second x++ → use 4, x becomes 5
-Third  x++ → use 5, x becomes 6
+Third x++ → use 5, x becomes 6
 Result = 3 + 4 + 5 = 12
 ```
 
 ---
 
-[⬅️ Back to Index](./README.md) | [Next: Bitwise & Shift Operators ➡️](./11-bitwise-and-shift.md)
+[ Back to Index](./README.md) | [Next: Bitwise & Shift Operators](./11-bitwise-and-shift.md)
