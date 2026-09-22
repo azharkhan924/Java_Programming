@@ -14,12 +14,14 @@
 
 ## 📚 Topics Covered
 
-| # | Topic | Status |
-|---|-------|--------|
-| 1 | [Java Basics](./Java%20Basics/) | ✅ Complete |
-| 2 | [Core Java](./Core%20Java/) | ✅ Complete |
+| # | Topic | Description | Status |
+|---|-------|-------------|--------|
+| 1 | [Java Basics](./Java%20Basics/) | Variables, Data Types, Operators, Flow Control, Arrays | ✅ Complete (16 Notes) |
+| 2 | [Core Java](./Core%20Java/) | Methods, OOP Fundamentals, Constructors, Static, Inheritance, Polymorphism | ✅ Complete (14 Notes) |
+| 3 | [OOP & Object Class](./OOP%20and%20Object%20Class/) | Object class methods, equals/hashCode, Casting, Strings, GC, Cloning, Singleton | ✅ Complete (11 Notes) |
+| 4 | [Java Web](./Java%20Web/) | Servlets, Lifecycle, Request/Response, RequestDispatcher, Cookies, Session, JSP & MVC | ✅ Complete (8 Notes) |
 
-> More topics coming soon — Collections, Exception Handling, Multithreading, etc.
+> More topics coming soon — Collections Framework, Exception Handling, Multithreading, etc.
 
 ---
 
