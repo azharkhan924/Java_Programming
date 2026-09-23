@@ -7,7 +7,7 @@
 
 # Spring Framework — Short Notes for Quick Revision
 
-> **Style:** These notes are for quick revision. Language is kept in **English** with clear explanations and interview-oriented content.
+> **Style:** These notes are for quick revision. Language is kept in **English** with clear explanations, structured diagrams, comparison tables, and interview-oriented content.
 
 ---
 
@@ -15,7 +15,8 @@
 
 | # | Topic | File | Description |
 |---|-------|------|-------------|
-| 1 | Advanced Dependency Injection & Autowiring | [01-dependency-injection-and-autowiring.md](./01-dependency-injection-and-autowiring.md) | Lookup Method Injection, Circular Dependency, Constructor/Setter Injection, XML Namespaces, Java Config, Autowiring, @Autowired, @Qualifier, @Primary, @Component |
+| 1 | Spring Core, IoC Container & Bean Scopes | [01-spring-core-and-ioc-container.md](./01-spring-core-and-ioc-container.md) | Introduction, Rod Johnson history, IoC & DI concepts, Project setup, First bean program, ABC.xml, ApplicationContext vs BeanFactory, Reflection, Spring Exceptions, DI types, getBean() overloads, Singleton vs Prototype scopes, 4 Scope combinations |
+| 2 | Advanced Dependency Injection & Autowiring | [02-dependency-injection-and-autowiring.md](./02-dependency-injection-and-autowiring.md) | Lookup Method Injection, Circular Dependency, 3-Level Cache, Constructor/Setter Injection, XML p & c Namespaces, Java Config, Collections, Autowiring, @Autowired, @Qualifier, @Primary, @Component, @Nullable |
 
 ---
 

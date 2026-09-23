@@ -21,7 +21,7 @@
 | 5 | [Java Web](./Java%20Web/) | Servlets, Lifecycle, Request/Response, RequestDispatcher, Cookies, Session, JSP & MVC | Complete (8 Notes) |
 | 6 | [Exception Handling](./Exception%20Handling/) | Throwable Hierarchy, Checked vs Unchecked, try-catch-finally, throw/throws, Custom Exceptions, Multi-Catch | Complete (8 Notes) |
 | 7 | [Inner Classes & Lambdas](./Inner%20Classes%20and%20Lambdas/) | Instance Inner, Local Inner, Anonymous Inner, Static Nested, Adapters, Functional Interfaces & Lambdas | Complete (9 Notes) |
-| 8 | [Spring Framework](./Spring%20Framework/) | Lookup Method Injection, Circular Dependency, DI, Autowiring, @Autowired, @Qualifier, @Primary, @Component | Complete (1 Note) |
+| 8 | [Spring Framework](./Spring%20Framework/) | Spring Core, IoC Container, BeanFactory vs ApplicationContext, Scopes, Lookup Method, Circular Dependency, DI, Autowiring, @Autowired, @Qualifier, @Primary | Complete (2 Notes) |
 
 ---
 

@@ -25,13 +25,8 @@ Suppose `Student` is a singleton and `Address` is prototype.
 package p1;
 
 public class Address {
-
     public Address() {
         System.out.println("Address constructor");
-    }
-
-    public void get() {
-        System.out.println("Address get()");
     }
 }
 ```
@@ -48,7 +43,8 @@ public abstract class Student {
     }
 
     public void show() {
-        get();
+        Address address = get();
+        System.out.println(address);
     }
 
     public abstract Address get();
