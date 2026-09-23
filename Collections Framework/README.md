@@ -23,14 +23,17 @@
 | 6 |  Cursors — Enumeration, Iterator & ListIterator | [06-cursors.md](./06-cursors.md) | 3 cursor types, methods, forward vs bidirectional, fail-fast behavior |
 | 7 |  Set Interface — HashSet, LinkedHashSet | [07-set-and-hashset.md](./07-set-and-hashset.md) | Set properties, HashSet internal working, equals/hashCode contract, LinkedHashSet |
 | 8 |  SortedSet, NavigableSet & TreeSet | [08-sortedset-and-treeset.md](./08-sortedset-and-treeset.md) | SortedSet methods, TreeSet constructors, natural ordering, null handling |
-| 9 | ⚖ Comparable & Comparator | [09-comparable-and-comparator.md](./09-comparable-and-comparator.md) | compareTo vs compare, natural vs custom sorting, TreeSet with Comparator |
-| 10 | ⚡ Master Quick Revision | [10-quick-revision.md](./10-quick-revision.md) | One-page cheat sheet, comparison matrices & interview traps |
+| 9 | Comparable & Comparator | [09-comparable-and-comparator.md](./09-comparable-and-comparator.md) | compareTo vs compare, natural vs custom sorting, TreeSet with Comparator |
+| 10 | Master Quick Revision | [10-quick-revision.md](./10-quick-revision.md) | One-page cheat sheet, comparison matrices & interview traps |
+| 11 | Queue, PriorityQueue, NavigableSet, NavigableMap & Utility Classes | [11-queue-and-priority-queue.md](./11-queue-and-priority-queue.md) | Queue interface, FIFO, PriorityQueue, NavigableSet/Map, Collections & Arrays utility |
+| 12 | Map & Implementations | [12-map-and-implementations.md](./12-map-and-implementations.md) | Map interface, HashMap, LinkedHashMap, IdentityHashMap, Hashtable, Map.Entry |
+| 13 | Concurrent Collections | [13-concurrent-collections.md](./13-concurrent-collections.md) | ConcurrentMap, ConcurrentHashMap, CopyOnWriteArrayList, fail-fast vs weakly consistent |
 
 ---
 
 ## How to Use These Notes
 
-1. **Sequential Learning** → Read files `01` to `09` in order for a structured walkthrough
+1. **Sequential Learning** → Read files `01` to `13` in order for a structured walkthrough
 2. **Quick Revision** → Jump to `10-quick-revision.md` for a one-page summary
 3. **Topic Lookup** → Use the table above to find a specific topic
 

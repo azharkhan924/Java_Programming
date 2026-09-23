@@ -15,12 +15,13 @@
 | # | Topic | Description | Status |
 |---|---|---|---|
 | 1 | [Java Basics](./Java%20Basics/) | Variables, Data Types, Operators, Flow Control, Arrays, Strings | Complete (16 Notes) |
-| 2 | [Core Java](./Core%20Java/) | Methods, OOP Fundamentals, Constructors, Static, Inheritance, Polymorphism, Access Modifiers | Complete (14 Notes) |
+| 2 | [Core Java](./Core%20Java/) | Methods, OOP Fundamentals, Constructors, Static, Inheritance, Polymorphism, Access Modifiers, Generics, Properties | Complete (16 Notes) |
 | 3 | [OOP & Object Class](./OOP%20and%20Object%20Class/) | Object class methods, equals/hashCode, Type Casting, Strings, GC, Cloning, Singleton, File Handling | Complete (11 Notes) |
-| 4 | [Collections Framework](./Collections%20Framework/) | ArrayList, LinkedList, Vector, Stack, Set, HashSet, TreeSet, Comparable, Comparator, Cursors | Complete (10 Notes) |
+| 4 | [Collections Framework](./Collections%20Framework/) | ArrayList, LinkedList, Vector, Stack, Set, HashSet, TreeSet, Comparable, Comparator, Queue, Map, Concurrent Collections | Complete (13 Notes) |
 | 5 | [Java Web](./Java%20Web/) | Servlets, Lifecycle, Request/Response, RequestDispatcher, Cookies, Session, JSP & MVC | Complete (8 Notes) |
 | 6 | [Exception Handling](./Exception%20Handling/) | Throwable Hierarchy, Checked vs Unchecked, try-catch-finally, throw/throws, Custom Exceptions, Multi-Catch | Complete (8 Notes) |
 | 7 | [Inner Classes & Lambdas](./Inner%20Classes%20and%20Lambdas/) | Instance Inner, Local Inner, Anonymous Inner, Static Nested, Adapters, Functional Interfaces & Lambdas | Complete (9 Notes) |
+| 8 | [Spring Framework](./Spring%20Framework/) | Lookup Method Injection, Circular Dependency, DI, Autowiring, @Autowired, @Qualifier, @Primary, @Component | Complete (1 Note) |
 
 ---
 
