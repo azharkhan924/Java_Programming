@@ -37,7 +37,9 @@ CREATE TABLE InsImg (
     uname VARCHAR(50),
     UImg LONGBLOB
 );
-```Agar image size small hai to `BLOB`/`MEDIUMBLOB` bhi use kar sakte hain.
+```
+
+Agar image size small hai to `BLOB`/`MEDIUMBLOB` bhi use kar sakte hain.
 
 For example:
 
@@ -214,7 +216,9 @@ byte[] imageBytes =
             rs.getBytes(1),
         "AAA"
     );
-```Yahan `1` first selected column hai.
+```
+
+Yahan `1` first selected column hai.
 
 ---
 
@@ -225,7 +229,9 @@ Agar query:
 ```java
 String q =
     "SELECT * FROM InsImg WHERE uname = ?";
-```Then:
+```
+
+Then:
 
 ```java
 byte[] imageBytes =
@@ -235,18 +241,24 @@ byte[] imageBytes =
             rs.getBytes(2),
         "AAA"
     );
-```Yahan:
+```
+
+Yahan:
 
 ```text
 1 → uname
 2 → UImg
-```Better practice: jab sirf image chahiye ho, use:
+```
+
+Better practice: jab sirf image chahiye ho, use:
 
 ```sql
 SELECT UImg
 FROM InsImg
 WHERE uname = ?
-```instead of:
+```
+
+instead of:
 
 ```sql
 SELECT *
@@ -260,14 +272,18 @@ Positional:
 
 ```sql
 INSERT INTO InsImg VALUES (?, ?)
-```Named:
+```
+
+Named:
 
 ```sql
 INSERT INTO InsImg
 (uname, UImg)
 VALUES
 (:uname, :uimg)
-```Java:
+```
+
+Java:
 
 ```java
 import java.io.FileInputStream;
@@ -452,7 +468,9 @@ Application
      |
      v
  Database
-```Typical lifecycle:
+```
+
+Typical lifecycle:
 
 ```text
 Borrow connection
@@ -464,11 +482,15 @@ Commit / rollback as required
 Close connection
       ↓
 Connection returned to pool
-```Important:
+```
+
+Important:
 
 ```java
 connection.close();
-```In a pool, closing the application-facing connection normally returns it
+```
+
+In a pool, closing the application-facing connection normally returns it
 to the pool rather than necessarily closing the underlying physical
 connection.
 
@@ -486,7 +508,9 @@ Authentication / network setup
 Execute SQL
       ↓
 Close physical connection
-```Repeated connection creation can add latency and resource overhead.
+```
+
+Repeated connection creation can add latency and resource overhead.
 
 With pooling:
 
@@ -528,7 +552,9 @@ Database
 SQL
   ↓
 Connection close
-```Repeated requests ke liye ye process repeatedly hota hai.
+```
+
+Repeated requests ke liye ye process repeatedly hota hai.
 
 ## With Pool
 
@@ -657,7 +683,9 @@ public class HikariDemo {
               value="3"/>
 
 </bean>
-```Main:
+```
+
+Main:
 
 ```java
 ApplicationContext app =
@@ -725,7 +753,9 @@ Suppose:
 ```java
 config.setMinimumIdle(3);
 config.setMaximumPoolSize(10);
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Minimum idle = 3
@@ -750,7 +780,9 @@ Suppose 7 connections in use:
 In-use = 7
 Idle = 3
 Total = 10
-```Agar aur request aaye aur idle connection available nahi hai, pool
+```
+
+Agar aur request aaye aur idle connection available nahi hai, pool
 `maximumPoolSize` tak new connections establish kar sakta hai.
 
 ### At Maximum
@@ -759,7 +791,9 @@ Total = 10
 Total = 10
 Idle = 0
 In-use = 10
-```Ab additional `getConnection()` calls available connection ka wait
+```
+
+Ab additional `getConnection()` calls available connection ka wait
 karenge.
 
 HikariCP mein `connectionTimeout` determine karta hai ki connection
@@ -821,13 +855,17 @@ Example:
 ```text
 minimumIdle = 10
 maximumPoolSize = 10
-```Is configuration mein pool effectively fixed-size behavior ke close hota
+```
+
+Is configuration mein pool effectively fixed-size behavior ke close hota
 hai:
 
 ```text
 10 connections total
 10 idle when unused
-```HikariCP specifically notes that leaving `minimumIdle` unset lets it act
+```
+
+HikariCP specifically notes that leaving `minimumIdle` unset lets it act
 as a fixed-size pool because the default minimum idle equals maximum
 pool size. citeturn0search2
 
@@ -841,13 +879,17 @@ Old-style JDBC examples commonly show:
 Class.forName(
     "com.mysql.cj.jdbc.Driver"
 );
-```or:
+```
+
+or:
 
 ```java
 config.setDriverClassName(
     "com.mysql.cj.jdbc.Driver"
 );
-```Modern JDBC 4+ drivers can register/load themselves through the JDBC
+```
+
+Modern JDBC 4+ drivers can register/load themselves through the JDBC
 driver mechanism.
 
 HikariCP can resolve a driver through `DriverManager` using the
@@ -861,7 +903,9 @@ So:
 config.setJdbcUrl(
     "jdbc:mysql://localhost:3306/springdb"
 );
-```is often enough when the MySQL JDBC driver is correctly present on the
+```
+
+is often enough when the MySQL JDBC driver is correctly present on the
 classpath.
 
 ---
@@ -878,7 +922,9 @@ HikariCP
 SLF4J API
 SLF4J binding/provider if required by the selected logging setup
 MySQL Connector/J
-```With Maven/Gradle, prefer declaring dependencies rather than manually
+```
+
+With Maven/Gradle, prefer declaring dependencies rather than manually
 copying arbitrary JAR versions.
 
 Example Maven:
@@ -971,7 +1017,9 @@ public class DBCPDemo {
         }
     }
 }
-```DBCP2's `maxTotal` limits the total number of connections that can be
+```
+
+DBCP2's `maxTotal` limits the total number of connections that can be
 active/allocated, while `maxIdle` limits how many can remain idle.
 citeturn1search0
 
@@ -986,7 +1034,9 @@ commons-dbcp2
 commons-pool2
 MySQL Connector/J
 Spring JDBC
-```Apache's documentation explicitly states that the `commons-dbcp2`
+```
+
+Apache's documentation explicitly states that the `commons-dbcp2`
 artifact relies on `commons-pool2` for the underlying object-pool
 mechanisms. citeturn1search6
 
@@ -1001,7 +1051,9 @@ Main DataSource:
 
 ```java
 org.apache.tomcat.jdbc.pool.DataSource
-```Common properties:
+```
+
+Common properties:
 
 ```text
 driverClassName
@@ -1012,7 +1064,9 @@ maxActive
 maxIdle
 minIdle
 maxWait
-```Current Tomcat documentation describes:
+```
+
+Current Tomcat documentation describes:
 
 -   `maxActive` = maximum active/allocated connections
 -   `maxIdle` = maximum idle connections retained
@@ -1089,7 +1143,9 @@ tomcat-juli
 MySQL Connector/J
 Spring JDBC
 Spring Core/context dependencies
-```Exact JAR versions should be kept compatible with the Tomcat/JDK/Spring
+```
+
+Exact JAR versions should be kept compatible with the Tomcat/JDK/Spring
 stack being used.
 
 ---
@@ -1102,7 +1158,9 @@ A common pooled DataSource is:
 
 ```java
 ComboPooledDataSource
-```It supports pooling-related configuration and can also support
+```
+
+It supports pooling-related configuration and can also support
 prepared-statement pooling when configured. citeturn3search0
 
 ---
@@ -1160,7 +1218,9 @@ public class C3P0Demo {
         ds.close();
     }
 }
-```c3p0's current documentation uses `ComboPooledDataSource`, `setJdbcUrl`,
+```
+
+c3p0's current documentation uses `ComboPooledDataSource`, `setJdbcUrl`,
 `setUser`, `setPassword`, and pool-size settings such as
 `setMinPoolSize` and `setMaxPoolSize`. citeturn3search0
 
@@ -1176,13 +1236,17 @@ minPoolSize
 maxPoolSize
 acquireIncrement
 maxIdleTime
-```For example:
+```
+
+For example:
 
 ```java
 ds.setMinPoolSize(3);
 ds.setAcquireIncrement(3);
 ds.setMaxPoolSize(10);
-```c3p0 documentation explains that the pool size varies according to usage
+```
+
+c3p0 documentation explains that the pool size varies according to usage
 between its configured minimum and maximum, and `acquireIncrement`
 controls how many connections are acquired when the pool needs more
 connections. citeturn3search0
@@ -1296,11 +1360,15 @@ DBCP2 available?
      Yes
       ↓
 DBCP2
-```Spring Boot can also be explicitly configured with:
+```
+
+Spring Boot can also be explicitly configured with:
 
 ```properties
 spring.datasource.type=...
-```and additional pools can be configured manually. citeturn2search3
+```
+
+and additional pools can be configured manually. citeturn2search3
 
 ---
 
@@ -1320,7 +1388,9 @@ Spring Boot DataSource
 HikariCP
         ↓
 MySQL/PostgreSQL/etc.
-```This does not mean other pools cannot be used.
+```
+
+This does not mean other pools cannot be used.
 
 ---
 
@@ -1331,7 +1401,9 @@ Suppose:
 ```sql
 SELECT username
 FROM InsMarks
-```Code:
+```
+
+Code:
 
 ```java
 String q =
@@ -1382,15 +1454,21 @@ List<String> li =
 for (String name : li) {
     System.out.println(name);
 }
-```If your actual column is `urno`, use:
+```
+
+If your actual column is `urno`, use:
 
 ```sql
 WHERE urno = ?
-```and:
+```
+
+and:
 
 ```java
 rs.getString("uname");
-```according to the actual table schema.
+```
+
+according to the actual table schema.
 
 ---
 
@@ -1406,7 +1484,9 @@ BeanPropertyRowMapper<Student> rowMapper =
     new BeanPropertyRowMapper<>(
         Student.class
     );
-```Then:
+```
+
+Then:
 
 ```java
 List<Student> li =
@@ -1415,7 +1495,9 @@ List<Student> li =
         rowMapper,
         "101"
     );
-```Column/property naming compatible honi chahiye.
+```
+
+Column/property naming compatible honi chahiye.
 
 ---
 
@@ -1556,7 +1638,9 @@ for (Student std : li) {
         + std.getUserName()
     );
 }
-```Yeh:
+```
+
+Yeh:
 
 ```text
 Student objects ki List
@@ -1578,7 +1662,9 @@ Suppose:
 ```sql
 SELECT username
 FROM InsMarks
-```Use:
+```
+
+Use:
 
 ```java
 String q =
@@ -1593,7 +1679,9 @@ List<String> li =
 for (String name : li) {
     System.out.println(name);
 }
-```This is useful when you only need one column as a simple Java type.
+```
+
+This is useful when you only need one column as a simple Java type.
 
 ---
 
@@ -1668,7 +1756,9 @@ for (Map<String, Object> row : li) {
         + row.get("username")
     );
 }
-```Concept:
+```
+
+Concept:
 
 ```text
 Database Row
@@ -1701,7 +1791,9 @@ Agar `Student`/file model mein:
 ```java
 private String uname;
 private byte[] uimg;
-```then:
+```
+
+then:
 
 ```java
 public class ImageData {
@@ -1725,21 +1817,27 @@ public class ImageData {
         this.uimg = uimg;
     }
 }
-```Named parameter:
+```
+
+Named parameter:
 
 ```java
 String q =
     "INSERT INTO InsImg " +
     "(uname, UImg) " +
     "VALUES (:uname, :uimg)";
-```Parameter source:
+```
+
+Parameter source:
 
 ```java
 SqlParameterSource source =
     new BeanPropertySqlParameterSource(
         imageData
     );
-```Execute:
+```
+
+Execute:
 
 ```java
 named.update(q, source);
@@ -1778,7 +1876,9 @@ Binary Large Object
 Binary data
  ↓
 Image / PDF / Audio / etc.
-```Types:
+```
+
+Types:
 
 ```text
 TINYBLOB   → 255 bytes
@@ -1813,7 +1913,9 @@ Apache DBCP2
 Tomcat JDBC Pool
   ↓
 HikariCP
-```Again, this is a conceptual comparison/learning sequence, not a claim
+```
+
+Again, this is a conceptual comparison/learning sequence, not a claim
 that the technologies literally replaced one another in this exact
 historical order.
 
@@ -1831,7 +1933,9 @@ JdbcTemplate
 SQL
       ↓
 Database
-```Important:
+```
+
+Important:
 
 ```text
 minimumIdle

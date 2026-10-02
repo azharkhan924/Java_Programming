@@ -41,7 +41,9 @@ Client request bhejta hai:
 
 ```text
 POST /students
-```Server request ko process karta hai aur response deta hai.
+```
+
+Server request ko process karta hai aur response deta hai.
 
 Usually data **JSON** format mein exchange hota hai.
 
@@ -89,7 +91,9 @@ Example:
 
 ```text
 POST /students
-```ka meaning hai:
+```
+
+ka meaning hai:
 
 > Students resource mein ek new student create karo.
 
@@ -112,14 +116,18 @@ Suppose client ye request bhejta hai:
 ```http
 POST /students
 Content-Type: application/json
-```Body:
+```
+
+Body:
 
 ```json
 {
   "name": "Azhar",
   "age": 21
 }
-```Backend:
+```
+
+Backend:
 
 ```text
 Controller
@@ -129,7 +137,9 @@ Service
 Repository
     ↓
 Database
-```Database mein student save hota hai.
+```
+
+Database mein student save hota hai.
 
 Then server response bhejta hai:
 
@@ -190,7 +200,9 @@ Language: Java
 Spring Boot: suitable stable version
 Packaging: Jar
 Java: installed/supported version
-```Example dependencies:
+```
+
+Example dependencies:
 
 -   Spring Web
 -   Spring Data JPA
@@ -203,7 +215,9 @@ Java: installed/supported version
 Spring Web
 Spring Data JPA
 MySQL Driver
-```enough hain.
+```
+
+enough hain.
 
 ---
 
@@ -307,7 +321,9 @@ Hamare project ko layers mein divide karenge:
 │       Database          │
 │         MySQL           │
 └─────────────────────────┘
-```Aur:
+```
+
+Aur:
 
 ```text
 Entity Layer
@@ -352,7 +368,9 @@ public class Student {
 
 ```java
 @Entity
-```Spring/JPA ko batata hai:
+```
+
+Spring/JPA ko batata hai:
 
 > Ye Java class database ki ek table ko represent karegi.
 
@@ -383,7 +401,9 @@ id
 1
 2
 3
-```Har student ko uniquely identify karne ke liye ID use hoti hai.
+```
+
+Har student ko uniquely identify karne ke liye ID use hoti hai.
 
 ---
 
@@ -391,7 +411,9 @@ id
 
 ```java
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-```Iska use ID ko automatically generate/increment karne ke liye hota hai.
+```
+
+Iska use ID ko automatically generate/increment karne ke liye hota hai.
 
 Example:
 
@@ -399,7 +421,9 @@ Example:
 Student 1 → id = 1
 Student 2 → id = 2
 Student 3 → id = 3
-```Database generated ID handle karta hai.
+```
+
+Database generated ID handle karta hai.
 
 ---
 
@@ -414,7 +438,9 @@ public class Student {
     private String name;
     private int age;
 }
-```Conceptually table:
+```
+
+Conceptually table:
 
   Column   Type
   -------- ---------
@@ -469,7 +495,9 @@ Simple meaning:
 Java Object
     ↕
 Database Table
-```Hibernate Java objects ko database records ke saath map/manage karne
+```
+
+Hibernate Java objects ko database records ke saath map/manage karne
 mein help karta hai.
 
 Isliye hume har basic operation ke liye manually SQL likhne ki zarurat
@@ -505,12 +533,16 @@ public interface StudentRepository
 
 ```java
 JpaRepository<Student, Integer>
-```Yahan:
+```
+
+Yahan:
 
 ```text
 Student → Entity type
 Integer → ID ka type
-```Spring Data JPA hume already kaafi ready-made methods provide karta hai.
+```
+
+Spring Data JPA hume already kaafi ready-made methods provide karta hai.
 
 Examples:
 
@@ -520,7 +552,9 @@ findAll()
 findById()
 deleteById()
 existsById()
-```Isliye basic CRUD ke liye SQL manually likhne ki zarurat nahi padti.
+```
+
+Isliye basic CRUD ke liye SQL manually likhne ki zarurat nahi padti.
 
 ---
 
@@ -534,7 +568,9 @@ Repository
 JPA / Hibernate
    ↓
 MySQL
-```Repository database-related operations ko handle karta hai.
+```
+
+Repository database-related operations ko handle karta hai.
 
 Controller ko directly database ke saath communicate nahi karna chahiye.
 
@@ -583,7 +619,9 @@ public class StudentService {
 
 ```java
 @Service
-```Spring ko batata hai:
+```
+
+Spring ko batata hai:
 
 > Ye class service/business logic layer ka component hai.
 
@@ -596,7 +634,9 @@ Spring is class ka object manage karta hai.
 ```java
 @Autowired
 private StudentRepository repo;
-```Spring automatically required dependency provide karta hai.
+```
+
+Spring automatically required dependency provide karta hai.
 
 Concept:
 
@@ -606,7 +646,9 @@ StudentService needs StudentRepository
           Spring
              ↓
 Repository object provide
-```Is process ko **Dependency Injection (DI)** kehte hain.
+```
+
+Is process ko **Dependency Injection (DI)** kehte hain.
 
 ---
 
@@ -621,7 +663,9 @@ public Student addStudent(Student s) {
 
     return repo.save(s);
 }
-```Future mein yahin:
+```
+
+Future mein yahin:
 
 -   validation
 -   calculations
@@ -680,7 +724,9 @@ public class StudentController {
 
 ```java
 @RestController
-```Ye class ko REST controller banata hai.
+```
+
+Ye class ko REST controller banata hai.
 
 Matlab:
 
@@ -693,25 +739,35 @@ Matlab:
 
 ```java
 @RequestMapping("/students")
-```Ye controller ka base URL define karta hai.
+```
+
+Ye controller ka base URL define karta hai.
 
 Example:
 
 ```text
 /students
-```Then:
+```
+
+Then:
 
 ```java
 @PostMapping
-```means:
+```
+
+means:
 
 ```text
 POST /students
-```And:
+```
+
+And:
 
 ```java
 @GetMapping
-```means:
+```
+
+means:
 
 ```text
 GET /students
@@ -723,7 +779,9 @@ GET /students
 
 ```java
 @PostMapping
-```POST request handle karta hai.
+```
+
+POST request handle karta hai.
 
 Use case:
 
@@ -735,7 +793,9 @@ Use case:
 
 ```java
 public Student add(@RequestBody Student s)
-```Client JSON bhejta hai:
+```
+
+Client JSON bhejta hai:
 
 ```json
 {
@@ -762,7 +822,9 @@ JSON
 Jackson
  ↓
 Student Java Object
-```Response ke time reverse:
+```
+
+Response ke time reverse:
 
 ```text
 Student Java Object
@@ -770,7 +832,9 @@ Student Java Object
 Jackson
  ↓
 JSON
-```Example Java object:
+```
+
+Example Java object:
 
 ```java
 Student {
@@ -778,7 +842,9 @@ Student {
     name = "Azhar",
     age = 21
 }
-```Response:
+```
+
+Response:
 
 ```json
 {
@@ -796,14 +862,18 @@ Suppose Postman se request aayi:
 
 ```text
 POST http://localhost:8080/students
-```Body:
+```
+
+Body:
 
 ```json
 {
   "name": "Azhar",
   "age": 21
 }
-```Internally flow:
+```
+
+Internally flow:
 
 ```text
 Client / Postman
@@ -876,7 +946,9 @@ Controller
 Repository
     ↓
 Database
-```Problems:
+```
+
+Problems:
 
 -   Business logic controller mein aa sakti hai
 -   Separation of concerns kam hota hai
@@ -916,7 +988,9 @@ Client
 API
   ↓
 Database
-```Agar application restart ho aur data sirf memory mein tha, to data lose
+```
+
+Agar application restart ho aur data sirf memory mein tha, to data lose
 ho sakta hai.
 
 Database persistent storage provide karta hai.
@@ -929,7 +1003,9 @@ MySQL mein:
 
 ```sql
 CREATE DATABASE testdb;
-```Database name application configuration se match hona chahiye.
+```
+
+Database name application configuration se match hona chahiye.
 
 Example:
 
@@ -945,7 +1021,9 @@ Location:
 
 ```text
 src/main/resources/application.properties
-```Example:
+```
+
+Example:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/testdb
@@ -967,7 +1045,9 @@ spring.jpa.show-sql=true
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/testdb
-```Meaning:
+```
+
+Meaning:
 
 ```text
 localhost → database same machine par hai
@@ -985,7 +1065,9 @@ spring.datasource.username=root
 
 ```properties
 spring.datasource.password=root
-```Actual password environment ke according hoga.
+```
+
+Actual password environment ke according hoga.
 
 ---
 
@@ -993,7 +1075,9 @@ spring.datasource.password=root
 
 ```properties
 spring.jpa.hibernate.ddl-auto=update
-```Development environment mein Hibernate entity ke according database
+```
+
+Development environment mein Hibernate entity ke according database
 schema ko update kar sakta hai.
 
 Example:
@@ -1024,7 +1108,9 @@ tools/processes preferred hote hain.
 
 ```properties
 spring.jpa.show-sql=true
-```Hibernate jo SQL generate karta hai, usse console/logs mein dekhne mein
+```
+
+Hibernate jo SQL generate karta hai, usse console/logs mein dekhne mein
 help milti hai.
 
 Useful for learning/debugging.
@@ -1053,7 +1139,9 @@ Spring Context
 Tomcat starts
         ↓
 Application ready
-```Usually local development mein URL:
+```
+
+Usually local development mein URL:
 
 ```text
 http://localhost:8080
@@ -1069,7 +1157,9 @@ Postman API testing ke liye useful tool hai.
 
 ```text
 POST http://localhost:8080/students
-```Body:
+```
+
+Body:
 
 ```text
 raw
@@ -1081,7 +1171,9 @@ JSON
   "name": "Azhar",
   "age": 21
 }
-```Send karo.
+```
+
+Send karo.
 
 Expected response:
 
@@ -1099,7 +1191,9 @@ Expected response:
 
 ```text
 GET http://localhost:8080/students
-```Expected response:
+```
+
+Expected response:
 
 ```json
 [
@@ -1173,11 +1267,15 @@ public Student update(
 
     return service.updateStudent(id, s);
 }
-```Request:
+```
+
+Request:
 
 ```text
 PUT /students/1
-```Body:
+```
+
+Body:
 
 ```json
 {
@@ -1192,13 +1290,17 @@ PUT /students/1
 
 ```java
 @PathVariable int id
-```URL se value read karta hai.
+```
+
+URL se value read karta hai.
 
 Example:
 
 ```text
 /students/10
-```Then:
+```
+
+Then:
 
 ```java
 id = 10
@@ -1213,11 +1315,15 @@ id = 10
 public void delete(@PathVariable int id) {
     service.deleteStudent(id);
 }
-```Request:
+```
+
+Request:
 
 ```text
 DELETE /students/1
-```Student with ID `1` delete ho jayega.
+```
+
+Student with ID `1` delete ho jayega.
 
 ---
 
@@ -1359,13 +1465,17 @@ Example:
 Application Memory
       ↓
 Temporary data
-```vs.
+```
+
+vs.
 
 ```text
 MySQL Database
       ↓
 Persistent data
-```Agar application restart ho jaye, MySQL mein stored data normally
+```
+
+Agar application restart ho jaye, MySQL mein stored data normally
 available rahega.
 
 ---
@@ -1387,7 +1497,9 @@ Tomcat
 Spring MVC
   ↓
 Controller
-```Isliye alag se traditional Tomcat server install/configure karna zaroori
+```
+
+Isliye alag se traditional Tomcat server install/configure karna zaroori
 nahi hota for a typical Spring Boot embedded-Tomcat setup.
 
 ---
@@ -1407,7 +1519,9 @@ DispatcherServlet
 Controller
       ↓
 Response
-```Spring Boot web application mein request processing ka important part
+```
+
+Spring Boot web application mein request processing ka important part
 **DispatcherServlet** handle karta hai.
 
 ---
@@ -1418,17 +1532,23 @@ Suppose:
 
 ```java
 StudentService
-```ko:
+```
+
+ko:
 
 ```java
 StudentRepository
-```chahiye.
+```
+
+chahiye.
 
 Instead of manually:
 
 ```java
 StudentRepository repo = new StudentRepository();
-```Spring dependency manage kar sakta hai.
+```
+
+Spring dependency manage kar sakta hai.
 
 ```text
 Spring Container
@@ -1436,7 +1556,9 @@ Spring Container
 Creates / manages beans
       ↓
 Injects required dependency
-```Isse classes loosely coupled aur easier to manage hoti hain.
+```
+
+Isse classes loosely coupled aur easier to manage hoti hain.
 
 ---
 
@@ -1451,7 +1573,9 @@ Examples:
 StudentService
 StudentRepository
 Controller
-```Spring annotations/configuration ke through in objects ko manage kar
+```
+
+Spring annotations/configuration ke through in objects ko manage kar
 sakta hai.
 
 ---
@@ -1466,13 +1590,17 @@ Normal Java mein:
 Developer
    ↓
 Object create karta hai
-```Spring mein:
+```
+
+Spring mein:
 
 ```text
 Spring Container
    ↓
 Object create/manage karta hai
-```Ye concept Dependency Injection se closely related hai.
+```
+
+Ye concept Dependency Injection se closely related hai.
 
 ---
 
@@ -1483,7 +1611,9 @@ Notes mein `@Autowired` field injection use kiya gaya hai:
 ```java
 @Autowired
 private StudentRepository repo;
-```Learning ke liye ye samajhna useful hai, but production code mein
+```
+
+Learning ke liye ye samajhna useful hai, but production code mein
 generally **constructor injection** prefer ki jaati hai.
 
 Example:
@@ -1498,7 +1628,9 @@ public class StudentService {
         this.repo = repo;
     }
 }
-```Benefits:
+```
+
+Benefits:
 
 -   Dependency explicit hoti hai
 -   `final` use kar sakte hain
@@ -1547,7 +1679,9 @@ Example:
 name empty nahi hona chahiye
 age positive honi chahiye
 email valid hona chahiye
-```Spring Boot mein Bean Validation use ki ja sakti hai.
+```
+
+Spring Boot mein Bean Validation use ki ja sakti hai.
 
 Example:
 
@@ -1557,7 +1691,9 @@ private String name;
 
 @Min(1)
 private int age;
-```Controller:
+```
+
+Controller:
 
 ```java
 public Student add(@Valid @RequestBody Student s)
@@ -1588,7 +1724,9 @@ Example:
 POST /students
         ↓
 201 Created
-```when a resource is successfully created.
+```
+
+when a resource is successfully created.
 
 ---
 
@@ -1600,7 +1738,9 @@ Good REST API ke liye:
 
 ```text
 /students
-```instead of:
+```
+
+instead of:
 
 ```text
 /getStudents

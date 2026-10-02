@@ -161,7 +161,9 @@ src
 @Repository
 @Service
 @Controller
-```Annotation      Typical Role
+```
+
+Annotation      Typical Role
   --------------- ----------------------------------
   `@Component`    Generic Spring-managed component
   `@Repository`   DAO / persistence layer

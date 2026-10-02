@@ -16,7 +16,9 @@ Example:
 A se ₹10,000 debit
         +
 B ko ₹10,000 credit
-```Dono operations ko ek logical unit maana chahiye.
+```
+
+Dono operations ko ek logical unit maana chahiye.
 
 Agar debit successful ho aur credit fail ho jaye, toh data inconsistent
 ho sakta hai.
@@ -52,25 +54,35 @@ Suppose:
 ```text
 AAA balance = ₹50,000
 BBB balance = ₹30,000
-```Transfer:
+```
+
+Transfer:
 
 ```text
 AAA → BBB
 ₹10,000
-```Required:
+```
+
+Required:
 
 ```text
 AAA = ₹40,000
 BBB = ₹40,000
-```Agar AAA se amount deduct ho gaya:
+```
+
+Agar AAA se amount deduct ho gaya:
 
 ```text
 AAA = ₹40,000
-```lekin BBB ko credit karne se pehle exception aa gaya:
+```
+
+lekin BBB ko credit karne se pehle exception aa gaya:
 
 ```text
 BBB = ₹30,000
-```toh total data inconsistent ho sakta hai.
+```
+
+toh total data inconsistent ho sakta hai.
 
 Transaction ke saath:
 
@@ -118,7 +130,9 @@ Example:
 Money transfer:
 Debit ₹10,000
 Credit ₹10,000
-```Data logically consistent rehna chahiye.
+```
+
+Data logically consistent rehna chahiye.
 
 ---
 
@@ -149,12 +163,16 @@ CREATE TABLE employee (
     user_name VARCHAR(50),
     user_salary DOUBLE
 );
-```Data:
+```
+
+Data:
 
 ```text
 AAA   50000
 BBB   50000
-```Service:
+```
+
+Service:
 
 ```java
 @Component
@@ -187,7 +205,9 @@ public class EmployeeService {
 ```text
 AAA = 40000
 BBB = 60000
-```assuming both started at 50000.
+```
+
+assuming both started at 50000.
 
 ---
 
@@ -271,7 +291,9 @@ public class EmployeeService {
         );
     }
 }
-```Flow:
+```
+
+Flow:
 
 ```text
 AAA debit
@@ -285,14 +307,18 @@ ArithmeticException
 method stops
    ↓
 BBB update is not executed
-```With the common default JDBC auto-commit behavior, the first statement
+```
+
+With the common default JDBC auto-commit behavior, the first statement
 may already be committed before the exception. Therefore the database
 can become:
 
 ```text
 AAA = 40000
 BBB = 50000
-```This is exactly the type of partial-update problem transactions are
+```
+
+This is exactly the type of partial-update problem transactions are
 intended to prevent.
 
 ---
@@ -303,7 +329,9 @@ Spring mein:
 
 ```java
 @Transactional
-```use kar sakte hain.
+```
+
+use kar sakte hain.
 
 ```java
 @Component
@@ -332,7 +360,9 @@ public class EmployeeService {
         );
     }
 }
-```If the exception causes rollback:
+```
+
+If the exception causes rollback:
 
 ```text
 AAA debit
@@ -343,7 +373,9 @@ ROLLBACK
    ↓
 AAA original salary
 BBB original salary
-```Spring's default `@Transactional` behavior rolls back for
+```
+
+Spring's default `@Transactional` behavior rolls back for
 `RuntimeException` and `Error`, while checked exceptions do not trigger
 rollback by default. `ArithmeticException` is a `RuntimeException`, so
 it normally triggers rollback. citeturn0search1
@@ -356,7 +388,9 @@ Sirf:
 
 ```java
 @Transactional
-```likhne se transaction infrastructure automatically active nahi ho jata
+```
+
+likhne se transaction infrastructure automatically active nahi ho jata
 in classic XML configuration.
 
 Annotation-driven transaction management enable karna hota hai.
@@ -366,7 +400,9 @@ XML:
 ```xml
 <tx:annotation-driven
     transaction-manager="TXM"/>
-```and a transaction manager bean:
+```
+
+and a transaction manager bean:
 
 ```xml
 <bean id="TXM"
@@ -375,7 +411,9 @@ XML:
     <property name="dataSource"
               ref="dataSource"/>
 </bean>
-```Spring documentation explicitly notes that the annotation is metadata
+```
+
+Spring documentation explicitly notes that the annotation is metadata
 and runtime transaction infrastructure must be enabled.
 citeturn0search1turn0search6
 
@@ -439,7 +477,9 @@ and runtime transaction infrastructure must be enabled.
         transaction-manager="TXM"/>
 
 </beans>
-```Spring's XML configuration uses `<tx:annotation-driven>` to activate
+```
+
+Spring's XML configuration uses `<tx:annotation-driven>` to activate
 annotation-based transactional behavior and a transaction manager such
 as `DataSourceTransactionManager`. citeturn0search1
 
@@ -467,7 +507,9 @@ JdbcTemplate update 2
 Method successful?
  ├── YES → COMMIT
  └── NO  → ROLLBACK
-```Spring's declarative transaction support uses AOP proxies and a
+```
+
+Spring's declarative transaction support uses AOP proxies and a
 transaction interceptor around transactional method invocations.
 citeturn0search0
 
@@ -500,7 +542,9 @@ public class EmployeeService {
         }
     }
 }
-```If all operations succeed:
+```
+
+If all operations succeed:
 
 ```text
 E1  10000
@@ -508,7 +552,9 @@ E2  20000
 E3  30000
 ...
 E10 100000
-```all belong to one transaction.
+```
+
+all belong to one transaction.
 
 ---
 
@@ -541,7 +587,9 @@ public class EmployeeService {
         }
     }
 }
-```Flow:
+```
+
+Flow:
 
 ```text
 E1 inserted
@@ -554,11 +602,15 @@ exception
 transaction rollback
 ↓
 all transaction changes rolled back
-```Final result:
+```
+
+Final result:
 
 ```text
 Transaction ke andar ke E1–E5 changes bhi database mein nahi rahenge.
-```If the table already contained unrelated data outside this transaction,
+```
+
+If the table already contained unrelated data outside this transaction,
 that unrelated data is not rolled back.
 
 ---
@@ -586,7 +638,9 @@ public void insert() {
         }
     }
 }
-```Typical auto-commit behavior mein:
+```
+
+Typical auto-commit behavior mein:
 
 ```text
 E1 → committed
@@ -596,7 +650,9 @@ E4 → committed
 E5 → statement executed and may be committed
 Exception
 E6-E10 → not executed
-```Exact result can depend on where the exception occurs and
+```
+
+Exact result can depend on where the exception occurs and
 transaction/autocommit configuration.
 
 ---
@@ -614,11 +670,15 @@ int n = jt.update(
     "UPDATE employee SET user_salary = ? WHERE user_name = ?",
     50000, "AAA"
 );
-```Return value:
+```
+
+Return value:
 
 ```java
 int
-```which represents the number of rows affected for that statement (subject
+```
+
+which represents the number of rows affected for that statement (subject
 to JDBC/database semantics).
 
 For many individual operations, repeatedly calling `update()` can create
@@ -652,11 +712,15 @@ for (int i = 1; i <= 10; i++) {
 
 int[] result =
     jt.batchUpdate(Q, list);
-```Return type:
+```
+
+Return type:
 
 ```java
 int[]
-```Each element generally corresponds to an update count for a batch item,
+```
+
+Each element generally corresponds to an update count for a batch item,
 subject to JDBC driver behavior.
 
 ---
@@ -724,7 +788,9 @@ public void insert() {
 
     jt.batchUpdate(Q, list);
 }
-```Agar transaction ke andar exception causes rollback, then the
+```
+
+Agar transaction ke andar exception causes rollback, then the
 transaction's database changes can be rolled back together.
 
 ---
@@ -754,7 +820,9 @@ Notebook mein:
 E1-E4 inserted
 E5 not inserted
 E6-E10 inserted
-```jaisa fixed result likha hai, lekin **ye universal JDBC guarantee nahi
+```
+
+jaisa fixed result likha hai, lekin **ye universal JDBC guarantee nahi
 hai**.
 
 Batch execution failure par exact partial-success behavior JDBC
@@ -768,7 +836,9 @@ transaction ke andar run karna safer design hai:
 public void insert() {
     jt.batchUpdate(Q, list);
 }
-```Then an appropriate exception causing rollback can roll back the
+```
+
+Then an appropriate exception causing rollback can roll back the
 transaction's changes.
 
 ---
@@ -785,7 +855,9 @@ Package:
 
 ```java
 org.springframework.jdbc.core.BatchPreparedStatementSetter
-```Iske important methods:
+```
+
+Iske important methods:
 
 ```java
 int getBatchSize();
@@ -915,7 +987,9 @@ H5 → inserted with wrong data
 E6 → inserted
 ...
 E9 → inserted
-```Agar `"wrong"` invalid type/constraint violate karta hai, tab exception
+```
+
+Agar `"wrong"` invalid type/constraint violate karta hai, tab exception
 aa sakta hai.
 
 ---
@@ -934,7 +1008,9 @@ some items may succeed
 one item fails
       ↓
 exception
-```Exact rows that remain committed depend on:
+```
+
+Exact rows that remain committed depend on:
 
 -   JDBC driver;
 -   database;
@@ -947,7 +1023,9 @@ Isliye fixed rule:
 E0-E4 always inserted
 E5 always failed
 E6-E9 always inserted
-```nahi hai.
+```
+
+nahi hai.
 
 ---
 
@@ -960,7 +1038,9 @@ With:
 public void insert() {
     ...
 }
-```and a properly configured transaction manager:
+```
+
+and a properly configured transaction manager:
 
 ```text
 Batch
@@ -970,7 +1050,9 @@ Exception
 Transaction rollback
  ↓
 Transaction ke andar ke changes rollback
-```This gives the desired **atomic all-or-nothing transaction semantics**.
+```
+
+This gives the desired **atomic all-or-nothing transaction semantics**.
 
 ---
 
@@ -1005,7 +1087,9 @@ Transaction ke andar ke changes rollback
 update 1 → committed
 update 2 → committed
 exception
-```Partial changes can remain.
+```
+
+Partial changes can remain.
 
 ---
 
@@ -1017,7 +1101,9 @@ update 2
 exception
 ↓
 rollback
-```Transaction changes can be rolled back.
+```
+
+Transaction changes can be rolled back.
 
 ---
 
@@ -1041,7 +1127,9 @@ batch
 failure
 ↓
 rollback transaction
-```provided the exception reaches the transaction interceptor and causes
+```
+
+provided the exception reaches the transaction interceptor and causes
 rollback.
 
 ---

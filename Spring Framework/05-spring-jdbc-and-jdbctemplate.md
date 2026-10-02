@@ -137,7 +137,9 @@ hai.
 
 ```java
 JdbcTemplate j = new JdbcTemplate(d);
-```Yahan `d` DataSource hai.
+```
+
+Yahan `d` DataSource hai.
 
 ---
 
@@ -153,11 +155,15 @@ Examples:
 
 ```java
 j.update(sql);
-```or:
+```
+
+or:
 
 ```java
 j.update(sql, Object... args);
-```Example:
+```
+
+Example:
 
 ```java
 String q =
@@ -173,7 +179,9 @@ System.out.println(count);
 
 ```java
 int
-```Usually affected rows ka count return hota hai.
+```
+
+Usually affected rows ka count return hota hai.
 
 ---
 
@@ -188,11 +196,15 @@ public void test(Object... values) {
         System.out.println(value);
     }
 }
-```Call:
+```
+
+Call:
 
 ```java
 test("Azhar", 101, 90.5);
-```JdbcTemplate:
+```
+
+JdbcTemplate:
 
 ```java
 j.update(
@@ -217,7 +229,9 @@ List<String> li = j.query(
 for (String s : li) {
     System.out.println(s);
 }
-```Yahan lambda RowMapper-style mapping provide kar raha hai.
+```
+
+Yahan lambda RowMapper-style mapping provide kar raha hai.
 
 ---
 
@@ -227,7 +241,9 @@ for (String s : li) {
 
 ```text
 Database Row → Java Object
-```Example:
+```
+
+Example:
 
 ```java
 List<Student> list = j.query(
@@ -271,12 +287,16 @@ public class MyRowMapper
         return s;
     }
 }
-```XML:
+```
+
+XML:
 
 ```xml
 <bean id="m1"
       class="pack1.MyRowMapper"/>
-```Main:
+```
+
+Main:
 
 ```java
 MyRowMapper m =
@@ -301,7 +321,9 @@ for (Student s : li) {
     <constructor-arg ref="d1"/>
 
 </bean>
-```Then:
+```
+
+Then:
 
 ```java
 JdbcTemplate j =
@@ -317,7 +339,9 @@ Positional parameters mein `?` placeholder use hota hai.
 ```java
 String q =
     "INSERT INTO marks VALUES (?, ?, ?, ?, ?)";
-```Values order ke according bind hongi:
+```
+
+Values order ke according bind hongi:
 
 ```java
 j.update(
@@ -349,14 +373,18 @@ Named parameters mein:
 
 ```text
 :name
-```format use hota hai.
+```
+
+format use hota hai.
 
 Example:
 
 ```sql
 INSERT INTO marks
 VALUES (:urno, :uname, :uphy, :uche, :umath)
-```For this, use:
+```
+
+For this, use:
 
 ```java
 NamedParameterJdbcTemplate
@@ -378,19 +406,25 @@ Student:
 ```java
 Student s1 =
     (Student) app.getBean("s1");
-```Create template:
+```
+
+Create template:
 
 ```java
 NamedParameterJdbcTemplate j =
     new NamedParameterJdbcTemplate(d);
-```Query:
+```
+
+Query:
 
 ```java
 String q =
     "INSERT INTO ins_marks " +
     "(urno, uname, physics, chemistry, maths) " +
     "VALUES (:urno, :uname, :physics, :chemistry, :maths)";
-```Map:
+```
+
+Map:
 
 ```java
 Map<String, Object> m =
@@ -401,7 +435,9 @@ m.put("uname", s1.getUname());
 m.put("physics", s1.getPhysics());
 m.put("chemistry", s1.getChemistry());
 m.put("maths", s1.getMaths());
-```Execute:
+```
+
+Execute:
 
 ```java
 int x = j.update(q, m);
@@ -414,8 +450,6 @@ if (x > 0) {
 ```
 
 ---
-
-
 
 ---
 
@@ -445,7 +479,9 @@ Agar query hai:
 
 ```sql
 SELECT * FROM ins_marks WHERE user_roll_number = ? AND user_name = ?
-```toh:
+```
+
+toh:
 
 ```java
 jdbcTemplate.queryForList(Q, String.class, 101, "AAA");
@@ -466,7 +502,9 @@ Agar query:
 
 ```sql
 SELECT * FROM ins_marks
-```hai, toh har row ko Spring ek `Map<String, Object>` mein represent kar
+```
+
+hai, toh har row ko Spring ek `Map<String, Object>` mein represent kar
 sakta hai.
 
 -   Map ka **key** = column name
@@ -482,14 +520,18 @@ List<Map<String, Object>> L =
         jdbcTemplate.queryForList(Q);
 
 System.out.println(L);
-```Conceptually result kuch aisa ho sakta hai:
+```
+
+Conceptually result kuch aisa ho sakta hai:
 
 ```text
 [
     {user_roll_number=101, user_name=AAA, marks=85},
     {user_roll_number=102, user_name=BBB, marks=90}
 ]
-```Yaani:
+```
+
+Yaani:
 
 ```text
 List
@@ -572,7 +614,9 @@ List<Map<String, Object>> L =
         jdbcTemplate.queryForList(Q, 101, "AAA");
 
 System.out.println(L);
-```Yahaan:
+```
+
+Yahaan:
 
 ```text
 Q              → SQL query
@@ -596,7 +640,9 @@ selected overload.
 
 ```java
 List<String>
-```Example:
+```
+
+Example:
 
 ```java
 String Q = "SELECT user_name FROM ins_marks";
@@ -609,7 +655,9 @@ List<String> L =
 
 ```java
 List<Map<String, Object>>
-```Example:
+```
+
+Example:
 
 ```java
 List<Map<String, Object>> L =
@@ -654,7 +702,9 @@ String Q =
 
 String name =
     jdbcTemplate.queryForObject(Q, String.class, 101);
-```Expected result:
+```
+
+Expected result:
 
 ```text
 One String value
@@ -677,7 +727,9 @@ Student student = jdbcTemplate.queryForObject(
     },
     101
 );
-```Expected result:
+```
+
+Expected result:
 
 ```text
 One Student object
@@ -692,15 +744,21 @@ String
 Integer
 Student
 Any custom Java object
-```Simple value ke case mein specified type use hota hai:
+```
+
+Simple value ke case mein specified type use hota hai:
 
 ```java
 queryForObject(Q, String.class, ...)
-```Row-mapping ke case mein `RowMapper<T>` ke according:
+```
+
+Row-mapping ke case mein `RowMapper<T>` ke according:
 
 ```java
 queryForObject(Q, rowMapper, ...)
-```Return type:
+```
+
+Return type:
 
 ```java
 T
@@ -721,7 +779,9 @@ Example:
 ```java
 String name =
     jdbcTemplate.queryForObject(Q, String.class, 999);
-```Agar roll number 999 ka record nahi hai, exception aa sakta hai.
+```
+
+Agar roll number 999 ka record nahi hai, exception aa sakta hai.
 
 ### More than one row
 
@@ -740,7 +800,9 @@ identify karta ho:
 
 ```sql
 SELECT * FROM student WHERE roll = ?
-```Agar `roll` unique hai, toh one student expected hai.
+```
+
+Agar `roll` unique hai, toh one student expected hai.
 
 ---
 
@@ -783,7 +845,9 @@ Usually:
 
 ```java
 List<T>
-```Yahaan `T` ka type `RowMapper<T>` decide karta hai.
+```
+
+Yahaan `T` ka type `RowMapper<T>` decide karta hai.
 
 Example:
 
@@ -813,7 +877,9 @@ List<Student> L = jdbcTemplate.query(
 for (Student s : L) {
     System.out.println(s);
 }
-```Yahaan:
+```
+
+Yahaan:
 
 ```text
 SQL
@@ -889,7 +955,9 @@ List<Student> L = jdbcTemplate.query(
     Q,
     new BeanPropertyRowMapper<>(Student.class)
 );
-```Student:
+```
+
+Student:
 
 ```java
 public class Student {
@@ -932,7 +1000,9 @@ Druid ka important class:
 
 ```java
 DruidDataSource
-```Package:
+```
+
+Package:
 
 ```java
 com.alibaba.druid.pool.DruidDataSource
@@ -952,7 +1022,9 @@ Druid DataSource
 Connection Pool
     ↓
 MySQL
-```Repeatedly new connection create karne ki cost kam ho sakti hai.
+```
+
+Repeatedly new connection create karne ki cost kam ho sakti hai.
 
 ### 2. Monitoring
 
@@ -1086,7 +1158,9 @@ try (FileReader fr =
 
     System.out.println(n);
 }
-```Isse `FileReader` automatically close ho jaata hai.
+```
+
+Isse `FileReader` automatically close ho jaata hai.
 
 ---
 
@@ -1102,24 +1176,32 @@ FileReader fr =
     new FileReader("D:\\basics\\demo.java");
 
 int n = jt.update(Q, fr);
-```Named parameter ke liye:
+```
+
+Named parameter ke liye:
 
 ```java
 NamedParameterJdbcTemplate named =
     new NamedParameterJdbcTemplate(jt.getDataSource());
-```Query:
+```
+
+Query:
 
 ```java
 String Q =
     "INSERT INTO ins_file(file_data) VALUES (:file_data)";
-```Parameter:
+```
+
+Parameter:
 
 ```java
 MapSqlParameterSource source =
     new MapSqlParameterSource();
 
 source.addValue("file_data", fr);
-```Update:
+```
+
+Update:
 
 ```java
 int n = named.update(Q, source);
@@ -1187,7 +1269,9 @@ public class App {
 ```sql
 INSERT INTO ins_file(file_data)
 VALUES (?)
-```Java:
+```
+
+Java:
 
 ```java
 jt.update(Q, fr);
@@ -1198,7 +1282,9 @@ jt.update(Q, fr);
 ```sql
 INSERT INTO ins_file(file_data)
 VALUES (:file_data)
-```Java:
+```
+
+Java:
 
 ```java
 source.addValue("file_data", fr);
@@ -1210,7 +1296,9 @@ named.update(Q, source);
 ```text
 ?            → positional parameter
 :file_data   → named parameter
-```Named parameters large queries mein readability improve kar sakte hain,
+```
+
+Named parameters large queries mein readability improve kar sakte hain,
 especially jab multiple parameters hon.
 
 ---
@@ -1271,7 +1359,9 @@ FileReader
 JdbcTemplate / NamedParameterJdbcTemplate
    ↓
 Character/Text column
-```Binary file:
+```
+
+Binary file:
 
 ```text
 Image/PDF/etc.

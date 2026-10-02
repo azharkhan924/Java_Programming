@@ -55,17 +55,23 @@ fw.close();
 
 ```java
 clob.getSubString(1, (int) clob.length());
-```ka use kiya gaya hai.
+```
+
+ka use kiya gaya hai.
 
 Agar query mein:
 
 ```sql
 SELECT UFile FROM insfile ...
-```sirf ek column select kiya hai, toh:
+```
+
+sirf ek column select kiya hai, toh:
 
 ```java
 rs.getClob("UFile")
-```use karna zyada readable hai.
+```
+
+use karna zyada readable hai.
 
 ---
 
@@ -178,7 +184,9 @@ Ye:
 
 ```java
 class Student extends Person
-```jaisa Java inheritance nahi hai.
+```
+
+jaisa Java inheritance nahi hai.
 
 Ye mainly Spring XML bean-definition configuration reuse hai.
 
@@ -210,7 +218,9 @@ Parent bean ko sirf configuration template ki tarah use karna ho toh:
 
 ```xml
 abstract="true"
-```use kar sakte hain.
+```
+
+use kar sakte hain.
 
 ### Example
 
@@ -221,7 +231,9 @@ abstract="true"
 
     <property name="id" value="101"/>
 </bean>
-```Ab:
+```
+
+Ab:
 
 ```xml
 <bean id="S2"
@@ -230,17 +242,23 @@ abstract="true"
 
     <property name="name" value="BBB"/>
 </bean>
-```Yahaan `S2` ko `S1` se:
+```
+
+Yahaan `S2` ko `S1` se:
 
 ```text
 id = 101
-```inherit hoga.
+```
+
+inherit hoga.
 
 Aur `S2` mein:
 
 ```text
 name = BBB
-```add ho gaya.
+```
+
+add ho gaya.
 
 ---
 
@@ -252,7 +270,9 @@ Agar:
 <bean id="S1"
       class="pack1.Student"
       abstract="true">
-```hai, toh `S1` ko normal bean instance ki tarah directly retrieve nahi
+```
+
+hai, toh `S1` ko normal bean instance ki tarah directly retrieve nahi
 karna chahiye.
 
 Example:
@@ -260,7 +280,9 @@ Example:
 ```java
 Student s =
     ac.getBean("S1", Student.class);
-```par Spring bean creation-related exception throw karega because `S1`
+```
+
+par Spring bean creation-related exception throw karega because `S1`
 abstract bean definition hai.
 
 ### Correct Approach
@@ -271,7 +293,9 @@ Child bean:
 <bean id="S2"
       class="pack1.Student"
       parent="S1">
-```retrieve karo:
+```
+
+retrieve karo:
 
 ```java
 Student s =
@@ -341,7 +365,9 @@ public class Student {
 ```text
 userRoleNumber = 101
 userName       = BBB
-```milega.
+```
+
+milega.
 
 Because:
 
@@ -355,7 +381,9 @@ userName       = AAA
 S2:
 userRoleNumber = 101
 userName       = BBB
-```Child ne `userName` override kar diya.
+```
+
+Child ne `userName` override kar diya.
 
 ---
 
@@ -367,7 +395,9 @@ Parent bean ko:
 
 ```xml
 abstract="true"
-```rakhna compulsory nahi hai.
+```
+
+rakhna compulsory nahi hai.
 
 Agar parent bean abstract nahi hai, toh:
 
@@ -487,13 +517,17 @@ Yahaan:
 ```text
 S1 class = Student
 E1 class = Employee
-```different classes hain.
+```
+
+different classes hain.
 
 Phir bhi E1:
 
 ```xml
 parent="S1"
-```ke through S1 ki **bean configuration properties** inherit kar sakta
+```
+
+ke through S1 ki **bean configuration properties** inherit kar sakta
 hai, provided the child bean's class supports those inherited
 properties.
 
@@ -503,7 +537,9 @@ So E1 ko:
 userRoleNumber = 101
 userName       = AAA
 salary         = 50000
-```milega.
+```
+
+milega.
 
 > Ye Java inheritance nahi hai. `Employee extends Student` likhna
 > required nahi hai. Spring bean-definition inheritance configuration
@@ -552,13 +588,17 @@ Example:
 
     <property name="userName" value="AAA"/>
 </bean>
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 S1 ─────┐
         ├── same Student bean
 S2 ─────┘
-```Ab:
+```
+
+Ab:
 
 ```java
 Student s1 =
@@ -566,12 +606,16 @@ Student s1 =
 
 Student s2 =
     ac.getBean("S2", Student.class);
-```Dono same underlying bean instance ko refer karte hain in the default
+```
+
+Dono same underlying bean instance ko refer karte hain in the default
 singleton scope.
 
 ```java
 System.out.println(s1 == s2);
-```Output:
+```
+
+Output:
 
 ```text
 true
@@ -608,7 +652,9 @@ id = S1
 aliases:
 S2
 S3
-```Access:
+```
+
+Access:
 
 ```java
 ac.getBean("S1");

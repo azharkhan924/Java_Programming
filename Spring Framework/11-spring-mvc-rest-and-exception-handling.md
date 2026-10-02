@@ -26,7 +26,9 @@ Iska main component:
 
 ```text
 DispatcherServlet
-```Instead of multiple separate entry points, normally requests ek central entry point — `DispatcherServlet` — se pass hoti hain.
+```
+
+Instead of multiple separate entry points, normally requests ek central entry point — `DispatcherServlet` — se pass hoti hain.
 
 ### Basic flow
 
@@ -48,7 +50,9 @@ Service
 Repository
    ↓
 Database
-```Response reverse direction me aata hai.
+```
+
+Response reverse direction me aata hai.
 
 ---
 
@@ -99,7 +103,9 @@ Example:
 public List<User> getUsers() {
     return service.getUsers();
 }
-```Mapping internally roughly:
+```
+
+Mapping internally roughly:
 
 ```text
 GET + /users
@@ -129,7 +135,9 @@ finds handler
 HandlerAdapter
       ↓
 invokes controller method
-```Different handler types ke liye different adapters ho sakte hain.
+```
+
+Different handler types ke liye different adapters ho sakte hain.
 
 Simple idea:
 
@@ -174,7 +182,9 @@ Suppose:
 public User getUser(@PathVariable int id) {
     ...
 }
-```HandlerMapping controller method identify kar leta hai.
+```
+
+HandlerMapping controller method identify kar leta hai.
 
 ### Step 5 — HandlerAdapter
 
@@ -249,11 +259,15 @@ URL ke andar se value extract karne ke liye.
 public Student getStudent(@PathVariable int id) {
     return service.getStudent(id);
 }
-```Request:
+```
+
+Request:
 
 ```text
 GET /students/101
-```Then:
+```
+
+Then:
 
 ```text
 id = 101
@@ -270,11 +284,15 @@ Query parameter read karne ke liye.
 public Student getStudent(@RequestParam int id) {
     ...
 }
-```Request:
+```
+
+Request:
 
 ```text
 /students?id=101
-```Here:
+```
+
+Here:
 
 ```text
 id = 101
@@ -291,14 +309,18 @@ Request body ke JSON ko Java object me convert karne ke liye.
 public Student addStudent(@RequestBody Student student) {
     return service.addStudent(student);
 }
-```JSON:
+```
+
+JSON:
 
 ```json
 {
   "name": "Azhar",
   "age": 21
 }
-```Spring/Jackson JSON ko `Student` object me deserialize karta hai.
+```
+
+Spring/Jackson JSON ko `Student` object me deserialize karta hai.
 
 ---
 
@@ -308,7 +330,9 @@ public Student addStudent(@RequestBody Student student) {
 @RestController
 public class StudentController {
 }
-```Conceptually:
+```
+
+Conceptually:
 
 ```java
 @Controller
@@ -336,7 +360,9 @@ public class StudentController {
         return "students";
     }
 }
-```Here `"students"` ek view name ho sakta hai.
+```
+
+Here `"students"` ek view name ho sakta hai.
 
 ### `@RestController`
 
@@ -351,7 +377,9 @@ public class StudentController {
         return student;
     }
 }
-```Returned object response body me serialize hota hai.
+```
+
+Returned object response body me serialize hota hai.
 
 ---
 
@@ -368,11 +396,15 @@ public class UserController {
         return user;
     }
 }
-```return karta hai:
+```
+
+return karta hai:
 
 ```java
 User
-```to Spring MVC `HttpMessageConverter` ke through object ko JSON representation me convert kar sakta hai.
+```
+
+to Spring MVC `HttpMessageConverter` ke through object ko JSON representation me convert kar sakta hai.
 
 Example:
 
@@ -445,7 +477,9 @@ Filter
 DispatcherServlet
  ↓
 Spring MVC
-```Filter Spring MVC ke outside bhi operate kar sakta hai.
+```
+
+Filter Spring MVC ke outside bhi operate kar sakta hai.
 
 ### Interceptor
 
@@ -475,7 +509,9 @@ public Student getStudent(int id) {
             .orElseThrow(() ->
                 new StudentNotFoundException("Student not found"));
 }
-```Agar exception properly handle nahi hui, client ko unwanted error response mil sakta hai.
+```
+
+Agar exception properly handle nahi hui, client ko unwanted error response mil sakta hai.
 
 ---
 
@@ -503,7 +539,9 @@ public class StudentController {
                 .body(ex.getMessage());
     }
 }
-```Agar isi controller ke request processing me `StudentNotFoundException` throw hoti hai, ye handler execute ho sakta hai.
+```
+
+Agar isi controller ke request processing me `StudentNotFoundException` throw hoti hai, ye handler execute ho sakta hai.
 
 ### Important
 
@@ -519,7 +557,9 @@ Instead of har controller me same:
 
 ```java
 @ExceptionHandler(...)
-```likhne ke, ek common class bana sakte hain.
+```
+
+likhne ke, ek common class bana sakte hain.
 
 ```java
 @ControllerAdvice
@@ -534,7 +574,9 @@ public class GlobalExceptionHandler {
                 .body(ex.getMessage());
     }
 }
-```Ye multiple controllers ke liye common handling provide kar sakta hai.
+```
+
+Ye multiple controllers ke liye common handling provide kar sakta hai.
 
 ---
 
@@ -547,7 +589,9 @@ Conceptually:
 ```java
 @ControllerAdvice
 @ResponseBody
-```Example:
+```
+
+Example:
 
 ```java
 @RestControllerAdvice
@@ -568,7 +612,9 @@ public class GlobalExceptionHandler {
                 .body(error);
     }
 }
-```REST API me structured JSON error response easily return kiya ja sakta hai.
+```
+
+REST API me structured JSON error response easily return kiya ja sakta hai.
 
 ---
 
@@ -588,7 +634,9 @@ Global/shared MVC exception handling
 @RestControllerAdvice
        ↓
 Global/shared REST API exception handling
-```Agar same exception ke liye controller-level aur global handlers available hon, Spring exception-resolution rules ke according suitable handler choose karta hai.
+```
+
+Agar same exception ke liye controller-level aur global handlers available hon, Spring exception-resolution rules ke according suitable handler choose karta hai.
 
 ---
 
@@ -604,7 +652,9 @@ public class StudentNotFoundException
         super(message);
     }
 }
-```Service:
+```
+
+Service:
 
 ```java
 public Student getStudent(int id) {
@@ -615,7 +665,9 @@ public Student getStudent(int id) {
                     "Student not found with id: " + id
                 ));
 }
-```Global handler:
+```
+
+Global handler:
 
 ```java
 @RestControllerAdvice
@@ -666,7 +718,9 @@ public class StudentDTO {
     @Min(1)
     private int age;
 }
-```Controller:
+```
+
+Controller:
 
 ```java
 @PostMapping("/students")
@@ -675,7 +729,9 @@ public Student add(
 
     return service.add(student);
 }
-```Invalid request par validation-related exception generate ho sakti hai.
+```
+
+Invalid request par validation-related exception generate ho sakti hai.
 
 Global handler me validation errors ko clean API response me convert kiya ja sakta hai.
 
@@ -717,7 +773,9 @@ public class ErrorResponse {
 
     // constructor, getters, setters
 }
-```Response:
+```
+
+Response:
 
 ```json
 {
@@ -844,7 +902,9 @@ Repository
       |
       ↓
 Database
-```Exception aaye:
+```
+
+Exception aaye:
 
 ```text
 Exception

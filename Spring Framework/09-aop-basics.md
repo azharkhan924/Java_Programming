@@ -43,7 +43,9 @@ public void service() {
 
     logEnd();
 }
-```Har method mein repeated code aa sakta hai.
+```
+
+Har method mein repeated code aa sakta hai.
 
 AOP ke saath:
 
@@ -53,7 +55,9 @@ public void service() {
 
     // only business logic
 }
-```Spring AOP proxy/interceptor transaction handling ko method invocation
+```
+
+Spring AOP proxy/interceptor transaction handling ko method invocation
 ke around apply kar sakta hai.
 
 Spring documentation explains that declarative transaction management is
@@ -137,7 +141,9 @@ method ko call kare:
 
 ```java
 this.otherMethod();
-```toh self-invocation normally proxy se pass nahi hota, isliye
+```
+
+toh self-invocation normally proxy se pass nahi hota, isliye
 `otherMethod()` ki separate transactional interception apply nahi hoti.
 
 Spring docs explicitly call this out for proxy mode. citeturn0search6
@@ -290,14 +296,18 @@ public class AppConfig {
         );
     }
 }
-```Then:
+```
+
+Then:
 
 ```java
 @Transactional
 public void service() {
     ...
 }
-```Spring's official annotation configuration uses
+```
+
+Spring's official annotation configuration uses
 `@EnableTransactionManagement` together with a
 `PlatformTransactionManager` bean. citeturn0search1
 
@@ -315,7 +325,9 @@ Timeout            = underlying system default
 RuntimeException  = rollback
 Error             = rollback
 Checked Exception = no rollback by default
-```Spring docs specify these defaults. citeturn0search1
+```
+
+Spring docs specify these defaults. citeturn0search1
 
 ---
 
@@ -330,7 +342,9 @@ Agar checked exception par bhi rollback chahiye:
 public void service() throws Exception {
     ...
 }
-```Now matching checked exceptions can trigger rollback according to the
+```
+
+Now matching checked exceptions can trigger rollback according to the
 specified rollback rule.
 
 ---

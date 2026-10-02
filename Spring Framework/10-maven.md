@@ -48,7 +48,9 @@ Plugins
 Build configuration
 Repositories
 Properties
-```Example:
+```
+
+Example:
 
 ```xml
 <project>
@@ -98,12 +100,16 @@ Group Id = demo
 Artifact Id = maven-demo-1
  ↓
 Finish
-```Common Maven quickstart archetype historically uses coordinates such as:
+```
+
+Common Maven quickstart archetype historically uses coordinates such as:
 
 ```text
 org.apache.maven.archetypes
 maven-archetype-quickstart
-```Exact archetype version IDE/Maven environment ke according change ho
+```
+
+Exact archetype version IDE/Maven environment ke according change ho
 sakta hai.
 
 ---
@@ -126,7 +132,9 @@ maven-demo-1/
     └── test/
         ├── java/
         └── resources/
-```Maven convention-based structure use karta hai.
+```
+
+Maven convention-based structure use karta hai.
 
 ---
 
@@ -140,7 +148,9 @@ Download JAR
 Project Build Path
  ↓
 Add JAR
-```Maven mein:
+```
+
+Maven mein:
 
 ```xml
 <dependency>
@@ -148,7 +158,9 @@ Add JAR
     <artifactId>...</artifactId>
     <version>...</version>
 </dependency>
-```Then Maven dependency resolve karta hai.
+```
+
+Then Maven dependency resolve karta hai.
 
 ---
 
@@ -178,7 +190,9 @@ Use local       Remote repository
              Local repository
                  ↓
                Use it
-```Maven documentation states that Maven first attempts to use a local
+```
+
+Maven documentation states that Maven first attempts to use a local
 copy; if it is not available, it downloads from a remote repository.
 citeturn0search3turn0search10
 
@@ -214,11 +228,15 @@ Linux/macOS:
 
 ```text
 ~/.m2/repository
-```Windows:
+```
+
+Windows:
 
 ```text
 C:\Users\<username>\.m2\repository
-```Yahaan downloaded artifacts store hote hain.
+```
+
+Yahaan downloaded artifacts store hote hain.
 
 Example:
 
@@ -272,7 +290,9 @@ Maven Central
 Company Nexus
 Company Artifactory
 Other configured repositories
-```Remote repository se artifacts download kiye ja sakte hain aur
+```
+
+Remote repository se artifacts download kiye ja sakte hain aur
 appropriate permissions ke saath deploy/upload bhi kiye ja sakte hain.
 citeturn0search10
 
@@ -309,7 +329,9 @@ A dependency commonly identify hoti hai:
 groupId
 artifactId
 version
-```Example:
+```
+
+Example:
 
 ```xml
 <dependency>
@@ -321,7 +343,9 @@ version
     <version>...</version>
 
 </dependency>
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 groupId     → organization/project group
@@ -339,7 +363,9 @@ Maven has three built-in lifecycles:
 1. default
 2. clean
 3. site
-```Official Maven lifecycle documentation defines separate phases for these
+```
+
+Official Maven lifecycle documentation defines separate phases for these
 lifecycles. citeturn0search7
 
 ---
@@ -371,7 +397,9 @@ post-integration-test
 verify
 install
 deploy
-```Beginner ke liye most important:
+```
+
+Beginner ke liye most important:
 
 ```text
 validate
@@ -390,7 +418,9 @@ Command:
 
 ```bash
 mvn compile
-```Source code compile karta hai.
+```
+
+Source code compile karta hai.
 
 Typical result:
 
@@ -408,7 +438,9 @@ target/classes
 
 ```bash
 mvn test
-```Test source compile karke tests run karta hai.
+```
+
+Test source compile karke tests run karta hai.
 
 ```text
 src/test/java
@@ -424,7 +456,9 @@ tests execute
 
 ```bash
 mvn package
-```Project ko package karta hai.
+```
+
+Project ko package karta hai.
 
 Example:
 
@@ -438,7 +472,9 @@ test
 package
  ↓
 target/maven-demo-1-1.0-SNAPSHOT.jar
-```Packaging type ke according output ho sakta hai:
+```
+
+Packaging type ke according output ho sakta hai:
 
 ```text
 JAR
@@ -452,7 +488,9 @@ EAR
 
 ```bash
 mvn install
-```Important point:
+```
+
+Important point:
 
 `install` lifecycle mein `package` se pehle ki required phases bhi
 execute hoti hain, then generated artifact ko local Maven repository
@@ -470,13 +508,17 @@ package
 install
  ↓
 ~/.m2/repository
-```Agar project:
+```
+
+Agar project:
 
 ```text
 groupId = demo
 artifactId = maven-demo-1
 version = 1.0-SNAPSHOT
-```hai, toh artifact local repository ke corresponding coordinate path mein
+```
+
+hai, toh artifact local repository ke corresponding coordinate path mein
 install ho sakta hai.
 
 ---
@@ -485,13 +527,17 @@ install ho sakta hai.
 
 ```bash
 mvn clean
-```Previous build ke generated output ko remove karta hai.
+```
+
+Previous build ke generated output ko remove karta hai.
 
 Commonly:
 
 ```text
 target/
-```remove hota hai.
+```
+
+remove hota hai.
 
 Important:
 
@@ -510,7 +556,9 @@ Common command:
 
 ```bash
 mvn clean package
-```Flow:
+```
+
+Flow:
 
 ```text
 clean
@@ -520,7 +568,9 @@ compile
 test
  ↓
 package
-```Isse clean build package generate hota hai.
+```
+
+Isse clean build package generate hota hai.
 
 ---
 
@@ -528,7 +578,9 @@ package
 
 ```bash
 mvn clean install
-```Flow:
+```
+
+Flow:
 
 ```text
 clean
@@ -550,14 +602,18 @@ Third lifecycle:
 
 ```text
 site
-```Related phases:
+```
+
+Related phases:
 
 ```text
 pre-site
 site
 post-site
 site-deploy
-```Purpose:
+```
+
+Purpose:
 
 Project documentation/site generate aur deploy karna.
 
@@ -569,7 +625,9 @@ Agar command:
 
 ```bash
 mvn package
-```run karte ho, Maven sirf `package` phase nahi karta.
+```
+
+run karte ho, Maven sirf `package` phase nahi karta.
 
 Woh `package` se pehle required phases ko sequence mein execute karta
 hai.
@@ -586,11 +644,15 @@ compile
 test
  ↓
 package
-```Isi tarah:
+```
+
+Isi tarah:
 
 ```bash
 mvn install
-```package tak ke required phases ke baad install phase execute karta hai.
+```
+
+package tak ke required phases ke baad install phase execute karta hai.
 
 ---
 
@@ -616,7 +678,9 @@ Traditional Java web applications ke liye.
 
 ```text
 target/app.war
-```Tomcat jaise servlet container mein deploy kiya ja sakta hai.
+```
+
+Tomcat jaise servlet container mein deploy kiya ja sakta hai.
 
 ---
 
@@ -626,7 +690,9 @@ Packaging:
 
 ```xml
 <packaging>pom</packaging>
-```Parent/multi-module Maven projects mein commonly useful.
+```
+
+Parent/multi-module Maven projects mein commonly useful.
 
 Is case mein project ka main artifact POM hota hai.
 
@@ -653,7 +719,9 @@ Artifact banata hai:
 
 ```text
 target/app.jar
-```or:
+```
+
+or:
 
 ```text
 target/app.war
@@ -674,7 +742,9 @@ install
 target/app.jar
    +
 ~/.m2/repository/...
-```Easy trick:
+```
+
+Easy trick:
 
 ```text
 package = package bana
@@ -698,14 +768,18 @@ Example:
 
 ```text
 1.0-SNAPSHOT
-```Development phase mein repeatedly updated artifact represent kar sakta
+```
+
+Development phase mein repeatedly updated artifact represent kar sakta
 hai.
 
 Release:
 
 ```text
 1.0
-```generally fixed/released version ko represent karta hai.
+```
+
+generally fixed/released version ko represent karta hai.
 
 ---
 
@@ -717,7 +791,9 @@ Suppose:
 Project A
 depends on
 Project B : 1.0-SNAPSHOT
-```Project B ka newer snapshot remote repository mein available ho sakta
+```
+
+Project B ka newer snapshot remote repository mein available ho sakta
 hai.
 
 Maven snapshot metadata/update policy ke according remote repository ko
@@ -782,7 +858,9 @@ JAR download
 Build path
  ↓
 Manual management
-```Maven:
+```
+
+Maven:
 
 ```text
 pom.xml
@@ -796,7 +874,9 @@ download if needed
 local repository
  ↓
 classpath
-```Benefits:
+```
+
+Benefits:
 
 -   Manual JAR handling reduced.
 -   Dependency versions centrally declared.
@@ -817,7 +897,9 @@ Multiple JDKs installed
 Maven/IDE wrong JDK pick kar raha hai
  ↓
 Compilation error
-```Important:
+```
+
+Important:
 
 Maven itself Java compiler nahi hai; Maven Java/JDK environment ko use
 karta hai to run Maven and compile the project.
@@ -826,7 +908,9 @@ Check:
 
 ```bash
 java -version
-```and:
+```
+
+and:
 
 ```bash
 mvn -version
@@ -846,7 +930,9 @@ JAVA_HOME
 PATH
 IDE Project SDK
 Maven JDK
-```correctly configure karo.
+```
+
+correctly configure karo.
 
 Agar project Java 21 target karta hai, ensure Maven/IDE/compiler
 configuration Java 21 ke saath consistent ho.
@@ -865,7 +951,9 @@ maven-surefire-plugin
 maven-jar-plugin
 maven-war-plugin
 maven-clean-plugin
-```Lifecycle phases plugins/goals ko execute karte hain.
+```
+
+Lifecycle phases plugins/goals ko execute karte hain.
 
 Conceptually:
 
@@ -889,7 +977,9 @@ Your Project
 Spring Library
     ↓
 Another required Library
-```Maven dependency graph ko resolve karke required transitive dependencies
+```
+
+Maven dependency graph ko resolve karke required transitive dependencies
 bhi la sakta hai, unless exclusions/scopes change that behavior.
 
 Isliye manually har dependent JAR download karne ki need reduce hoti
@@ -908,7 +998,9 @@ runtime
 test
 system
 import
-```Most common beginner examples:
+```
+
+Most common beginner examples:
 
 ### compile
 
@@ -922,7 +1014,9 @@ Example:
 
 ```text
 Servlet API
-```traditional servlet deployment context mein.
+```
+
+traditional servlet deployment context mein.
 
 ### runtime
 
@@ -961,7 +1055,9 @@ Maven
 
 Gradle
 → DSL + tasks + highly programmable builds
-```Neither is universally "better"; choice depends on project requirements,
+```
+
+Neither is universally "better"; choice depends on project requirements,
 team preference, ecosystem and build complexity.
 
 ---
@@ -1012,7 +1108,9 @@ Git clone
 pom.xml
  ↓
 mvn build
-```Team members dependency setup manually repeat nahi karte.
+```
+
+Team members dependency setup manually repeat nahi karte.
 
 ---
 
@@ -1036,7 +1134,9 @@ Artifact:
 
 ```text
 target/
-```mein generate.
+```
+
+mein generate.
 
 ### install
 
@@ -1044,7 +1144,9 @@ Artifact:
 
 ```text
 local repository
-```mein install.
+```
+
+mein install.
 
 ### deploy
 
@@ -1052,7 +1154,9 @@ Artifact:
 
 ```text
 remote repository
-```mein publish/upload, provided repository credentials/configuration
+```
+
+mein publish/upload, provided repository credentials/configuration
 permit it.
 
 ---
@@ -1061,39 +1165,57 @@ permit it.
 
 ```bash
 mvn validate
-```Project configuration validate.
+```
+
+Project configuration validate.
 
 ```bash
 mvn compile
-```Main source compile.
+```
+
+Main source compile.
 
 ```bash
 mvn test
-```Tests run.
+```
+
+Tests run.
 
 ```bash
 mvn package
-```JAR/WAR etc. package.
+```
+
+JAR/WAR etc. package.
 
 ```bash
 mvn install
-```Artifact local repository mein install.
+```
+
+Artifact local repository mein install.
 
 ```bash
 mvn clean
-```Previous build output clean.
+```
+
+Previous build output clean.
 
 ```bash
 mvn clean package
-```Clean + package.
+```
+
+Clean + package.
 
 ```bash
 mvn clean install
-```Clean + build + test + package + local install.
+```
+
+Clean + build + test + package + local install.
 
 ```bash
 mvn deploy
-```Artifact remote repository mein deploy.
+```
+
+Artifact remote repository mein deploy.
 
 ---
 
@@ -1129,15 +1251,21 @@ Company Nexus / Artifactory / Central etc.
 
 ```bash
 mvn clean
-```generally project ke generated build output ko clean karta hai:
+```
+
+generally project ke generated build output ko clean karta hai:
 
 ```text
 target/
-```It does not normally delete:
+```
+
+It does not normally delete:
 
 ```text
 ~/.m2/repository
-```Agar `.m2/repository` manually delete kar doge, toh future build mein
+```
+
+Agar `.m2/repository` manually delete kar doge, toh future build mein
 Maven ko required dependencies dobara download karni pad sakti hain.
 
 ---

@@ -39,7 +39,9 @@ The important cache mechanisms to understand are:
 4. Collection Cache
 5. Natural-ID Cache
 6. Statistics/Monitoring
-```L1 is fundamental and built into the Session/persistence context.
+```
+
+L1 is fundamental and built into the Session/persistence context.
 
 L2 and query caching require appropriate configuration/provider support
 and should not be treated as automatically enabled in every modern
@@ -75,7 +77,9 @@ Student s1 =
 
 Student s2 =
     session.get(Student.class, 1);
-```Potentially:
+```
+
+Potentially:
 
 ```text
 First get  → DB
@@ -160,7 +164,9 @@ Suppose Session 1 loads:
 
 ```java
 Student #1
-```Flow:
+```
+
+Flow:
 
 ```text
 Session 1
@@ -176,7 +182,9 @@ L2
 L1
    ↓
 Application
-```Later Session 2 requests Student #1:
+```
+
+Later Session 2 requests Student #1:
 
 ```text
 Session 2
@@ -190,7 +198,9 @@ No DB query needed
 Session 2 L1
    ↓
 Application
-```This is the major reason L2 cache can reduce repeated database access
+```
+
+This is the major reason L2 cache can reduce repeated database access
 across Sessions.
 
 ---
@@ -229,7 +239,9 @@ Hibernate
 JCache / Supported Cache Provider
    ↓
 Cache Implementation
-```Examples of cache technologies/integrations can vary by Hibernate
+```
+
+Examples of cache technologies/integrations can vary by Hibernate
 version and application architecture.
 
 Always follow the cache provider and Hibernate version documentation for
@@ -249,7 +261,9 @@ A typical setup process is:
 5. Mark required entities/collections cacheable
 6. Start application
 7. Verify cache hits/misses using statistics/monitoring
-```The exact dependency and configuration names depend on Hibernate version
+```
+
+The exact dependency and configuration names depend on Hibernate version
 and cache provider.
 
 ---
@@ -335,7 +349,9 @@ Query query =
     session.createQuery(
         "from Student where department.id = :id"
     );
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Query + Parameters
@@ -375,7 +391,9 @@ Entity IDs
 L2 Entity Cache
     ↓
 Entity Objects
-```If the required entities are not available in cache, Hibernate may still
+```
+
+If the required entities are not available in cache, Hibernate may still
 need database access.
 
 ---
@@ -399,7 +417,9 @@ query.setHint(
     "org.hibernate.cacheable",
     true
 );
-```Depending on Hibernate API/version, Hibernate-specific query APIs may
+```
+
+Depending on Hibernate API/version, Hibernate-specific query APIs may
 also expose cacheable methods.
 
 ---
@@ -446,11 +466,15 @@ Query:
 from Student where department.id = :id
 
 id = 10
-```and:
+```
+
+and:
 
 ```text
 id = 20
-```represent different parameterized results.
+```
+
+represent different parameterized results.
 
 ---
 
@@ -464,7 +488,9 @@ Example:
 Department
    |
    +--> students collection
-```A collection cache can help remember which child entity identifiers
+```
+
+A collection cache can help remember which child entity identifiers
 belong to a parent.
 
 Conceptually:
@@ -478,7 +504,9 @@ Collection Cache
       +--> Student #1
       +--> Student #2
       +--> Student #3
-```The actual entity state may still come from L2 entity cache or the
+```
+
+The actual entity state may still come from L2 entity cache or the
 database.
 
 ---
@@ -497,7 +525,9 @@ Student #1 → Student data
 Department #10
     →
 [Student #1, Student #2, Student #3]
-```Collection cache stores the association/collection information, not
+```
+
+Collection cache stores the association/collection information, not
 simply a complete duplicate of all child entity state.
 
 ---
@@ -512,15 +542,21 @@ Example:
 ```text
 Student
 naturalId = email
-```Instead of:
+```
+
+Instead of:
 
 ```text
 Primary key → 101
-```the application may identify the entity using:
+```
+
+the application may identify the entity using:
 
 ```text
 email → azhar@example.com
-```Hibernate can provide natural-id lookup/cache mechanisms.
+```
+
+Hibernate can provide natural-id lookup/cache mechanisms.
 
 Example mapping concept:
 
@@ -528,7 +564,9 @@ Example mapping concept:
 @NaturalId
 @Column(unique = true)
 private String email;
-```Natural ID must represent a stable/unique business identifier
+```
+
+Natural ID must represent a stable/unique business identifier
 appropriate for the domain.
 
 ---
@@ -549,7 +587,9 @@ L2 Entity Cache
    |
    v
 Entity
-```If cache misses occur, Hibernate may access the database.
+```
+
+If cache misses occur, Hibernate may access the database.
 
 ---
 
@@ -571,7 +611,9 @@ Network/DB processing
 Result
   ↓
 Application
-```Repeated request:
+```
+
+Repeated request:
 
 ```text
 Request
@@ -593,7 +635,9 @@ L1 Cache
 HIT
   ↓
 Return object
-```If MISS:
+```
+
+If MISS:
 
 ```text
 L1 MISS
@@ -621,7 +665,9 @@ L2 Cache
 HIT
    ↓
 Return
-```Only if both miss:
+```
+
+Only if both miss:
 
 ```text
 L1 MISS
@@ -728,7 +774,9 @@ Database
                    MISS
                      v
                 Query/DB
-```More precisely, query cache is a separate mechanism used when a query is
+```
+
+More precisely, query cache is a separate mechanism used when a query is
 configured as cacheable:
 
 ```text
@@ -759,11 +807,15 @@ Suppose:
 ```text
 L2:
 Student #1 = "AAA"
-```Database changes:
+```
+
+Database changes:
 
 ```text
 Student #1 = "BBB"
-```The cache must be updated/invalidated appropriately.
+```
+
+The cache must be updated/invalidated appropriately.
 
 Therefore:
 
@@ -773,7 +825,9 @@ Cache
 Consistency
   +
 Invalidation
-```must be considered together.
+```
+
+must be considered together.
 
 This is why caching is not simply "store everything in memory."
 
@@ -824,7 +878,9 @@ Query cache hit count
 Query cache miss count
 Query execution count
 Flush count
-```Statistics can help answer:
+```
+
+Statistics can help answer:
 
 ```text
 Is cache actually helping?
@@ -842,7 +898,9 @@ A common configuration concept is:
 
 ```properties
 hibernate.generate_statistics=true
-```Then Hibernate's statistics APIs can be used for diagnostics.
+```
+
+Then Hibernate's statistics APIs can be used for diagnostics.
 
 Example concept:
 
@@ -855,7 +913,9 @@ Statistics stats =
 System.out.println(
     stats.getSecondLevelCacheHitCount()
 );
-```Exact API packages and methods depend on the Hibernate version.
+```
+
+Exact API packages and methods depend on the Hibernate version.
 
 ---
 
@@ -866,14 +926,18 @@ Suppose:
 ```text
 L2 cache hit count = 0
 L2 cache miss count = 10,000
-```This suggests the cache may not be helping the workload.
+```
+
+This suggests the cache may not be helping the workload.
 
 If:
 
 ```text
 L2 hit count = 9,500
 L2 miss count = 500
-```there may be significant reuse.
+```
+
+there may be significant reuse.
 
 But high hit rate alone does not guarantee overall application
 performance; cache memory usage, invalidation, query patterns and DB
@@ -1047,7 +1111,9 @@ Do not memorize this as:
 
 ```text
 Transient → Persistent → Detached → Removed
-```as though every object must always follow exactly this sequence.
+```
+
+as though every object must always follow exactly this sequence.
 
 A better model is:
 
@@ -1066,7 +1132,9 @@ TRANSIENT ───────→ MANAGED/PERSISTENT
              | merge()
              v
           MANAGED
-```This is the more accurate mental model.
+```
+
+This is the more accurate mental model.
 
 ---
 
@@ -1179,7 +1247,9 @@ When reading a relationship annotation, ask four questions:
 2. Who owns it?
 3. What should cascade?
 4. When should related data load?
-```Example:
+```
+
+Example:
 
 ```java
 @OneToMany(
@@ -1189,7 +1259,9 @@ When reading a relationship annotation, ask four questions:
     orphanRemoval = true
 )
 private List<Student> students;
-```Interpretation:
+```
+
+Interpretation:
 
 ```text
 @OneToMany
@@ -1245,7 +1317,9 @@ public class Department {
         student.setDepartment(null);
     }
 }
-```Student:
+```
+
+Student:
 
 ```java
 @Entity
@@ -1412,7 +1486,9 @@ many → 1
 
 @ManyToMany
 many ↔ many
-```Remember:
+```
+
+Remember:
 
 ```text
 mappedBy = Java property on the owning side
@@ -1433,11 +1509,15 @@ REMOVE
 REFRESH
 DETACH
 ALL
-```Remember:
+```
+
+Remember:
 
 ```text
 Cascade = Parent operation can propagate to child
-```But:
+```
+
+But:
 
 ```text
 Cascade ≠ orphanRemoval
@@ -1453,7 +1533,9 @@ EAGER
 
 LAZY
 = Load association when accessed
-```JPA common defaults:
+```
+
+JPA common defaults:
 
 ```text
 OneToOne   → EAGER
@@ -1705,7 +1787,9 @@ remember this:
                     COMMIT
                        |
                     DATABASE
-```And:
+```
+
+And:
 
 ```text
 DETACHED ENTITY
@@ -1719,7 +1803,9 @@ No automatic dirty checking
        |
        v
 MANAGED ENTITY
-```This distinction explains a large portion of Hibernate's behavior.
+```
+
+This distinction explains a large portion of Hibernate's behavior.
 
 ---
 
@@ -1740,7 +1826,9 @@ Whenever you create a relationship, check:
 [ ] N+1 risk?
 [ ] Serialization/JSON recursion risk?
 [ ] Transaction boundary correct?
-```This checklist prevents many common Hibernate relationship problems.
+```
+
+This checklist prevents many common Hibernate relationship problems.
 
 ---
 

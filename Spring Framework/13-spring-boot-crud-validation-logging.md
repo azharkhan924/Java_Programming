@@ -50,7 +50,9 @@ Jab hum run karte hain:
 
 ```java
 SpringApplication.run(DemoApplication.class, args);
-```Basic flow:
+```
+
+Basic flow:
 
 ```text
 SpringApplication.run()
@@ -80,7 +82,9 @@ Spring Boot mein:
 
 ```java
 @SpringBootApplication
-```important annotation hai.
+```
+
+important annotation hai.
 
 Ye Spring ko application configuration aur component scanning setup
 karne mein help karta hai.
@@ -89,14 +93,18 @@ Suppose main package:
 
 ```text
 com.example.demo
-```Aur uske andar:
+```
+
+Aur uske andar:
 
 ```text
 entity
 service
 repository
 controller
-```Spring in components ko scan karke required beans create/manage karta
+```
+
+Spring in components ko scan karke required beans create/manage karta
 hai.
 
 Common stereotype annotations:
@@ -107,7 +115,9 @@ Common stereotype annotations:
 @Repository
 @Controller
 @RestController
-```Inhe commonly **stereotype annotations** kaha jata hai.
+```
+
+Inhe commonly **stereotype annotations** kaha jata hai.
 
 ---
 
@@ -121,7 +131,9 @@ StudentService
 needs
       ↓
 StudentRepository
-```Spring Container required dependency provide karta hai.
+```
+
+Spring Container required dependency provide karta hai.
 
 Example:
 
@@ -135,7 +147,9 @@ public class StudentService {
         this.repo = repo;
     }
 }
-```Concept:
+```
+
+Concept:
 
 ```text
 Spring Container
@@ -164,14 +178,18 @@ class MyService {
 @Service
 class AnotherService {
 }
-```Aise cases mein **`@Qualifier`** use kiya ja sakta hai.
+```
+
+Aise cases mein **`@Qualifier`** use kiya ja sakta hai.
 
 ```java
 public MyController(
         @Qualifier("myService") MyService service) {
     this.service = service;
 }
-```Another option:
+```
+
+Another option:
 
 ```java
 @Primary
@@ -198,7 +216,9 @@ Basic Bean Lifecycle:
 5. Application runs
        ↓
 6. Bean Destroyed
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Create
@@ -210,7 +230,9 @@ Initialize
 Ready
   ↓
 Destroy
-```Initialization/destruction ke liye lifecycle callbacks bhi use kiye ja
+```
+
+Initialization/destruction ke liye lifecycle callbacks bhi use kiye ja
 sakte hain.
 
 Example:
@@ -281,7 +303,9 @@ One shared bean instance
 HTTP Request 1 → Object A
 HTTP Request 2 → Object B
 HTTP Request 3 → Object C
-```Request-scoped bean web application mein individual HTTP request ke
+```
+
+Request-scoped bean web application mein individual HTTP request ke
 lifecycle se associated hota hai.
 
 ---
@@ -300,7 +324,9 @@ Spring Container
 → Objects/Beans manage karta hai
 → Dependencies inject karta hai
 → Configuration handle karta hai
-```Spring Boot is process ko conventions aur auto-configuration ke through
+```
+
+Spring Boot is process ko conventions aur auto-configuration ke through
 easier banata hai.
 
 ---
@@ -334,11 +360,15 @@ public Student update(
 
     return service.updateStudent(id, s);
 }
-```Request:
+```
+
+Request:
 
 ```text
 PUT /students/1
-```Body:
+```
+
+Body:
 
 ```json
 {
@@ -353,13 +383,17 @@ PUT /students/1
 
 ```java
 @PathVariable int id
-```URL se ID extract karta hai.
+```
+
+URL se ID extract karta hai.
 
 Example:
 
 ```text
 /students/1
-```Then:
+```
+
+Then:
 
 ```text
 id = 1
@@ -371,7 +405,9 @@ id = 1
 
 ```java
 @RequestBody Student s
-```Incoming JSON ko Java object mein convert karne mein help karta hai.
+```
+
+Incoming JSON ko Java object mein convert karne mein help karta hai.
 
 Example JSON:
 
@@ -380,7 +416,9 @@ Example JSON:
   "name": "Azhar",
   "age": 21
 }
-```Concept:
+```
+
+Concept:
 
 ```text
 JSON
@@ -430,7 +468,9 @@ Modify Object
 repo.save(existing)
   ↓
 Database Update
-```Important:
+```
+
+Important:
 
 > Yahan hum **existing object ko modify** kar rahe hain, directly new
 > student create nahi kar rahe.
@@ -443,7 +483,9 @@ Database Update
 
 ```java
 repo.findById(id)
-```Internally conceptually SQL:
+```
+
+Internally conceptually SQL:
 
 ```sql
 SELECT *
@@ -457,7 +499,9 @@ Agar ID nahi mili:
 
 ```java
 orElseThrow(...)
-```Exception throw kar sakte hain.
+```
+
+Exception throw kar sakte hain.
 
 ```text
 Exception
@@ -498,14 +542,18 @@ INSERT
 Existing entity / existing identifier
         ↓
 UPDATE
-```JPA/Hibernate entity state and identifier ke basis par persistence
+```
+
+JPA/Hibernate entity state and identifier ke basis par persistence
 operation determine karta hai.
 
 Example concept:
 
 ```sql
 INSERT INTO student ...
-```vs.
+```
+
+vs.
 
 ```sql
 UPDATE student
@@ -523,7 +571,9 @@ Wrong approach:
 Student newStudent = new Student();
 ...
 repo.save(newStudent);
-```Agar existing record ka ID correctly associate nahi hua, to new row
+```
+
+Agar existing record ka ID correctly associate nahi hua, to new row
 insert ho sakti hai.
 
 Correct basic approach:
@@ -569,7 +619,9 @@ public void deleteStudent(int id) {
 
     repo.deleteById(id);
 }
-```Basic flow:
+```
+
+Basic flow:
 
 ```text
 Check ID exists
@@ -597,7 +649,9 @@ existsById(id)
 deleteById(id)
   ↓
 Database
-```Conceptual SQL:
+```
+
+Conceptual SQL:
 
 ```sql
 DELETE FROM student
@@ -614,7 +668,9 @@ WHERE id = 1;
 DELETE record
      ↓
 Data physically removed from table
-```Meaning:
+```
+
+Meaning:
 
 > Data normal application query se permanently gone ho sakta hai.
 
@@ -631,17 +687,23 @@ Instead of:
 ```sql
 DELETE FROM student
 WHERE id = 1;
-```we can maintain a flag:
+```
+
+we can maintain a flag:
 
 ```java
 private boolean isDeleted;
-```Then:
+```
+
+Then:
 
 ```sql
 UPDATE student
 SET is_deleted = true
 WHERE id = 1;
-```Record database mein remain karta hai but application use normally show
+```
+
+Record database mein remain karta hai but application use normally show
 nahi karti.
 
 ---
@@ -654,7 +716,9 @@ Handwritten notes ke points:
 Data Recovery
 Audit Logs
 Safety
-```Additional benefits:
+```
+
+Additional benefits:
 
 -   Historical records maintain karna
 -   Accidental deletion recovery
@@ -677,11 +741,15 @@ isDeleted = true
 save()
      ↓
 Database
-```Fetch queries mein:
+```
+
+Fetch queries mein:
 
 ```text
 WHERE is_deleted = false
-```jaisa condition use kiya ja sakta hai.
+```
+
+jaisa condition use kiya ja sakta hai.
 
 ---
 
@@ -693,11 +761,15 @@ Example:
 
 ```text
 /students
-```Specific student:
+```
+
+Specific student:
 
 ```text
 /students/1
-```Yahan:
+```
+
+Yahan:
 
 ```text
 students = Resource
@@ -712,7 +784,9 @@ Suppose:
 
 ```text
 /students/1
-```Meaning:
+```
+
+Meaning:
 
 > Student resource jiska ID `1` hai.
 
@@ -732,13 +806,17 @@ DELETE /students/1 → Delete
 
 ```text
 /students/1
-```Specific student.
+```
+
+Specific student.
 
 ## 2. Filters / Query Parameters
 
 ```text
 /students?age=21
-```Filtering ke liye.
+```
+
+Filtering ke liye.
 
 ## 3. Full Object / Request Body
 
@@ -749,7 +827,9 @@ POST/PUT mein:
   "name": "Azhar",
   "age": 21
 }
-```Body mein complete/required data bheja ja sakta hai.
+```
+
+Body mein complete/required data bheja ja sakta hai.
 
 ---
 
@@ -801,7 +881,9 @@ Example request:
   "name": "",
   "age": -5
 }
-```Ye invalid data ho sakta hai.
+```
+
+Ye invalid data ho sakta hai.
 
 ---
 
@@ -811,7 +893,9 @@ Dependency:
 
 ```text
 Spring Boot Starter Validation
-```Example:
+```
+
+Example:
 
 ```java
 @NotBlank
@@ -819,7 +903,9 @@ private String name;
 
 @Min(1)
 private int age;
-```Controller:
+```
+
+Controller:
 
 ```java
 @PostMapping
@@ -840,7 +926,9 @@ private String name;
 
 @Min(value = 1, message = "Age must be positive")
 private int age;
-```Invalid request par validation error response generate kiya ja sakta
+```
+
+Invalid request par validation error response generate kiya ja sakta
 hai.
 
 ---
@@ -876,7 +964,9 @@ String ke liye useful:
 ```java
 @NotBlank
 private String name;
-```Blank/empty/whitespace-only values ko reject karne mein help karta hai.
+```
+
+Blank/empty/whitespace-only values ko reject karne mein help karta hai.
 
 Example invalid:
 
@@ -895,7 +985,9 @@ Numeric minimum define karta hai:
 ```java
 @Min(1)
 private int age;
-```Meaning:
+```
+
+Meaning:
 
 ```text
 age >= 1
@@ -929,7 +1021,9 @@ private String email;
 
 ```java
 @Valid @RequestBody Student s
-```Spring ko request body ke validation constraints apply karne ke liye
+```
+
+Spring ko request body ke validation constraints apply karne ke liye
 trigger karta hai.
 
 ---
@@ -964,7 +1058,9 @@ No debugging
 No file/history
   ↓
 Problems identify karna difficult
-```Production application mein logs useful hote hain for:
+```
+
+Production application mein logs useful hote hain for:
 
 -   Debugging
 -   Monitoring
@@ -984,7 +1080,9 @@ DEBUG
 INFO
 WARN
 ERROR
-```Simple understanding:
+```
+
+Simple understanding:
 
 ### INFO
 
@@ -1030,7 +1128,9 @@ Example:
 ```java
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-```Then:
+```
+
+Then:
 
 ```java
 private static final Logger log =
@@ -1070,7 +1170,9 @@ Controller mein bhi request-related logging ho sakti hai:
 
 ```java
 log.info("Received request to add student");
-```But excessive logging avoid karna chahiye.
+```
+
+But excessive logging avoid karna chahiye.
 
 ---
 
@@ -1105,7 +1207,9 @@ Repository
 Database
    ↓
 log.info("Saved successfully")
-```Error:
+```
+
+Error:
 
 ```text
 Exception
@@ -1125,7 +1229,9 @@ Default Spring Boot applications commonly use:
 SLF4J API
       ↓
 Logging implementation
-```Typical Spring Boot setup uses Logback by default when included through
+```
+
+Typical Spring Boot setup uses Logback by default when included through
 the standard starters.
 
 ---
@@ -1138,7 +1244,9 @@ Configuration can be customized using files such as:
 
 ```text
 logback-spring.xml
-```Advanced configuration can include:
+```
+
+Advanced configuration can include:
 
 -   log levels
 -   console output
@@ -1159,7 +1267,9 @@ Common environments:
 dev
 test
 prod
-```Example:
+```
+
+Example:
 
 ```text
 application-dev.properties
@@ -1176,7 +1286,9 @@ Without profiles:
 Local DB
 Test DB
 Production DB
-```sab configuration mix ho sakti hain.
+```
+
+sab configuration mix ho sakti hain.
 
 Profiles se:
 
@@ -1184,7 +1296,9 @@ Profiles se:
 Development → Dev config
 Testing     → Test config
 Production  → Prod config
-```Use kar sakte hain.
+```
+
+Use kar sakte hain.
 
 ---
 
@@ -1194,12 +1308,16 @@ Main file:
 
 ```text
 application.properties
-```Profile files:
+```
+
+Profile files:
 
 ```text
 application-dev.properties
 application-prod.properties
-```Example:
+```
+
+Example:
 
 ### `application-dev.properties`
 
@@ -1221,7 +1339,9 @@ spring.datasource.url=jdbc:mysql://prod-server:3306/student_prod
 
 ```properties
 spring.profiles.active=dev
-```Then Spring `dev` profile configuration load karega.
+```
+
+Then Spring `dev` profile configuration load karega.
 
 Concept:
 
@@ -1255,13 +1375,17 @@ Application runs with that config
 
 ```text
 application-dev.properties
-```contains local DB/config.
+```
+
+contains local DB/config.
 
 ### Production
 
 ```text
 application-prod.properties
-```contains production DB/config.
+```
+
+contains production DB/config.
 
 Important:
 
@@ -1287,7 +1411,9 @@ logging.level.com.example.demo=DEBUG
 
 ```properties
 logging.level.com.example.demo=INFO
-```Development mein detailed logs useful ho sakte hain, while production
+```
+
+Development mein detailed logs useful ho sakte hain, while production
 mein unnecessary DEBUG logs reduce kiye ja sakte hain.
 
 ---
@@ -1320,7 +1446,9 @@ mein unnecessary DEBUG logs reduce kiye ja sakte hain.
              └──────┬───────┘
                     ↓
                 MYSQL DB
-```Spring Container:
+```
+
+Spring Container:
 
 ```text
 Creates & manages
@@ -1510,7 +1638,9 @@ Service
 Repository
         ↓
 Database
-```Along the way:
+```
+
+Along the way:
 
 ```text
 Validation → input check

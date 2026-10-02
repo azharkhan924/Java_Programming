@@ -13,7 +13,9 @@ Example:
 ```java
 @Transient
 private double temporaryValue;
-```Hibernate/JPA ignores this field for database persistence.
+```
+
+Hibernate/JPA ignores this field for database persistence.
 
 ### Why needed?
 
@@ -31,7 +33,9 @@ Example:
 public double getFinalMarks() {
     return marks + bonus;
 }
-```If the calculated value does not need a DB column:
+```
+
+If the calculated value does not need a DB column:
 
 ```java
 @Transient
@@ -47,7 +51,9 @@ private double finalMarks;
 ```java
 java.util.Date
 java.util.Calendar
-```It tells JPA how to map a legacy date/time value.
+```
+
+It tells JPA how to map a legacy date/time value.
 
 Values:
 
@@ -55,7 +61,9 @@ Values:
 TemporalType.DATE
 TemporalType.TIME
 TemporalType.TIMESTAMP
-```Example:
+```
+
+Example:
 
 ```java
 @Temporal(TemporalType.DATE)
@@ -86,12 +94,16 @@ public enum Status {
     ACTIVE,
     INACTIVE
 }
-```Entity:
+```
+
+Entity:
 
 ```java
 @Enumerated(EnumType.STRING)
 private Status status;
-```Database can store:
+```
+
+Database can store:
 
 ```text
 ACTIVE
@@ -107,7 +119,9 @@ Stores numeric ordinal:
 ```text
 ACTIVE   → 0
 INACTIVE → 1
-```This can be dangerous if enum order changes.
+```
+
+This can be dangerous if enum order changes.
 
 #### `EnumType.STRING`
 
@@ -116,7 +130,9 @@ Stores enum name:
 ```text
 ACTIVE
 INACTIVE
-```Usually safer because changing enum declaration order does not change
+```
+
+Usually safer because changing enum declaration order does not change
 the stored meaning.
 
 Recommended example:
@@ -146,12 +162,16 @@ Types:
 ```text
 CLOB → Character Large Object
 BLOB → Binary Large Object
-```Example:
+```
+
+Example:
 
 ```java
 @Lob
 private String description;
-```or:
+```
+
+or:
 
 ```java
 @Lob
@@ -171,11 +191,15 @@ Example:
 ```java
 @CreationTimestamp
 private LocalDateTime createdAt;
-```When the entity is initially persisted:
+```
+
+When the entity is initially persisted:
 
 ```text
 createdAt = current date/time
-```This is useful for:
+```
+
+This is useful for:
 
 -   Record creation time
 -   Audit information
@@ -194,7 +218,9 @@ Example:
 ```java
 @UpdateTimestamp
 private LocalDateTime updatedAt;
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Create entity
@@ -326,7 +352,9 @@ public class Student {
         return updatedAt;
     }
 }
-```Enum:
+```
+
+Enum:
 
 ```java
 public enum Status {
@@ -396,13 +424,17 @@ Example:
 
 ```java
 Student s = new Student();
-```This object initially exists only in memory.
+```
+
+This object initially exists only in memory.
 
 When it is saved to the database:
 
 ```java
 session.persist(s);
-```the object's state becomes persistent.
+```
+
+the object's state becomes persistent.
 
 Conceptually:
 
@@ -445,7 +477,9 @@ It helps Hibernate know:
 
 ```java
 Student s = session.get(Student.class, 101);
-```Hibernate loads the student.
+```
+
+Hibernate loads the student.
 
 Conceptually:
 
@@ -457,17 +491,23 @@ SELECT ...
 Student object
    ↓
 Persistence Context
-```Now Hibernate manages that object.
+```
+
+Now Hibernate manages that object.
 
 If we do:
 
 ```java
 s.setName("Rahul");
-```we don't necessarily need to write:
+```
+
+we don't necessarily need to write:
 
 ```sql
 UPDATE student SET name = 'Rahul' WHERE id = 101;
-```Hibernate can detect the change through **dirty checking** and
+```
+
+Hibernate can detect the change through **dirty checking** and
 synchronize it during flush/transaction commit.
 
 ---
@@ -484,7 +524,9 @@ Student s = session.get(Student.class, 101);
 s.setName("Rahul");
 
 tx.commit();
-```No manual UPDATE query is written.
+```
+
+No manual UPDATE query is written.
 
 Conceptually:
 
@@ -506,7 +548,9 @@ UPDATE SQL generated
 JDBC
      ↓
 Database
-```This is one of Hibernate's major advantages over manual JDBC object
+```
+
+This is one of Hibernate's major advantages over manual JDBC object
 mapping.
 
 ---
@@ -526,7 +570,9 @@ A JPA entity can conceptually move through states:
  detach    remove
     ↓         ↓
 DETACHED   REMOVED
-```Common states:
+```
+
+Common states:
 
 ### Transient
 
@@ -542,7 +588,9 @@ Entity is associated with persistence context.
 
 ```java
 session.persist(s);
-```or after:
+```
+
+or after:
 
 ```java
 session.get(Student.class, id);
@@ -594,7 +642,9 @@ SQL generated
 JDBC
     ↓
 Database
-```The persistence context is not the database itself.
+```
+
+The persistence context is not the database itself.
 
 It is not simply a permanent copy of every database row.
 
@@ -621,11 +671,15 @@ Traditional Hibernate:
 
 ```java
 session.save(student);
-```Modern JPA-style:
+```
+
+Modern JPA-style:
 
 ```java
 session.persist(student);
-```Example:
+```
+
+Example:
 
 ```java
 Student s = new Student();
@@ -636,7 +690,9 @@ s.setAge(22);
 session.persist(s);
 
 tx.commit();
-```Conceptual flow:
+```
+
+Conceptual flow:
 
 ```text
 Student object
@@ -673,7 +729,9 @@ returns `null`.
 
 ```java
 Student s = session.get(Student.class, 101);
-```Generally:
+```
+
+Generally:
 
 -   Immediately obtains/fetches the entity.
 -   Returns `null` if the entity does not exist.
@@ -682,7 +740,9 @@ Student s = session.get(Student.class, 101);
 
 ```java
 Student s = session.load(Student.class, 101);
-```In older Hibernate APIs, `load()` can use a proxy and defer database
+```
+
+In older Hibernate APIs, `load()` can use a proxy and defer database
 access.
 
 If the entity does not exist, accessing the proxy can result in an
@@ -707,7 +767,9 @@ Student s = session.get(Student.class, 101);
 s.setName("Rahul");
 
 tx.commit();
-```No manual UPDATE SQL is required.
+```
+
+No manual UPDATE SQL is required.
 
 Hibernate performs dirty checking.
 
@@ -737,7 +799,9 @@ Student s = session.get(Student.class, 101);
 session.remove(s);
 
 tx.commit();
-```Hibernate generates the appropriate DELETE SQL.
+```
+
+Hibernate generates the appropriate DELETE SQL.
 
 ---
 
@@ -818,40 +882,58 @@ public class App {
 
 ```java
 Configuration cfg = new Configuration();
-```Creates a configuration object.
+```
+
+Creates a configuration object.
 
 ```java
 cfg.configure();
-```Loads configuration.
+```
+
+Loads configuration.
 
 ```java
 SessionFactory sf = cfg.buildSessionFactory();
-```Builds heavyweight SessionFactory and initializes Hibernate
+```
+
+Builds heavyweight SessionFactory and initializes Hibernate
 infrastructure.
 
 ```java
 Session session = sf.openSession();
-```Opens a Session/persistence context.
+```
+
+Opens a Session/persistence context.
 
 ```java
 Transaction tx = session.beginTransaction();
-```Begins transaction.
+```
+
+Begins transaction.
 
 ```java
 session.persist(s);
-```Makes entity managed and schedules persistence.
+```
+
+Makes entity managed and schedules persistence.
 
 ```java
 tx.commit();
-```Flushes required changes and commits the transaction.
+```
+
+Flushes required changes and commits the transaction.
 
 ```java
 session.close();
-```Closes session.
+```
+
+Closes session.
 
 ```java
 sf.close();
-```Closes SessionFactory and releases its resources.
+```
+
+Closes SessionFactory and releases its resources.
 
 ---
 
@@ -875,7 +957,9 @@ JDBC
 JDBC Driver
       ↓
 MySQL
-```For reading:
+```
+
+For reading:
 
 ```text
 session.get()
@@ -907,7 +991,9 @@ SQL
 ResultSet
  ↓
 Manually create object
-```With Hibernate:
+```
+
+With Hibernate:
 
 ```text
 Entity
@@ -923,7 +1009,9 @@ Database
 Hibernate maps result
  ↓
 Entity
-```Hibernate abstracts much of the manual mapping.
+```
+
+Hibernate abstracts much of the manual mapping.
 
 ---
 
@@ -977,7 +1065,9 @@ EntityManager
 Persistence Context
        ↓
 Database
-```Hibernate provides an implementation underneath.
+```
+
+Hibernate provides an implementation underneath.
 
 Example:
 
@@ -994,15 +1084,21 @@ em.persist(student);
 tx.commit();
 
 em.close();
-```Hibernate-native API:
+```
+
+Hibernate-native API:
 
 ```java
 Session
-```JPA API:
+```
+
+JPA API:
 
 ```java
 EntityManager
-```Do not unnecessarily mix the two APIs in one example.
+```
+
+Do not unnecessarily mix the two APIs in one example.
 
 ---
 
@@ -1020,7 +1116,9 @@ SessionFactory sessionFactory;
 ```java
 EntityManager entityManager;
 EntityManagerFactory entityManagerFactory;
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 JPA API
@@ -1054,7 +1152,9 @@ Database Column
 Object Relationship
      ↓
 Foreign Key / Join Table
-```It lets developers think primarily in terms of entities and objects
+```
+
+It lets developers think primarily in terms of entities and objects
 instead of manually converting every row.
 
 ---
@@ -1119,7 +1219,9 @@ Example:
 ```java
 Student s1 = session.get(Student.class, 101);
 Student s2 = session.get(Student.class, 101);
-```Within the same persistence context, Hibernate can avoid unnecessarily
+```
+
+Within the same persistence context, Hibernate can avoid unnecessarily
 loading the same managed entity again.
 
 Important:
@@ -1128,7 +1230,9 @@ Important:
 Session / Persistence Context
         ↓
 First-Level Cache
-```The first-level cache is associated with the Session/persistence context
+```
+
+The first-level cache is associated with the Session/persistence context
 and is not a global application-wide cache.
 
 ---
@@ -1141,7 +1245,9 @@ Example concept:
 
 ```java
 student.getDepartment();
-```Hibernate may defer loading the department until it is accessed,
+```
+
+Hibernate may defer loading the department until it is accessed,
 depending on mapping and fetch strategy.
 
 Benefits:
@@ -1163,7 +1269,9 @@ Possible cause:
 
 ```text
 MySQL JDBC driver dependency missing
-```or driver configuration problem.
+```
+
+or driver configuration problem.
 
 ---
 
@@ -1220,7 +1328,9 @@ Missing:
 
 ```java
 @Id
-```Every normal JPA entity needs an identifier.
+```
+
+Every normal JPA entity needs an identifier.
 
 ---
 
@@ -1269,7 +1379,9 @@ public class Student {
     public Student() {
     }
 }
-```Meaning:
+```
+
+Meaning:
 
 ```text
 Student Java class
@@ -1490,7 +1602,9 @@ Student student =
 System.out.println(student.getName());
 
 tx.commit();
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 get()
@@ -1517,11 +1631,15 @@ Student student =
 student.setName("Rahul");
 
 tx.commit();
-```No manual:
+```
+
+No manual:
 
 ```sql
 UPDATE ...
-```is required.
+```
+
+is required.
 
 Hibernate uses dirty checking.
 
@@ -1538,7 +1656,9 @@ Student student =
 session.remove(student);
 
 tx.commit();
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Managed entity
@@ -1560,15 +1680,21 @@ Older/native Hibernate code may use:
 
 ```java
 session.save(student);
-```Modern JPA-style Hibernate code commonly uses:
+```
+
+Modern JPA-style Hibernate code commonly uses:
 
 ```java
 session.persist(student);
-```JPA standard:
+```
+
+JPA standard:
 
 ```java
 entityManager.persist(student);
-```For learning modern persistence, understand `persist()` as the standard
+```
+
+For learning modern persistence, understand `persist()` as the standard
 JPA operation.
 
 ---
@@ -1605,19 +1731,27 @@ Important distinction:
 
 ```java
 Configuration cfg = new Configuration();
-```does not mean:
+```
+
+does not mean:
 
 ```text
 Permanent DB connection opened
-```It creates/configures the bootstrap object.
+```
+
+It creates/configures the bootstrap object.
 
 ```java
 cfg.configure();
-```loads configuration.
+```
+
+loads configuration.
 
 ```java
 cfg.buildSessionFactory();
-```initializes the SessionFactory and its persistence infrastructure.
+```
+
+initializes the SessionFactory and its persistence infrastructure.
 
 Actual database interaction happens when persistence operations require
 it.
@@ -1660,7 +1794,9 @@ Session
 Persistence Context
   ↓
 Managed Entities
-```The Session is the Hibernate API object through which you interact with
+```
+
+The Session is the Hibernate API object through which you interact with
 the persistence context.
 
 In JPA:
@@ -1687,7 +1823,9 @@ Get ResultSet
 Read columns
    ↓
 Create Java object
-```Hibernate mindset:
+```
+
+Hibernate mindset:
 
 ```text
 Work with Entity
@@ -1697,7 +1835,9 @@ Hibernate mapping
 Hibernate generates SQL
    ↓
 Database
-```This is the central advantage of ORM abstraction.
+```
+
+This is the central advantage of ORM abstraction.
 
 ---
 
@@ -1715,7 +1855,9 @@ Persistence operations
 Some connection/resource management
 Caching mechanisms
 Lazy loading
-```It does **not** mean that developers never need to understand:
+```
+
+It does **not** mean that developers never need to understand:
 
 -   SQL
 -   Database design
@@ -1742,7 +1884,9 @@ Entity model
 ORM API
 +
 Dialect/provider
-```instead of embedding database-specific SQL everywhere.
+```
+
+instead of embedding database-specific SQL everywhere.
 
 However:
 
@@ -1763,7 +1907,9 @@ You normally do not manually write:
 ```java
 Configuration cfg = new Configuration();
 SessionFactory sf = cfg.buildSessionFactory();
-```Spring Boot commonly configures:
+```
+
+Spring Boot commonly configures:
 
 ```text
 DataSource
@@ -1771,7 +1917,9 @@ Hibernate
 JPA
 EntityManagerFactory
 Transactions
-```for you.
+```
+
+for you.
 
 Typical architecture:
 
@@ -1787,7 +1935,9 @@ Hibernate
 JDBC
      ↓
 Database
-```This is why Hibernate fundamentals remain important even when working
+```
+
+This is why Hibernate fundamentals remain important even when working
 with Spring Boot.
 
 ---
@@ -1822,7 +1972,9 @@ Hibernate
 JDBC
    ↓
 Database
-```The abstraction changes, but the fundamental ORM concepts remain.
+```
+
+The abstraction changes, but the fundamental ORM concepts remain.
 
 ---
 
@@ -2051,14 +2203,18 @@ Remember Hibernate with this single picture:
                     |
                     v
                DATABASE
-```And remember the core relationship:
+```
+
+And remember the core relationship:
 
 ```text
 JPA = Standard / Rules
 Hibernate = Implementation / Provider
 JDBC = Low-level database connectivity
 ORM = Object ↔ Relational mapping technique
-```The most important conceptual chain is:
+```
+
+The most important conceptual chain is:
 
 ```text
 Java Object

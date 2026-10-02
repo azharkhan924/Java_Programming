@@ -124,7 +124,9 @@ Spring ka:
 
 ```java
 SimpleJdbcCall
-```stored procedure/function calls ko simplify karne ke liye use kiya ja
+```
+
+stored procedure/function calls ko simplify karne ke liye use kiya ja
 sakta hai.
 
 Example:
@@ -357,7 +359,9 @@ student.setMaths("88");
 
 SqlParameterSource source =
     new BeanPropertySqlParameterSource(student);
-```Ab query ke named parameters bean properties ke names se match karne
+```
+
+Ab query ke named parameters bean properties ke names se match karne
 chahiye:
 
 ```sql
@@ -456,7 +460,9 @@ BEGIN
 END //
 
 DELIMITER ;
-```Spring `JdbcTemplate.call()` mein ResultSet ko retrieve karne ke liye
+```
+
+Spring `JdbcTemplate.call()` mein ResultSet ko retrieve karne ke liye
 `SqlReturnResultSet` declare karna useful hai.
 
 Example:
@@ -544,7 +550,9 @@ BEGIN
 END //
 
 DELIMITER ;
-```Spring:
+```
+
+Spring:
 
 ```java
 ApplicationContext app =
@@ -652,7 +660,9 @@ Query:
 String q =
     "INSERT INTO ins_marks " +
     "VALUES (?, ?, ?, ?, ?)";
-```Multiple argument arrays:
+```
+
+Multiple argument arrays:
 
 ```java
 List<Object[]> list =
@@ -687,7 +697,9 @@ list.add(
         "60"
     }
 );
-```Execute:
+```
+
+Execute:
 
 ```java
 int[] x =
@@ -711,7 +723,9 @@ List<Object[]>
 batchUpdate()
    ↓
 Multiple rows
-```Each `Object[]` ek row ke positional parameter values represent karta
+```
+
+Each `Object[]` ek row ke positional parameter values represent karta
 hai.
 
 ---
@@ -733,7 +747,9 @@ public class Student {
     // getters
     // setters
 }
-```Students:
+```
+
+Students:
 
 ```java
 List<Student> list =
@@ -768,7 +784,9 @@ list.add(
         "40"
     )
 );
-```Now convert each Student into an `Object[]`:
+```
+
+Now convert each Student into an `Object[]`:
 
 ```java
 List<Object[]> list2 =
@@ -788,7 +806,9 @@ for (int i = 0; i < list.size(); i++) {
         }
     );
 }
-```Execute:
+```
+
+Execute:
 
 ```java
 String q =
@@ -864,7 +884,9 @@ String q =
     "INSERT INTO ins_marks " +
     "(urno, uname, physics, chemistry, maths) " +
     "VALUES (:urno, :uname, :physics, :chemistry, :maths)";
-```Create maps:
+```
+
+Create maps:
 
 ```java
 Map<String, Object> m1 =
@@ -893,7 +915,9 @@ m3.put("uname", "AAA");
 m3.put("physics", "20");
 m3.put("chemistry", "30");
 m3.put("maths", "40");
-```Convert:
+```
+
+Convert:
 
 ```java
 SqlParameterSource[] batch = {
@@ -902,7 +926,9 @@ SqlParameterSource[] batch = {
     new MapSqlParameterSource(m2),
     new MapSqlParameterSource(m3)
 };
-```Execute:
+```
+
+Execute:
 
 ```java
 NamedParameterJdbcTemplate namedJdbcTemplate =
@@ -941,7 +967,9 @@ students.add(
 students.add(
     new Student("103", "AAA", "20", "30", "40")
 );
-```Create parameter sources:
+```
+
+Create parameter sources:
 
 ```java
 SqlParameterSource[] batch =
@@ -954,14 +982,18 @@ for (int i = 0; i < students.size(); i++) {
             students.get(i)
         );
 }
-```Query:
+```
+
+Query:
 
 ```java
 String q =
     "INSERT INTO ins_marks " +
     "(urno, uname, physics, chemistry, maths) " +
     "VALUES (:urno, :uname, :physics, :chemistry, :maths)";
-```Execute:
+```
+
+Execute:
 
 ```java
 NamedParameterJdbcTemplate namedJdbcTemplate =
@@ -1177,7 +1209,9 @@ public void setJdbcTemplate(
 
     this.jdbcTemplate = jdbcTemplate;
 }
-```Isse har method mein repeatedly DataSource/JdbcTemplate create nahi
+```
+
+Isse har method mein repeatedly DataSource/JdbcTemplate create nahi
 karna padega.
 
 ---
@@ -1506,7 +1540,6 @@ public class StudentControllerImpl
 
     </bean>
 
-
     <!-- JdbcTemplate -->
 
     <bean id="jdbcTemplate"
@@ -1515,7 +1548,6 @@ public class StudentControllerImpl
         <constructor-arg ref="dataSource"/>
 
     </bean>
-
 
     <!-- DAO -->
 
@@ -1530,7 +1562,6 @@ public class StudentControllerImpl
 
     </bean>
 
-
     <!-- Service -->
 
     <bean id="studentService"
@@ -1540,7 +1571,6 @@ public class StudentControllerImpl
                   ref="studentDAO"/>
 
     </bean>
-
 
     <!-- Controller -->
 
@@ -1613,11 +1643,15 @@ Basic syntax:
 
 ```text
 #{expression}
-```Example:
+```
+
+Example:
 
 ```xml
 value="#{10 + 20}"
-```Output:
+```
+
+Output:
 
 ```text
 30
@@ -1645,7 +1679,9 @@ public class Student {
         return "SWT";
     }
 }
-```XML:
+```
+
+XML:
 
 ```xml
 <bean id="s1"
@@ -1655,7 +1691,9 @@ public class Student {
         value="#{T(pack1.Student).show()}"/>
 
 </bean>
-```Output:
+```
+
+Output:
 
 ```text
 SWT
@@ -1667,7 +1705,9 @@ Class name ke through method directly access kar rahe hain:
 
 ```text
 T(pack1.Student).show()
-```Isliye `show()` static hona chahiye.
+```
+
+Isliye `show()` static hona chahiye.
 
 ---
 
@@ -1681,18 +1721,24 @@ public class Student {
     public String id = "101";
 
 }
-```Instance field ko access karne ke liye object/reference required hoga.
+```
+
+Instance field ko access karne ke liye object/reference required hoga.
 
 SpEL mein object create karke:
 
 ```xml
 <constructor-arg
     value="#{new pack1.Student().id}"/>
-```Yahan:
+```
+
+Yahan:
 
 ```text
 new pack1.Student()
-```new object create karta hai.
+```
+
+new object create karta hai.
 
 ---
 
@@ -1703,12 +1749,16 @@ Suppose bean:
 ```xml
 <bean id="student"
       class="pack1.Student"/>
-```Then another bean/expression can reference it:
+```
+
+Then another bean/expression can reference it:
 
 ```xml
 <constructor-arg
     value="#{student.id}"/>
-```Yahan `student` Spring bean ka reference hai.
+```
+
+Yahan `student` Spring bean ka reference hai.
 
 ---
 
@@ -1716,15 +1766,21 @@ Suppose bean:
 
 ```xml
 value="#{10 + 20}"
-```Output:
+```
+
+Output:
 
 ```text
 30
-```More examples:
+```
+
+More examples:
 
 ```xml
 value="#{10 - 20}"
-```Output:
+```
+
+Output:
 
 ```text
 -10
@@ -1732,7 +1788,9 @@ value="#{10 - 20}"
 
 ```xml
 value="#{10 * 20}"
-```Output:
+```
+
+Output:
 
 ```text
 200
@@ -1740,7 +1798,9 @@ value="#{10 * 20}"
 
 ```xml
 value="#{20 / 10}"
-```Output:
+```
+
+Output:
 
 ```text
 2
@@ -1752,7 +1812,9 @@ value="#{20 / 10}"
 
 ```xml
 value="#{10 == 20}"
-```Output:
+```
+
+Output:
 
 ```text
 false
@@ -1760,7 +1822,9 @@ false
 
 ```xml
 value="#{10 != 20}"
-```Output:
+```
+
+Output:
 
 ```text
 true
@@ -1768,7 +1832,9 @@ true
 
 ```xml
 value="#{10 < 20}"
-```Output:
+```
+
+Output:
 
 ```text
 true
@@ -1776,7 +1842,9 @@ true
 
 ```xml
 value="#{10 > 20}"
-```Output:
+```
+
+Output:
 
 ```text
 false
@@ -1790,15 +1858,21 @@ Isliye safer form:
 
 ```xml
 value="#{10 lt 20}"
-```or XML escape:
+```
+
+or XML escape:
 
 ```xml
 value="#{10 &lt; 20}"
-```Similarly:
+```
+
+Similarly:
 
 ```xml
 value="#{10 gt 20}"
-```or:
+```
+
+or:
 
 ```xml
 value="#{10 &gt; 20}"
@@ -1810,7 +1884,9 @@ value="#{10 &gt; 20}"
 
 ```xml
 value="#{true && false}"
-```Output:
+```
+
+Output:
 
 ```text
 false
@@ -1818,7 +1894,9 @@ false
 
 ```xml
 value="#{true || false}"
-```Output:
+```
+
+Output:
 
 ```text
 true
@@ -1826,7 +1904,9 @@ true
 
 ```xml
 value="#{!false}"
-```Output:
+```
+
+Output:
 
 ```text
 true
@@ -1834,7 +1914,9 @@ true
 
 ```xml
 value="#{!true}"
-```Output:
+```
+
+Output:
 
 ```text
 false
@@ -1848,13 +1930,17 @@ SpEL mein:
 
 ```text
 T(TypeName)
-```type/class ko refer karta hai.
+```
+
+type/class ko refer karta hai.
 
 Example:
 
 ```xml
 value="#{T(pack1.Student)}"
-```Yeh `pack1.Student` class/type ko refer karta hai.
+```
+
+Yeh `pack1.Student` class/type ko refer karta hai.
 
 ---
 
@@ -1862,11 +1948,15 @@ value="#{T(pack1.Student)}"
 
 ```xml
 value="#{T(java.lang.Math).max(10, 20)}"
-```Output:
+```
+
+Output:
 
 ```text
 20
-```Important syntax:
+```
+
+Important syntax:
 
 ```text
 T(java.lang.Math).max(10,20)
@@ -1878,11 +1968,15 @@ T(java.lang.Math).max(10,20)
 
 ```xml
 value="#{T(java.lang.Byte).MAX_VALUE}"
-```Output:
+```
+
+Output:
 
 ```text
 127
-```Because Java `byte` ki maximum value:
+```
+
+Because Java `byte` ki maximum value:
 
 ```text
 127
@@ -1896,15 +1990,21 @@ Suppose:
 
 ```java
 String abc = "hello";
-```SpEL mein instance method call conceptually:
+```
+
+SpEL mein instance method call conceptually:
 
 ```text
 #{abc.toUpperCase()}
-```Agar bean/reference ke context mein:
+```
+
+Agar bean/reference ke context mein:
 
 ```xml
 value="#{student.name.toUpperCase()}"
-```to name ko uppercase mein convert kiya ja sakta hai, provided
+```
+
+to name ko uppercase mein convert kiya ja sakta hai, provided
 `student.name` valid bean/property reference ho.
 
 ---
@@ -2172,7 +2272,9 @@ namedJdbcTemplate.batchUpdate(
 
 ```java
 new BeanPropertySqlParameterSource(student)
-```Then:
+```
+
+Then:
 
 ```java
 namedJdbcTemplate.batchUpdate(
@@ -2237,7 +2339,9 @@ connection.prepareCall(...)
 
 ```text
 #{...}
-```Examples:
+```
+
+Examples:
 
 ```text
 #{10 + 20}                       → 30

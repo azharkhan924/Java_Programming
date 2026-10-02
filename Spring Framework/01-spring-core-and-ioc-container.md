@@ -47,7 +47,6 @@ creates/manages Spring beans
 
 ---
 
-
 # 2. Spring Project --- Basic Setup
 
 For a basic XML-based Spring project in Eclipse:
@@ -107,7 +106,6 @@ Project
 
 ---
 
-
 # 3. First Spring Bean Program
 
 We will create a very basic `Student` bean.
@@ -158,7 +156,6 @@ String name;
 along with their getter and setter methods.
 
 ---
-
 
 # 4. Spring Configuration File --- ABC.xml
 
@@ -216,7 +213,6 @@ Spring creates Student object
 
 ---
 
-
 # 5. Property Tag
 
 Inside the bean:
@@ -256,7 +252,6 @@ So the `property` tag is used for setter-based configuration/injection.
 
 ---
 
-
 # 6. MainDemo.java
 
 ```java
@@ -292,7 +287,6 @@ AAA
 
 ---
 
-
 # 7. Understanding `ApplicationContext`
 
 ```java
@@ -322,7 +316,6 @@ ClassPathXmlApplicationContext
 ```
 
 ---
-
 
 # 8. What Happens When `ClassPathXmlApplicationContext` Is Created?
 
@@ -355,7 +348,6 @@ For normal eager singleton beans, Spring creates the bean while the
 application context is being initialized.
 
 ---
-
 
 # 9. `getBean()`
 
@@ -390,7 +382,6 @@ new Student();
 ```
 
 ---
-
 
 # 10. Java GC vs Spring Container
 
@@ -430,7 +421,6 @@ Spring IoC → object/bean creation and dependency management
 
 ---
 
-
 # 11. Bean Concept
 
 A Spring-managed object is called a **bean**.
@@ -451,7 +441,6 @@ pack1.Student
 That object is a Spring bean.
 
 ---
-
 
 # 12. Meaning of Bean ID and Class
 
@@ -488,7 +477,6 @@ pack1.Student object
 
 ---
 
-
 # 13. IoC --- Inversion of Control
 
 Without Spring:
@@ -515,7 +503,6 @@ Therefore:
 > code to the IoC container.**
 
 ---
-
 
 # 14. IoC Container
 
@@ -545,7 +532,6 @@ getBean()
 
 ---
 
-
 # 15. Types of IoC Container
 
 At the basic level, two important Spring container abstractions are:
@@ -554,7 +540,6 @@ At the basic level, two important Spring container abstractions are:
 2.  `ApplicationContext`
 
 ---
-
 
 # 16. BeanFactory
 
@@ -574,7 +559,6 @@ It provides the basic IoC container functionality.
 -   Provides the fundamental bean-management functionality.
 
 ---
-
 
 # 17. ApplicationContext
 
@@ -599,7 +583,6 @@ AnnotationConfigApplicationContext
 
 ---
 
-
 # 18. BeanFactory vs ApplicationContext
 
 | Point | BeanFactory | ApplicationContext |
@@ -617,7 +600,6 @@ AnnotationConfigApplicationContext
 
 | Typical use | Basic/low-level | Most Spring |
                           container               applications
-
 
 ### Important
 
@@ -639,7 +621,6 @@ ApplicationContext
 ```
 
 ---
-
 
 # 19. Container Hierarchy --- Basic View
 
@@ -672,7 +653,6 @@ AnnotationConfigApplicationContext
 
 ---
 
-
 # 20. BeanFactory and Lazy Creation
 
 A basic characteristic of `BeanFactory` is that singleton beans can be
@@ -695,7 +675,6 @@ singleton beans during context initialization unless lazy initialization
 is configured.
 
 ---
-
 
 # 21. Reflection and Private Constructor
 
@@ -735,7 +714,6 @@ Student s =
 ```
 
 ---
-
 
 # 22. Reflection Example
 
@@ -790,7 +768,6 @@ Object created
 
 ---
 
-
 # 23. Important Spring Exceptions
 
 ## 23.1 `BeanDefinitionStoreException`
@@ -811,7 +788,6 @@ with a lower-level resource exception as the cause.
 
 ---
 
-
 # 24. Wrong XML Resource
 
 Example:
@@ -831,7 +807,6 @@ BeanDefinitionStoreException
 with an underlying resource/file-related cause.
 
 ---
-
 
 # 25. Wrong Bean Class
 
@@ -858,7 +833,6 @@ as the cause in the relevant case.
 
 ---
 
-
 # 26. `BeanDefinitionParsingException`
 
 If the Spring bean definition XML is malformed or cannot be parsed
@@ -876,7 +850,6 @@ Invalid/malformed XML bean configuration
 ```
 
 ---
-
 
 # 27. `BeanInstantiationException`
 
@@ -907,7 +880,6 @@ Use a concrete implementation instead:
 ```
 
 ---
-
 
 # 28. Dependency Injection --- Meaning
 
@@ -947,7 +919,6 @@ So:
 > create those dependencies itself.**
 
 ---
-
 
 # 29. Why Dependency Injection?
 
@@ -991,7 +962,6 @@ Loose coupling
 
 ---
 
-
 # 30. Types of Dependency Injection
 
 Three commonly discussed types:
@@ -1003,7 +973,6 @@ Three commonly discussed types:
 ```
 
 ---
-
 
 # 31. Constructor Injection
 
@@ -1031,7 +1000,6 @@ public class Student {
 
 ---
 
-
 # 32. Setter Injection
 
 Dependency is supplied through a setter method.
@@ -1055,7 +1023,6 @@ public class Student {
 
 ---
 
-
 # 33. Field Injection
 
 Dependency is injected directly into a field.
@@ -1078,7 +1045,6 @@ public class Student {
 
 ---
 
-
 # 34. Constructor vs Setter vs Field Injection
 
 | Point | Constructor Injection | Setter Injection | Field Injection |
@@ -1095,13 +1061,11 @@ public class Student {
 
 ---
 
-
 # 35. `getBean()` Method
 
 Spring's `ApplicationContext` provides overloaded `getBean()` methods.
 
 ---
-
 
 ## 35.1 `T getBean(Class<T> requiredType)`
 
@@ -1126,7 +1090,6 @@ The method returns a bean matching the requested type.
 
 ---
 
-
 ## 35.2 `Object getBean(String name)`
 
 ```java
@@ -1137,7 +1100,6 @@ Object obj =
 The bean is requested by name.
 
 ---
-
 
 ## 35.3 `T getBean(String name, Class<T> requiredType)`
 
@@ -1154,7 +1116,6 @@ Type      → Student
 ```
 
 ---
-
 
 ## 35.4 `Object getBean(String name, Object... args)`
 
@@ -1175,7 +1136,6 @@ This form is relevant to prototype bean creation where explicit
 arguments are supplied to the bean's creation mechanism.
 
 ---
-
 
 # 36. Singleton Scope
 
@@ -1215,7 +1175,6 @@ true
 ```
 
 ---
-
 
 # 37. Prototype Scope
 
@@ -1265,7 +1224,6 @@ Student #3
 
 ---
 
-
 # 38. Singleton vs Prototype
 
 | Point | Singleton | Prototype |
@@ -1276,7 +1234,6 @@ Student #3
 | **Object Creation Overhead** | Low (created once) | Higher (created repeatedly) |
 | **Memory Usage** | Fewer instances in memory | More instances created in memory |
 | **Destruction Management** | Container manages complete lifecycle including `@PreDestroy` / destruction callbacks | Container does NOT manage complete destruction lifecycle after returning prototype |
-
 
 ### Important
 
@@ -1291,7 +1248,6 @@ does not manage its complete destruction lifecycle after returning it to
 the caller.
 
 ---
-
 
 # 39. Student and Address Scope Example
 
@@ -1315,7 +1271,6 @@ Case 4 → Student Singleton + Address Singleton
 ```
 
 ---
-
 
 # 40. Case 1 --- Student Singleton + Address Prototype
 
@@ -1377,7 +1332,6 @@ This is the problem solved by **Lookup Method Injection**.
 
 ---
 
-
 # 41. Case 2 --- Student Prototype + Address Singleton
 
 ### ABC.xml
@@ -1428,7 +1382,6 @@ Address → same object
 
 ---
 
-
 # 42. Case 3 --- Both Prototype
 
 ```xml
@@ -1466,7 +1419,6 @@ Both are prototype beans.
 
 ---
 
-
 # 43. Case 4 --- Both Singleton
 
 ```xml
@@ -1495,7 +1447,6 @@ Within the same Spring container, repeated `getBean()` calls return the
 same Student and Address instances.
 
 ---
-
 
 # 44. Four Cases --- Quick Revision
 

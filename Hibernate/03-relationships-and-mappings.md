@@ -127,7 +127,9 @@ Example:
 Student s = new Student();
 
 s.setName("AAA");
-```At this point:
+```
+
+At this point:
 
 ```text
 Stored in database?       No
@@ -152,11 +154,15 @@ Java Memory
      |
      v
 TRANSIENT
-```No SQL is generated merely because:
+```
+
+No SQL is generated merely because:
 
 ```java
 Student s = new Student();
-```or:
+```
+
+or:
 
 ```java
 s.setName("AAA");
@@ -170,7 +176,9 @@ Use:
 
 ```java
 session.persist(s);
-```Example:
+```
+
+Example:
 
 ```java
 Session session = sessionFactory.openSession();
@@ -186,11 +194,15 @@ session.persist(s);
 tx.commit();
 
 session.close();
-```After:
+```
+
+After:
 
 ```java
 session.persist(s);
-```the entity becomes **managed/persistent** in the current persistence
+```
+
+the entity becomes **managed/persistent** in the current persistence
 context.
 
 Conceptually:
@@ -235,12 +247,16 @@ Student s =
     session.get(Student.class, 1);
 
 s.setName("BBB");
-```Suppose database initially contains:
+```
+
+Suppose database initially contains:
 
 ```text
 id = 1
 name = "AAA"
-```Hibernate loads the entity:
+```
+
+Hibernate loads the entity:
 
 ```text
 Database
@@ -255,20 +271,28 @@ Persistence Context
    +--> Current object state
    |
    +--> Snapshot/original state
-```Original state:
+```
+
+Original state:
 
 ```text
 name = "AAA"
-```Application changes:
+```
+
+Application changes:
 
 ```java
 s.setName("BBB");
-```Now:
+```
+
+Now:
 
 ```text
 Old/Snapshot value = AAA
 Current value       = BBB
-```Hibernate detects the difference during dirty checking.
+```
+
+Hibernate detects the difference during dirty checking.
 
 Conceptually:
 
@@ -288,13 +312,17 @@ UPDATE SQL generated
 Flush
     ↓
 Database
-```Example generated SQL:
+```
+
+Example generated SQL:
 
 ```sql
 UPDATE student
 SET name = 'BBB'
 WHERE id = 1;
-```The exact generated SQL depends on mappings, dialect, dynamic-update
+```
+
+The exact generated SQL depends on mappings, dialect, dynamic-update
 settings and provider/version.
 
 ---
@@ -310,11 +338,15 @@ Student s =
 s.setName("BBB");
 
 tx.commit();
-```We did not write:
+```
+
+We did not write:
 
 ```sql
 UPDATE student SET name = 'BBB' WHERE id = 1;
-```Hibernate can generate it automatically because:
+```
+
+Hibernate can generate it automatically because:
 
 ```text
 Managed Entity
@@ -342,11 +374,15 @@ Student s =
 session.close();
 
 s.setName("CCC");
-```After:
+```
+
+After:
 
 ```java
 session.close();
-```the object still exists in Java memory, but the Session/persistence
+```
+
+the object still exists in Java memory, but the Session/persistence
 context that managed it is gone.
 
 ### Characteristics
@@ -390,7 +426,9 @@ For example:
 
 ```java
 session.close();
-```makes the object detached.
+```
+
+makes the object detached.
 
 The database row can still exist.
 
@@ -407,13 +445,17 @@ Student s =
 session1.close();
 
 s.setName("CCC");
-```Now `s` is detached.
+```
+
+Now `s` is detached.
 
 Modern JPA-style approach:
 
 ```java
 Student managedStudent = session2.merge(s);
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Detached Object
@@ -444,7 +486,9 @@ Therefore:
 
 ```java
 Student managed = session.merge(detached);
-```is the important pattern.
+```
+
+is the important pattern.
 
 ---
 
@@ -454,7 +498,9 @@ Hibernate-native API historically provides:
 
 ```java
 session.update(detached);
-```while JPA standard provides:
+```
+
+while JPA standard provides:
 
 ```java
 entityManager.merge(detached);
@@ -470,7 +516,9 @@ Detached object
 update()
       ↓
 associated with Session
-```It can fail if another instance with the same identifier is already
+```
+
+It can fail if another instance with the same identifier is already
 associated with that Session.
 
 Example situation:
@@ -481,14 +529,18 @@ Student s1 = session.get(Student.class, 1);
 Student s2 = detachedStudentWithId1;
 
 session.update(s2);
-```The Session already contains an entity with ID `1`, so Hibernate can
+```
+
+The Session already contains an entity with ID `1`, so Hibernate can
 report a conflict such as a non-unique object/identifier conflict.
 
 ### `merge()`
 
 ```java
 Student managed = session.merge(detached);
-```Hibernate finds/creates the appropriate managed instance and copies
+```
+
+Hibernate finds/creates the appropriate managed instance and copies
 state into it.
 
 This is generally safer for detached-state workflows.
@@ -532,7 +584,9 @@ Student s =
 session.remove(s);
 
 tx.commit();
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Managed Entity
@@ -557,7 +611,9 @@ For a detached object:
 
 ```java
 session.remove(detachedStudent);
-```is not the normal JPA lifecycle operation and can result in an
+```
+
+is not the normal JPA lifecycle operation and can result in an
 exception. A detached entity can first be merged:
 
 ```java
@@ -613,7 +669,9 @@ tx.commit();
 
 // 4. DETACHED
 session.close();
-```A separate detached example:
+```
+
+A separate detached example:
 
 ```java
 Student s =
@@ -642,7 +700,9 @@ Persistence Context
         | (Student, 2) → Student object |
         | (Department, 1) → Department  |
         +--------------------------------+
-```The exact internal data structures are implementation details, but this
+```
+
+The exact internal data structures are implementation details, but this
 mental model is extremely useful.
 
 ### Why?
@@ -682,7 +742,9 @@ Student s1 =
 
 Student s2 =
     session.get(Student.class, 1);
-```First call:
+```
+
+First call:
 
 ```text
 session.get(Student, 1)
@@ -696,7 +758,9 @@ SELECT DB
 Student object
         ↓
 Stored in Persistence Context / L1
-```Second call:
+```
+
+Second call:
 
 ```text
 session.get(Student, 1)
@@ -706,7 +770,9 @@ L1 Cache checked
 Already present
         ↓
 Return managed object
-```Potentially only one database SELECT is needed.
+```
+
+Potentially only one database SELECT is needed.
 
 ---
 
@@ -723,11 +789,15 @@ Student s2 =
     session.get(Student.class, 1);
 
 System.out.println(s1 == s2);
-```Expected:
+```
+
+Expected:
 
 ```text
 true
-```This is tied to the persistence context's identity map behavior.
+```
+
+This is tied to the persistence context's identity map behavior.
 
 ---
 
@@ -745,13 +815,17 @@ Session 2
    |
    +--> L1 Cache
         Student #1
-```The two Sessions have separate first-level caches.
+```
+
+The two Sessions have separate first-level caches.
 
 Therefore:
 
 ```text
 L1 Cache ≠ Global Cache
-```If Session 1 loads Student #1 and then Session 2 loads Student #1,
+```
+
+If Session 1 loads Student #1 and then Session 2 loads Student #1,
 Session 2 may execute its own SELECT unless another cache layer is
 involved.
 
@@ -788,7 +862,9 @@ context.
 
 ```java
 session.clear();
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Persistence Context
@@ -800,7 +876,9 @@ Persistence Context
    | clear()
    v
 Persistence Context emptied
-```The entities become detached.
+```
+
+The entities become detached.
 
 ### Example
 
@@ -812,7 +890,9 @@ Student s2 =
     session.get(Student.class, 2);
 
 session.clear();
-```Now both are no longer managed by this Session.
+```
+
+Now both are no longer managed by this Session.
 
 ---
 
@@ -825,7 +905,9 @@ Example:
 
 ```java
 session.evict(s1);
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 L1 Cache
@@ -842,7 +924,9 @@ L1 Cache
    |
    +--> s2
    +--> s3
-```Only `s1` becomes detached.
+```
+
+Only `s1` becomes detached.
 
 ---
 
@@ -863,7 +947,9 @@ Example:
 
 ```java
 session.refresh(s);
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Java Entity
@@ -886,15 +972,21 @@ Suppose another transaction changes:
 ```text
 DB:
 name = "CCC"
-```but your in-memory managed object currently has:
+```
+
+but your in-memory managed object currently has:
 
 ```text
 name = "AAA"
-```Then:
+```
+
+Then:
 
 ```java
 session.refresh(s);
-```reloads the database state into the entity.
+```
+
+reloads the database state into the entity.
 
 > `refresh()` is different from dirty checking. Dirty checking sends
 > managed object changes **to** the database; refresh brings database
@@ -908,14 +1000,18 @@ Hibernate's native:
 
 ```java
 session.update(detachedObject);
-```can associate a detached instance with a Session, subject to Session
+```
+
+can associate a detached instance with a Session, subject to Session
 identity/conflict rules.
 
 For modern portable JPA code:
 
 ```java
 entityManager.merge(detachedObject);
-```is generally preferred.
+```
+
+is generally preferred.
 
 ---
 
@@ -934,7 +1030,9 @@ Example:
 s.setName("CCC");
 
 session.flush();
-```Hibernate may immediately send:
+```
+
+Hibernate may immediately send:
 
 ```sql
 UPDATE student
@@ -952,13 +1050,17 @@ This distinction is extremely important.
 flush()
    ↓
 SQL sent/executed against DB
-```while:
+```
+
+while:
 
 ```text
 commit()
    ↓
 Transaction successfully completed
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Persistence Context
@@ -970,7 +1072,9 @@ SQL sent to DB
        | commit()
        v
 Transaction committed
-```Flush does not itself mean the transaction has permanently committed.
+```
+
+Flush does not itself mean the transaction has permanently committed.
 
 ---
 
@@ -990,11 +1094,15 @@ session.flush();
 // UPDATE may already have been executed
 
 tx.commit();
-```If the transaction is later rolled back:
+```
+
+If the transaction is later rolled back:
 
 ```java
 tx.rollback();
-```the database transaction may undo the SQL changes, depending on
+```
+
+the database transaction may undo the SQL changes, depending on
 transaction/database behavior.
 
 ---
@@ -1008,7 +1116,9 @@ Common case:
 
 ```java
 tx.commit();
-```Before transaction commit, pending changes are normally flushed.
+```
+
+Before transaction commit, pending changes are normally flushed.
 
 With the default `AUTO` flush behavior, Hibernate may also flush before
 executing certain queries when necessary to maintain query consistency.
@@ -1022,7 +1132,9 @@ session.flush()
 Automatic flush:
 before commit
 and potentially before relevant queries
-```Do not assume every query always causes a flush; it depends on flush
+```
+
+Do not assume every query always causes a flush; it depends on flush
 mode and query/provider behavior.
 
 ---
@@ -1034,7 +1146,9 @@ Common JPA flush modes:
 ```text
 AUTO
 COMMIT
-```Hibernate also has additional/native flush modes.
+```
+
+Hibernate also has additional/native flush modes.
 
 ### `AUTO`
 
@@ -1073,7 +1187,9 @@ SQL executed
    | commit()
    v
 Transaction committed
-```If Session closes without committing/with rollback:
+```
+
+If Session closes without committing/with rollback:
 
 ```text
 Session / Transaction ends
@@ -1095,7 +1211,9 @@ Student
    | belongs to
    v
 Department
-```or:
+```
+
+or:
 
 ```text
 Student
@@ -1103,7 +1221,9 @@ Student
    | studies in
    v
 College
-```Relational databases represent relationships using:
+```
+
+Relational databases represent relationships using:
 
 -   Foreign keys
 -   Join tables
@@ -1135,13 +1255,17 @@ department
 +----+-------------+
 | 10 | CSE         |
 +----+-------------+
-```Java:
+```
+
+Java:
 
 ```java
 class Student {
     private Department department;
 }
-```Hibernate maps:
+```
+
+Hibernate maps:
 
 ```text
 student.dept_id
@@ -1170,7 +1294,9 @@ Example:
 
 ```text
 Person 1 ───── 1 Passport
-```Another example:
+```
+
+Another example:
 
 ```text
 Student 1 ───── 1 StudentProfile
@@ -1210,7 +1336,9 @@ public class StudentProfile {
 
     private String phone;
 }
-```Database:
+```
+
+Database:
 
 ```text
 student
@@ -1265,7 +1393,9 @@ public class StudentProfile {
 
 ```java
 mappedBy = "profile"
-```This means:
+```
+
+This means:
 
 > The relationship is mapped by the `profile` field of `Student`.
 
@@ -1291,7 +1421,9 @@ Department
    | mappedBy = "department"
    v
 Student.department
-```It means:
+```
+
+It means:
 
 > "The other side owns/manages the actual relationship mapping."
 
@@ -1307,20 +1439,26 @@ Student
    | department_id
    v
 Department
-```If `Student` has:
+```
+
+If `Student` has:
 
 ```java
 @ManyToOne
 @JoinColumn(name = "department_id")
 private Department department;
-```then Student is the owning side.
+```
+
+then Student is the owning side.
 
 Department may have:
 
 ```java
 @OneToMany(mappedBy = "department")
 private List<Student> students;
-```Department is the inverse/non-owning side.
+```
+
+Department is the inverse/non-owning side.
 
 ### Why?
 
@@ -1383,7 +1521,9 @@ public class Student {
     @JoinColumn(name = "department_id")
     private Department department;
 }
-```Database:
+```
+
+Database:
 
 ```text
 department
@@ -1413,13 +1553,17 @@ The foreign key normally resides on the "many" table.
 Student table
     |
     +--> department_id FK
-```Therefore:
+```
+
+Therefore:
 
 ```java
 @ManyToOne
 @JoinColumn(name = "department_id")
 private Department department;
-```naturally represents the owning side.
+```
+
+naturally represents the owning side.
 
 ---
 
@@ -1433,13 +1577,17 @@ Student  ──┤
 Student  ──┼──> Department
 Student  ──┤
 Student  ──┘
-```Code:
+```
+
+Code:
 
 ```java
 @ManyToOne
 @JoinColumn(name = "department_id")
 private Department department;
-```Use cases:
+```
+
+Use cases:
 
 -   Many employees → One company
 -   Many students → One department
@@ -1456,7 +1604,9 @@ Example:
 
 ```text
 Student ←→ Course
-```A student can take many courses.
+```
+
+A student can take many courses.
 
 A course can have many students.
 
@@ -1465,7 +1615,9 @@ Student 1 ── Course A
 Student 1 ── Course B
 Student 2 ── Course A
 Student 2 ── Course C
-```A relational database normally uses a join table.
+```
+
+A relational database normally uses a join table.
 
 ---
 
@@ -1527,7 +1679,9 @@ Student is the owning side because it defines:
 
 ```java
 @JoinTable(...)
-```Course is inverse side:
+```
+
+Course is inverse side:
 
 ```java
 mappedBy = "courses"
@@ -1549,7 +1703,9 @@ Course                      |
    ^                        |
    |                        |
    +---- inverse side ------+
-```The owning side controls relationship updates.
+```
+
+The owning side controls relationship updates.
 
 If you modify only the inverse side and don't update the owning side,
 the join-table relationship may not be synchronized as expected.
@@ -1566,13 +1722,17 @@ Example:
 Department
     |
     +--> List<Student>
-```and:
+```
+
+and:
 
 ```java
 Student
     |
     +--> Department
-```So navigation is possible in both directions:
+```
+
+So navigation is possible in both directions:
 
 ```java
 student.getDepartment();
@@ -1592,15 +1752,21 @@ Example:
 Student
    |
    +--> Department
-```but:
+```
+
+but:
 
 ```java
 Department
-```does not contain:
+```
+
+does not contain:
 
 ```java
 List<Student>
-```Use it when navigation from the reverse side is not required.
+```
+
+Use it when navigation from the reverse side is not required.
 
 ---
 
@@ -1641,7 +1807,9 @@ Example:
 ```java
 @OneToMany(cascade = CascadeType.ALL)
 private List<Student> students;
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Department
@@ -1649,7 +1817,9 @@ Department
     | cascade
     v
 Students
-```If an operation is performed on the Department, the configured cascade
+```
+
+If an operation is performed on the Department, the configured cascade
 operation can propagate to the students.
 
 ---
@@ -1673,7 +1843,9 @@ ALL
 
 ```java
 cascade = CascadeType.PERSIST
-```Persisting the parent cascades persist to the related entity.
+```
+
+Persisting the parent cascades persist to the related entity.
 
 Example:
 
@@ -1681,11 +1853,15 @@ Example:
 department
    |
    +--> student
-```If:
+```
+
+If:
 
 ```java
 session.persist(department);
-```the persist operation can cascade to the students.
+```
+
+the persist operation can cascade to the students.
 
 ---
 
@@ -1693,7 +1869,9 @@ session.persist(department);
 
 ```java
 cascade = CascadeType.MERGE
-```Merge operation cascades.
+```
+
+Merge operation cascades.
 
 Useful when detached parent and child entities need to be merged.
 
@@ -1703,7 +1881,9 @@ Useful when detached parent and child entities need to be merged.
 
 ```java
 cascade = CascadeType.REMOVE
-```Removing the parent can cascade removal to related child entities.
+```
+
+Removing the parent can cascade removal to related child entities.
 
 ### Caution
 
@@ -1715,7 +1895,9 @@ Example:
 Department
   ↓ REMOVE
 Students
-```Deleting a department could delete all associated students if the
+```
+
+Deleting a department could delete all associated students if the
 relationship is configured this way.
 
 ---
@@ -1726,7 +1908,9 @@ Refresh operation cascades.
 
 ```java
 entityManager.refresh(parent);
-```can refresh associated entities depending on the mapping.
+```
+
+can refresh associated entities depending on the mapping.
 
 ---
 
@@ -1749,7 +1933,9 @@ MERGE
 REMOVE
 REFRESH
 DETACH
-```Example:
+```
+
+Example:
 
 ```java
 @OneToMany(cascade = CascadeType.ALL)
@@ -1762,7 +1948,9 @@ private List<Student> students;
 
 ```text
 everything automatically forever
-```It means all defined JPA cascade operations are propagated.
+```
+
+It means all defined JPA cascade operations are propagated.
 
 ---
 
@@ -1795,11 +1983,15 @@ Example:
     orphanRemoval = true
 )
 private List<Student> students;
-```If:
+```
+
+If:
 
 ```java
 department.getStudents().remove(student);
-```then Hibernate can schedule the orphaned student for deletion.
+```
+
+then Hibernate can schedule the orphaned student for deletion.
 
 Use this when the child lifecycle is conceptually owned by the parent.
 
@@ -1814,7 +2006,9 @@ Use this when the child lifecycle is conceptually owned by the parent.
     orphanRemoval = true
 )
 private List<Student> students = new ArrayList<>();
-```This commonly expresses:
+```
+
+This commonly expresses:
 
 ```text
 Department
@@ -1824,7 +2018,9 @@ Department
     +--> persist/merge/remove can cascade
     |
     +--> removing a child from collection can delete orphan
-```Use carefully because it creates strong lifecycle coupling.
+```
+
+Use carefully because it creates strong lifecycle coupling.
 
 ---
 
@@ -1845,7 +2041,9 @@ public void removeStudent(Student student) {
     students.remove(student);
     student.setDepartment(null);
 }
-```This keeps the Java object graph consistent.
+```
+
+This keeps the Java object graph consistent.
 
 ---
 
@@ -1856,19 +2054,27 @@ Remember:
 ```java
 @OneToMany(mappedBy = "department")
 private List<Student> students;
-```The value:
+```
+
+The value:
 
 ```text
 "department"
-```is NOT:
+```
+
+is NOT:
 
 ```text
 department_id
-```It is the Java property:
+```
+
+It is the Java property:
 
 ```java
 private Department department;
-```inside `Student`.
+```
+
+inside `Student`.
 
 Think:
 
@@ -1887,11 +2093,15 @@ Example:
 ```java
 @JoinColumn(name = "department_id")
 private Department department;
-```This means the foreign-key column is:
+```
+
+This means the foreign-key column is:
 
 ```text
 department_id
-```in the owning table.
+```
+
+in the owning table.
 
 ---
 
@@ -1903,7 +2113,9 @@ Most commonly seen with:
 
 ```java
 @ManyToMany
-```Example:
+```
+
+Example:
 
 ```java
 @JoinTable(
@@ -1971,7 +2183,9 @@ Conceptually:
 Load Student
       ↓
 Load Department too
-```Example:
+```
+
+Example:
 
 ```java
 @ManyToOne(fetch = FetchType.EAGER)
@@ -2000,7 +2214,9 @@ Example:
 ```java
 @OneToMany(fetch = FetchType.LAZY)
 private List<Student> students;
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 Load Department
@@ -2026,7 +2242,9 @@ If the persistence context/session is already closed:
 session.close();
 
 department.getStudents();
-```the required lazy data may not be available and can result in a lazy
+```
+
+the required lazy data may not be available and can result in a lazy
 initialization error.
 
 ---
@@ -2055,7 +2273,6 @@ EAGER
 Student loaded
      |
      +----> Department loaded immediately
-
 
 LAZY
 
@@ -2087,11 +2304,15 @@ Student 1 → department query
 Student 2 → department query
 Student 3 → department query
 ...
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 1 + N queries
-```Solutions may include:
+```
+
+Solutions may include:
 
 -   Fetch joins
 -   Entity graphs

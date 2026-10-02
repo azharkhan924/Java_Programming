@@ -130,7 +130,9 @@ Java Object-Oriented World
    MISMATCH
         ↓
 Relational Database World
-```This is called:
+```
+
+This is called:
 
 ## Object-Relational Impedance Mismatch
 
@@ -185,7 +187,9 @@ public class Student {
     private int id;
     private String name;
 }
-```Database:
+```
+
+Database:
 
 ```text
 student
@@ -194,7 +198,9 @@ student
 +----+--------+
 | 1  | Azhar  |
 +----+--------+
-```ORM understands that:
+```
+
+ORM understands that:
 
 ```text
 Student class → student table
@@ -233,14 +239,18 @@ class Address {
     String city;
     String state;
 }
-```The database may store:
+```
+
+The database may store:
 
 ```text
 student
 +----+------+-------+
 | id | city | state |
 +----+------+-------+
-```ORM decides how the object structure maps to the relational structure.
+```
+
+ORM decides how the object structure maps to the relational structure.
 
 ---
 
@@ -254,7 +264,9 @@ class Person { }
 class Student extends Person { }
 
 class Teacher extends Person { }
-```Relational databases do not have Java-style class inheritance directly.
+```
+
+Relational databases do not have Java-style class inheritance directly.
 
 ORM provides strategies to represent inheritance in tables.
 
@@ -267,13 +279,17 @@ Java objects have object identity.
 ```java
 Student s1 = new Student();
 Student s2 = new Student();
-```The database identifies rows primarily through primary keys.
+```
+
+The database identifies rows primarily through primary keys.
 
 ```text
 Student object identity
         ↓
 Database primary key
-```ORM manages this mapping.
+```
+
+ORM manages this mapping.
 
 ---
 
@@ -283,7 +299,9 @@ Java can directly represent object references:
 
 ```java
 student.setAddress(address);
-```A relational database represents relationships using:
+```
+
+A relational database represents relationships using:
 
 -   Foreign keys
 -   Join tables
@@ -299,7 +317,9 @@ Java can navigate an object graph:
 
 ```java
 student.getDepartment().getCollege();
-```A relational database normally requires SQL queries and joins to obtain
+```
+
+A relational database normally requires SQL queries and joins to obtain
 related information.
 
 ORM can provide mechanisms such as:
@@ -374,7 +394,9 @@ SQL
 JDBC
     ↓
 Database
-```Important:
+```
+
+Important:
 
 > Hibernate does **not** replace JDBC internally. Hibernate commonly
 > uses JDBC underneath to communicate with the database.
@@ -399,7 +421,9 @@ Examples:
 @Id
 @Column
 @GeneratedValue
-```and JPA APIs such as:
+```
+
+and JPA APIs such as:
 
 ```java
 EntityManager
@@ -412,12 +436,16 @@ EntityManagerFactory
 JPA       → Specification / Rules / Standard
 
 Hibernate → Implementation / Provider
-```A simple analogy:
+```
+
+A simple analogy:
 
 ```text
 JPA       = Rules
 Hibernate = Implementation of those rules
-```Other JPA providers exist as well; Hibernate is one of the widely used
+```
+
+Other JPA providers exist as well; Hibernate is one of the widely used
 providers.
 
 > Modern Jakarta Persistence is the successor of the API historically
@@ -489,7 +517,9 @@ JDBC
 JDBC Driver
        ↓
 Database
-```For MySQL:
+```
+
+For MySQL:
 
 ```text
 Java Application
@@ -501,7 +531,9 @@ JDBC
 MySQL Connector/J
        ↓
 MySQL Database
-```Hibernate sits between application code and the database and manages
+```
+
+Hibernate sits between application code and the database and manages
 ORM/persistence communication.
 
 ---
@@ -523,17 +555,23 @@ Example:
 
 ```java
 Configuration cfg = new Configuration();
-```At this point:
+```
+
+At this point:
 
 ```text
 Configuration object created
         ↓
 Configuration file not necessarily loaded yet
-```Then:
+```
+
+Then:
 
 ```java
 cfg.configure();
-```By default, Hibernate looks for:
+```
+
+By default, Hibernate looks for:
 
 ```text
 hibernate.cfg.xml
@@ -546,7 +584,9 @@ hibernate.cfg.xml
 ```java
 Configuration cfg = new Configuration();
 cfg.configure();
-```Conceptually:
+```
+
+Conceptually:
 
 ```text
 cfg.configure()
@@ -615,7 +655,9 @@ Examples:
 session.persist(student);
 session.get(Student.class, 101);
 session.remove(student);
-```A Session manages a persistence context and tracks managed entities.
+```
+
+A Session manages a persistence context and tracks managed entities.
 
 ---
 
@@ -631,7 +673,9 @@ Transaction tx = session.beginTransaction();
 session.persist(student);
 
 tx.commit();
-```If an operation fails, the transaction can be rolled back.
+```
+
+If an operation fails, the transaction can be rolled back.
 
 ```java
 tx.rollback();
@@ -647,7 +691,9 @@ Example:
 Operation 1 ✓
 Operation 2 ✓
 Operation 3 ✗
-```A transaction allows the unit of work to be rolled back when
+```
+
+A transaction allows the unit of work to be rolled back when
 appropriate.
 
 ---
@@ -662,11 +708,15 @@ src/
      ├── java/
      └── resources/
          └── hibernate.cfg.xml
-```Default file:
+```
+
+Default file:
 
 ```text
 hibernate.cfg.xml
-```Custom configuration:
+```
+
+Custom configuration:
 
 ```java
 cfg.configure("myconfig.xml");
@@ -736,13 +786,17 @@ cfg.configure("myconfig.xml");
 <property name="connection.driver_class">
     com.mysql.cj.jdbc.Driver
 </property>
-```Specifies the JDBC driver class.
+```
+
+Specifies the JDBC driver class.
 
 For MySQL Connector/J:
 
 ```text
 com.mysql.cj.jdbc.Driver
-```Without the required JDBC driver dependency, the application cannot
+```
+
+Without the required JDBC driver dependency, the application cannot
 communicate with MySQL.
 
 ---
@@ -753,7 +807,9 @@ Example:
 
 ```text
 jdbc:mysql://localhost:3306/college
-```Breakdown:
+```
+
+Breakdown:
 
 ```text
 jdbc       → JDBC protocol
@@ -771,7 +827,9 @@ college    → Database name
 <property name="connection.username">
     root
 </property>
-```Database username.
+```
+
+Database username.
 
 ---
 
@@ -781,7 +839,9 @@ college    → Database name
 <property name="connection.password">
     root
 </property>
-```Database password.
+```
+
+Database password.
 
 ---
 
@@ -791,7 +851,9 @@ college    → Database name
 <property name="dialect">
     ...
 </property>
-```Dialect tells Hibernate how to generate SQL appropriate for the target
+```
+
+Dialect tells Hibernate how to generate SQL appropriate for the target
 database.
 
 Think:
@@ -802,7 +864,9 @@ Hibernate
 Which DB am I targeting?
    ↓
 How should SQL be generated?
-```Exact dialect configuration depends on Hibernate version and whether
+```
+
+Exact dialect configuration depends on Hibernate version and whether
 automatic dialect detection is being used.
 
 ---
@@ -811,7 +875,9 @@ automatic dialect detection is being used.
 
 ```xml
 <property name="show_sql">true</property>
-```Shows generated SQL in the console.
+```
+
+Shows generated SQL in the console.
 
 Useful for:
 
@@ -871,7 +937,9 @@ Example:
 
 ```xml
 <mapping class="com.entity.Student"/>
-```This tells Hibernate that the `Student` class is part of the persistence
+```
+
+This tells Hibernate that the `Student` class is part of the persistence
 model when using this traditional configuration approach.
 
 With modern JPA/Spring Boot setups, entities are commonly discovered
@@ -919,7 +987,9 @@ Provides standard persistence annotations/APIs such as:
 @Id
 @Column
 @GeneratedValue
-```Exact artifact names depend on whether the project uses older
+```
+
+Exact artifact names depend on whether the project uses older
 `javax.persistence` or modern `jakarta.persistence`.
 
 ---
@@ -999,7 +1069,9 @@ Example:
 ```java
 @Id
 private int id;
-```Database:
+```
+
+Database:
 
 ```text
 student
@@ -1008,7 +1080,9 @@ student
 +-----+--------+
 | 101 | Azhar  |
 +-----+--------+
-```Here `id = 101` identifies the entity.
+```
+
+Here `id = 101` identifies the entity.
 
 ---
 
@@ -1031,7 +1105,9 @@ public class Student {
     public Student() {
     }
 }
-```Without a suitable no-argument constructor, entity instantiation can
+```
+
+Without a suitable no-argument constructor, entity instantiation can
 fail.
 
 ---
@@ -1042,7 +1118,9 @@ fail.
 @Entity
 public class Student {
 }
-```Meaning:
+```
+
+Meaning:
 
 > This class is a persistent entity managed by the ORM provider.
 
@@ -1062,11 +1140,15 @@ Example:
 @Entity
 public class Student {
 }
-```Can map to a table such as:
+```
+
+Can map to a table such as:
 
 ```text
 Student
-```Exact physical naming can depend on the ORM provider and naming
+```
+
+Exact physical naming can depend on the ORM provider and naming
 strategy.
 
 ---
@@ -1082,7 +1164,9 @@ Example:
 @Table(name = "student_info")
 public class Student {
 }
-```Now:
+```
+
+Now:
 
 ```text
 Java Entity
@@ -1098,15 +1182,21 @@ Suppose the existing database has:
 
 ```text
 student_info
-```but your Java class is:
+```
+
+but your Java class is:
 
 ```java
 Student
-```Then:
+```
+
+Then:
 
 ```java
 @Table(name = "student_info")
-```maps them correctly.
+```
+
+maps them correctly.
 
 ---
 
@@ -1117,7 +1207,9 @@ Student
 ```java
 @Id
 private int id;
-```Database:
+```
+
+Database:
 
 ```text
 id → Primary Key
@@ -1145,7 +1237,9 @@ Used for automatic identifier generation.
 @Id
 @GeneratedValue
 private Long id;
-```Common strategies:
+```
+
+Common strategies:
 
 ```text
 AUTO
@@ -1176,7 +1270,9 @@ Example in MySQL:
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
-```Database can generate:
+```
+
+Database can generate:
 
 ```text
 1
@@ -1194,7 +1290,9 @@ Uses a database sequence where supported.
 
 ```java
 @GeneratedValue(strategy = GenerationType.SEQUENCE)
-```Common with databases that support sequences.
+```
+
+Common with databases that support sequences.
 
 ---
 
@@ -1204,7 +1302,9 @@ Uses a table-based mechanism for identifier generation.
 
 ```java
 @GeneratedValue(strategy = GenerationType.TABLE)
-```Less commonly chosen in modern applications.
+```
+
+Less commonly chosen in modern applications.
 
 ---
 
@@ -1217,7 +1317,9 @@ Example:
 ```java
 @Column(name = "stu_name")
 private String name;
-```This maps:
+```
+
+This maps:
 
 ```text
 Java field: name
@@ -1249,19 +1351,25 @@ Custom column name.
 
 ```java
 nullable = false
-```Column should not accept `NULL` according to generated schema
+```
+
+Column should not accept `NULL` according to generated schema
 constraints.
 
 ### `unique`
 
 ```java
 unique = true
-```Requests a uniqueness constraint in generated schema.
+```
+
+Requests a uniqueness constraint in generated schema.
 
 ### `length`
 
 ```java
 length = 50
-```Defines length for applicable string columns in generated schema.
+```
+
+Defines length for applicable string columns in generated schema.
 
 ---
